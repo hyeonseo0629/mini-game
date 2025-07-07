@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #1c1c1c; /* 거의 블랙에 가까운 차콜 */
+    color: #e0d8c3; /* 따뜻한 샌드 베이지 톤 */
+    overflow-x: hidden;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+nav.menu-area {
+    background-color: #2a2a2a; /* 딥 그레이 브라운 */
+    width: 12.5%;
+    height: 100vh; /* 화면 전체 높이 고정 */
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    position: fixed;
+    left: 0%;
+    top: 0;
+    transition: left 0.5s ease-out;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.7);
+}
+
+nav.menu-area > div {
+    flex: 1; /* 동일 비율 */
+    display: flex;
+}
+
+nav.menu-area button {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex; /* 텍스트 중앙 정렬 */
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #3a3a3a, #2a2a2a);
+    border: none;
+    color: #e0d8c3;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+nav.menu-area button:hover {
+    background: linear-gradient(45deg, #5a4033, #3a3a3a);
+    transform: translateX(3px);
+}
+
+.info-area {
+    background-color: #2a2a2a;
+    width: 12.5%;
+    min-height: 100vh;
+    position: fixed;
+    right: 0%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: right 0.5s ease-out;
+    color: #e0d8c3;
+    padding-top: 20px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.7);
+}
+
+.core-area {
+    flex: 1;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+    background-color: #252525; /* 차콜과 블랙 사이 */
+    padding: 50px;
+    min-height: 100vh;
+    border-left: 1px solid #3a3a3a;
+    border-right: 1px solid #3a3a3a;
+}
+
+.hover-zone {
+    position: fixed;
+    top: 0;
+    width: 15%;
+    height: 100vh;
+    z-index: 3;
+}
+
+.hover-zone.left {
+    left: 0;
+}
+
+.hover-zone.right {
+    right: 0;
+}
+
+button {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+a {
+    color: #cfae70; /* 골드 포인트 */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #e0d8c3;
+}
