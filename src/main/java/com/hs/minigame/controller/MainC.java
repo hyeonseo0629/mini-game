@@ -1,6 +1,6 @@
 package com.hs.minigame.controller;
 
-import com.hs.minigame.service.LoginService;
+import com.hs.minigame.service.login.LoginService;
 import com.hs.minigame.service.SampleService;
 import com.hs.minigame.vo.LoginVO;
 import jakarta.servlet.http.HttpSession;

@@ -1,6 +1,6 @@
-package com.hs.minigame.service;
+package com.hs.minigame.service.login;
 
-import com.hs.minigame.mapper.LoginMapper;
+import com.hs.minigame.mapper.login.LoginMapper;
 import com.hs.minigame.vo.LoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
