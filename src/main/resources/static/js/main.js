@@ -28,12 +28,12 @@ function init(isGamePage) {
     lrzone.forEach((zone) => {
         console.log(zone)
         zone.addEventListener("mouseleave", function () {
-        if (isGamePage == 1) {
-            leftContent.style.left = "-25%";
-                    leftContent.style.transition = "left 0.5s ease-out";
-                    rightContent.style.right = "-25%";
-                    rightContent.style.transition = "right 0.5s ease-out";
-        }
+            if (isGamePage == 1) {
+                leftContent.style.left = "-25%";
+                        leftContent.style.transition = "left 0.5s ease-out";
+                        rightContent.style.right = "-25%";
+                        rightContent.style.transition = "right 0.5s ease-out";
+            }
         })
     })
 }
