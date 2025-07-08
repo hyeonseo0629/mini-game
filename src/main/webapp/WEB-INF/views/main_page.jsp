@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/resources/css/main.css">
     <script src="/resources/js/main.js"></script>
 </head>
-<body onload="init('${isGamePage}')">
+<body>
     <div class="main-container">
         <div class="hover-zone left"></div>
         <nav class="lrzone menu-area">
