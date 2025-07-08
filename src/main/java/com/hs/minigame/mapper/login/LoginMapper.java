@@ -1,12 +1,8 @@
-package com.hs.minigame.mapper;
+package com.hs.minigame.mapper.login;
 
 import com.hs.minigame.vo.LoginVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.mybatis.spring.annotation.MapperScans;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Mapper()
 public interface LoginMapper {
