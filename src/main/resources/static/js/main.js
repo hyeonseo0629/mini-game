@@ -30,9 +30,9 @@ function init(isGamePage) {
         zone.addEventListener("mouseleave", function () {
         if (isGamePage == 1) {
             leftContent.style.left = "-25%";
-                    leftContent.style.transition = "left 0.5s ease-out";
-                    rightContent.style.right = "-25%";
-                    rightContent.style.transition = "right 0.5s ease-out";
+            leftContent.style.transition = "left 0.5s ease-out";
+            rightContent.style.right = "-25%";
+            rightContent.style.transition = "right 0.5s ease-out";
         }
         })
     })
@@ -44,7 +44,7 @@ function clicked(no) {
             location.href = "Game.html";
             break;
         case 2:
-            alert(11);
+            location.href = "ShopC";
             break;
     }
 }

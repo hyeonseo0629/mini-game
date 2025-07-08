@@ -26,4 +26,10 @@ public class MainC {
         return "main_page";
     }
 
+    @GetMapping("/ShopC")
+    public String shopC(Model model) {
+        model.addAttribute("content", "shop/shop_main.jsp");
+        model.addAttribute("isGamePage", 0);
+        return "main_page";
+    }
 }
