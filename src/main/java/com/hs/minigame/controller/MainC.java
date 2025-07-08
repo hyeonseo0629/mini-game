@@ -18,4 +18,9 @@ public class MainC {
         return "index";
     }
 
+    @GetMapping("/GameC")
+    public String gameC() {
+        return "game/game_menu";
+    }
+
 }
