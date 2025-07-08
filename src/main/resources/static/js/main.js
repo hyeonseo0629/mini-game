@@ -46,7 +46,7 @@ function init(isGamePage) {
 function clicked(no) {
     switch (no) {
         case 1:
-            location.href = "Game.html";
+            location.href = "GameC";
             break;
         case 2:
             location.href = "ShopC";
