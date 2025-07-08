@@ -85,6 +85,7 @@ public class MainC {
     public String rankingC(Model model) {
         model.addAttribute("content", "ranking/ranking_menu.jsp");
         model.addAttribute("isRankingPage", 0);
+        return "main_page";
     }
 
     @GetMapping("/CommunityC")
