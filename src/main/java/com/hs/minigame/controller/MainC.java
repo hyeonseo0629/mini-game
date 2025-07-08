@@ -27,11 +27,18 @@ public class MainC {
         return "main_page";
     }
 
+    @GetMapping("/ShopC")
+    public String shopC(Model model) {
+        model.addAttribute("content", "shop/shop_main.jsp");
+        model.addAttribute("isGamePage", 0);
+    }
+    
     @GetMapping("/RankingC")
     public String rankingC(Model model) {
         model.addAttribute("content", "ranking/ranking_menu.jsp");
         model.addAttribute("isRankingPage", 0);
     }
+
     @GetMapping("/CommunityC")
     public String communityC(Model model) {
         model.addAttribute("content", "community/community_main.jsp");

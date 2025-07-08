@@ -1,0 +1,45 @@
+h1 {
+    text-align: center;
+}
+
+.shop-container {
+    width: 200px;
+    border: 2px solid #333;
+    padding: 10px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.item-img {
+    width: 100%;
+    height: 150px;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.item-name {
+    border-top: 2px solid #333;
+    padding: 5px 0;
+    font-weight: bold;
+}
+
+.underside {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+
+.item-price {
+    border: 2px solid #333;
+    padding: 5px 10px;
+}
+
+.buy-btn {
+    border: 2px solid #333;
+    background-color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
