@@ -28,12 +28,12 @@ function init(isGamePage) {
     lrzone.forEach((zone) => {
         console.log(zone)
         zone.addEventListener("mouseleave", function () {
-        if (isGamePage == 1) {
-            leftContent.style.left = "-25%";
-                    leftContent.style.transition = "left 0.5s ease-out";
-                    rightContent.style.right = "-25%";
-                    rightContent.style.transition = "right 0.5s ease-out";
-        }
+            if (isGamePage == 1) {
+                leftContent.style.left = "-25%";
+                        leftContent.style.transition = "left 0.5s ease-out";
+                        rightContent.style.right = "-25%";
+                        rightContent.style.transition = "right 0.5s ease-out";
+            }
         })
     })
 }
@@ -45,6 +45,18 @@ function clicked(no) {
             break;
         case 2:
             alert(11);
+            break;
+        case 3:
+            break;
+        case 4:
+            location.href = "CommunityC";
+            break;
+        case 5:
+            break;
+        case 6:
+            location.href = "SupportC";
+            break;
+        default:
             break;
     }
 }
