@@ -79,12 +79,14 @@ public class MainC {
     public String shopC(Model model) {
         model.addAttribute("content", "shop/shop_main.jsp");
         model.addAttribute("isGamePage", 0);
+        return  "main_page";
     }
     
     @GetMapping("/RankingC")
     public String rankingC(Model model) {
         model.addAttribute("content", "ranking/ranking_menu.jsp");
         model.addAttribute("isRankingPage", 0);
+        return "main_page";
     }
 
     @GetMapping("/CommunityC")
