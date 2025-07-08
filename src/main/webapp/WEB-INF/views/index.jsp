@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>mini game</title>
-  <script>location.href="HC?isGamePage=1"</script>
+  <script>location.href="GameC"</script>
 </head>
 <body>
 
