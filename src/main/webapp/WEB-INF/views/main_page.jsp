@@ -3,8 +3,8 @@
 <html>
 <head>
     <title>home page</title>
-    <link rel="stylesheet" href="CSS/main.css">
-    <script src="JS/main.js"></script>
+    <link rel="stylesheet" href="/resources/css/main.css">
+    <script src="/resources/js/main.js"></script>
 </head>
 <body onload="init('${isGamePage}')">
     <div class="main-container">
