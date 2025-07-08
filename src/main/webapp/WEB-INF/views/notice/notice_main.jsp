@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>mini game</title>
-  <script>location.href="GameC"</script>
+    <title>mini game</title>
 </head>
 <body>
 
