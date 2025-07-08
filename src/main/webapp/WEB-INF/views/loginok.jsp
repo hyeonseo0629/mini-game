@@ -3,9 +3,11 @@
 <html>
 <head>
   <title>mini game</title>
-  <script>location.href="GameC"</script>
+  <script></script>
 </head>
 <body>
-
+    ${users.user_id}님
+    <br>
+     <button>로그아웃</button>
 </body>
 </html>

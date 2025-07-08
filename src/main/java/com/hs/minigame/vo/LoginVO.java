@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 // only Data needs
 @NoArgsConstructor
 @AllArgsConstructor
+
 @Data
 public class LoginVO {
-    private String test;
+    private String user_id;
+    private String user_pw;
+    private String user_name;
 }
