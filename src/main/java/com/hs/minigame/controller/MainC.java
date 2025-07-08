@@ -13,10 +13,11 @@ public class MainC {
     private SampleService sampleService;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
         // you can add this as attribute on model if you need.
         // sampleService.selectAll();
-        return "index";
+        model.addAttribute("content", "game/game_menu.jsp");
+        return "main_page";
     }
 
     @GetMapping("/GameC")
@@ -30,6 +31,25 @@ public class MainC {
     public String shopC(Model model) {
         model.addAttribute("content", "shop/shop_main.jsp");
         model.addAttribute("isGamePage", 0);
+    }
+    
+    @GetMapping("/RankingC")
+    public String rankingC(Model model) {
+        model.addAttribute("content", "ranking/ranking_menu.jsp");
+        model.addAttribute("isRankingPage", 0);
+    }
+
+    @GetMapping("/CommunityC")
+    public String communityC(Model model) {
+        model.addAttribute("content", "community/community_main.jsp");
+        model.addAttribute("isGamePage", 1);
+        return "main_page";
+    }
+
+    @GetMapping("/SupportC")
+    public String supportC(Model model) {
+        model.addAttribute("content", "support/support_main.jsp");
+        model.addAttribute("isGamePage", 1);
         return "main_page";
     }
 }
