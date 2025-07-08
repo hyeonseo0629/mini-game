@@ -18,16 +18,16 @@
                 <button onclick="clicked(2)">상점</button>
             </div>
             <div>
-              <button>랭킹</button>
+                <button>랭킹</button>
             </div>
             <div>
-               <button>게시판</button>
+                <button onclick="clicked(4)">게시판</button>
             </div>
             <div>
                 <button>공지사항</button>
             </div>
             <div>
-                <button>문의</button>
+                <button onclick="clicked(6)">문의</button>
             </div>
 
         </nav>
