@@ -1,3 +1,8 @@
+window.onload = function() {
+    init(1)
+}
+
+
 function init(isGamePage) {
     // hovweZone을 복수개로 받은 것 -> 문제 원인인 가능성 높음
     const hoverZones = document.querySelectorAll(".hover-zone");
