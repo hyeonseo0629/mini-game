@@ -3,6 +3,7 @@ package com.hs.minigame.controller;
 import com.hs.minigame.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -12,10 +13,11 @@ public class MainC {
     private SampleService sampleService;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
         // you can add this as attribute on model if you need.
         // sampleService.selectAll();
-        return "index";
+        model.addAttribute("content", "game/game_menu.jsp");
+        return "main_page";
     }
 
     @GetMapping("/GameC")

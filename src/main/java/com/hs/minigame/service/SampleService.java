@@ -1,5 +1,6 @@
 package com.hs.minigame.service;
 
+import com.hs.minigame.mapper.SampleMapper;
 import com.hs.minigame.vo.SampleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,10 @@ import java.util.List;
 public class SampleService {
 
     @Autowired
-    private SampleService sampleService;
+    private SampleMapper sampleMapper;
 
     public List<SampleVO> selectAll() {
-        return sampleService.selectAll();
+        return sampleMapper.selectAll();
     }
 
 }
