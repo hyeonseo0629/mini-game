@@ -28,13 +28,6 @@ public class MainC {
         return "main_page";
     }
 
-    @GetMapping("/GameC")
-    public String gameC(Model model) {
-        model.addAttribute("content", "game/game_menu.jsp");
-        model.addAttribute("isGamePage", 1);
-        return "main_page";
-    }
-
     @PostMapping("/login")
     public String login(@RequestParam String id, @RequestParam String pw, HttpSession session, Model model) {
 
@@ -75,6 +68,13 @@ public class MainC {
 
     }
 
+    @GetMapping("/GameC")
+    public String gameC(Model model) {
+        model.addAttribute("content", "game/game_menu.jsp");
+        model.addAttribute("isGamePage", 1);
+        return "main_page";
+    }
+
     @GetMapping("/ShopC")
     public String shopC(Model model) {
         model.addAttribute("content", "shop/shop_main.jsp");
@@ -92,14 +92,21 @@ public class MainC {
     @GetMapping("/CommunityC")
     public String communityC(Model model) {
         model.addAttribute("content", "community/community_main.jsp");
-        model.addAttribute("isGamePage", 1);
+        model.addAttribute("isGamePage", 0);
+        return "main_page";
+    }
+
+    @GetMapping("/NoticeC")
+    public String noticeC(Model model) {
+        model.addAttribute("content", "notice/notice_main.jsp");
+        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 
     @GetMapping("/SupportC")
     public String supportC(Model model) {
         model.addAttribute("content", "support/support_main.jsp");
-        model.addAttribute("isGamePage", 1);
+        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 }
