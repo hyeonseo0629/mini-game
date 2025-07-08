@@ -27,4 +27,17 @@ public class MainC {
         return "main_page";
     }
 
+    @GetMapping("/CommunityC")
+    public String communityC(Model model) {
+        model.addAttribute("content", "community/community_main.jsp");
+        model.addAttribute("isGamePage", 1);
+        return "main_page";
+    }
+
+    @GetMapping("/SupportC")
+    public String supportC(Model model) {
+        model.addAttribute("content", "support/support_main.jsp");
+        model.addAttribute("isGamePage", 1);
+        return "main_page";
+    }
 }

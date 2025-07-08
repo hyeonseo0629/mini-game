@@ -46,5 +46,17 @@ function clicked(no) {
         case 2:
             alert(11);
             break;
+        case 3:
+            break;
+        case 4:
+            location.href = "CommunityC";
+            break;
+        case 5:
+            break;
+        case 6:
+            location.href = "SupportC";
+            break;
+        default:
+            break;
     }
 }
