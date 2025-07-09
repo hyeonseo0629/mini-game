@@ -51,20 +51,21 @@ public class MainC {
              model.addAttribute("alert","pw 불일치");
 
          }
+        model.addAttribute("content", "game/game_menu.jsp");
+        return "main_page";
 
-//         if(users != null && users.getPw().equals(pw)){
+//  연습용       if(users != null && users.getPw().equals(pw)){
 //             session.setAttribute("users", users);
 //         }
 //-------------------------------------
-//         if(users == null){//id 중심 확인 구성이니까 -> db에 없으면 그냥 불일치 시켜버림
+//   연습용     if(users == null){//id 중심 확인 구성이니까 -> db에 없으면 그냥 불일치 시켜버림
 //             System.out.println("id 불일치");
 //         }else if(users.getPw().equals(pw)) {
 //             System.out.println("로그인 성공");
 //         }else{
 //             System.out.println("pw 불일치");
 //         }
-        model.addAttribute("content", "game/game_menu.jsp");
-        return "main_page";
+
 
     }
 
