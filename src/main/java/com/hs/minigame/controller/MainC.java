@@ -99,6 +99,8 @@ public class MainC {
         return "main_page";
     }
 
+
+
     @GetMapping("/ShopC")
     public String shopC(Model model) {
         model.addAttribute("itemsInfo", shopService.selectAll());
