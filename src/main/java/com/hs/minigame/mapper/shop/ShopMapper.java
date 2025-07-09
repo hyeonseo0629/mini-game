@@ -1,6 +1,5 @@
 package com.hs.minigame.mapper.shop;
 
-import com.hs.minigame.vo.SampleVO;
 import com.hs.minigame.vo.ShopVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
