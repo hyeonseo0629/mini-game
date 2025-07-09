@@ -119,6 +119,14 @@ public class MainC {
         return "main_page";
     }
 
+    @GetMapping("/CommunityPostC")
+    public String communityPostC(Model model) {
+        model.addAttribute("community",communityService.getAllReview());
+        model.addAttribute("content", "community/community_post.jsp");
+        model.addAttribute("isGamePage", 0);
+        return "main_page";
+    }
+
     @GetMapping("/NoticeC")
     public String noticeC(Model model) {
         model.addAttribute("content", "notice/notice_main.jsp");
@@ -130,6 +138,14 @@ public class MainC {
     public String supportC(Model model) {
         model.addAttribute("support", supportService.getAllSupport());
         model.addAttribute("content", "support/support_main.jsp");
+        model.addAttribute("isGamePage", 0);
+        return "main_page";
+    }
+
+    @GetMapping("/SupportPostC")
+    public String supportPostC(Model model) {
+        model.addAttribute("support", supportService.getAllSupport());
+        model.addAttribute("content", "support/support_post.jsp");
         model.addAttribute("isGamePage", 0);
         return "main_page";
     }

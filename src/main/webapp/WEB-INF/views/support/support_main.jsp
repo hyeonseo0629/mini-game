@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -7,13 +8,14 @@
     <link rel="stylesheet" href="resources/css/support.css">
 </head>
 <body>
-<div>
+<div class="sup">
     <h1>문의</h1><br>
+    <button onclick="location.href='SupportPostC'">문의 작성</button>
     <hr>
     <table>
         <thead>
         <tr>
-            <th>ID</th>
+            <th>No.</th>
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
@@ -27,12 +29,15 @@
                     <td class="sup_id">${sup.text_id}</td>
                     <td class="sup_title">${sup.text_title}</td>
                     <td class="sup_user_no">${sup.text_user_no}</td>
-                    <td class="sup_date">${sup.text_write_date}</td>
+                    <td class="sup_date">
+                        <fmt:formatDate value="${sup.text_write_date}" pattern="MM월 dd일" />
+                    </td>
                 </tr>
             </div>
         </c:forEach>
         </div>
     </div>
+
 
     </table>
 </div>

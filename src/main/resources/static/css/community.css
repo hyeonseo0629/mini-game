@@ -26,6 +26,7 @@ table {
 /*}*/
 
 .commu-container {
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -60,6 +61,7 @@ table {
 }
 
 .commu_user_no{
+    width: 500px;
     text-align:  center;
 }
 
