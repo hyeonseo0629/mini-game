@@ -4,6 +4,7 @@ import com.hs.minigame.service.community.CommunityService;
 import com.hs.minigame.service.login.LoginService;
 import com.hs.minigame.service.SampleService;
 import com.hs.minigame.service.shop.ShopService;
+import com.hs.minigame.service.support.SupportService;
 import com.hs.minigame.vo.LoginVO;
 import com.hs.minigame.vo.ShopVO;
 import jakarta.servlet.http.HttpSession;
@@ -25,7 +26,11 @@ public class MainC {
 
     @Autowired
     private ShopService shopService;
+
+    @Autowired
     private CommunityService communityService;
+    @Autowired
+    private SupportService supportService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -123,6 +128,7 @@ public class MainC {
 
     @GetMapping("/SupportC")
     public String supportC(Model model) {
+        model.addAttribute("support", supportService.getAllSupport());
         model.addAttribute("content", "support/support_main.jsp");
         model.addAttribute("isGamePage", 0);
         return "main_page";
