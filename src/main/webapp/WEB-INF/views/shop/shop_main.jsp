@@ -13,19 +13,23 @@
 <br>
 <hr>
 <br>
-<c:forEach var="i" items="${itemsInfo}">
-<form action="/buyItem" method="post">
-    <div class="shop-container">
-        <div class="item-img">${i.item_avatar_img}</div>
-        <div class="item-name">${i.item_name}</div>
-        <div class="underside">
-            <div class="item-price">${i.item_price}</div>
-            <input type="hidden" name="itemId" value="${i.item_id}">
-            <button type="button" class="buy-btn" onclick="shopbuy()">구매</button>
-        </div>
-    </div>
-</form>
-</c:forEach>
+<div class="container">
+    <c:forEach var="i" items="${itemsInfo}">
+        <form action="/buyItem" method="post">
+            <div class="shop-item-container">
+                <div class="item-img">
+                    <img src="resources/images/${i.item_avatar_img}" alt="img">
+                </div>
+                <div class="item-name">${i.item_name}</div>
+                <div class="underside">
+                    <div class="item-price">${i.item_price}</div>
+                    <input type="hidden" name="itemId" value="${i.item_id}">
+                    <button type="button" class="buy-btn" onclick="shopbuy()">구매</button>
+                </div>
+            </div>
+        </form>
+    </c:forEach>
+</div>
 
 </body>
 </html>

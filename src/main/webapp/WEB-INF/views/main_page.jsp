@@ -46,9 +46,9 @@
                 <input type="submit"value="아이디/비밀번호 찾기">
 
             </form>
-            <c:if test = "${empty users}">
-            <script>alert('${alert}')</script>
-            </c:if>
+<%--            <c:if test = "${empty users}">--%>
+<%--            <script>alert('${alert}')</script>--%>
+<%--            </c:if>--%>
 
         </div>
         <div class="hover-zone right"></div>

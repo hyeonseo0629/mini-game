@@ -25,6 +25,8 @@ public class MainC {
 
     @Autowired
     private ShopService shopService;
+
+    @Autowired
     private CommunityService communityService;
 
     @GetMapping("/")
@@ -81,6 +83,8 @@ public class MainC {
         model.addAttribute("isGamePage", 1);
         return "main_page";
     }
+
+
 
     @GetMapping("/ShopC")
     public String shopC(Model model) {
