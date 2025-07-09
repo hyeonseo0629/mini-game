@@ -94,7 +94,7 @@ nav.menu-area button:hover {
 .hover-zone {
     position: fixed;
     top: 0;
-    width: 15%;
+    width: 13%;
     height: 100vh;
     z-index: 3;
 }
