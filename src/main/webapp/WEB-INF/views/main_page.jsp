@@ -38,17 +38,20 @@
 
         <div class="lrzone info-area">
             <jsp:include page="login/login.jsp" />
-<%--            <form action="login"method="post">--%>
-<%--               <input type="text"name="id"><br>--%>
-<%--                <input type="text"name="pw"><br>--%>
-<%--                <input type="submit"value="로그인">--%>
-<%--                <input tyep="submit"value="회원가입">--%>
-<%--                <input type="submit"value="아이디/비밀번호 찾기">--%>
-<%--            </form>--%>
-<%--            <c:if test = "${empty users}">--%>
-<%--            <script>alert('${alert}')</script>--%>
-<%--            </c:if>--%>
-        </div>
+
+            <br>
+            <div>
+                <div>마이 페이지</div>
+                <div>ID : ${users.user_id}</div>
+                <div>PW : ${users.user_pw}</div>
+                <div>이름 : ${users.user_name}</div>
+                <div>닉네임 : </div>
+                <div>머니 : </div>
+
+                <button>인벤토리</button>
+            </div>
+         </div>
+
         <div class="hover-zone right"></div>
     </div>
 </body>
