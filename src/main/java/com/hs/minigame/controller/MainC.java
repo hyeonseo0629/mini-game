@@ -1,5 +1,6 @@
 package com.hs.minigame.controller;
 
+import com.hs.minigame.service.community.CommunityService;
 import com.hs.minigame.service.login.LoginService;
 import com.hs.minigame.service.SampleService;
 import com.hs.minigame.service.shop.ShopService;
@@ -24,6 +25,7 @@ public class MainC {
 
     @Autowired
     private ShopService shopService;
+    private CommunityService communityService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -106,6 +108,7 @@ public class MainC {
 
     @GetMapping("/CommunityC")
     public String communityC(Model model) {
+        model.addAttribute("community",communityService.getAllReview());
         model.addAttribute("content", "community/community_main.jsp");
         model.addAttribute("isGamePage", 0);
         return "main_page";
