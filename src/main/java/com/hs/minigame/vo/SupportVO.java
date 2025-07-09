@@ -10,11 +10,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CommunityVO {
+public class SupportVO {
         private String text_id;
         private String text_title;
-        private String text_user_no;
         private String text_content;
+        private String text_user_no;
         private Date text_write_date;
         private String text_type;
 }
