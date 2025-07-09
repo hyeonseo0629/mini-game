@@ -2,7 +2,9 @@ package com.hs.minigame.controller;
 
 import com.hs.minigame.service.login.LoginService;
 import com.hs.minigame.service.SampleService;
+import com.hs.minigame.service.shop.ShopService;
 import com.hs.minigame.vo.LoginVO;
+import com.hs.minigame.vo.ShopVO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ public class MainC {
 
     @Autowired
     private LoginService loginService; //새로운 service마다 의존성 필요
+
+    @Autowired
+    private ShopService shopService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -77,6 +82,16 @@ public class MainC {
 
     @GetMapping("/ShopC")
     public String shopC(Model model) {
+        model.addAttribute("itemsInfo", shopService.selectAll());
+        model.addAttribute("content", "shop/shop_main.jsp");
+        model.addAttribute("isGamePage", 0);
+        return "main_page";
+    }
+
+    @PostMapping("/buyItem")
+    public String buyItemC(@RequestParam("itemId") String itemId ,Model model) {
+        System.out.println("itemID : " + itemId);
+        model.addAttribute("itemsInfo", shopService.selectAll());
         model.addAttribute("content", "shop/shop_main.jsp");
         model.addAttribute("isGamePage", 0);
         return "main_page";
