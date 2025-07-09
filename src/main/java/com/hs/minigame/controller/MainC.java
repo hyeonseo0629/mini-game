@@ -3,6 +3,7 @@ package com.hs.minigame.controller;
 import com.hs.minigame.service.community.CommunityService;
 import com.hs.minigame.service.login.LoginService;
 import com.hs.minigame.service.shop.ShopService;
+import com.hs.minigame.service.support.SupportService;
 import com.hs.minigame.vo.LoginVO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class MainC {
 
     @Autowired
     private CommunityService communityService;
+    @Autowired
+    private SupportService supportService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -95,6 +98,8 @@ public class MainC {
         return "main_page";
     }
 
+
+
     @GetMapping("/ShopC")
     public String shopC(Model model) {
         model.addAttribute("itemsInfo", shopService.selectAll());
@@ -127,6 +132,14 @@ public class MainC {
         return "main_page";
     }
 
+    @GetMapping("/CommunityPostC")
+    public String communityPostC(Model model) {
+        model.addAttribute("community",communityService.getAllReview());
+        model.addAttribute("content", "community/community_post.jsp");
+        model.addAttribute("isGamePage", 0);
+        return "main_page";
+    }
+
     @GetMapping("/NoticeC")
     public String noticeC(Model model) {
         model.addAttribute("content", "notice/notice_main.jsp");
@@ -136,7 +149,16 @@ public class MainC {
 
     @GetMapping("/SupportC")
     public String supportC(Model model) {
+        model.addAttribute("support", supportService.getAllSupport());
         model.addAttribute("content", "support/support_main.jsp");
+        model.addAttribute("isGamePage", 0);
+        return "main_page";
+    }
+
+    @GetMapping("/SupportPostC")
+    public String supportPostC(Model model) {
+        model.addAttribute("support", supportService.getAllSupport());
+        model.addAttribute("content", "support/support_post.jsp");
         model.addAttribute("isGamePage", 0);
         return "main_page";
     }
