@@ -1,6 +1,6 @@
 package com.hs.minigame.mapper.community;
 
-import com.hs.minigame.vo.CommunityVO;
+import com.hs.minigame.vo.TextsVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -11,8 +11,8 @@ import java.util.List;
 public interface CommunityMapper {
 
 //    @Select("select * from texts where TEXT_TYPE = 'COMMUNITY'")
-//    public List<CommunityVO> selectAll();
+//    public List<TextsVO> selectAll();
 
     @Select("select * from texts where TEXT_TYPE = 'COMMUNITY'")
-    public List<CommunityVO> selectAll();
+    public List<TextsVO> selectAll();
 }

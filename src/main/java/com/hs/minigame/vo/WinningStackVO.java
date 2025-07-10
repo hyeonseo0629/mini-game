@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 // only Data needs
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Data
-public class LoginVO {
-    private String user_id;
-    private String user_pw;
-    private String user_name;
+public class WinningStackVO {
+    private String stack_id;
+    private String stack_user_no;
+    private String stack_game_id;
+    private int stack_point;
 }

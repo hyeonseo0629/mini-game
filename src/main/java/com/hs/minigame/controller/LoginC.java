@@ -1,12 +1,11 @@
 package com.hs.minigame.controller;
 
 import com.hs.minigame.service.login.LoginService;
-import com.hs.minigame.vo.LoginVO;
+import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,7 +18,7 @@ public class LoginC {
     @PostMapping("/login")
     public String login(@RequestParam String id, @RequestParam String pw, HttpSession session, Model model) {
         // 로그인 제어 / db에서 조회
-        LoginVO users = loginService.getUser(id);
+        UsersVO users = loginService.getUser(id);
 
 //        if (users==null) {
 //            redirectAttributes.addFlashAttribute("alert","id 불일치");
