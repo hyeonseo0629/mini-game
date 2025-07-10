@@ -19,4 +19,13 @@ public class ShopService {
         return items;
     }
 
+    public List<ShopItemsVO> getShopItems(int page, int limit) {
+        int offset = (page - 1) * limit;
+        return shopMapper.SelectShopItemsByPaging(offset,limit);
+    }
+
+    public int getShopItemCount() {
+
+        return shopMapper.getShopItemCount();
+    }
 }
