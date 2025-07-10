@@ -12,7 +12,6 @@
 <h1>상점</h1>
 <br>
 <hr>
-<br>
 <div class="container">
     <c:forEach var="i" items="${itemsInfo}">
         <form action="/buyItem" method="post">
