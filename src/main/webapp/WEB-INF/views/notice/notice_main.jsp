@@ -5,6 +5,7 @@
     <title>mini game</title>
 </head>
 <body>
-
+<h1>공지사항</h1><br>
+<hr>
 </body>
 </html>

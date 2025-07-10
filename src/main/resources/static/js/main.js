@@ -1,3 +1,7 @@
+ window.onload = () => {
+     init(1)
+ }
+
 function init(isGamePage) {
     // hovweZone을 복수개로 받은 것 -> 문제 원인인 가능성 높음
     const hoverZones = document.querySelectorAll(".hover-zone");
@@ -41,17 +45,19 @@ function init(isGamePage) {
 function clicked(no) {
     switch (no) {
         case 1:
-            location.href = "Game.html";
+            location.href = "GameC";
             break;
         case 2:
             location.href = "ShopC";
             break;
         case 3:
+            location.href = "RankingC";
             break;
         case 4:
             location.href = "CommunityC";
             break;
         case 5:
+            location.href = "NoticeC";
             break;
         case 6:
             location.href = "SupportC";

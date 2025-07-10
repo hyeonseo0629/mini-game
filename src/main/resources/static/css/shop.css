@@ -1,13 +1,22 @@
-h1 {
-    text-align: center;
+
+.container{
+    display: flex;
+    flex-wrap: wrap; /* 넘칠 경우 줄바꿈 */
+    justify-content: center; /* 전체를 가운데 정렬 */
+    gap: 20px; /* 아이템 사이 간격 */
+    padding: 20px; /* 컨테이너 padding */
 }
 
-.shop-container {
-    width: 200px;
+.shop-item-container {
+    width: 200px; /* 한 줄에 4개씩 배치하려면 200px * 4 + gap 고려 */
+    box-sizing: border-box; /* padding, border 포함 계산 */
     border: 2px solid #333;
     padding: 10px;
     text-align: center;
     font-family: sans-serif;
+    background-color: #222; /* 배경색 예시 */
+    border-radius: 8px; /* 모서리 둥글게 */
+
 }
 
 .item-img {
@@ -18,6 +27,11 @@ h1 {
     align-items: center;
     justify-content: center;
     margin-bottom: 5px;
+}
+
+.item-img > img {
+    max-width: 100%;
+    height: 100%;
 }
 
 .item-name {
