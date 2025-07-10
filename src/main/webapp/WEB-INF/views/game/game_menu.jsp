@@ -12,7 +12,6 @@
 </head>
 <body>
 <div class="container">
-    아무거나
 </div>
 </body>
 </html>

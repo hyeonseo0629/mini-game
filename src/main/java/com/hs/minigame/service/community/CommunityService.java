@@ -1,7 +1,7 @@
 package com.hs.minigame.service.community;
 
 import com.hs.minigame.mapper.community.CommunityMapper;
-import com.hs.minigame.vo.CommunityVO;
+import com.hs.minigame.vo.TextsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +14,12 @@ public class CommunityService {
     @Autowired
     private CommunityMapper communityMapper;
 
-//    public List<CommunityVO> selectAll() {
+//    public List<TextsVO> selectAll() {
 //        return communityMapper.selectAll();
 //    }
 
-    public List<CommunityVO> getAllReview() {
-        List<CommunityVO> community = communityMapper.selectAll();
+    public List<TextsVO> getAllReview() {
+        List<TextsVO> community = communityMapper.selectAll();
         System.out.println(community);
         return community;
     }

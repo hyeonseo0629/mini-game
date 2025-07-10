@@ -2,7 +2,7 @@ package com.hs.minigame.service.login;
 
 
 import com.hs.minigame.mapper.login.LoginMapper;
-import com.hs.minigame.vo.LoginVO;
+import com.hs.minigame.vo.UsersVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +11,6 @@ public class LoginService {
     @Autowired
     private LoginMapper loginMapper;
 
-    public LoginVO getUser(String id){
+    public UsersVO getUser(String id){
         return loginMapper.selectUser(id);}
 }
