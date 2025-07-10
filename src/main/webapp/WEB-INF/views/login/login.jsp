@@ -80,13 +80,17 @@ function centerModal(){
 }
 
     $(document).ready(function() {
-       $('#openModal').click(function() {
-         $('#modal').fadeIn();
-         centerModal();
-       });
-        $('#closeModal').click(function() {
-         $('#modal').fadeOut();
-         centerModal();
+        $('#openModal').click(function () {
+            $('#modal').fadeIn();
+        });
+        $('#closeModal').click(function () {
+            $('#modal').fadeOut();
+        });
+        $('#modal').click(function (e) {// 클릭한 대상 modal-body가 아닌 경우 닫기
+            if (!$(e.target).closest('.modal-body').length) {
+                $('#modal').fadeOut();
+            }
+
         });
     });
 
