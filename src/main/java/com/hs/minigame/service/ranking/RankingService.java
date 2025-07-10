@@ -3,6 +3,7 @@ package com.hs.minigame.service.ranking;
 import com.hs.minigame.mapper.ranking.RankingMapper;
 import com.hs.minigame.vo.UserScoreVO;
 import com.hs.minigame.vo.UserStackVO;
+import com.hs.minigame.vo.UsersVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class RankingService {
         return rankingMapper.selectStackRanking();
     }
 
-//    public List<UserVO> selectMoneyRanking() {
-//        return rankingMapper.selectMoneyRanking();
-//    }
+    public List<UsersVO> selectMoneyRanking() {
+        return rankingMapper.selectMoneyRanking();
+    }
 }

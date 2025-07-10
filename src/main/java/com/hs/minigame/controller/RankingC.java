@@ -30,7 +30,7 @@ public class RankingC {
             model.addAttribute("rankingList", rankingService.selectStackRanking());
             model.addAttribute("rankingType", "연승 횟수");
         } else if (rankingType.equals("money")) {
-//            model.addAttribute("rankingList", rankingService.selectMoneyRanking());
+            model.addAttribute("rankingList", rankingService.selectMoneyRanking());
             model.addAttribute("rankingType", "보유 금액");
         }
 

@@ -57,6 +57,17 @@
                         <hr style="margin: 10px 0">
                     </c:forEach>
                 </c:when>
+                <c:when test="${rankingType=='보유 금액'}">
+                    <c:forEach var="r" items="${rankingList}" varStatus="i">
+                        <div style="display: flex; justify-content: space-around">
+                            <div>${i.count}</div>
+                            <div>${r.user_id}</div>
+                            <div>${r.user_nickname}</div>
+                            <div>${r.user_money}</div>
+                        </div>
+                        <hr style="margin: 10px 0">
+                    </c:forEach>
+                </c:when>
             </c:choose>
 
         </div>
