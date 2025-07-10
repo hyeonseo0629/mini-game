@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ShopVO {
+public class ShopItemsVO {
     private String item_id;
     private String item_name;
     private int item_price;
-private String item_avatar_img;
+    private String item_avatar_img;
 
 }

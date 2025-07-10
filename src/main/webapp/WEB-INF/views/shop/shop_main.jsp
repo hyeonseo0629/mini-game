@@ -13,7 +13,7 @@
 <br>
 <hr>
 <div class="container">
-    <c:forEach var="i" items="${itemsInfo}">
+    <c:forEach var="i" items="${pagedItems}">
         <form action="/BuyItem" method="post">
             <div class="shop-item-container">
                 <div class="item-img">
@@ -29,6 +29,20 @@
         </form>
     </c:forEach>
 </div>
+
+<div class="pagination">
+    <c:forEach var="p" begin="1" end="${totalPage}">
+        <c:choose>
+            <c:when test="${p == currentPage}">
+                <span>[${p}]</span>
+            </c:when>
+            <c:otherwise>
+                <a href="/ShopC?page=${p}">[${p}]</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</div>
+
 
 </body>
 </html>
