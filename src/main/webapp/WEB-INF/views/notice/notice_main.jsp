@@ -7,5 +7,8 @@
 <body>
 <h1>공지사항</h1><br>
 <hr>
+<c:forEach var="" items="">
+
+</c:forEach>
 </body>
 </html>

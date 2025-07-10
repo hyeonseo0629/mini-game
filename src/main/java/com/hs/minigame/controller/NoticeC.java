@@ -1,0 +1,21 @@
+package com.hs.minigame.controller;
+
+import com.hs.minigame.service.notice.NoticeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class NoticeC {
+
+    @Autowired
+    private NoticeService noticeService;
+
+    @GetMapping("/NoticeC")
+    public String NoticeC(Model model) {
+        model.addAttribute("content", "notice/notice_main.jsp");
+        model.addAttribute("isGamePage", 0);
+        return "main_page";
+    }
+}
