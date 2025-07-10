@@ -13,10 +13,11 @@
 
 <c:when test="${empty users}">
 <form action="login"method="post">
-    <input type="text"name="id"><br>
-    <input type="text"name="pw"><br>
+    <input type="text"name="id"placeholder="아이디"><br>
+    <input type="password"name="pw"placeholder="비밀번호"id="pw">
+    <button type="button"onclick="toggle()">보기</button>
+    <br>
     <input type="submit"value="로그인">
-    <button>회원가입</button>
     <input type="submit"value="회원가입">
     <input type="submit"value="아이디/비밀번호 찾기">
 </form>
@@ -44,7 +45,7 @@
     <br>
     <button id="openModal">인벤토리</button>
 </c:if>
-
+<div id="modal-sign"class="modal"style="display:none">
 <form action="/sign"method="post">
     <div>회원 가입</div>
     <div>
@@ -59,9 +60,10 @@
     <div>
         <input type="text"name="nickname"placeholder="닉네임">
     </div>
-    <button type="submit">회원가입</button>
+    <button id="openModal-sign">회원가입</button>
+    <button id="closeModal-sign">X</button>
 </form>
-
+</div>
 <div id="modal" class="modal" style="display: none;">
     <div class="modal-body">
         <div>인벤토리 </div>
@@ -79,11 +81,22 @@
 <c:if test = "${not empty alert2}">
     <script>alert('${alert2}')</script>
 </c:if>
-<!--인벤토리 모달창 기능-->
-<script>
 
+<script>
+<!--비밀번호토글기능-->
+function toggle(){
+    const pwField = document.getElementById("pw");
+    const isHidden = pwField.getAttribute("type");
+
+    if(isHidden=="password"){
+        pwField.setAttribute("type","text");
+    }else{
+        pwField.setAttribute("type","password");
+    }
+}
+<!--회원가입 모달창 기능-->
 function centerModal(){
-    var modal = document.getElementById("modal");
+    var modal = document.getElementById("modal-sign");
     var modalWidth = modal.offsetWidth;
     var modalHeight = modal.offsetHeight;
     var windowWidth = window.innerWidth;
@@ -97,9 +110,22 @@ function centerModal(){
 
 }
 
-    $(document).ready(function() {
+$(document).ready(function() {
+    $('#openModal-sign').click(function () {
+        $('#modal-sign').fadeIn();
+        centerModal('modal-sign');
+    });
+    $('#closeModal-sign').click(function () {
+        $('#modal-sign').fadeOut();
+    });
+);
+
+<!--인벤토리 모달창 기능-->
+
+
         $('#openModal').click(function () {
             $('#modal').fadeIn();
+            centerModal('modal');
         });
         $('#closeModal').click(function () {
             $('#modal').fadeOut();
