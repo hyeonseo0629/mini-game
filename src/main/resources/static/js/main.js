@@ -15,8 +15,8 @@ function init(isGamePage) {
             leftContent.style.zIndex = "3";
             leftContent.style.transition = "left 0.5s ease-out";
             rightContent.style.right = "0";
-            rightContent.style.transition = "right 0.5s ease-out";
             rightContent.style.zIndex = "3";
+            rightContent.style.transition = "right 0.5s ease-out";
             zone.style.zIndex = "1";
         });
         // if (isGamePage == 1) {

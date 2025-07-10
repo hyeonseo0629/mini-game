@@ -13,18 +13,18 @@
     <hr>
     <table>
         <thead>
-        <tr>
-            <th>No.</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
+            <tr class="">
+                <th>No.</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+            </tr>
         </thead>
         <div style="width: 100%; display: flex; justify-content: center;">
             <div class="text-container">
                 <c:forEach var="t" items="${notice}">
                     <div class="text-wrap">
-                        <tr style="width: ">
+                        <tr>
                             <td class="text_id">${t.text_id}</td>
                             <td class="text_title">${t.text_title}</td>
                             <td class="text_user_no">${t.text_user_no}</td>
