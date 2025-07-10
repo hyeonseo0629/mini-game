@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,6 +46,7 @@ public class LoginC {
             System.out.println("로그인 성공");
             model.addAttribute("alert","로그인 성공");
             model.addAttribute("content", "game/game_menu.jsp");
+            model.addAttribute("user", users);
             return "main_page";
         } else {
             System.out.println("pw 불일치");
