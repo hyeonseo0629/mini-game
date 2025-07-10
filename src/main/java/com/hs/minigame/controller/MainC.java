@@ -28,19 +28,5 @@ public class MainC {
         model.addAttribute("isGamePage", 1);
         return "main_page";
     }
-
-    @GetMapping("/RankingC")
-    public String rankingC(Model model) {
-        model.addAttribute("content", "ranking/ranking_menu.jsp");
-        model.addAttribute("isRankingPage", 0);
-        return "main_page";
-    }
-
-    @GetMapping("/NoticeC")
-    public String noticeC(Model model) {
-        model.addAttribute("content", "notice/notice_main.jsp");
-        model.addAttribute("isGamePage", 0);
-        return "main_page";
-    }
 }
 
