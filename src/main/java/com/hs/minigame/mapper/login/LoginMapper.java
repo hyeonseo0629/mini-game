@@ -1,6 +1,6 @@
 package com.hs.minigame.mapper.login;
 
-import com.hs.minigame.vo.LoginVO;
+import com.hs.minigame.vo.UsersVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

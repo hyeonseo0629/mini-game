@@ -23,7 +23,7 @@ body {
     min-height: 100vh;
 }
 
-nav.menu-area {
+.menu-area {
     background-color: #2a2a2a; /* 딥 그레이 브라운 */
     width: 12.5%;
     height: 100vh; /* 화면 전체 높이 고정 */
@@ -38,12 +38,12 @@ nav.menu-area {
     box-shadow: 2px 0 5px rgba(0,0,0,0.7);
 }
 
-nav.menu-area > div {
+.menu-area > div {
     flex: 1; /* 동일 비율 */
     display: flex;
 }
 
-nav.menu-area button {
+.menu-area button {
     width: 100%;
     height: 100%;
     padding: 0;
@@ -59,7 +59,7 @@ nav.menu-area button {
     transition: background 0.3s, transform 0.2s;
 }
 
-nav.menu-area button:hover {
+.menu-area button:hover {
     background: linear-gradient(45deg, #5a4033, #3a3a3a);
     transform: translateX(3px);
 }
@@ -106,8 +106,6 @@ nav.menu-area button:hover {
 .hover-zone.right {
     right: 0;
 }
-
-
 
 button {
     font-family: 'Noto Sans KR', sans-serif;
