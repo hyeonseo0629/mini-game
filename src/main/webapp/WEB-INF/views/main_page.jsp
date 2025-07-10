@@ -36,19 +36,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
             </div>
 
             <div class="lrzone info-area">
-                I'm right zone.
-                <form action="login" method="post">
-                    <input type="text" name="id" /><br />
-                    <input type="text" name="pw" /><br />
-                    <input type="submit" value="로그인" />
-                    <input tyep="submit" value="회원가입" />
-                    <input type="submit" value="아이디/비밀번호 찾기" />
-                </form>
-                <c:if test="${empty users}">
-                    <script>
-                        alert("${alert}");
-                    </script>
-                </c:if>
+
 
                 <jsp:include page="login/login.jsp" />
             </div>
