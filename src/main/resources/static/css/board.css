@@ -1,6 +1,6 @@
 
 
-.sup{
+.board-text {
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
@@ -25,19 +25,20 @@ table {
 /*    border: 1px solid #ccc;*/
 /*}*/
 
-.sup-container {
+.text-container {
+    justify-content: space-between;
     width: 100%;
 }
 
-.sup-wrap {
+.text-wrap {
     display: table-row;
 }
 
-.sup-wrap tr {
+.text-wrap tr {
     display: table-row;
 }
 
-/*.commu-wrap td {*/
+/*.text-wrap td {*/
 /*    display: table-cell;*/
 /*    padding: 10px;*/
 /*    border-bottom: 1px solid #eee;*/
@@ -45,25 +46,26 @@ table {
 /*    vertical-align: middle;*/
 /*}*/
 
-/*.commu-wrap:hover {*/
+/*.text-wrap:hover {*/
 /*    background-color: #f9f9f9;*/
 /*}*/
 
 
-.sup_id{
+.text_id{
     text-align:  center;
 }
 
-.sup_title {
+.text_title {
     width: 1000px;
     text-align: center;
 }
 
-.sup_user_no{
+.text_user_no{
+    width: 500px;
     text-align:  center;
 }
 
-.sup_date{
+.text_date{
     text-align:  center;
 }
 

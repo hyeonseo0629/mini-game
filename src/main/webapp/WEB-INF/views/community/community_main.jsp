@@ -5,13 +5,14 @@
 <html>
 <head>
     <title>mini game</title>
-    <link rel="stylesheet" href="resources/css/community.css">
+    <link rel="stylesheet" href="resources/css/board1.css">
 </head>
 <body>
-<div class="commu">
-        <h1>게시판</h1><br>
+<div class="board-text">
+    <h1>게시판</h1><br>
+    <div class="button-container">
         <button onclick="location.href='CommunityPostC'">게시물 작성</button>
-        <hr>
+    </div>
     <table>
         <thead>
         <tr>
@@ -21,22 +22,18 @@
             <th>작성일</th>
         </tr>
         </thead>
-        <div style="width: 100%; display: flex; justify-content: center;">
-            <div class="commu-container">
-                <c:forEach var="commu" items="${community}">
-                    <div class="commu-wrap">
-                        <tr style="width: ">
-                            <td class="commu_id">${commu.text_id}</td>
-                            <td class="commu_title">${commu.text_title}</td>
-                            <td class="commu_user_no">${commu.text_user_no}</td>
-                            <td class="commu_date">
-                                <fmt:formatDate value="${commu.text_write_date}" pattern="MM월 dd일" />
-                            </td>
-                        </tr>
-                    </div>
-                </c:forEach>
-            </div>
-        </div>
+        <tbody>
+        <c:forEach var="t" items="${community}">
+            <tr>
+                <td class="text_id">${t.text_id}</td>
+                <td class="text_title">${t.text_title}</td>
+                <td class="text_user_no">${t.text_user_no}</td>
+                <td class="text_date">
+                    <fmt:formatDate value="${t.text_write_date}" pattern="MM월 dd일" />
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
     </table>
 </div>
 </body>

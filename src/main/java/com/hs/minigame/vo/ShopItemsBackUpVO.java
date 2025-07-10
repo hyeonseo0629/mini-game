@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ShopItemsVO {
+public class ShopItemsBackUpVO {
     private String item_id;
     private String item_name;
     private int item_price;
