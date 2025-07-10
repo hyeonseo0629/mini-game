@@ -16,6 +16,7 @@
     <input type="text"name="id"><br>
     <input type="text"name="pw"><br>
     <input type="submit"value="로그인">
+    <button>회원가입</button>
     <input type="submit"value="회원가입">
     <input type="submit"value="아이디/비밀번호 찾기">
 </form>
@@ -43,6 +44,23 @@
     <br>
     <button id="openModal">인벤토리</button>
 </c:if>
+
+<form action="/sign"method="post">
+    <div>회원 가입</div>
+    <div>
+        <input type="text"name="id"placeholder="id">
+    </div>
+    <div>
+        <input type="text"name="pw"placeholder="pw">
+    </div>
+    <div>
+        <input type="text"name="name"placeholder="이름">
+    </div>
+    <div>
+        <input type="text"name="nickname"placeholder="닉네임">
+    </div>
+    <button type="submit">회원가입</button>
+</form>
 
 <div id="modal" class="modal" style="display: none;">
     <div class="modal-body">
