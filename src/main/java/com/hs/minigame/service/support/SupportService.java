@@ -23,4 +23,9 @@ public class SupportService {
         System.out.println(support);
         return support;
     }
+
+    public List<TextsVO> setNewSupport() {
+        List<TextsVO> insertSupport = supportMapper.insertSupport();
+        return insertSupport;
+    }
 }
