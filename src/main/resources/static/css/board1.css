@@ -1,0 +1,78 @@
+.board-text {
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: "Noto Sans KR", sans-serif;
+    color: #ddd;
+    position: relative; /* 버튼 absolute 배치 위해 추가 */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 60px; /* 버튼 공간 확보 위해 margin 증가 */
+    color: #eee;
+}
+
+.button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #444;
+    color: #eee;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #666;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    background-color: #222;
+}
+
+thead {
+    background-color: #555;
+    color: #fff;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+    word-wrap: break-word;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:nth-child(even) {
+    background-color: #2a2a2a;
+}
+
+tr:hover {
+    background-color: #333;
+}
+
+.text_id, .text_user_no, .text_date {
+    width: 100px;
+}
+
+.text_title {
+    width: auto;
+    text-align: left;
+    padding-left: 20px;
+    color: #ddd;
+}

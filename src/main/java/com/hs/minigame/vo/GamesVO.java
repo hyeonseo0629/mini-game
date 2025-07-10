@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ShopItemsVO {
-    private String item_id;
-    private String item_name;
-    private int item_price;
-    private String item_avatar_img;
+public class GamesVO {
+    private String game_id;
+    private String game_name;
+    private String game_explain;
 }

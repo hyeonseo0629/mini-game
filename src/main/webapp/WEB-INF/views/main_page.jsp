@@ -35,12 +35,10 @@ contentType="text/html;charset=UTF-8" language="java" %>
                 <jsp:include page="${content}" />
             </div>
 
-            <div class="lrzone info-area">
-
-
+            <nav class="lrzone info-area">
                 <jsp:include page="login/login.jsp" />
-            </div>
-            <div class="hover-zone right"></div>
+            </nav>
+            <div class="hover-zone right">
         </div>
     </body>
 </html>
