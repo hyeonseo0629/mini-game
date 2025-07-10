@@ -14,7 +14,7 @@
 <hr>
 <div class="container">
     <c:forEach var="i" items="${itemsInfo}">
-        <form action="/buyItem" method="post">
+        <form action="/BuyItem" method="post">
             <div class="shop-item-container">
                 <div class="item-img">
                     <img src="resources/images/${i.item_avatar_img}" alt="img">
