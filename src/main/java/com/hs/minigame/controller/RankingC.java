@@ -19,14 +19,14 @@ public class RankingC {
     public String getRankingScore(Model model) {
         model.addAttribute("rankingList", rankingService.selectScoreRanking());
         model.addAttribute("rankingType", "레이팅 점수");
+        model.addAttribute("page", 1);
         model.addAttribute("content", "ranking/ranking_main.jsp");
         model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 
     @PostMapping("/RankingC")
-    public String postRankingScore(Model model, @RequestParam String rankingType,
-                                   @RequestParam(defaultValue = "1") int page) {
+    public String postRankingScore(Model model, @RequestParam String rankingType) {
         if (rankingType.equals("winningStack")) {
             model.addAttribute("rankingList", rankingService.selectStackRanking());
             model.addAttribute("rankingType", "연승 횟수");
@@ -34,6 +34,7 @@ public class RankingC {
             model.addAttribute("rankingList", rankingService.selectMoneyRanking());
             model.addAttribute("rankingType", "보유 금액");
         }
+        model.addAttribute("page", 1);
         model.addAttribute("content", "ranking/ranking_main.jsp");
         model.addAttribute("isGamePage", 0);
         return "main_page";
