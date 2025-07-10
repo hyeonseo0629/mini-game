@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 // only Data needs
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Data
-public class LoginVO {
-    private String user_id;
-    private String user_pw;
-    private String user_name;
+public class ShopItemsVO {
+    private String item_id;
+    private String item_name;
+    private int item_price;
+    private String item_avatar_img;
+
 }

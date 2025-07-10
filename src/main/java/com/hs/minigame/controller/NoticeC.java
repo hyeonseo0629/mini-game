@@ -13,7 +13,8 @@ public class NoticeC {
     private NoticeService noticeService;
 
     @GetMapping("/NoticeC")
-    public String NoticeC(Model model) {
+    public String noticeC(Model model) {
+        model.addAttribute("notice", noticeService.getAllNotice());
         model.addAttribute("content", "notice/notice_main.jsp");
         model.addAttribute("isGamePage", 0);
         return "main_page";
