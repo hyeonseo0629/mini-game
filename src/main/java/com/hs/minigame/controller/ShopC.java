@@ -34,7 +34,6 @@ public class ShopC {
         UsersVO user = (UsersVO) session.getAttribute("users");
         model.addAttribute("user", user);
 
-
         //paging 관련 로직
         model.addAttribute("pagedItems", pagedItems);
         model.addAttribute("totalPage", totalPage);
@@ -42,7 +41,6 @@ public class ShopC {
 
         //select 로직
         model.addAttribute("content", "shop/shop_main.jsp");
-        model.addAttribute("isGamePage", 0);
 
         return "main_page";
     }
@@ -113,7 +111,6 @@ public class ShopC {
 
         model.addAttribute("Money", aftermoney);
         model.addAttribute("content", "shop/shop_main.jsp");
-        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 

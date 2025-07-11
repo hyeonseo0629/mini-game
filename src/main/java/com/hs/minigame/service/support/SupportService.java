@@ -23,4 +23,17 @@ public class SupportService {
         System.out.println(support);
         return support;
     }
+
+    public List<TextsVO> setNewSupport() {
+        return supportMapper.insertSupport();
+    }
+
+    public List<TextsVO> selectSupportTexts(int page, int limit) {
+        int offset = (page - 1) * limit;
+        return supportMapper.selectSupportTexts(offset, limit);
+    }
+
+    public int supportCount() {
+        return supportMapper.supportCount();
+    }
 }
