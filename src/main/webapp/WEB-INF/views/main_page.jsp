@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ page
-contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
     <head>
@@ -9,8 +9,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
     </head>
     <body>
         <div class="main-container">
-            <div class="hover-zone left"></div>
-            <nav class="lrzone menu-area">
+            <nav class="lrzone menu-area" style="background-color: red">
                 <div>
                     <button onclick="clicked(1)">게임</button>
                 </div>
@@ -31,14 +30,13 @@ contentType="text/html;charset=UTF-8" language="java" %>
                 </div>
             </nav>
 
-            <div class="core-area">
+            <div class="lrzone core-area">
                 <jsp:include page="${content}" />
             </div>
 
-            <nav class="lrzone info-area">
+            <nav class="info-area">
                 <jsp:include page="login/login.jsp" />
             </nav>
-            <div class="hover-zone right">
         </div>
     </body>
 </html>
