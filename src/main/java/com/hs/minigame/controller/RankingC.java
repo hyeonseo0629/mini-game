@@ -32,6 +32,7 @@ public class RankingC {
             int offset = 10 + (page - 2) * limit; // Top 10 이후의 offset
             // (1) 페이지별 데이터 가져오기
             List<UserScoreVO> pagedRanking = rankingService.selectScoreRankingByPage(offset, limit);
+            System.out.println(pagedRanking);
             model.addAttribute("rankingList", pagedRanking);
             // (2) 전체 데이터 개수 가져오기 (페이징 버튼 계산용)
             model.addAttribute("totalCount", rankingService.getScoreRankingCount());
@@ -48,9 +49,6 @@ public class RankingC {
     public String postRankingScore(Model model, @RequestParam String rankingType,
                                    @RequestParam(defaultValue = "1") int page) {
         int limit = 10;
-
-        System.out.println("rankingType : " + rankingType);
-        System.out.println("page : " + page);
 
         if (rankingType.equals("winningStack")) {
             if (page == 1) {
@@ -80,6 +78,20 @@ public class RankingC {
                 model.addAttribute("totalCount", rankingService.getMoneyRankingCount());
             }
             model.addAttribute("rankingType", "보유 금액");
+        } else {
+            if (page == 1) { // 첫 번째 페이지 -> 전체를 받아와서 Top3와 7개만 처리
+                List<UserScoreVO> fullRanking = rankingService.selectScoreRanking();
+                model.addAttribute("rankingList", fullRanking);
+                model.addAttribute("totalCount", fullRanking.size());
+            } else {
+                int offset = 10 + (page - 2) * limit; // Top 10 이후의 offset
+                // (1) 페이지별 데이터 가져오기
+                List<UserScoreVO> pagedRanking = rankingService.selectScoreRankingByPage(offset, limit);
+                model.addAttribute("rankingList", pagedRanking);
+                // (2) 전체 데이터 개수 가져오기 (페이징 버튼 계산용)
+                model.addAttribute("totalCount", rankingService.getScoreRankingCount());
+            }
+            model.addAttribute("rankingType", "레이팅 점수");
         }
         model.addAttribute("page", page);
         model.addAttribute("content", "ranking/ranking_main.jsp");

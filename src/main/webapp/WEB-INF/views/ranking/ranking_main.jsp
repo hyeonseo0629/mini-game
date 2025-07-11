@@ -96,7 +96,6 @@
                 </div>
             </div>
             <c:forEach var="r" items="${rankingList}" varStatus="i">
-                <c:if test="${i.index >= startIndex && i.index < endIndex}">
                     <div class="ranking-row">
                         <div>${startIndex + i.index + 1}</div>
                         <div>${r.user_id}</div>
@@ -109,21 +108,19 @@
                             </c:choose>
                         </div>
                     </div>
-                </c:if>
             </c:forEach>
         </c:if>
         <!-- 페이징 버튼 -->
-        <c:set var="total" value="${rankingList.size()}" />
+        <c:set var="total" value="${totalCount}" />
         <c:set var="lastPage" value="${(total > 10) ? ((total-10) / 10 + ((total-10) % 10 == 0 ? 0 : 1)) + 1 : 1}" />
         <div class="pagination">
             <c:forEach var="p" begin="1" end="${lastPage}">
                 <form action="RankingC" method="post">
-                    <input type="hidden" name="rankingType" value="${rankingType}" />
+                    <input type="hidden" name="rankingType" value="${rankingType == '연승 횟수' ? 'winningStack' : (rankingType == '보유 금액' ? 'money' : 'score')}" />
                     <input type="hidden" name="page" value="${p}" />
                     <button type="submit" class="${p == page ? 'active' : ''}">${p}</button>
                 </form>
             </c:forEach>
-            </div>
         </div>
     </div>
 </body>

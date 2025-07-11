@@ -31,7 +31,7 @@
 .top3-wrapper {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 60px;
     margin-bottom: 40px;
 }
 
@@ -39,17 +39,17 @@
     background: #333;
     border-radius: 20px;
     padding: 20px;
-    width: 150px;
+    width: 170px;
     text-align: center;
     position: relative;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
 .top3-card img.avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 120px;
+    height: 180px;
+    border-radius: 10%;
+    object-fit: contain;
     border: 3px solid #cfae70;
     margin-bottom: 10px;
 }
