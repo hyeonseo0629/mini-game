@@ -38,6 +38,7 @@ body {
 }
 
 .modal-body {
+    position: relative;
     background-color: #252525;
     color: #e0d8c3;
     padding: 30px;
@@ -57,6 +58,7 @@ body {
     cursor: pointer;
     border-radius: 5px;
     margin-top: 20px;
+    position:  absolute;
 }
 
 #closeModal:hover {

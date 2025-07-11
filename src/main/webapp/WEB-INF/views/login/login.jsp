@@ -94,8 +94,10 @@ function toggle(){
         pwField.setAttribute("type","password");
     }
 }
-<!--회원가입 모달창 기능-->
-function centerModal(){
+</script>
+<script>
+<!--모달창중앙위치기능-->
+function centerModal(modalId){
     var modal = document.getElementById("modal-sign");
     var modalWidth = modal.offsetWidth;
     var modalHeight = modal.offsetHeight;
@@ -107,9 +109,8 @@ function centerModal(){
 
     modal.style.top = top + "px";
     modal.style.left = left + "px";
-
 }
-
+<!--회원가입 모달창 기능-->
 $(document).ready(function() {
     $('#openModal-sign').click(function () {
         $('#modal-sign').fadeIn();
@@ -118,11 +119,8 @@ $(document).ready(function() {
     $('#closeModal-sign').click(function () {
         $('#modal-sign').fadeOut();
     });
-);
 
 <!--인벤토리 모달창 기능-->
-
-
         $('#openModal').click(function () {
             $('#modal').fadeIn();
             centerModal('modal');
