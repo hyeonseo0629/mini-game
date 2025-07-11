@@ -41,7 +41,6 @@ public class RankingC {
         model.addAttribute("page", page);
 
         model.addAttribute("content", "ranking/ranking_main.jsp");
-        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 
@@ -95,7 +94,6 @@ public class RankingC {
         }
         model.addAttribute("page", page);
         model.addAttribute("content", "ranking/ranking_main.jsp");
-        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 
