@@ -17,36 +17,59 @@ public class LoginC {
     private LoginService loginService; //새로운 service마다 의존성 필요
 
     @PostMapping("/login")
-    public String login(@RequestParam String id, @RequestParam String pw, HttpSession session, Model model) {
+    public String login(@RequestParam String id, @RequestParam String pw, HttpSession session, RedirectAttributes redirectAttributes) {
         // 로그인 제어 / db에서 조회
         UsersVO users = loginService.getUser(id);
-
         if (users == null) {
             System.out.println("id 불일치");
-            model.addAttribute("alert","id 불일치");
-            model.addAttribute("content", "game/game_menu.jsp");
-            return "main_page";
+            redirectAttributes.addFlashAttribute("alert","id 불일치");
+            redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
+            return "redirect:/main_page";
         } else if (users.getUser_pw().equals(pw)) {
             session.setAttribute("users", users);
             System.out.println("로그인 성공");
-            model.addAttribute("alert","로그인 성공");
-            model.addAttribute("content", "game/game_menu.jsp");
-            model.addAttribute("user", users);
-            return "main_page";
+            redirectAttributes.addFlashAttribute("alert","로그인 성공");
+            redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
+            redirectAttributes.addFlashAttribute("user", users);
+            return "redirect:/main_page";
         } else {
-        System.out.println("pw 불일치");
-           model.addAttribute("alert","pw 불일치");
-            model.addAttribute("content", "game/game_menu.jsp");
-            return "main_page";
+            System.out.println("pw 불일치");
+            redirectAttributes.addFlashAttribute("alert","pw 불일치");
+            redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
+            return "redirect:/main_page";
         }
-
+//        if (users == null) {model용
+//            System.out.println("id 불일치");
+//            model.addAttribute("alert","id 불일치");
+//            model.addAttribute("content", "game/game_menu.jsp");
+//            return "main_page";
+//        } else if (users.getUser_pw().equals(pw)) {
+//            session.setAttribute("users", users);
+//            System.out.println("로그인 성공");
+//            model.addAttribute("alert","로그인 성공");
+//            model.addAttribute("content", "game/game_menu.jsp");
+//            model.addAttribute("user", users);
+//            return "main_page";
+//        } else {
+//        System.out.println("pw 불일치");
+//           model.addAttribute("alert","pw 불일치");
+//            model.addAttribute("content", "game/game_menu.jsp");
+//            return "main_page";
+//        }
     }
 
     @PostMapping("/logout")
-    public String logout(HttpSession session, Model model) {
+    public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
+
         session.invalidate();
-        model.addAttribute("alert2","로그아웃");
-        model.addAttribute("content", "game/game_menu.jsp");
-        return "main_page";
+        redirectAttributes.addFlashAttribute("alert2","로그아웃");
+        redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
+        return "redirect:/main_page";
+
+
+//        session.invalidate();model용
+//        model.addAttribute("alert2","로그아웃");
+//        model.addAttribute("content", "game/game_menu.jsp");
+//        return "main_page";
     }
 }
