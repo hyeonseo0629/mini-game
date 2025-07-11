@@ -50,16 +50,16 @@
 <form action="/sign"method="post">
     <div>회원 가입</div>
     <div>
-        <input type="text"name="id"placeholder="id">
+        <input type="text" name="user_id" placeholder="id">
     </div>
     <div>
-        <input type="text"name="pw"placeholder="pw">
+        <input type="text" name="user_pw" placeholder="pw">
     </div>
     <div>
-        <input type="text"name="name"placeholder="이름">
+        <input type="text" name="user_name" placeholder="이름">
     </div>
     <div>
-        <input type="text"name="nickname"placeholder="닉네임">
+        <input type="text" name="user_nickname" placeholder="닉네임">
     </div>
     <button id="openModal-sign">회원가입</button>
     <button id="closeModal-sign">X</button>
