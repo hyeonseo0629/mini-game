@@ -8,12 +8,12 @@
 <h1>문의</h1><br>
 <hr>
 <div style="display: flex; justify-content: center;">
-    <form action="" method="" enctype="">
+    <form action="add-post" method="post">
         <div class=""></div>
         <div>
             <div>제목</div>
             <div>
-                <input name="title">
+                <input name="text_title" placeholder="제목을 입력해주세요.">
             </div>
         </div>
 
@@ -24,10 +24,11 @@
             </div>
             <div>
                 <div>
-                    <button class="">업로드</button>
+                    <button type="button" onclick="">업로드</button>
                 </div>
             </div>
         </div>
-
+    </form>
+</div>
 </body>
 </html>

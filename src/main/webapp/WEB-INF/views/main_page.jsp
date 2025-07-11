@@ -38,7 +38,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
             <nav class="lrzone info-area">
                 <jsp:include page="login/login.jsp" />
             </nav>
-            <div class="hover-zone right" />
+            <div class="hover-zone right"></div>
         </div>
     </body>
 </html>
