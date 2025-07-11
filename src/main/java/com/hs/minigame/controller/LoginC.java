@@ -19,6 +19,7 @@ public class LoginC {
     public String login(@RequestParam String id, @RequestParam String pw, HttpSession session, Model model) {
         // 로그인 제어 / db에서 조회
         UsersVO users = loginService.getUser(id);
+        System.out.println(users);
 
 //        if (users==null) {
 //            redirectAttributes.addFlashAttribute("alert","id 불일치");

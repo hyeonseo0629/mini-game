@@ -10,6 +10,23 @@
 </head>
 <body>
 <h1>상점</h1>
+
+<c:choose>
+    <c:when test="${not empty sessionScope.users}">
+        <input type="hidden" id="loginCheck" value="true">
+    </c:when>
+    <c:otherwise>
+        <input type="hidden" id="loginCheck" value="false">
+    </c:otherwise>
+</c:choose>
+
+
+<div>${Money}</div>
+
+
+<c:if test="${not empty errorMsg}">
+    <input type="hidden" id="errorMsg" value="${errorMsg}">
+</c:if>
 <br>
 <hr>
 <div class="container">
