@@ -8,8 +8,12 @@ import org.apache.ibatis.annotations.Select;
 @Mapper()
 public interface LoginMapper {
 
+<<<<<<< HEAD
+    @Select("select * from users where user_id =#{id}")
+=======
     @Select("select user_id, user_pw, user_name, user_nickname, user_money from users where user_id =#{id}")
 
+>>>>>>> fc866169a10f35db525e31a37f9d772e5b7ff9bc
     UsersVO selectUser(String id);
 
 

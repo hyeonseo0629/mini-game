@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Data
 public class UsersVO {
-    private String user_no;
+    private int user_no;
     private String user_id;
     private String user_pw;
     private String user_name;
