@@ -23,6 +23,10 @@ body {
     min-height: 100vh;
 }
 
+.lrzone {
+    opacity: 0.8;
+}
+
 .menu-area {
     background-color: #2a2a2a; /* 딥 그레이 브라운 */
     width: 12.5%;
@@ -89,22 +93,6 @@ body {
     min-height: 100vh;
     border-left: 1px solid #3a3a3a;
     border-right: 1px solid #3a3a3a;
-}
-
-.hover-zone {
-    position: fixed;
-    top: 0;
-    width: 13%;
-    height: 100vh;
-    z-index: 3;
-}
-
-.hover-zone.left {
-    left: 0;
-}
-
-.hover-zone.right {
-    right: 0;
 }
 
 button {
