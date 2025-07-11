@@ -17,12 +17,12 @@ public interface ShopMapper {
     public List<ShopItemsVO> selectAll();
 
     @Update("UPDATE SHOPITEMS SET ITEM_AVATAR_IMG=#{item_avatar_img} WHERE ITEM_ID=#{item_id}")
-    void updateImage(ShopItemsVO vo);
+    public void updateImage(ShopItemsVO vo);
 
     @Select("select * from shopitems"+" order by item_id desc"+
             " offset #{offset} rows fetch next #{limit} rows only")
-    List<ShopItemsVO> SelectShopItemsByPaging(@Param("offset") int offset,@Param("limit") int limit);
+    public List<ShopItemsVO> SelectShopItemsByPaging(@Param("offset") int offset,@Param("limit") int limit);
 
     @Select("SELECT count(*) FROM shopitems")
     public int getShopItemCount();
-    }
+}

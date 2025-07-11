@@ -5,5 +5,4 @@ function shopbuy(){
     }else {
         alert("구매가 취소되었습니다")
     }
-
 }

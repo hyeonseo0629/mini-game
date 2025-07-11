@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
+
     @Autowired
     private LoginMapper loginMapper;
 
     public UsersVO getUser(String id){
-        return loginMapper.selectUser(id);}
+        return loginMapper.selectUser(id);
+    }
 }

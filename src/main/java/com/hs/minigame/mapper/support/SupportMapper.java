@@ -23,5 +23,5 @@ public interface SupportMapper {
 
     @Select("select * from texts"+" order by text_id desc"+
             " offset #{offset} rows fetch next #{limit} rows only")
-    List<TextsVO> selectSupportTexts(@Param("offset") int offset, @Param("limit") int limit);
+    public List<TextsVO> selectSupportTexts(@Param("offset") int offset, @Param("limit") int limit);
 }

@@ -20,7 +20,6 @@ public class CommunityService {
 
     public List<TextsVO> getAllReview() {
         List<TextsVO> community = communityMapper.selectAll();
-        System.out.println(community);
         return community;
     }
 }

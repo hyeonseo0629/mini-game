@@ -16,7 +16,6 @@ public class NoticeService {
 
     public List<TextsVO> getAllNotice() {
         List<TextsVO> notice = noticeMapper.selectAll();
-        System.out.println(notice);
         return notice;
     }
 }

@@ -24,8 +24,5 @@ public class ShopService {
         return shopMapper.SelectShopItemsByPaging(offset,limit);
     }
 
-    public int getShopItemCount() {
-
-        return shopMapper.getShopItemCount();
-    }
+    public int getShopItemCount() { return shopMapper.getShopItemCount(); }
 }
