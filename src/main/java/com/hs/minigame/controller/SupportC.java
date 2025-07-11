@@ -23,14 +23,12 @@ public class SupportC {
     public String supportC(Model model) {
         model.addAttribute("support", supportService.getAllSupport());
         model.addAttribute("content", "support/support_main.jsp");
-        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 
     @GetMapping("/SupportPostC")
     public String supportPostC(Model model) {
         model.addAttribute("content", "support/support_post.jsp");
-        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 
@@ -58,9 +56,7 @@ public class SupportC {
         model.addAttribute("supportTexts", supportTexts);
 
         model.addAttribute("content", "support/support_main.jsp");
-        model.addAttribute("isGamePage", 0);
 
-        System.out.println(supportService.supportCount());
         return "main_page";
     }
 

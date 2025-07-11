@@ -1,12 +1,11 @@
 /* 랭킹 화면 전용 CSS */
 
 .rank-container {
-    padding: 20px;
     color: #e0d8c3;
 }
 
 .ranking-type {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -47,7 +46,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 40px;
+    gap: 50px;
     margin-bottom: 40px;
 }
 
@@ -63,7 +62,7 @@
 
 .top3-card img.avatar {
     width: 120px;
-    height: 160px;
+    height: 140px;
     border-radius: 10%;
     object-fit: contain;
     border: 3px solid #cfae70;
@@ -80,7 +79,6 @@
 .top3-card .score {
     font-size: 1rem;
     color: #ffc66d;
-    margin-bottom: 8px;
 }
 
 .top3-card .badge {
@@ -105,7 +103,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 12px 0;
+    padding: 10px 0;
     background: #2a2a2a;
     border-radius: 8px;
     margin: 6px 0;
@@ -127,7 +125,7 @@
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 14px;
     gap: 10px;
 }
 

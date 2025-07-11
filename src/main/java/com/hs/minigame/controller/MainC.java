@@ -37,7 +37,6 @@ public class MainC {
     @GetMapping("/GameC")
     public String gameC(Model model) {
         model.addAttribute("content", "game/game_menu.jsp");
-        model.addAttribute("isGamePage", 1);
         return "main_page";
     }
 }

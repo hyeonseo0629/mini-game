@@ -3,35 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>mini game</title>
-    <link rel="stylesheet" href="/resources/css/login.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script></script>
-</head>
-<body>
-<c:choose>
-
-<c:when test="${empty users}">
-<form action="login"method="post">
-    <input type="text"name="id"placeholder="아이디"><br>
-    <input type="password"name="pw"placeholder="비밀번호"id="pw">
-    <button type="button"onclick="toggle()">보기</button>
-    <br>
-    <input type="submit"value="로그인">
-    <button type="button"id="openModal-sign">회원가입</button>
-    <input type="submit"value="아이디/비밀번호 찾기">
-</form>
-</c:when>
-
-<c:otherwise>
-    <span>${users.user_id}님</span>
-          <br>
-    <form action="logout" method="post">
-    <button type="submit">로그아웃</button>
-    </form>
-</c:otherwise>
-
-</c:choose>
 <br>
 
 <c:if test="${not empty users}">
@@ -73,16 +44,6 @@
     </div>
 
 </div>
-
-<!--로그인,로그아웃 알람-->
-<c:if test = "${not empty alert}">
-    <script>alert('${alert}')</script>
-</c:if>
-
-<c:if test = "${not empty alert2}">
-    <script>alert('${alert2}')</script>
-</c:if>
-
 <script>
 <!--비밀번호토글기능-->
 function toggle(){
@@ -111,7 +72,7 @@ function centerModal(modalId){
     modal.style.top = top + "px";
     modal.style.left = left + "px";
 }
-<!--회원가입 모달창 기능-->
+// <!--회원가입 모달창 기능-->
 $(document).ready(function() {
     $('#openModal-sign').click(function () {
         $('#modal-sign').fadeIn();
@@ -121,7 +82,7 @@ $(document).ready(function() {
         $('#modal-sign').fadeOut();
     });
 
-<!--인벤토리 모달창 기능-->
+// <!--인벤토리 모달창 기능-->
         $('#openModal').click(function () {
             $('#modal').fadeIn();
             centerModal('modal');
@@ -139,5 +100,41 @@ $(document).ready(function() {
 
 </script>
 
+    <title>mini game</title>
+    <link rel="stylesheet" href="/resources/css/login.css" />
+</head>
+<body>
+<div class="login-container">
+    <c:choose>
+        <c:when test="${empty users}">
+            <form action="login" method="post" class="login-form">
+                <h2>로그인</h2>
+                <input type="text" name="id" placeholder="아이디" required>
+                <input type="password" name="pw" placeholder="비밀번호" required>
+                <button type="submit">로그인</button>
+                <div class="sub-actions">
+                    <button type="button" onclick="location.href='register'">회원가입</button>
+                    <button type="button" onclick="location.href='findAccount'">아이디/비밀번호 찾기</button>
+                </div>
+            </form>
+        </c:when>
+
+        <c:otherwise>
+            <div class="welcome-box">
+                <span>${users.user_id}님 환영합니다</span>
+                <form action="logout" method="post">
+                    <button type="submit">로그아웃</button>
+                </form>
+            </div>
+        </c:otherwise>
+    </c:choose>
+
+    <c:if test = "${not empty alert}">
+        <script>alert('${alert}')</script>
+    </c:if>
+    <c:if test = "${not empty alert2}">
+        <script>alert('${alert2}')</script>
+    </c:if>
+</div>
 </body>
 </html>
