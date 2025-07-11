@@ -48,7 +48,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       <c:forEach begin="1" end="${totalPage}" var="p">
         <c:choose>
           <c:when test="${p == currentPage}">
-            <strong>[${p}]</strong>
+            <span>[${p}]</span>
           </c:when>
           <c:otherwise>
             <a href="/support_main?page=${p}">[${p}]</a>

@@ -23,7 +23,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="t" items="${community}">
+        <c:forEach var="t" items="${communityTexts}">
             <tr>
                 <td class="text_id">${t.text_id}</td>
                 <td class="text_title">${t.text_title}</td>
@@ -35,6 +35,24 @@
         </c:forEach>
         </tbody>
     </table>
+
+    <div class="paging">
+        <!-- [1] [2] [3] ... -->
+        <c:forEach begin="1" end="${totalPage}" var="p">
+            <c:choose>
+                <c:when test="${p == currentPage}">
+                    <span>[${p}]</span>
+                </c:when>
+                <c:otherwise>
+                    <a href="/CommunityC?page=${p}">[${p}]</a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </div>
+</div>
+
+
+
 </div>
 </body>
 </html>
