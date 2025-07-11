@@ -28,7 +28,6 @@ public class ShopC {
         int totalCount = shopService.getShopItemCount();
         int totalPage = (int)Math.ceil((double)totalCount / limit);
 
-
         //paging 관련 로직
         model.addAttribute("pagedItems", pagedItems);
         model.addAttribute("totalPage", totalPage);
