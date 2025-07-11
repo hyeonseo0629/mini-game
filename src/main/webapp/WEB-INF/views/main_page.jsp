@@ -38,30 +38,13 @@ contentType="text/html;charset=UTF-8" language="java" %>
                 <jsp:include page="login/login.jsp" />
             </nav>
         </div>
-        <div>
-          <button onclick="clicked(2)">상점</button>
+        <div class="lrzone core-area">
+            <jsp:include page="${content}" />
         </div>
-        <div>
-          <button onclick="clicked(3)">랭킹</button>
-        </div>
-        <div>
-          <button onclick="clicked(4)">게시판</button>
-        </div>
-        <div>
-          <button onclick="clicked(5)">공지사항</button>
-        </div>
-        <div>
-          <button onclick="clicked(6)">문의</button>
-        </div>
-      </nav>
 
-      <div class="lrzone core-area">
-        <jsp:include page="${content}" />
-      </div>
-
-      <nav class="info-area">
-        <jsp:include page="login/login.jsp" />
-      </nav>
+        <nav class="info-area">
+            <jsp:include page="login/login.jsp" />
+        </nav>
     </div>
   </body>
 </html>
