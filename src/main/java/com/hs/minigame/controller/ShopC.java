@@ -32,7 +32,11 @@ public class ShopC {
 
         //session 관련 로직
         UsersVO user = (UsersVO) session.getAttribute("users");
-        model.addAttribute("user", user);
+        if (user != null) {
+            model.addAttribute("userMoney", user.getUser_money());
+        } else {
+            model.addAttribute("userMoney", 0);
+        }
 
         //paging 관련 로직
         model.addAttribute("pagedItems", pagedItems);
@@ -61,6 +65,7 @@ public class ShopC {
         //유저 아이디 조회
         UsersVO user = (UsersVO) session.getAttribute("users");
         System.out.println("user : " + user);
+        model.addAttribute("user", user);
 
 
 
@@ -109,7 +114,7 @@ public class ShopC {
         System.out.println("aftermoney : " + aftermoney);
 
 
-        model.addAttribute("Money", aftermoney);
+        model.addAttribute("userMoney", aftermoney);
         model.addAttribute("content", "shop/shop_main.jsp");
         return "main_page";
     }

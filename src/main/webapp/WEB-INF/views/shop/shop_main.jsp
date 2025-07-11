@@ -9,7 +9,7 @@
     <title>shop main</title>
 </head>
 <body>
-<h1>상점</h1>
+
 
 <c:choose>
     <c:when test="${not empty sessionScope.users}">
@@ -21,12 +21,21 @@
 </c:choose>
 
 
-<div>${Money}</div>
+<div>${userMoney}</div>
 
 
 <c:if test="${not empty errorMsg}">
     <input type="hidden" id="errorMsg" value="${errorMsg}">
 </c:if>
+
+<input type="hidden" id="userMoney" value="${userMoney}">
+<input type="hidden" id="userMoney" value="${user.user_money}">
+
+
+
+
+
+<h1>상점</h1>
 <br>
 <hr>
 <div class="container">
@@ -40,7 +49,7 @@
                 <div class="underside">
                     <div class="item-price">${i.item_price}</div>
                     <input type="hidden" name="itemId" value="${i.item_id}">
-                    <button type="button" class="buy-btn" onclick="shopbuy()">구매</button>
+                    <button type="button" class="buy-btn" data-price="${i.item_price}" onclick="shopbuy(this)">구매</button>
                 </div>
             </div>
         </form>
