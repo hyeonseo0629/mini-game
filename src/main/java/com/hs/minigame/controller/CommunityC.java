@@ -22,7 +22,6 @@ public class CommunityC {
     public String communityC(Model model) {
         model.addAttribute("community",communityService.getAllReview());
         model.addAttribute("content", "community/community_main.jsp");
-        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 
