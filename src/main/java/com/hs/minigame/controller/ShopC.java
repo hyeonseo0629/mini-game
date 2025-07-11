@@ -35,7 +35,6 @@ public class ShopC {
 
         //select 로직
         model.addAttribute("content", "shop/shop_main.jsp");
-        model.addAttribute("isGamePage", 0);
 
         return "main_page";
     }
@@ -55,7 +54,6 @@ public class ShopC {
 
 
         model.addAttribute("content", "shop/shop_main.jsp");
-        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 
