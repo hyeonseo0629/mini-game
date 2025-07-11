@@ -10,8 +10,7 @@
 <div style="display: flex; justify-content: center;">
     <form action="insert-texts" method="post">
         <input type="hidden" name="text_type" value="support">
-        <input type="hidden" name="text_user_no" value="">
-        <input type="hidden" name="">
+        <input type="hidden" name="text_user_no" value="${text_user_no}">
 
         <div class="sup">
             <div>

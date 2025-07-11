@@ -60,7 +60,7 @@ function clicked(no) {
             location.href = "NoticeC";
             break;
         case 6:
-            location.href = "SupportC";
+            location.href = "support_main";
             break;
         default:
             break;

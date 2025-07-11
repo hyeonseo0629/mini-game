@@ -25,7 +25,15 @@ public class SupportService {
     }
 
     public List<TextsVO> setNewSupport() {
-        List<TextsVO> insertSupport = supportMapper.insertSupport();
-        return insertSupport;
+        return supportMapper.insertSupport();
+    }
+
+    public List<TextsVO> selectSupportTexts(int page, int limit) {
+        int offset = (page - 1) * limit;
+        return supportMapper.selectSupportTexts(offset, limit);
+    }
+
+    public int supportCount() {
+        return supportMapper.supportCount();
     }
 }

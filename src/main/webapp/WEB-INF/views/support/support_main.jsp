@@ -24,7 +24,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         </thead>
         <div style="width: 100%; display: flex; justify-content: center">
           <div class="text-container">
-            <c:forEach var="sup" items="${support}">
+            <c:forEach var="sup" items="${supportTexts}">
               <div class="text-wrap">
                 <tr>
                   <td class="text_id">${sup.text_id}</td>
@@ -42,6 +42,20 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
           </div>
         </div>
       </table>
+
+      <div class="paging">
+      <!-- [1] [2] [3] ... -->
+      <c:forEach begin="1" end="${totalPage}" var="p">
+        <c:choose>
+          <c:when test="${p == currentPage}">
+            <strong>[${p}]</strong>
+          </c:when>
+          <c:otherwise>
+            <a href="support_main?p=${p}">[${p}]</a>
+          </c:otherwise>
+        </c:choose>
+      </c:forEach>
+      </div>
     </div>
   </body>
 </html>
