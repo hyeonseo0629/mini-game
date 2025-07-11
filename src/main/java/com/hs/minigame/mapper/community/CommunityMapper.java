@@ -15,4 +15,6 @@ public interface CommunityMapper {
 
     @Select("select * from texts where TEXT_TYPE = 'COMMUNITY'")
     public List<TextsVO> selectAll();
+
+
 }
