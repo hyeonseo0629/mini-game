@@ -30,11 +30,11 @@
                 </div>
             </nav>
 
-            <div class="lrzone core-area">
+            <div class="core-area">
                 <jsp:include page="${content}" />
             </div>
 
-            <nav class="info-area">
+            <nav class="lrzone info-area">
                 <jsp:include page="login/login.jsp" />
             </nav>
         </div>
