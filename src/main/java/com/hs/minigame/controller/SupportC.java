@@ -60,7 +60,6 @@ public class SupportC {
         model.addAttribute("content", "support/support_main.jsp");
         model.addAttribute("isGamePage", 0);
 
-        System.out.println(supportService.supportCount());
         return "main_page";
     }
 

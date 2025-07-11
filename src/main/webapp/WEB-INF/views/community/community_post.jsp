@@ -8,24 +8,21 @@
 <h1>게시판</h1><br>
 <hr>
 <div style="display: flex; justify-content: center;">
-    <form action="" method="" enctype="">
-        <div class=""></div>
-        <div>
-            <div>제목</div>
-            <div>
-                <input type="text" name="text_title">
-            </div>
-        </div>
+    <form action="insert-texts" method="post">
+        <input type="hidden" name="text_type" value="support">
+        <input type="hidden" name="text_user_no" value="${text_user_no}">
 
-        <div>
-            <div>내용</div>
+        <div class="sup">
             <div>
-                <textarea rows="5" cols="40" name="story"></textarea>
+                <div class="col-1">제목</div>
+                <div class="col-2"><input name="text_title"></div>
             </div>
             <div>
-                <div>
-                    <button class="">업로드</button>
-                </div>
+                <div class="col-1">내용</div>
+                <div class="col-2"><textarea name="text_content" rows="10"></textarea></div>
+            </div>
+            <div>
+                <button type="submit">등록</button>
             </div>
         </div>
     </form>

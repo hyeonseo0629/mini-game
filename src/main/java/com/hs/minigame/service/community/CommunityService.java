@@ -23,4 +23,18 @@ public class CommunityService {
         System.out.println(community);
         return community;
     }
+
+    public List<TextsVO> setNewCommunity() {
+        return communityMapper.insertCommunity();
+    }
+
+    public List<TextsVO> selectCommunityTexts(int page, int limit) {
+        int offset = (page - 1) * limit;
+        return communityMapper.selectCommunityTexts(offset, limit);
+
+    }
+
+    public int communityCount() {
+        return communityMapper.communityCount();
+    }
 }
