@@ -1,0 +1,165 @@
+/* 랭킹 화면 전용 CSS */
+
+.rank-container {
+    padding: 20px;
+    color: #e0d8c3;
+}
+
+.ranking-type {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.ranking-type form button {
+    padding: 10px 16px;
+    background: linear-gradient(45deg, #3a3a3a, #2a2a2a);
+    border: 1px solid #4a4a4a;
+    border-radius: 6px;
+    color: #e0d8c3;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.ranking-type form button:hover {
+    background: linear-gradient(45deg, #5a4033, #3a3a3a);
+    transform: scale(1.05);
+}
+
+.rank-1 {
+    order: 2;
+    transform: scale(1.15);
+    z-index: 2;
+    border: 4px solid #cfae70;
+}
+
+.rank-2 {
+    order: 1;
+}
+
+.rank-3 {
+    order: 3;
+}
+
+.top3-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.top3-card {
+    background: #333;
+    border-radius: 20px;
+    padding: 20px;
+    width: 170px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.top3-card img.avatar {
+    width: 120px;
+    height: 160px;
+    border-radius: 10%;
+    object-fit: contain;
+    border: 3px solid #cfae70;
+    margin-bottom: 10px;
+}
+
+.top3-card .username {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff4d2;
+    margin-bottom: 6px;
+}
+
+.top3-card .score {
+    font-size: 1rem;
+    color: #ffc66d;
+    margin-bottom: 8px;
+}
+
+.top3-card .badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.ranking-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 0;
+    background: #2a2a2a;
+    border-radius: 8px;
+    margin: 6px 0;
+    transition: transform 0.2s;
+}
+
+.ranking-row:hover {
+    transform: translateY(-2px);
+    background: #3a3a3a;
+    font-weight: 700;
+}
+
+.ranking-row div {
+    width: 22%;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.pagination form button {
+    padding: 6px 12px;
+    border: none;
+    background-color: #444;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.pagination form button:hover {
+    background-color: #666;
+}
+
+.pagination form button.active {
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+}
+
+.ranking-header {
+    border: 1px solid #3a3a3a;
+    background: #3a3a3a;
+}
+
+.ranking-header:hover {
+    transform: translateY(0px);
+}
+
+.ranking-header > div {
+    font-weight: 700;
+}

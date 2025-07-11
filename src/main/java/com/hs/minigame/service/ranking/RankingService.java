@@ -15,6 +15,7 @@ public class RankingService {
     @Autowired
     private RankingMapper rankingMapper;
 
+    // all select (사용 X)
     public List<UserScoreVO> selectScoreRanking(){
         return rankingMapper.selectScoreRanking();
     }
@@ -25,5 +26,31 @@ public class RankingService {
 
     public List<UsersVO> selectMoneyRanking() {
         return rankingMapper.selectMoneyRanking();
+    }
+
+    // (1) 페이지별 데이터 가져오기
+    public List<UserScoreVO> selectScoreRankingByPage(int offset, int limit) {
+        return rankingMapper.selectScoreRankingByPage(offset, limit);
+    }
+
+    public List<UserStackVO> selectStackRankingByPage(int offset, int limit) {
+        return rankingMapper.selectStackRankingByPage(offset, limit);
+    }
+
+    public List<UsersVO> selectMoneyRankingByPage(int offset, int limit) {
+        return rankingMapper.selectMoneyRankingByPage(offset, limit);
+    }
+
+    // (2) 전체 데이터 개수 가져오기
+    public int getScoreRankingCount() {
+        return rankingMapper.getScoreRankingCount();
+    }
+
+    public int getStackRankingCount() {
+        return rankingMapper.getStackRankingCount();
+    }
+
+    public int getMoneyRankingCount() {
+        return rankingMapper.getMoneyRankingCount();
     }
 }
