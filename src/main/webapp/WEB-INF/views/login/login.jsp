@@ -18,7 +18,7 @@
     <button type="button"onclick="toggle()">보기</button>
     <br>
     <input type="submit"value="로그인">
-    <input type="submit"value="회원가입">
+    <button type="button"id="openModal-sign">회원가입</button>
     <input type="submit"value="아이디/비밀번호 찾기">
 </form>
 </c:when>
@@ -45,6 +45,7 @@
     <br>
     <button id="openModal">인벤토리</button>
 </c:if>
+<jsp:include page="${content}" />
 <div id="modal-sign"class="modal"style="display:none">
 <form action="/sign"method="post">
     <div>회원 가입</div>
@@ -98,7 +99,7 @@ function toggle(){
 <script>
 <!--모달창중앙위치기능-->
 function centerModal(modalId){
-    var modal = document.getElementById("modal-sign");
+    var modal = document.getElementById(modalId);
     var modalWidth = modal.offsetWidth;
     var modalHeight = modal.offsetHeight;
     var windowWidth = window.innerWidth;
