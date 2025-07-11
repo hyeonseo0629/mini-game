@@ -76,3 +76,7 @@ tr:hover {
     padding-left: 20px;
     color: #ddd;
 }
+
+.paging{
+    text-align: center;
+}

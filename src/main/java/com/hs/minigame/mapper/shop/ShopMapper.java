@@ -25,4 +25,15 @@ public interface ShopMapper {
 
     @Select("SELECT count(*) FROM shopitems")
     public int getShopItemCount();
+
+
+    @Select("select * from SHOPITEMS where ITEM_ID = #{itemId}")
+    ShopItemsVO selectInfoById(@Param("itemId") String itemId);
+
+    @Update("update USERS set USER_MONEY = USER_MONEY - #{itemPrice} where USER_ID = #{userId} ")
+    int updateUserInfo(@Param("userId") String userId, @Param("itemPrice")  int price);
+
+    //구매 후 보유 돈 조회하기
+    @Select("select USER_MONEY from USERS where USER_ID = #{userId}")
+    int getAfterMoney(@Param("userId") String userId);
 }

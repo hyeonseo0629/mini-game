@@ -22,4 +22,22 @@ public class CommunityService {
         List<TextsVO> community = communityMapper.selectAll();
         return community;
     }
+
+    public int setNewCommunity(String text_title, String text_content, int user_no) {
+        return communityMapper.insertCommunity(text_title, text_content, user_no);
+    }
+
+//    public void insert(TextsVO textsVO) {
+//        communityMapper.insertCommunity(textsVO);
+//    }
+
+    public List<TextsVO> selectCommunityTexts(int page, int limit) {
+        int offset = (page - 1) * limit;
+        return communityMapper.selectCommunityTexts(offset, limit);
+
+    }
+
+    public int communityCount() {
+        return communityMapper.communityCount();
+    }
 }
