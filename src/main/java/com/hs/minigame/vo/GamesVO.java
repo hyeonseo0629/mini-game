@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// only Data needs
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class GamesVO {
     private String game_id;
     private String game_name;

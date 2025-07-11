@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ page
+contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
     <head>
@@ -38,5 +38,30 @@
                 <jsp:include page="login/login.jsp" />
             </nav>
         </div>
-    </body>
+        <div>
+          <button onclick="clicked(2)">상점</button>
+        </div>
+        <div>
+          <button onclick="clicked(3)">랭킹</button>
+        </div>
+        <div>
+          <button onclick="clicked(4)">게시판</button>
+        </div>
+        <div>
+          <button onclick="clicked(5)">공지사항</button>
+        </div>
+        <div>
+          <button onclick="clicked(6)">문의</button>
+        </div>
+      </nav>
+
+      <div class="lrzone core-area">
+        <jsp:include page="${content}" />
+      </div>
+
+      <nav class="info-area">
+        <jsp:include page="login/login.jsp" />
+      </nav>
+    </div>
+  </body>
 </html>
