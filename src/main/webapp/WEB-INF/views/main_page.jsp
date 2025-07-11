@@ -32,7 +32,9 @@ contentType="text/html;charset=UTF-8" language="java" %>
             </nav>
 
             <div class="core-area">
+
                 <jsp:include page="${content}" />
+
             </div>
 
             <nav class="lrzone info-area">

@@ -45,7 +45,7 @@
     <br>
     <button id="openModal">인벤토리</button>
 </c:if>
-<jsp:include page="${content}" />
+
 <div id="modal-sign"class="modal"style="display:none">
 <form action="/sign"method="post">
     <div>회원 가입</div>
