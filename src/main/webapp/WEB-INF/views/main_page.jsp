@@ -38,13 +38,5 @@ contentType="text/html;charset=UTF-8" language="java" %>
                 <jsp:include page="login/login.jsp" />
             </nav>
         </div>
-        <div class="lrzone core-area">
-            <jsp:include page="${content}" />
-        </div>
-
-        <nav class="info-area">
-            <jsp:include page="login/login.jsp" />
-        </nav>
-    </div>
   </body>
 </html>
