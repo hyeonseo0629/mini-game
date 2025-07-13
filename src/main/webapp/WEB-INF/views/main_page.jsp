@@ -38,5 +38,5 @@ contentType="text/html;charset=UTF-8" language="java" %>
             <jsp:include page="login/login.jsp" />
         </nav>
     </div>
-  </body>
+</body>
 </html>
