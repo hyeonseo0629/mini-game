@@ -30,7 +30,6 @@ public class CommunityC {
     @GetMapping("/CommunityPostC")
     public String communityPostC(Model model) {
         model.addAttribute("content", "community/community_post.jsp");
-        model.addAttribute("isGamePage", 0);
         return "main_page";
     }
 
@@ -50,15 +49,9 @@ public class CommunityC {
             System.out.println("업로드 성공!");
             List<TextsVO> list = communityService.getAllReview();
             model.addAttribute("communityTexts", list);
-
         } else {
             System.out.println("업로드 실패");
         }
-
-//        model.addAttribute("text_title");
-//        model.addAttribute("text_content");
-//        model.addAttribute("text_user_no");
-//        model.addAttribute("text_type");
         model.addAttribute("content", "community/community_main.jsp");
         return "main_page";
     }
@@ -77,7 +70,6 @@ public class CommunityC {
         model.addAttribute("communityTexts", communityTexts);
 
         model.addAttribute("content", "community/community_main.jsp");
-        model.addAttribute("isGamePage", 0);
 
         return "main_page";
     }

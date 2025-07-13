@@ -30,14 +30,12 @@ public class ShopService {
     }
 
     public int getShopItemCount() {
-
         return shopMapper.getShopItemCount();
     }
 
     public int buyitem(String userId, int itemPrice) {
         return shopMapper.updateUserInfo(userId, itemPrice);
     }
-
 
     //구매 후 보유 돈 조회하기
     public int getUserMoney(String userId) {

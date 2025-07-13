@@ -66,9 +66,10 @@ public class ShopC {
             return "main_page";
         }
 
-        // 구매 처리
-        int updateCheck = shopService.buyitem(user.getUser_id(), itemPrice);
-        if (updateCheck > 0) {
+        //userdb에서 가격에 따른 보유금액 변동, 아바타 변경 업데이트
+        int updatcheck = shopService.buyitem(user.getUser_id(), itemPrice);
+
+        if (updatcheck > 0) {
             System.out.println("구매 완료");
 
             // 세션 반영

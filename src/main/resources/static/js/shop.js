@@ -6,7 +6,6 @@ function shopbuy(btn){
     console.log(userMoney);
     console.log(itemPrice);
 
-
     //로그인 안된상태로 구매버튼을 눌렀을때 예외처리
     const loginCheck = document.getElementById("loginCheck").value;
 
@@ -34,15 +33,11 @@ function shopbuy(btn){
         return;
     }
 
-
-
     //구매할지말지 마지막 확인
     if(confirm("정말 구매하시겠습니까?")){
         alert("구매 완료되었습니다")
-        btn.closest("form").submit();
+        document.querySelector("form").submit();
     }else {
-            alert("구매가 취소되었습니다")
+        alert("구매가 취소되었습니다")
     }
-
-
 }

@@ -4,7 +4,6 @@ import com.hs.minigame.service.ranking.RankingService;
 import com.hs.minigame.vo.UserScoreVO;
 import com.hs.minigame.vo.UserStackVO;
 import com.hs.minigame.vo.UsersVO;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

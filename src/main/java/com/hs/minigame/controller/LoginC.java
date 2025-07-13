@@ -72,7 +72,6 @@ public class LoginC {
         redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
         return "redirect:/main_page";
 
-
 //        session.invalidate();model용
 //        model.addAttribute("alert2","로그아웃");
 //        model.addAttribute("content", "game/game_menu.jsp");
@@ -87,12 +86,12 @@ public class LoginC {
 
       boolean success = loginService.registerUser(users);
 
-       if(success){
-          redirectAttributes.addFlashAttribute("alert","회원 가입 성공");
-       }else{
+       if(success) {
+           redirectAttributes.addFlashAttribute("alert","회원 가입 성공");
+       } else {
            redirectAttributes.addFlashAttribute("alert","회원 가입 실패");
        }
-        redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
-      return  "redirect:/main_page";
+       redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
+       return  "redirect:/main_page";
     }
 }
