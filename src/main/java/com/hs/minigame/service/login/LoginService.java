@@ -15,7 +15,7 @@ public class LoginService {
         return loginMapper.selectUser(id);
     }
     public boolean registerUser(UsersVO users){
-        if(loginMapper.selectUser(users.getUser_id())!=null){
+        if (loginMapper.selectUser(users.getUser_id())!=null) {
             return false;
         }
         loginMapper.insertUser(users);

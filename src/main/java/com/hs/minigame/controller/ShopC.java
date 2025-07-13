@@ -76,8 +76,6 @@ public class ShopC {
         System.out.println("avatar : " + avatar);
         System.out.println("price : " + itemPrice);
 
-
-
         //금액이 부족하면 잔액부족 예외처리
         if(user.getUser_money() < itemPrice){
             System.out.println("보유 금액 부족");
@@ -87,7 +85,6 @@ public class ShopC {
             model.addAttribute("isGamePage", 0);
             return "main_page";
         }
-
 
         //userdb에서 가격에 따른 보유금액 변동, 아바타 변경 업데이트
         int updatcheck = shopService.buyitem(user.getUser_id(), itemPrice);
@@ -102,21 +99,15 @@ public class ShopC {
             // 세션 객체도 업데이트
             user.setUser_money(aftermoney);
             session.setAttribute("users", user);
-
-        }else {
+        } else {
             System.out.println("구매 오류");
         }
 
-
-
-
         int aftermoney = user.getUser_money();
         System.out.println("aftermoney : " + aftermoney);
-
 
         model.addAttribute("userMoney", aftermoney);
         model.addAttribute("content", "shop/shop_main.jsp");
         return "main_page";
     }
-
 }

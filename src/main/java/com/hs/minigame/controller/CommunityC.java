@@ -49,15 +49,9 @@ public class CommunityC {
             System.out.println("업로드 성공!");
             List<TextsVO> list = communityService.getAllReview();
             model.addAttribute("communityTexts", list);
-
         } else {
             System.out.println("업로드 실패");
         }
-
-//        model.addAttribute("text_title");
-//        model.addAttribute("text_content");
-//        model.addAttribute("text_user_no");
-//        model.addAttribute("text_type");
         model.addAttribute("content", "community/community_main.jsp");
         return "main_page";
     }

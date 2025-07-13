@@ -58,5 +58,4 @@ public class SupportC {
 
         return "main_page";
     }
-
 }
