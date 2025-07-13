@@ -5,6 +5,38 @@
     justify-content: center; /* 전체를 가운데 정렬 */
     gap: 20px; /* 아이템 사이 간격 */
     padding: 20px; /* 컨테이너 padding */
+    margin-top: 10%;
+}
+
+.Shop-Top-Line{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Coin-Zone{
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    width: 15%;
+    justify-content: center;
+    align-items: end;
+    gap: 5px;
+
+
+}
+
+.Shop-Top-Line-img{
+    background-image: url("/resources/images/coin.webp");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+}
+
+.Shop-Top-Line-Money{
+    font-size: 20px;
+    align-content: flex-end;
+    font-family: sans-serif;
 }
 
 .shop-item-container {
@@ -60,9 +92,10 @@
 }
 
 .pagination{
-border: 1px solid white;
+
     text-align: center;
     font-size: 25px;
+    margin-top: 10%;
 }
 
 

@@ -21,7 +21,7 @@
 </c:choose>
 
 
-<div>${userMoney}</div>
+
 
 
 <c:if test="${not empty errorMsg}">
@@ -34,8 +34,14 @@
 
 
 
-
+<div class="Shop-Top-Line">
 <h1>상점</h1>
+    <div class="Coin-Zone">
+        <div class="Shop-Top-Line-img"></div>
+        <div class="Shop-Top-Line-Money">${userMoney} 원</div>
+    </div>
+</div>
+
 <br>
 <hr>
 <div class="container">
@@ -47,7 +53,7 @@
                 </div>
                 <div class="item-name">${i.item_name}</div>
                 <div class="underside">
-                    <div class="item-price">${i.item_price}</div>
+                    <div class="item-price">${i.item_price}원</div>
                     <input type="hidden" name="itemId" value="${i.item_id}">
                     <button type="button" class="buy-btn" data-price="${i.item_price}" onclick="shopbuy(this)">구매</button>
                 </div>
