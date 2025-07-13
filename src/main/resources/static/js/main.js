@@ -1,8 +1,8 @@
  window.onload = () => {
-     init(1)
+     init()
  }
 
-function init(isGamePage) {
+function init() {
     const leftContent = document.querySelector(".menu-area");
     const rightContent = document.querySelector(".info-area");
 

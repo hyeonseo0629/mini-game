@@ -17,25 +17,22 @@ public interface ShopMapper {
     public List<ShopItemsVO> selectAll();
 
     @Update("UPDATE SHOPITEMS SET ITEM_AVATAR_IMG=#{item_avatar_img} WHERE ITEM_ID=#{item_id}")
-    void updateImage(ShopItemsVO vo);
+    public void updateImage(ShopItemsVO vo);
 
     @Select("select * from shopitems"+" order by item_id desc"+
             " offset #{offset} rows fetch next #{limit} rows only")
-    List<ShopItemsVO> SelectShopItemsByPaging(@Param("offset") int offset,@Param("limit") int limit);
+    public List<ShopItemsVO> SelectShopItemsByPaging(@Param("offset") int offset,@Param("limit") int limit);
 
     @Select("SELECT count(*) FROM shopitems")
     public int getShopItemCount();
 
-
     @Select("select * from SHOPITEMS where ITEM_ID = #{itemId}")
-    ShopItemsVO selectInfoById(@Param("itemId") String itemId);
+    public ShopItemsVO selectInfoById(@Param("itemId") String itemId);
 
     @Update("update USERS set USER_MONEY = USER_MONEY - #{itemPrice} where USER_ID = #{userId} ")
-    int updateUserInfo(@Param("userId") String userId, @Param("itemPrice")  int price);
-
-
+    public int updateUserInfo(@Param("userId") String userId, @Param("itemPrice")  int price);
 
     //구매 후 보유 돈 조회하기
     @Select("select USER_MONEY from USERS where USER_ID = #{userId}")
-    int getAfterMoney(@Param("userId") String userId);
+    public int getAfterMoney(@Param("userId") String userId);
 }
