@@ -41,4 +41,16 @@ public class CommunityService {
     public int communityCount() {
         return communityMapper.communityCount();
     }
+
+    public TextsVO selectCommunityText(int textId) {
+        return communityMapper.selectCommunityText(textId);
+    }
+
+    public TextsVO getTextById(int text_id) {
+        return communityMapper.getTextByID(text_id);
+    }
+
+    public void updateCommunity(String title, String content, String text_id) {
+        communityMapper.updateCommunity(title, content, text_id);
+    }
 }

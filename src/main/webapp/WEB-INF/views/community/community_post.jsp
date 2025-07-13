@@ -10,8 +10,6 @@
 <div style="display: flex; justify-content: center;">
     <form action="commu-insert-texts" method="post">
         <input type="hidden" name="text_type" value="COMMUNITY">
-        ${users} <br>
-        ${sessionScope.users}
         <input name="text_user_no" value="${users.user_no}">
 
         <div class="sup">

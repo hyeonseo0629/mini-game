@@ -26,7 +26,7 @@
         <c:forEach var="t" items="${communityTexts}">
             <tr>
                 <td class="text_id">${t.text_id}</td>
-                <td class="text_title">${t.text_title}</td>
+                <td class="text_title" onclick="location.href='/community_detail?text_id=${t.text_id}'">${t.text_title}</td>
                 <td class="text_user_no">${t.text_user_no}</td>
                 <td class="text_date">
                     <fmt:formatDate value="${t.text_write_date}" pattern="MM월 dd일" />
@@ -49,10 +49,6 @@
             </c:choose>
         </c:forEach>
     </div>
-</div>
-
-
-
 </div>
 </body>
 </html>
