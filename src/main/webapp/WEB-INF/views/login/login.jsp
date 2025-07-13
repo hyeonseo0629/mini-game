@@ -81,10 +81,19 @@
 
     <!--로그인알람-->
     <c:if test = "${not empty alert}">
-        <script>alert('${alert}')</script>
+        <script>if (!window.shownAlert) {
+            alert('${alert}');
+            window.shownAlert = true;
+        }
+        </script>
     </c:if>
     <c:if test = "${not empty alert2}">
-        <script>alert('${alert2}')</script>
+        <script>
+            if (!window.shownAlert) {
+                alert('${alert2}');
+                window.shownAlert = true;
+            }
+        </script>
     </c:if>
 
 <script>
