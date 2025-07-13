@@ -49,13 +49,22 @@ public class CommunityC {
     @PostMapping("/commu-insert-texts")
     public String insertTexts(Model model, HttpSession session, TextsVO texts) {
         UsersVO user = (UsersVO) session.getAttribute("users");
-
+        System.out.println(user);
         int user_no = user.getUser_no();
+        System.out.println(user);
+
         String text_title = texts.getText_title();
         String text_content = texts.getText_content();
 
         int checkNumber = communityService.setNewCommunity(text_title, text_content, user_no);
 
+        if (checkNumber != 0) {
+            System.out.println("업로드 성공!");
+            List<TextsVO> list = communityService.getAllReview();
+            model.addAttribute("communityTexts", list);
+        } else {
+            System.out.println("업로드 실패");
+        }
         model.addAttribute("content", "community/community_main.jsp");
         return "main_page";
     }
