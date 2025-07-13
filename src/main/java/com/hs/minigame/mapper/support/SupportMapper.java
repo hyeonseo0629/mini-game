@@ -21,7 +21,7 @@ public interface SupportMapper {
     @Select("SELECT count(*) FROM texts where TEXT_TYPE = 'QUESTION'")
     public int supportCount();
 
-    @Select("select * from texts"+" order by text_id desc"+
+    @Select("select * from texts"+" order by text_write_date desc"+
             " offset #{offset} rows fetch next #{limit} rows only")
     List<TextsVO> selectSupportTexts(@Param("offset") int offset, @Param("limit") int limit);
 }
