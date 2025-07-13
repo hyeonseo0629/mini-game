@@ -2,7 +2,6 @@ package com.hs.minigame.controller;
 
 import com.hs.minigame.service.support.SupportService;
 import com.hs.minigame.vo.TextsVO;
-import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,5 +58,4 @@ public class SupportC {
 
         return "main_page";
     }
-
 }
