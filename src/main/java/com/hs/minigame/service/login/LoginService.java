@@ -22,6 +22,7 @@ public class LoginService {
         return true;
     }
     public void deleteUser(String userId){
+        System.out.println("Deleting user with ID: " + userId);
         loginMapper.deleteUser(userId);
     }
 }

@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>mini game</title>
     <link rel="stylesheet" href="/resources/css/login.css"/>
 </head>
@@ -31,9 +32,9 @@
         <form action="logout" method="post">
             <button type="submit">로그아웃</button>
         </form>
-        <form action="deleteUser" method="post">
+        <form id="deleteUser"action="deleteUser" method="post">
             <input type="hidden" name="user_id" value="${sessionScope.loginUser.user_id}">
-            <button type="submit">회원 탈퇴</button>
+            <button type="button"onclick="checkDelete()">회원 탈퇴</button>
         </form>
     </div>
     </c:otherwise>
@@ -49,9 +50,10 @@
         <div>머니 : ${users.user_money}</div>
     </div>
     <br>
-</div>
+
 <button onclick="openInvenModal()" type="button">인벤토리</button>
 </c:if>
+</div>
 
 <!--회원가입모달창-->
 <div id="signModal" class="modal" style="display:none" onclick="backSignModal(event)">
@@ -112,7 +114,9 @@
         }
     }
 </script>
+
 <script>
+    <!--회원가입모달창기능-->
     function openSignModal() {
         document.getElementById("signModal").style.display = "flex";
     }
@@ -128,6 +132,7 @@
     }
 </script>
 <script>
+    <!--인벤토리모달창기능-->
     function openInvenModal() {
         document.getElementById("invenModal").style.display = "flex";
     }
@@ -139,6 +144,18 @@
     function backInvenModal(event) {
         if (event.target.id == "invenModal") {
             closeInvenModal();
+        }
+    }
+</script>
+<script>
+    <!--삭제확인알랏기능-->
+    function checkDelete(){
+        const checkUser = confirm("정말로 회원 탈퇴를 하시겠습니까?");
+
+        if(checkUser){
+            document.getElementById("deleteUser").submit();
+        }else{
+            alert("취소되었습니다.")
         }
     }
 </script>
