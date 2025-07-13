@@ -21,4 +21,7 @@ public class LoginService {
         loginMapper.insertUser(users);
         return true;
     }
+    public void deleteUser(String userId){
+        loginMapper.deleteUser(userId);
+    }
 }

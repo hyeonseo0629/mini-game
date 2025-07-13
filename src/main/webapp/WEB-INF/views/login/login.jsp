@@ -31,6 +31,10 @@
         <form action="logout" method="post">
             <button type="submit">로그아웃</button>
         </form>
+        <form action="deleteUser" method="post">
+            <input type="hidden" name="user_id" value="${sessionScope.loginUser.user_id}">
+            <button type="submit">회원 탈퇴</button>
+        </form>
     </div>
     </c:otherwise>
     </c:choose>

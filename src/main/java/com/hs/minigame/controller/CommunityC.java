@@ -38,7 +38,7 @@ public class CommunityC {
     public String insertTexts(Model model, HttpSession session, TextsVO texts) {
         UsersVO user = (UsersVO) session.getAttribute("users");
         System.out.println(user);
-        int user_no = Integer.parseInt(user.getUser_no());
+        int user_no = user.getUser_no();
         System.out.println(user);
 
         String text_title = texts.getText_title();

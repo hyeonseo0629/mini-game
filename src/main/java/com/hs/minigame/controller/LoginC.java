@@ -95,4 +95,11 @@ public class LoginC {
         redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
       return  "redirect:/main_page";
     }
+    @PostMapping("/deleteUser")
+    public String deleteUser(@RequestParam("user_id") String userId, HttpSession session, RedirectAttributes redirectAttributes ) {
+        loginService.deleteUser(userId);
+        session.invalidate();
+        redirectAttributes.addFlashAttribute("alert","회원 탈퇴가 완료되었습니다.");
+        return "redirect:/main_page";
+    }
 }
