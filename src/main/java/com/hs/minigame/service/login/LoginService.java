@@ -5,6 +5,7 @@ import com.hs.minigame.mapper.login.LoginMapper;
 import com.hs.minigame.vo.UsersVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LoginService {
@@ -21,5 +22,10 @@ public class LoginService {
         }
         loginMapper.insertUser(users);
         return true;
+    }
+    @Transactional
+    public void deleteUser(String userId){
+          loginMapper.deleteUser(userId);
+        System.out.println("Deleting user with ID: " + userId);
     }
 }
