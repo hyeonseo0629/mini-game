@@ -12,15 +12,28 @@ let turn = 1;
 let rollCount = 0;
 
 const canvas = document.querySelector("#canvas");
+const btn = document.createElement("button");
 const width = 800;
 const height = 800;
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
+const categories = ["ones", "twos", "threes", "fours", "fives", "sixes", "three", "four", "full", "small", "large", "yahtzee", "chance"];
+
+const faceMap = {
+    0: 1, // +X 방향 텍스처가 눈3일 때
+    1: 2, // -X 방향이 눈4일 때
+    2: 3, // +Y 방향이 눈1일 때
+    3: 4, // -Y 방향이 눈6일 때
+    4: 5, // +Z 방향이 눈2일 때
+    5: 6, // -Z 방향이 눈5일 때
+};
+
 init();
 animate();
 
+// 초기 설정
 function init() {
 
     scene = new THREE.Scene();
@@ -142,7 +155,6 @@ function init() {
         diceMeshes.push(mesh);
     }
 
-    const btn = document.createElement("button");
     btn.textContent = "Start Game";
     btn.style.position = "absolute";
     btn.style.top = "6%";
@@ -216,40 +228,27 @@ function init() {
     });
 }
 
+// 주사위 던지기
 function rollDice() {
-    rollCount++;
+    if (rollCount >= 3) {
+        enableCategoryClicks();
+        return;
+    } // 3회 초과 방지
 
+    rollCount++;
     diceBodies.forEach((body, i) => {
         if (heldDice.has(i)) return;
-
         body.type = CANNON.Body.DYNAMIC;
-
-        // 💡 살짝 튀는 듯한 느낌의 속도
-        const vx = (Math.random() - 0.5) * 5; // -2.5 ~ 2.5
-        const vy = Math.random() * 5 + 5; // 5 ~ 10 (위쪽으로 튐)
-        const vz = (Math.random() - 0.5) * 5;
-
-        body.velocity.set(vx, vy, vz);
-
-        // 💡 랜덤한 회전 부여 (좀 강하게 돌리려면 범위 키움)
-        body.angularVelocity.set(
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 20
-        );
-
-        // 💡 쿼터니언 회전도 랜덤화 (살짝 바꾸기만 하면 됨)
-        const q = new CANNON.Quaternion(
-            Math.random() * 2 - 1,
-            Math.random() * 2 - 1,
-            Math.random() * 2 - 1,
-            Math.random() * 2 - 1
-        );
-        q.normalize();
-        body.quaternion.copy(q);
+        body.velocity.set((Math.random() - 0.5) * 5, Math.random() * 5 + 5, (Math.random() - 0.5) * 5);
+        body.angularVelocity.set((Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20);
     });
+
+    if (rollCount === 3 || heldDice.size === 5) {
+        setTimeout(enableCategoryClicks, 1000); // 주사위 굴림 후 약간 대기하고 점수판 활성화
+    }
 }
 
+// 주사위 던질 때의 움직임 구현
 function animate() {
     requestAnimationFrame(animate);
     world.step(1 / 20);
@@ -266,15 +265,7 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-const faceMap = {
-    0: 1, // +X 방향 텍스처가 눈3일 때
-    1: 2, // -X 방향이 눈4일 때
-    2: 3, // +Y 방향이 눈1일 때
-    3: 4, // -Y 방향이 눈6일 때
-    4: 5, // +Z 방향이 눈2일 때
-    5: 6, // -Z 방향이 눈5일 때
-};
-
+// 주사위 윗면(선택 숫자) 얻기
 function getTopFaceIndex(quaternion) {
     // THREE.Quaternion을 CANNON.Quaternion으로 변환 (필요 시)
     if (quaternion instanceof THREE.Quaternion) {
@@ -350,4 +341,136 @@ function smoothMove(mesh, fromPos, toPos, duration = 0.5) {
         }
     }
     requestAnimationFrame(animateMove);
+}
+
+// 점수판 카테고리 클릭 이벤트 추가
+function enableCategoryClicks() {
+    categories.forEach(cat => {
+        const cell = document.querySelector(`#board-1 #score-${cat}`);
+        if (cell && cell.textContent === "-") {
+            cell.classList.add("clickable");
+            cell.onclick = () => {
+                const values = getCurrentDiceValues();
+                const scoreMap = calculateScore(values);
+                cell.textContent = scoreMap[cat];
+                cell.classList.remove("clickable");
+                cell.onclick = null;
+
+                rollCount = 0;
+                heldDice.clear();
+                updateTotalScore();
+                rollDice(); // 자동으로 새 라운드 시작
+
+                setTimeout(cpuTurn, 1000);
+            };
+        }
+    });
+}
+
+// 굴린 주사위 값 가져오기
+function getCurrentDiceValues() {
+    return diceMeshes.map(m => getTopFaceIndex(m.quaternion));
+}
+
+// 야추 점수 계산 함수 추가
+function calculateScore(values) {
+    const counts = Array(7).fill(0); // 1~6
+    values.forEach(v => counts[v]++);
+
+    const total = values.reduce((a, b) => a + b, 0);
+    const score = {
+        ones: counts[1] * 1,
+        twos: counts[2] * 2,
+        threes: counts[3] * 3,
+        fours: counts[4] * 4,
+        fives: counts[5] * 5,
+        sixes: counts[6] * 6,
+        three: counts.some(c => c >= 3) ? total : 0,
+        four: counts.some(c => c >= 4) ? total : 0,
+        full: counts.includes(3) && counts.includes(2) ? 25 : 0,
+        small: hasSmallStraight(values) ? 30 : 0,
+        large: hasLargeStraight(values) ? 40 : 0,
+        yahtzee: counts.includes(5) ? 50 : 0,
+        chance: total,
+    };
+    return score;
+}
+
+function hasSmallStraight(arr) {
+    const unique = [...new Set(arr)].sort();
+    const str = unique.join('');
+    return ['1234','2345','3456'].some(s => str.includes(s));
+}
+
+function hasLargeStraight(arr) {
+    const unique = [...new Set(arr)].sort().join('');
+    return unique === '12345' || unique === '23456';
+}
+
+// Total 점수 계산
+function updateTotalScore() {
+    let total = 0;
+    categories.forEach(cat => {
+        const cell = document.querySelector(`#board-1 #score-${cat}`);
+        if (cell && !isNaN(parseInt(cell.textContent))) {
+            total += parseInt(cell.textContent);
+        }
+    });
+    document.getElementById("score-total").textContent = total;
+}
+
+// CPU 턴 로직
+function cpuTurn() {
+    rollCount = 0;
+    heldDice.clear();
+
+    const maxRolls = 3;
+    let rolls = 0;
+
+    const intervalId = setInterval(() => {
+        if (rolls < maxRolls) {
+            rollDice();
+            btn.click();
+            rolls++;
+        } else {
+            clearInterval(intervalId);
+            // 3번째 굴림 끝난 뒤 1초 후 점수 선택 및 턴 전환
+            setTimeout(() => {
+                const values = getCurrentDiceValues();
+                const scoreMap = calculateScore(values);
+
+                let bestCat = null;
+                let maxScore = -1;
+                categories.forEach(cat => {
+                    const cell = document.querySelector(`#board-2 #score-${cat}`);
+                    if (cell && cell.textContent === "-" && scoreMap[cat] > maxScore) {
+                        maxScore = scoreMap[cat];
+                        bestCat = cat;
+                    }
+                });
+
+                if (bestCat) {
+                    const cell = document.querySelector(`#board-2 #score-${bestCat}`);
+                    cell.textContent = scoreMap[bestCat];
+                }
+
+                updateCPUTotalScore();
+
+                // 다음 턴 유저 진행 준비
+                rollCount = 0;
+                heldDice.clear();
+            }, 1500);
+        }
+    }, 1500);
+}
+
+function updateCPUTotalScore() {
+    let total = 0;
+    categories.forEach(cat => {
+        const cell = document.querySelector(`#board-2 #score-${cat}`);
+        if (cell && !isNaN(parseInt(cell.textContent))) {
+            total += parseInt(cell.textContent);
+        }
+    });
+    document.querySelector(`#board-2 #score-total`).textContent = total;
 }

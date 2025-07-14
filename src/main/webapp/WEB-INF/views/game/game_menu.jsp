@@ -32,6 +32,7 @@
                 <tr><td>Large Straight</td><td id="score-large">-</td></tr>
                 <tr><td>Yahtzee</td><td id="score-yahtzee">-</td></tr>
                 <tr><td>Chance</td><td id="score-chance">-</td></tr>
+                <tr><td>Total</td><td id="score-total"></td></tr>
                 </tbody>
             </table>
         </div>
@@ -58,6 +59,7 @@
                 <tr><td>Large Straight</td><td id="score-large">-</td></tr>
                 <tr><td>Yahtzee</td><td id="score-yahtzee">-</td></tr>
                 <tr><td>Chance</td><td id="score-chance">-</td></tr>
+                <tr><td>Total</td><td id="score-total"></td></tr>
                 </tbody>
             </table>
         </div>
