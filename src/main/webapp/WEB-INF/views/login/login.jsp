@@ -15,8 +15,14 @@
         <c:when test="${empty users}">
             <form action="login" method="post" class="login-form">
                 <h2>로그인</h2>
-                <input type="text" name="id" placeholder="아이디" required>
-                <input type="password" name="pw" placeholder="비밀번호" required>
+                <input type="text" name="id"
+                       value="${alert == 'id 불일치' ? '' : param.id}"
+                       placeholder="${alert == 'id 불일치' ? '아이디 미존재' : '아이디'}" required>
+                       <!--alert가 "id 불일치"이면 비우고/ 아니면 param.id(아이디)-->
+                       <!--alert가 "id 불일치"이면 '아이디 미존재'/아니면 '아이디'-->
+                <input type="password" name="pw"
+                       value="${alert == 'pw 불일치' ? '' : param.pw}"
+                       placeholder="${alert == 'pw 불일치' ? '비밀번호 불일치' : '비밀번호'}" required>
                 <button type="submit">로그인</button>
                 <div class="sub-actions">
                     <button onclick="openSignModal()" type="button">회원가입</button>
@@ -95,11 +101,6 @@ onsubmit="return validateSignForm()">
     }
     </script>
 </c:if>
-<!--로그인실패알람-->
-<c:if test="${alert == 'id 불일치' || alert == 'pw 불일치'}">
-    <div id="errorMessage" style="color: red; margin-top: 10px;">${alert}</div>
-</c:if>
-
 
 <!--로그아웃알람-->
 <c:if test="${not empty alert2}">
@@ -129,11 +130,9 @@ onsubmit="return validateSignForm()">
     function openSignModal() {
         document.getElementById("signModal").style.display = "flex";
     }
-
     function closeSignModal() {
         document.getElementById("signModal").style.display = "none";
     }
-
     function backSignModal(event) {
         if (event.target.id == "signModal") {
             closeSignModal();
@@ -145,11 +144,9 @@ onsubmit="return validateSignForm()">
     function openInvenModal() {
         document.getElementById("invenModal").style.display = "flex";
     }
-
     function closeInvenModal() {
         document.getElementById("invenModal").style.display = "none";
     }
-
     function backInvenModal(event) {
         if (event.target.id == "invenModal") {
             closeInvenModal();
@@ -195,6 +192,20 @@ function validateSignForm(){
             alert("취소되었습니다.")
         }
     }
+</script>
+<script>
+    <!--alret양식통일용-->
+window.alert = function(message){
+    const box = document.createElement();
+    box.className = "cssAlert";
+    box.textContent = message;
+    document.body.appendChild(box);
+
+    setTimeout(()=>{
+     box.classList.add("fade-out");
+     setTimeout(()=>box.remove(),300)
+    },2500);
+};
 </script>
 
 </body>
