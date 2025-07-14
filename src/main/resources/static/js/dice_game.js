@@ -30,12 +30,11 @@ const faceMap = {
     5: 6, // -Z 방향이 눈5일 때
 };
 
-init();
+gameInit();
 animate();
 
 // 초기 설정
-function init() {
-
+function gameInit() {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
     camera.position.set(0, 20, 3);
@@ -155,6 +154,7 @@ function init() {
         diceMeshes.push(mesh);
     }
 
+    // 버튼 설정
     btn.textContent = "Start Game";
     btn.style.position = "absolute";
     btn.style.top = "6%";
@@ -180,6 +180,7 @@ function init() {
         // }
     });
 
+    // 마우스 클릭에 따른 이벤트
     window.addEventListener("click", (event) => {
         const rect = renderer.domElement.getBoundingClientRect();
         mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
@@ -303,6 +304,7 @@ function getTopFaceIndex(quaternion) {
     return topFace;
 }
 
+// 주사위의 특정 눈(face)이 위로 향하도록 회전 방향(쿼터니언)을 지정함
 function getQuaternionForFace(face) {
     const q = new CANNON.Quaternion();
     console.log(q, face);
@@ -343,7 +345,7 @@ function smoothMove(mesh, fromPos, toPos, duration = 0.5) {
     requestAnimationFrame(animateMove);
 }
 
-// 점수판 카테고리 클릭 이벤트 추가
+// 점수판 카테고리 클릭 이벤트
 function enableCategoryClicks() {
     categories.forEach(cat => {
         const cell = document.querySelector(`#board-1 #score-${cat}`);
@@ -372,7 +374,7 @@ function getCurrentDiceValues() {
     return diceMeshes.map(m => getTopFaceIndex(m.quaternion));
 }
 
-// 야추 점수 계산 함수 추가
+// 주사위별 점수 계산 함수 추가
 function calculateScore(values) {
     const counts = Array(7).fill(0); // 1~6
     values.forEach(v => counts[v]++);
@@ -421,6 +423,8 @@ function updateTotalScore() {
 
 // CPU 턴 로직
 function cpuTurn() {
+    btn.textContent = "CPU Turn";
+    btn.style.disabled = true;
     rollCount = 0;
     heldDice.clear();
 
@@ -430,7 +434,6 @@ function cpuTurn() {
     const intervalId = setInterval(() => {
         if (rolls < maxRolls) {
             rollDice();
-            btn.click();
             rolls++;
         } else {
             clearInterval(intervalId);
@@ -459,9 +462,12 @@ function cpuTurn() {
                 // 다음 턴 유저 진행 준비
                 rollCount = 0;
                 heldDice.clear();
-            }, 1500);
+                btn.textContent = "Player Turn";
+                btn.style.disabled = false;
+                gameStarted = false;
+            }, 1000);
         }
-    }, 1500);
+    }, 1000);
 }
 
 function updateCPUTotalScore() {
