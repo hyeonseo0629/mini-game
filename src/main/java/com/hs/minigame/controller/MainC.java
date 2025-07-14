@@ -33,6 +33,7 @@ public class MainC {
 
         return "main_page";
     }
+
     @GetMapping("/GameC")
     public String gameC(Model model) {
         model.addAttribute("content", "game/game_menu.jsp");

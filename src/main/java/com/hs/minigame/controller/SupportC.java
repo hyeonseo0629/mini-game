@@ -37,7 +37,7 @@ public class SupportC {
         model.addAttribute("text_content");
         model.addAttribute("text_user_no");
         model.addAttribute("text_type");
-       return "redirect:/SupportC";
+        return "redirect:/SupportC";
    }
 
     @GetMapping("/support_main")

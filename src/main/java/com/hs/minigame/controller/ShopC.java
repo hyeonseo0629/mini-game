@@ -16,7 +16,6 @@ import java.util.List;
 @Controller
 public class ShopC {
 
-
     //리미트 상수화
     private static final int PAGE_LIMIT = 4;
 
@@ -37,7 +36,6 @@ public class ShopC {
                            HttpSession session,
                            @RequestParam(defaultValue = "1") int page,
                            Model model) {
-
         setPagingData(model, page);
         UsersVO user = setUserMoneyToModel(session, model);
 

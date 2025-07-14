@@ -29,8 +29,8 @@ public interface CommunityMapper {
     public TextsVO selectCommunityText(@Param("textId") int textId);
 
     @Update("UPDATE texts SET text_title = #{text_title}, text_content = #{text_content} WHERE text_id = #{text_id}")
-    void updateCommunity(String text_title, String text_content, String text_id);
+    public void updateCommunity(String text_title, String text_content, String text_id);
 
     @Select("select * from texts where TEXT_ID = #{text_id}")
-    TextsVO getTextByID(int text_id);
+    public TextsVO getTextByID(int text_id);
 }
