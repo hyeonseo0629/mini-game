@@ -14,14 +14,14 @@
 <%--        </div>--%>
         <div class="ranking-type" style="display: flex;">
             <%-- GET 방식 --%>
-            <form action="RankingC" method="get">
+            <form action="rank" method="get">
                 <button type="submit">레이팅왕</button>
             </form>
             <%-- POST 방식 --%>
-            <form action="RankingC" method="post">
+            <form action="rank" method="post">
                 <button type="submit" name="rankingType" value="winningStack">연승왕</button>
             </form>
-            <form action="RankingC" method="post">
+            <form action="rank" method="post">
                 <button type="submit" name="rankingType" value="money">코인왕</button>
             </form>
         </div>
@@ -115,7 +115,7 @@
         <c:set var="lastPage" value="${(total > 10) ? ((total-10) / 10 + ((total-10) % 10 == 0 ? 0 : 1)) + 1 : 1}" />
         <div class="pagination">
             <c:forEach var="p" begin="1" end="${lastPage}">
-                <form action="RankingC" method="post">
+                <form action="rank" method="post">
                     <input type="hidden" name="rankingType" value="${rankingType == '연승 횟수' ? 'winningStack' : (rankingType == '보유 금액' ? 'money' : 'score')}" />
                     <input type="hidden" name="page" value="${p}" />
                     <button type="submit" class="${p == page ? 'active' : ''}">${p}</button>

@@ -10,6 +10,8 @@ let heldDice = new Set();
 let gameStarted = false;
 let turn = 1;
 let rollCount = 0;
+let playerTotal = 0;
+let computerTotal = 0;
 
 const canvas = document.querySelector("#canvas");
 const btn = document.createElement("button");
@@ -35,6 +37,8 @@ animate();
 
 // 초기 설정
 function gameInit() {
+    btn.style.disabled = false;
+
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
     camera.position.set(0, 20, 3);
@@ -411,11 +415,11 @@ function hasLargeStraight(arr) {
 
 // Total 점수 계산
 function updateTotalScore() {
-    let total = 0;
+    playerTotal = 0;
     categories.forEach(cat => {
         const cell = document.querySelector(`#board-1 #score-${cat}`);
         if (cell && !isNaN(parseInt(cell.textContent))) {
-            total += parseInt(cell.textContent);
+            playerTotal += parseInt(cell.textContent);
         }
     });
     document.getElementById("score-total").textContent = total;
@@ -471,11 +475,24 @@ function cpuTurn() {
 }
 
 function updateCPUTotalScore() {
-    let total = 0;
+    computerTotal = 0;
+    let scoreCount = 0;
     categories.forEach(cat => {
         const cell = document.querySelector(`#board-2 #score-${cat}`);
         if (cell && !isNaN(parseInt(cell.textContent))) {
-            total += parseInt(cell.textContent);
+            computerTotal += parseInt(cell.textContent);
+            scoreCount++;
+        }
+
+        if (scoreCount === 13) {
+            btn.style.disabled = true;
+            let result = "draw";
+            if (playerTotal > computerTotal) {
+                result = "win";
+            } else if (playerTotal < computerTotal) {
+                result = "lose";
+            }
+            location.href = "GameEndC?result=" + result;
         }
     });
     document.querySelector(`#board-2 #score-total`).textContent = total;

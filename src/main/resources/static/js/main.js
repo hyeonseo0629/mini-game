@@ -35,7 +35,7 @@ function clicked(no) {
             location.href = "ShopC";
             break;
         case 3:
-            location.href = "RankingC";
+            location.href = "rank";
             break;
         case 4:
             location.href = "CommunityC";
