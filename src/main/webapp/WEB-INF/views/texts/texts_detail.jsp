@@ -6,7 +6,7 @@
 <head>
     <title>mini game</title>
     <link rel="stylesheet" href="resources/css/detail.css">
-    <script src="/resources/js/community.js"></script>
+    <script src="/resources/js/texts.js"></script>
 </head>
 <body>
 <div class="board-text">
@@ -39,7 +39,7 @@
         </table>
         <div class="button-container">
             <button>게시물 수정</button>
-            <button type="button" onclick="deleteCommunity(${text.text_id})">게시물 삭제</button>
+            <button type="button" onclick="deleteTexts(${text.text_id})">게시물 삭제</button>
         </div>
     </form>
 

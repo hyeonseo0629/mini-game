@@ -23,8 +23,8 @@ public class CommunityService {
         return community;
     }
 
-    public int setNewCommunity(String text_title, String text_content, int user_no) {
-        return communityMapper.insertCommunity(text_title, text_content, user_no);
+    public int insertCommunityText(String text_title, String text_content, int user_no) {
+        return communityMapper.insertCommunityText(text_title, text_content, user_no);
     }
 
 //    public void insert(TextsVO textsVO) {
@@ -49,7 +49,11 @@ public class CommunityService {
         return communityMapper.getTextByID(text_id);
     }
 
-    public void updateCommunity(String title, String content, String text_id) {
-        communityMapper.updateCommunity(title, content, text_id);
+    public void updateCommunityText(String title, String content, String text_id) {
+        communityMapper.updateCommunityText(title, content, text_id);
+    }
+
+    public void deleteCommunityText(int textId) {
+        communityMapper.deleteCommunityText(textId);
     }
 }

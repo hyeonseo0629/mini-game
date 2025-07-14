@@ -9,9 +9,9 @@
 </head>
 <body>
 <div class="board-text">
-    <h1>게시판</h1><br>
+    <h1>${texts_type}</h1><br>
     <div class="button-container">
-        <button onclick="location.href='TextPostC?b=${param.b}'" >게시물 작성</button>
+        <button onclick="location.href='TextPostC?b=${param.b}'" >${texts_type} 작성</button>
     </div>
     <table>
         <thead>
