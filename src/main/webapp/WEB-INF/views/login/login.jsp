@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>mini game</title>
     <link rel="stylesheet" href="/resources/css/login.css"/>
 </head>
@@ -14,8 +15,14 @@
         <c:when test="${empty users}">
             <form action="login" method="post" class="login-form">
                 <h2>로그인</h2>
-                <input type="text" name="id" placeholder="아이디" required>
-                <input type="password" name="pw" placeholder="비밀번호" required>
+                <input type="text" name="id"
+                       value="${alert == 'id 불일치' ? '' : param.id}"
+                       placeholder="${alert == 'id 불일치' ? '아이디 미존재' : '아이디'}" required>
+                       <!--alert가 "id 불일치"이면 비우고/ 아니면 param.id(아이디)-->
+                       <!--alert가 "id 불일치"이면 '아이디 미존재'/아니면 '아이디'-->
+                <input type="password" name="pw"
+                       value="${alert == 'pw 불일치' ? '' : param.pw}"
+                       placeholder="${alert == 'pw 불일치' ? '비밀번호 불일치' : '비밀번호'}" required>
                 <button type="submit">로그인</button>
                 <div class="sub-actions">
                     <button onclick="openSignModal()" type="button">회원가입</button>
@@ -24,15 +31,19 @@
             </form>
         </c:when>
 
-        <c:otherwise>
-            <!--로그인완료창-->
-            <div class="welcome-box">
-                <span>${users.user_id}님 환영합니다</span>
-                <form action="logout" method="post">
-                    <button type="submit">로그아웃</button>
-                </form>
-            </div>
-        </c:otherwise>
+    <c:otherwise>
+        <!--로그인완료창-->
+    <div class="welcome-box">
+        <span>${users.user_id}님 환영합니다</span>
+        <form action="logout" method="post">
+            <button type="submit">로그아웃</button>
+        </form>
+        <form id="deleteUser"action="deleteUser" method="post">
+            <input type="hidden" name="user_id" value="${sessionScope.loginUser.user_id}">
+            <button type="button"onclick="checkDelete()">회원 탈퇴</button>
+        </form>
+    </div>
+    </c:otherwise>
     </c:choose>
     <br>
     <!--마이페이지+인벤토리-->
@@ -45,12 +56,14 @@
         <div>머니 : ${users.user_money}</div>
     </div>
     <br>
-</div>
+
 <button onclick="openInvenModal()" type="button">인벤토리</button>
 </c:if>
+</div>
 
 <!--회원가입모달창-->
-<div id="signModal" class="modal" style="display:none" onclick="backSignModal(event)">
+<div id="signModal" class="modal" style="display:none" onclick="backSignModal(event)"
+onsubmit="return validateSignForm()">
     <form action="/sign" method="post">
         <div>회원 가입</div>
         <div>
@@ -80,13 +93,16 @@
 </div>
 
 <!--로그인알람-->
-<c:if test="${not empty alert}">
-    <script>if (!window.shownAlert) {
+<c:if test="${alert == '로그인 성공'}">
+    <script>
+        if (!window.shownAlert) {
         alert('${alert}');
         window.shownAlert = true;
     }
     </script>
 </c:if>
+
+<!--로그아웃알람-->
 <c:if test="${not empty alert2}">
     <script>
         if (!window.shownAlert) {
@@ -108,15 +124,15 @@
         }
     }
 </script>
+
 <script>
+    <!--회원가입모달창기능-->
     function openSignModal() {
         document.getElementById("signModal").style.display = "flex";
     }
-
     function closeSignModal() {
         document.getElementById("signModal").style.display = "none";
     }
-
     function backSignModal(event) {
         if (event.target.id == "signModal") {
             closeSignModal();
@@ -124,19 +140,72 @@
     }
 </script>
 <script>
+    <!--인벤토리모달창기능-->
     function openInvenModal() {
         document.getElementById("invenModal").style.display = "flex";
     }
-
     function closeInvenModal() {
         document.getElementById("invenModal").style.display = "none";
     }
-
     function backInvenModal(event) {
         if (event.target.id == "invenModal") {
             closeInvenModal();
         }
     }
+</script>
+
+<script>
+    <!--회원가입필수입력기능-->
+function validateSignForm(){
+    const id = document.querySelector('input[name="user_id"]').value.trim();
+    const pw = document.querySelector('input[name="user_pw"]').value.trim();
+    const name = document.querySelector('input[name="user_name"]').value.trim();
+    const nickname = document.querySelector('input[name="user_nickname"]').value.trim();
+    if (!id) {
+        alert("아이디를 입력해주세요.");
+        return false;
+    }
+    if (!pw) {
+        alert("비밀번호를 입력해주세요.");
+        return false;
+    }
+    if (!name) {
+        alert("이름을 입력해주세요.");
+        return false;
+    }
+    if (!nickname) {
+        alert("닉네임을 입력해주세요.");
+        return false;
+    }
+    return true;
+}
+</script>
+
+<script>
+    <!--삭제확인알람기능-->
+    function checkDelete(){
+        const checkUser = confirm("정말로 회원 탈퇴를 하시겠습니까?");
+
+        if(checkUser){
+            document.getElementById("deleteUser").submit();
+        }else{
+            alert("취소되었습니다.")
+        }
+    }
+</script>
+<script>
+    <!--alret양식통일용-->
+window.alert = function(message){
+    const box = document.createElement();
+    box.className = "cssAlert";
+    box.textContent = message;
+    document.body.appendChild(box);
+
+    setTimeout(()=>{
+     box.classList.add("fade-out");
+     setTimeout(()=>box.remove(),300)
+    },2500);
+};
 </script>
 
 </body>
