@@ -148,3 +148,24 @@ body {
 .welcome-box button:hover {
   background-color: #e0d8c3;
 }
+.cssAlert {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2a2a2a;
+  color: #e0d8c3;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* 다른 UI 방해 안 하도록 */
+}
+
+.cssAlert.fade-out {
+  opacity: 0;
+}
