@@ -56,7 +56,8 @@
 </div>
 
 <!--회원가입모달창-->
-<div id="signModal" class="modal" style="display:none" onclick="backSignModal(event)">
+<div id="signModal" class="modal" style="display:none" onclick="backSignModal(event)"
+onsubmit="return validateSignForm()">
     <form action="/sign" method="post">
         <div>회원 가입</div>
         <div>
@@ -98,21 +99,6 @@
 <c:if test="${alert == 'id 불일치' || alert == 'pw 불일치'}">
     <div id="errorMessage" style="color: red; margin-top: 10px;">${alert}</div>
 </c:if>
-<%--<script>--%>
-<%--    window.onload =function (){--%>
-<%--       const errorMessage = document.getElementById('errorMessage');--%>
-<%--       if(errorMessage){--%>
-<%--          setTimeout(()=>{--%>
-<%--              errorMessage.style.transition = 'opacity 0.5s ease-out';--%>
-<%--              errorMessage.style.opacity = '0';--%>
-<%--              setTimeout(()=>errorMessage.remove(),500);--%>
-<%--          },3000);--%>
-<%--       }--%>
-<%--    }--%>
-
-
-</script>
-
 
 
 <!--로그아웃알람-->
@@ -170,8 +156,36 @@
         }
     }
 </script>
+
 <script>
-    <!--삭제확인알랏기능-->
+    <!--회원가입필수입력기능-->
+function validateSignForm(){
+    const id = document.querySelector('input[name="user_id"]').value.trim();
+    const pw = document.querySelector('input[name="user_pw"]').value.trim();
+    const name = document.querySelector('input[name="user_name"]').value.trim();
+    const nickname = document.querySelector('input[name="user_nickname"]').value.trim();
+    if (!id) {
+        alert("아이디를 입력해주세요.");
+        return false;
+    }
+    if (!pw) {
+        alert("비밀번호를 입력해주세요.");
+        return false;
+    }
+    if (!name) {
+        alert("이름을 입력해주세요.");
+        return false;
+    }
+    if (!nickname) {
+        alert("닉네임을 입력해주세요.");
+        return false;
+    }
+    return true;
+}
+</script>
+
+<script>
+    <!--삭제확인알람기능-->
     function checkDelete(){
         const checkUser = confirm("정말로 회원 탈퇴를 하시겠습니까?");
 
