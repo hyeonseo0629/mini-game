@@ -140,7 +140,6 @@ function init() {
         mesh.userData.index = i;
         scene.add(mesh);
         diceMeshes.push(mesh);
-        console.log(diceMeshes)
     }
 
     const btn = document.createElement("button");
@@ -174,11 +173,8 @@ function init() {
         mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
         mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-        console.log(mouse.x);
-        console.log(mouse.y)
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(diceMeshes);
-        console.log(intersects)
 
         if (intersects.length > 0) {
             const index = intersects[0].object.userData.index;
