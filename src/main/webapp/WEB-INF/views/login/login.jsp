@@ -86,13 +86,36 @@
 </div>
 
 <!--로그인알람-->
-<c:if test="${not empty alert}">
-    <script>if (!window.shownAlert) {
+<c:if test="${alert == '로그인 성공'}">
+    <script>
+        if (!window.shownAlert) {
         alert('${alert}');
         window.shownAlert = true;
     }
     </script>
 </c:if>
+<!--로그인실패알람-->
+<c:if test="${alert == 'id 불일치' || alert == 'pw 불일치'}">
+    <div id="errorMessage" style="color: red; margin-top: 10px;">${alert}</div>
+</c:if>
+<%--<script>--%>
+<%--    window.onload =function (){--%>
+<%--       const errorMessage = document.getElementById('errorMessage');--%>
+<%--       if(errorMessage){--%>
+<%--          setTimeout(()=>{--%>
+<%--              errorMessage.style.transition = 'opacity 0.5s ease-out';--%>
+<%--              errorMessage.style.opacity = '0';--%>
+<%--              setTimeout(()=>errorMessage.remove(),500);--%>
+<%--          },3000);--%>
+<%--       }--%>
+<%--    }--%>
+
+
+</script>
+
+
+
+<!--로그아웃알람-->
 <c:if test="${not empty alert2}">
     <script>
         if (!window.shownAlert) {
