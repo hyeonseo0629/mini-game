@@ -121,7 +121,7 @@ public class ShopC {
 
         user.setUser_avatar_img(avatarImg);
 
-        session.setAttribute("user", user);
+        session.setAttribute("users", user);
 
         return "redirect:/main_page";
     }

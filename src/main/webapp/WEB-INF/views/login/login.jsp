@@ -142,9 +142,11 @@ onsubmit="return validateSignForm()">
             <button onclick="closeUpdateUser()" type="button">X</button>
         </form>
     </div>
+</div>
+
 <div class="avatar_zone">
-    <c:if test="${not empty user.user_avatar_img}">
-        <img src="/resources/images/${user.user_avatar_img}" alt="현재 아바타" width="100">
+    <c:if test="${not empty users.user_avatar_img}">
+        <img src="/resources/images/${users.user_avatar_img}" alt="현재 아바타" width="100">
     </c:if>
 </div>
 
@@ -351,7 +353,7 @@ function validateSignForm(){
 <script>
     <!--alret양식통일용-->
 window.alert = function(message){
-    const box = document.createElement("<div>");
+    const box = document.createElement("div");
     box.className = "cssAlert";
     box.textContent = message;
     document.body.appendChild(box);
