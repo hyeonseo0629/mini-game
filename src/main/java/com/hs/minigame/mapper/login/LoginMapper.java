@@ -11,12 +11,10 @@ public interface LoginMapper {
 
 
     @Insert("insert into users(user_id, user_pw,user_name,user_nickname,user_money,user_role,user_avatar_img)"+
-            "values (#{user_id},#{user_pw},#{user_name},#{user_nickname},#{user_money},#{user_role},#{user_avatar_img})"
-    )
+            "values (#{user_id},#{user_pw},#{user_name},#{user_nickname},#{user_money},#{user_role},#{user_avatar_img})")
     public void insertUser(UsersVO users);
 
     @Delete("delete from users where user_id = #{userId}")
-
     void deleteUser(@Param("userId") String userId);
 
 }

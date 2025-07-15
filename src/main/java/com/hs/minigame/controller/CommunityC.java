@@ -4,14 +4,11 @@ import com.hs.minigame.service.community.CommunityService;
 import com.hs.minigame.vo.TextsVO;
 import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpSession;
-import lombok.Data;
-import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 

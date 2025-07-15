@@ -2,7 +2,6 @@ package com.hs.minigame.controller;
 
 import com.hs.minigame.service.login.LoginService;
 import com.hs.minigame.vo.UsersVO;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
