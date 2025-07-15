@@ -10,10 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -120,14 +117,45 @@ public class LoginC {
            redirectAttributes.addFlashAttribute("alert","회원 가입 실패");
        }
        redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
-       return  "redirect:/login";
+       return  "redirect:/main_page";
     }
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam("user_id") String userId, HttpSession session, RedirectAttributes redirectAttributes ) {
         System.out.println("Controller: Attempting to delete user with ID: " + userId);
-        loginService.deleteUser(userId);
-        session.invalidate();
-        redirectAttributes.addFlashAttribute("alert","회원 탈퇴가 완료되었습니다.");
+        try {
+          try {
+              loginService.deleteUserFromRecord(userId);
+          } catch (Exception e) {
+              System.out.println("record 임시 테이블 없음 /삭제 실패 → 무시하고 진행: " + e.getMessage());
+          }
+          System.out.println("Calling deleteUser");
+          loginService.deleteUser(userId);
+          session.invalidate();
+          redirectAttributes.addFlashAttribute("alert", "회원 탈퇴가 완료되었습니다.");
+          return "redirect:/main_page";
+      } catch (Exception e) {
+          e.printStackTrace();
+          redirectAttributes.addFlashAttribute("alert", "회원 탈퇴에 실패했습니다.");
+          return "redirect:/main_page";
+      }
+    }
+
+    @PostMapping("/updateUser")
+    public String updateUser(@ModelAttribute UsersVO users,@RequestParam("originalId") String originalId,RedirectAttributes redirectAttributes,HttpSession session) {
+
+        if (users.getUser_pw() == null || users.getUser_pw().trim().isEmpty()) {
+            UsersVO originalUser = loginService.getUser(originalId);
+            users.setUser_pw(originalUser.getUser_pw());
+        }
+
+     boolean updateSuccess = loginService.updateUser(originalId,users);
+
+     if(updateSuccess) {
+         redirectAttributes.addFlashAttribute("alert","회원 정보가 수정되었습니다.");
+         session.setAttribute("users", users);
+     }else{
+         redirectAttributes.addFlashAttribute("alert","수정에 실패하였습니다. 다시 시도해주세요.");
+     }
         return "redirect:/main_page";
     }
 
