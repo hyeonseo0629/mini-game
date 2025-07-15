@@ -6,10 +6,10 @@
     <title>mini game</title>
 </head>
 <body>
-<h1>게시판</h1><br>
+<h1>${texts_type}</h1><br>
 <hr>
 <div style="display: flex; justify-content: center;">
-    <form action="CommunityUpdateTextC" method="post">
+    <form action="TextUpdateC" method="post">
         <input type="hidden" name="text_type" value="community">
         <input type="hidden" name="text_user_no" value="${text.text_user_no}" readonly>
         <input type="hidden" name="text_id" value="${text.text_id}">

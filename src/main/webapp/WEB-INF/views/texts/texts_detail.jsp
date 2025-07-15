@@ -6,12 +6,12 @@
 <head>
     <title>mini game</title>
     <link rel="stylesheet" href="resources/css/detail.css">
-    <script src="/resources/js/community.js"></script>
+    <script src="/resources/js/texts.js"></script>
 </head>
 <body>
 <div class="board-text">
-    <h1>게시판</h1><br>
-    <form action="CommunityUpdatePageC" method="post">
+    <h1>${texts_type}</h1><br>
+    <form action="TextUpdatePageC" method="POST">
         <input type="hidden" name="text" value="${text.text_id}">
         <table>
             <thead>
@@ -38,8 +38,8 @@
             </tbody>
         </table>
         <div class="button-container">
-            <button>게시물 수정</button>
-            <button type="button" onclick="deleteCommunity(${text.text_id})">게시물 삭제</button>
+            <button >게시물 수정</button>
+            <button type="button" onclick="deleteTexts(${text.text_id})">게시물 삭제</button>
         </div>
     </form>
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -5,12 +6,13 @@
     <title>mini game</title>
 </head>
 <body>
-<h1>게시판</h1><br>
+<h1>${texts_type}</h1><br>
 <hr>
 <div style="display: flex; justify-content: center;">
-    <form action="CommunityInsertC" method="post">
-        <input type="hidden" name="text_type" value="COMMUNITY">
+    <form action="TextInsertC" method="post">
+        <input type="hidden" name="text_type" value="${text.text_type}">
         <input type="hidden" name="text_user_no" value="${users.user_no}">
+        <input type="hidden" name="b" value="${b}" >
 
         <div class="sup">
             <div>
