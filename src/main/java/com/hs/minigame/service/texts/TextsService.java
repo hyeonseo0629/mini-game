@@ -32,7 +32,7 @@ public class TextsService {
         textsMapper.deleteText(textId);
     }
 
-    public int insertText(String textTitle, String textContent, int userNo, String textType) {
-        return textsMapper.insertText(textTitle, textContent, userNo, textType);
+    public void insertText(String textTitle, String textContent, int userNo, String textType) {
+        textsMapper.insertText(textTitle, textContent, userNo, textType);
     }
 }

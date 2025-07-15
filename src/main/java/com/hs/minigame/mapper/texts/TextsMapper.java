@@ -25,5 +25,5 @@ public interface TextsMapper {
     public void deleteText(int textId);
 
     @Insert("insert into texts( text_title, text_content, text_user_no, text_type) values (#{text_title}, #{text_content}, #{user_no}, #{text_type})")
-    public int insertText(@Param("text_title") String text_title, @Param("text_content") String text_content, int user_no, String text_type);
+    public void insertText(@Param("text_title") String text_title, @Param("text_content") String text_content, int user_no, String text_type);
 }

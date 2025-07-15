@@ -6,6 +6,7 @@ import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class TextsC {
 
     // 게시판 홈 (페이징 있음)
     @GetMapping("/TextsC")
-    public String textsMain(@RequestParam(defaultValue = "1") int page, @RequestParam("b") int text_type, Model model) {
+    public String textsMain(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "1", value = "b") int text_type, Model model) {
         int limit = 5;
         String type = "";
         String KRType = "";
@@ -56,16 +57,32 @@ public class TextsC {
 
     // 게시판 글 상세내용
     @GetMapping("/TextDetailC")
-    public String textDetail(@RequestParam("text_id") int text_id, Model model) {
+    public String textDetail(@RequestParam("text_id") int text_id, @RequestParam("b") int text_type, Model model) {
         TextsVO text = textsService.getTextById(text_id);
+        String KRType = "";
+
+        switch (text_type) {
+            case 1:
+                KRType = "게시판";
+                break;
+            case 2:
+                KRType = "공지사항";
+                break;
+            case 3:
+                KRType = "문의사항";
+                break;
+        }
+
         model.addAttribute("text", text);
+        model.addAttribute("texts_type", KRType);
         model.addAttribute("content", "texts/texts_detail.jsp");
         return"main_page";
     }
 
     // 게시판 글 작성 폼
     @GetMapping("/TextPostC")
-    public String textPost(Model model) {
+    public String textPost(@RequestParam("b") int text_type, Model model) {
+        model.addAttribute("b", text_type);
         model.addAttribute("content", "texts/texts_post.jsp");
         return "main_page";
     }
@@ -96,30 +113,37 @@ public class TextsC {
         textsService.deleteText(text_id);
 
         model.addAttribute("content", "texts/texts_main.jsp");
-        return "redirect:/TextsC";
+        return "redirect:/TextsC?b=1";
     }
 
     // 게시판 게시물 작성
+    @Transactional
     @PostMapping("/TextInsertC")
-    public String textInsert(Model model, HttpSession session, TextsVO texts) {
+    public String textInsert(@RequestParam("b") int b, HttpSession session, TextsVO texts) {
+        if (b != 1 && b != 2 && b != 3) return "redirect:/TextsC";  // 컨트롤러 로직이 포함된 곳
         UsersVO user = (UsersVO) session.getAttribute("users");
         int user_no = user.getUser_no();
 
         String text_title = texts.getText_title();
         String text_content = texts.getText_content();
-        String text_type = texts.getText_type();
 
-        int checkNumber = textsService.insertText(text_title, text_content, user_no, text_type);
+        String type = "";
 
-        if (checkNumber != 0) {
-            System.out.println("업로드 성공!");
-//            List<TextsVO> list = textsService.getAllReview();
-//            model.addAttribute("textsTexts", list);
-        } else {
-            System.out.println("업로드 실패");
+        switch (b) {
+            case 1:
+                type = "COMMUNITY";
+                break;
+            case 2:
+                type = "NOTICE";
+                break;
+            case 3:
+                type = "QUESTION";
+                break;
         }
-        model.addAttribute("content", "texts/texts_main.jsp");
-        return "redirect:/TextsC";
+
+        textsService.insertText(text_title, text_content, user_no, type);
+
+        return "redirect:/TextsC?b=" + b;
     }
 
 //    @GetMapping("/commu-edit-texts")
