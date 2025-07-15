@@ -14,7 +14,12 @@ public class ShopService {
     @Autowired
     private ShopMapper shopMapper;
 
-    public ShopItemsVO getItemById(String itemId) {
+    public  List<ShopItemsVO> getInventory(int user_no) {
+        List<ShopItemsVO> inventoryList = shopMapper.inventory(user_no);
+        return inventoryList;
+    }
+
+    public ShopItemsVO getItemById(int itemId) {
         ShopItemsVO itemGetById = shopMapper.selectInfoById(itemId);
         return itemGetById;
     }
@@ -40,5 +45,13 @@ public class ShopService {
     //구매 후 보유 돈 조회하기
     public int getUserMoney(String userId) {
         return shopMapper.getAfterMoney(userId);
+    }
+
+    public int insertBuyingRecord(int user_no, int item_Id) {
+        return shopMapper.insertRecord(user_no, item_Id);
+    }
+
+    public int updateUserAvatar(String userId, String avatarImg) {
+        return shopMapper.updateAvatar(userId,avatarImg);
     }
 }
