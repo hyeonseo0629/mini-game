@@ -10,9 +10,6 @@
 <hr>
 <div style="display: flex; justify-content: center;">
     <form action="TextInsertC" method="post">
-        <input type="hidden" name="text_type" value="${text.text_type}">
-        <input type="hidden" name="text_user_no" value="${users.user_no}">
-        <input type="hidden" name="b" value="${b}" >
 
         <div class="sup">
             <div>
@@ -24,7 +21,7 @@
                 <div class="col-2"><textarea name="text_content" rows="10"></textarea></div>
             </div>
             <div>
-                <button type="submit">등록</button>
+                <button name="b" value="1">등록</button>
             </div>
         </div>
     </form>
