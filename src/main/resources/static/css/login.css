@@ -12,6 +12,55 @@
   justify-content: center;
   align-items: center;
 }
+
+/*인벤 모달 슬라이드 기능*/
+.inventory-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  /*gap: 5px;*/
+}
+
+.inventory-contents {
+  flex: 1;
+  min-width: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.inventory-track {
+  display: flex;
+  transition: transform 0.3s ease;
+  min-width: 100%;
+  will-change: transform;
+}
+
+.inventory-item {
+  flex: 0 0 130px;
+  margin-right: 20px; /*js에서 계산한 마진이랑 일치*/
+  text-align: center;
+  padding: 10px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.slide-btn {
+  background-color: transparent;
+  border: none;
+  color: #e0d8c3;
+  font-size: 1.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slide-btn:hover {
+  color: #cfae70;
+}
+
+/*슬라이드 기능은 여기까지*/
+
+
 .inven-modal-body {
   position: relative;
   display: inline-block;
@@ -21,7 +70,7 @@
   border-radius: 8px;
   text-align: center;
   width: 400px;
-  height: 250px;
+  height: 400px;
 }
 
 #closeInvenModal {

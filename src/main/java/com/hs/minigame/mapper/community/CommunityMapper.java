@@ -12,10 +12,10 @@ public interface CommunityMapper {
 //    @Select("select * from texts where TEXT_TYPE = 'COMMUNITY'")
 //    public List<TextsVO> selectAll();
 
-    @Select("select * from texts where TEXT_TYPE = 'COMMUNITY'")
+    @Select("select * from texts where text_type = 'COMMUNITY'")
     public List<TextsVO> selectAll();
 
-    @Select("SELECT count(*) FROM texts where TEXT_TYPE = 'COMMUNITY'")
+    @Select("select count(*) from texts where text_type = 'COMMUNITY'")
     public int communityCount();
 
     @Select("select * from texts"+" order by text_write_date desc "+
@@ -23,14 +23,17 @@ public interface CommunityMapper {
     public List<TextsVO> selectCommunityTexts(@Param("offset") int offset, @Param("limit") int limit);
 
     @Insert("insert into texts( text_title, text_content, text_user_no, text_type) values (#{text_title}, #{text_content}, #{user_no}, 'COMMUNITY')")
-    public int insertCommunity(@Param("text_title") String text_title, @Param("text_content") String text_content, int user_no);
+    public int insertCommunityText(@Param("text_title") String text_title, @Param("text_content") String text_content, int user_no);
 
-    @Select("select * from texts where TEXT_ID = #{textId}")
+    @Select("select * from texts where text_id = #{textId}")
     public TextsVO selectCommunityText(@Param("textId") int textId);
 
-    @Update("UPDATE texts SET text_title = #{text_title}, text_content = #{text_content} WHERE text_id = #{text_id}")
-    void updateCommunity(String text_title, String text_content, String text_id);
+    @Update("update texts set text_title = #{text_title}, text_content = #{text_content} where text_id = #{text_id}")
+    public void updateCommunityText(String text_title, String text_content, String text_id);
 
-    @Select("select * from texts where TEXT_ID = #{text_id}")
-    TextsVO getTextByID(int text_id);
+    @Select("select * from texts where text_id = #{text_id}")
+    public TextsVO getTextByID(int text_id);
+
+    @Delete("delete from texts where text_id = #{text_id}")
+    public void deleteCommunityText(int textId);
 }
