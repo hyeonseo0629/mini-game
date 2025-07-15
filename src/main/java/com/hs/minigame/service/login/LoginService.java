@@ -23,9 +23,27 @@ public class LoginService {
         loginMapper.insertUser(users);
         return true;
     }
+
     @Transactional
     public void deleteUser(String userId){
-          loginMapper.deleteUser(userId);
+        System.out.println("deleteUser is called with ID: " + userId);
+         loginMapper.deleteUser(userId);
         System.out.println("Deleting user with ID: " + userId);
     }
+        public void deleteUserFromRecord(String userId) {
+            System.out.println("deleteUserFromRecord is called with ID: " + userId);
+        loginMapper.deleteUserFromRecord(userId);
+    }
+
+    public boolean updateUser(String originalId,UsersVO users){
+        System.out.println("updateUser is called with original ID: " + originalId + ", new ID: " + users.getUser_id());
+         return loginMapper.updateUser(originalId, users);
+
+
+//       int result = loginMapper.updateUser(users);
+//        return result == 1;
+        }
+
+
+
 }
