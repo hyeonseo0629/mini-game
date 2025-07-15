@@ -141,6 +141,16 @@ onsubmit="return validateSignForm()">
     </script>
 </c:if>
 
+<!-- 누락된 알림들도 처리하는 공통 alert 처리 -->
+<c:if test="${not empty alert}">
+    <script>
+        if (!window.shownAlert) {
+            alert('${alert}');
+            window.shownAlert = true;
+        }
+    </script>
+</c:if>
+
 <script>
     <!--비밀번호토글기능-->
     function toggle() {
