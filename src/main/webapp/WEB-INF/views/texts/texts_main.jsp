@@ -6,12 +6,13 @@
 <head>
     <title>mini game</title>
     <link rel="stylesheet" href="resources/css/board1.css">
+    <script src="/resources/js/texts.js"></script>
 </head>
 <body>
 <div class="board-text">
-    <h1>게시판</h1><br>
+    <h1>${texts_type}</h1><br>
     <div class="button-container">
-        <button onclick="location.href='TextPostC?b=${param.b}'" >게시물 작성</button>
+            <button type="button" onclick="postTexts(${text.text_type})">${texts_type} 작성</button>
     </div>
     <table>
         <thead>
@@ -24,7 +25,7 @@
         </thead>
         <tbody>
         <c:forEach var="t" items="${Texts}">
-            <tr onclick="location.href='TextDetailC??b=${param.b}&text_id=${t.text_id}'">
+            <tr onclick="location.href='TextDetailC?b=${param.b}&text_id=${t.text_id}'">
                 <td class="text_id">${t.text_id}</td>
                 <td class="text_title">${t.text_title}</td>
                 <td class="text_user_no">${t.text_user_no}</td>

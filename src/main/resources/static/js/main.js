@@ -38,13 +38,13 @@ function clicked(no) {
             location.href = "rank";
             break;
         case 4:
-            location.href = "CommunityC";
+            location.href = "TextsC?b=1";
             break;
         case 5:
-            location.href = "NoticeC";
+            location.href = "TextsC?b=2";
             break;
         case 6:
-            location.href = "support_main";
+            location.href = "TextsC?b=3";
             break;
         default:
             break;

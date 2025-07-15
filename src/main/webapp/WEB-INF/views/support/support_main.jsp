@@ -1,17 +1,17 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib
-prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%@ page
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
   <head>
     <title>mini game</title>
-    <link rel="stylesheet" href="resources/css/board.css" />
+    <link rel="stylesheet" href="resources/css/board1.css" />
   </head>
   <body>
     <div class="board-text">
       <h1>문의</h1>
       <br />
-      <button onclick="location.href='SupportPostC'">문의 작성</button>
+      <button onclick="location.href='TextPostC?b=${param.b}'">문의 작성</button>
       <hr />
       <table>
         <thead>
@@ -24,20 +24,18 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         </thead>
         <div style="width: 100%; display: flex; justify-content: center">
           <div class="text-container">
-            <c:forEach var="sup" items="${supportTexts}">
-              <div class="text-wrap">
-                <tr>
-                  <td class="text_id">${sup.text_id}</td>
-                  <td class="text_title">${sup.text_title}</td>
-                  <td class="text_user_no">${sup.text_user_no}</td>
+            <c:forEach var="t" items="${Texts}">
+                <tr onclick="location.href='TextDetailC??b=${param.b}&text_id=${t.text_id}'">
+                  <td class="text_id">${t.text_id}</td>
+                  <td class="text_title">${t.text_title}</td>
+                  <td class="text_user_no">${t.text_user_no}</td>
                   <td class="text_date">
                     <fmt:formatDate
-                      value="${sup.text_write_date}"
+                      value="${t.text_write_date}"
                       pattern="MM월 dd일"
                     />
                   </td>
                 </tr>
-              </div>
             </c:forEach>
           </div>
         </div>
@@ -51,7 +49,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
             <span>[${p}]</span>
           </c:when>
           <c:otherwise>
-            <a href="/support_main?page=${p}">[${p}]</a>
+            <a href="/TextsC?b=${param.b}&page=${p}">[${p}]</a>
           </c:otherwise>
         </c:choose>
       </c:forEach>
