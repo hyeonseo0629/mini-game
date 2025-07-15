@@ -15,8 +15,11 @@ public interface LoginMapper {
     )
     public void insertUser(UsersVO users);
 
-    @Delete("delete from users where user_id = #{userId}")
 
+    @Delete("DELETE FROM record WHERE user_id = #{userId}")
+    void deleteUserFromRecord(@Param("userId") String userId);
+
+    @Delete("delete from users where user_id = #{userId}")
     void deleteUser(@Param("userId") String userId);
 
 }

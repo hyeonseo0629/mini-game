@@ -38,8 +38,9 @@
         <form action="logout" method="post">
             <button type="submit">로그아웃</button>
         </form>
+        <p>현재 로그인한 유저 ID: ${users.user_id}</p>
         <form id="deleteUser"action="deleteUser" method="post">
-            <input type="hidden" name="user_id" value="${sessionScope.loginUser.user_id}">
+            <input type="hidden" name="user_id" value="${users.user_id}">
             <button type="button"onclick="checkDelete()">회원 탈퇴</button>
         </form>
     </div>
