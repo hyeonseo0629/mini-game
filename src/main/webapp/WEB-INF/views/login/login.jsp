@@ -270,7 +270,7 @@ function validateSignForm(){
 <script>
     <!--alret양식통일용-->
 window.alert = function(message){
-    const box = document.createElement();
+    const box = document.createElement("div");
     box.className = "cssAlert";
     box.textContent = message;
     document.body.appendChild(box);
