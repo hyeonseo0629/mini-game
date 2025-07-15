@@ -6,12 +6,13 @@
 <head>
     <title>mini game</title>
     <link rel="stylesheet" href="resources/css/board1.css">
+    <script src="/resources/js/texts.js"></script>
 </head>
 <body>
 <div class="board-text">
-    <h1>게시판</h1><br>
+    <h1>${texts_type}</h1><br>
     <div class="button-container">
-        <button onclick="location.href='CommunityPostC'">게시물 작성</button>
+            <button type="button" onclick="postTexts(${text.text_type})">${texts_type} 작성</button>
     </div>
     <table>
         <thead>
@@ -23,10 +24,10 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="t" items="${communityTexts}">
-            <tr>
+        <c:forEach var="t" items="${Texts}">
+            <tr onclick="location.href='TextDetailC?b=${param.b}&text_id=${t.text_id}'">
                 <td class="text_id">${t.text_id}</td>
-                <td class="text_title" onclick="location.href='/community_detail?text_id=${t.text_id}'">${t.text_title}</td>
+                <td class="text_title">${t.text_title}</td>
                 <td class="text_user_no">${t.text_user_no}</td>
                 <td class="text_date">
                     <fmt:formatDate value="${t.text_write_date}" pattern="MM월 dd일" />
@@ -44,7 +45,7 @@
                     <span>[${p}]</span>
                 </c:when>
                 <c:otherwise>
-                    <a href="/CommunityC?page=${p}">[${p}]</a>
+                    <a href="/TextsC?b=${param.b}&page=${p}">[${p}]</a>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
