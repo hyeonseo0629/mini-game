@@ -3,6 +3,7 @@ package com.hs.minigame.service.login;
 
 import com.hs.minigame.mapper.login.LoginMapper;
 import com.hs.minigame.vo.UsersVO;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,9 +41,15 @@ public class LoginService {
         System.out.println("updateUser is called with original ID: " + originalId + ", new ID: " + users.getUser_id());
         return loginMapper.updateUser(originalId, users);
 
+
 //       int result = loginMapper.updateUser(users);
 //        return result == 1;
     }
 
+    public boolean loginCheck(HttpSession session) {
+        UsersVO user = (UsersVO) session.getAttribute("users");
+        if (user == null) return false;
+        return true;
+    }
 
 }

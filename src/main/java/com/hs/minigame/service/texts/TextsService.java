@@ -12,8 +12,9 @@ public class TextsService {
     @Autowired
     private TextsMapper textsMapper;
 
-    public List<TextsVO> selectTexts(int page, int limit, String type) {
-        return textsMapper.selectTexts(page, limit, type);
+    public List<TextsVO> selectTexts(int page, String type) {
+        int offset = (page - 1) * 5;
+        return textsMapper.selectTexts(offset, type);
     }
 
     public int textsCount(String type) {
