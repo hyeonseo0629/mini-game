@@ -124,9 +124,6 @@ public class ShopC {
         return "redirect:/main_page";
     }
 
-
-
-
     // 1 공통 처리 메서드(페이징)
     private void setPagingData(Model model, int page) {
         List<ShopItemsVO> pagedItems = shopService.getShopItems(page, PAGE_LIMIT);
