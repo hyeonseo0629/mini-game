@@ -51,7 +51,6 @@
     <c:if test="${not empty users}">
     <div>
         <div>ID : ${users.user_id}</div>
-        <div>PW : ${users.user_pw}</div>
         <div>이름 : ${users.user_name}</div>
         <div>닉네임 : ${users.user_nickname}</div>
         <div>머니 : ${users.user_money}</div>
@@ -106,7 +105,7 @@ onsubmit="return validateSignForm()">
             </div>
             <div>
                 <label for="user_pw">비밀번호</label>
-                <input type="text" name="user_pw" placeholder="변경할 비밀번호를 입력하세요">
+                <input type="text" name="user_pw"required placeholder="변경할 비밀번호를 입력하세요">
             </div>
             <div>
                 <label for="user_name">이름</label>
@@ -199,6 +198,8 @@ onsubmit="return validateSignForm()">
         }
     }
 </script>
+
+
 
 <script>
     <!--회원가입필수입력기능-->

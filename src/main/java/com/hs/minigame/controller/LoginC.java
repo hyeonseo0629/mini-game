@@ -97,7 +97,7 @@ public class LoginC {
            redirectAttributes.addFlashAttribute("alert","회원 가입 실패");
        }
        redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
-       return  "redirect:/login";
+       return  "redirect:/main_page";
     }
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam("user_id") String userId, HttpSession session, RedirectAttributes redirectAttributes ) {
@@ -122,6 +122,11 @@ public class LoginC {
 
     @PostMapping("/updateUser")
     public String updateUser(@ModelAttribute UsersVO users,@RequestParam("originalId") String originalId,RedirectAttributes redirectAttributes,HttpSession session) {
+
+        if (users.getUser_pw() == null || users.getUser_pw().trim().isEmpty()) {
+            UsersVO originalUser = loginService.getUser(originalId);
+            users.setUser_pw(originalUser.getUser_pw());
+        }
 
      boolean updateSuccess = loginService.updateUser(originalId,users);
 
