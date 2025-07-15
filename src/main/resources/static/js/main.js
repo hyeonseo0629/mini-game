@@ -32,7 +32,7 @@ function clicked(no) {
             location.href = "GameC";
             break;
         case 2:
-            location.href = "ShopC";
+            location.href = "shopC";
             break;
         case 3:
             location.href = "rank";
