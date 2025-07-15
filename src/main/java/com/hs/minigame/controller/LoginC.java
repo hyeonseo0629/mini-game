@@ -123,19 +123,19 @@ public class LoginC {
       }
     }
 
-//    @PostMapping("/updateUser")
-//    public String updateUser(@ModelAttribute UsersVO users,RedirectAttributes redirectAttributes,HttpSession session) {
-//
-//     boolean updateSuccess = loginService.updateUser(users);
-//
-//     if(updateSuccess) {
-//         redirectAttributes.addFlashAttribute("alert","회원 정보가 수정되었습니다.");
-//         session.setAttribute("users", users);
-//     }else{
-//         redirectAttributes.addFlashAttribute("alert","수정에 실패하였습니다. 다시 시도해주세요.");
-//     }
-//        return "redirect:/mypage";
-//    }
+    @PostMapping("/updateUser")
+    public String updateUser(@ModelAttribute UsersVO users,@RequestParam("originalId") String originalId,RedirectAttributes redirectAttributes,HttpSession session) {
+
+     boolean updateSuccess = loginService.updateUser(originalId,users);
+
+     if(updateSuccess) {
+         redirectAttributes.addFlashAttribute("alert","회원 정보가 수정되었습니다.");
+         session.setAttribute("users", users);
+     }else{
+         redirectAttributes.addFlashAttribute("alert","수정에 실패하였습니다. 다시 시도해주세요.");
+     }
+        return "redirect:/mypage";
+    }
 
 
 

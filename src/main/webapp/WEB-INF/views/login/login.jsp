@@ -98,6 +98,7 @@ onsubmit="return validateSignForm()">
 <div id="updateModal" class="modal" style="display: none"onclick="backUpdateModal(event)">
     <div>
         <form action="/updateUser" method="post">
+            <input type="hidden" name="originalId" value="${user.user_id}">
             <div>회원 정보 수정</div>
             <div>
                 <label for="user_id">아이디</label>
@@ -115,7 +116,7 @@ onsubmit="return validateSignForm()">
                 <label for="user_nickname">닉네임</label>
                 <input type="text" id="user_nickname"name="user_nickname" value="${user.user_nickname}">
             </div>
-            <button class="">정보수정</button>
+            <button type="submit">정보수정</button>
             <button onclick="closeUpdateUser()" type="button">X</button>
         </form>
     </div>
