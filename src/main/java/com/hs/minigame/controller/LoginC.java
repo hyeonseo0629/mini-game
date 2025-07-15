@@ -106,13 +106,11 @@ public class LoginC {
     public String deleteUser(@RequestParam("user_id") String userId, HttpSession session, RedirectAttributes redirectAttributes ) {
         System.out.println("Controller: Attempting to delete user with ID: " + userId);
         try {
-
           try {
               loginService.deleteUserFromRecord(userId);
           } catch (Exception e) {
-              System.out.println("[경고] record 테이블 없음 또는 삭제 실패 → 무시하고 진행: " + e.getMessage());
+              System.out.println("record 임시 테이블 없음 /삭제 실패 → 무시하고 진행: " + e.getMessage());
           }
-
           System.out.println("Calling deleteUser");
           loginService.deleteUser(userId);
           session.invalidate();
@@ -124,4 +122,21 @@ public class LoginC {
           return "redirect:/main_page";
       }
     }
+
+//    @PostMapping("/updateUser")
+//    public String updateUser(@ModelAttribute UsersVO users,RedirectAttributes redirectAttributes,HttpSession session) {
+//
+//     boolean updateSuccess = loginService.updateUser(users);
+//
+//     if(updateSuccess) {
+//         redirectAttributes.addFlashAttribute("alert","회원 정보가 수정되었습니다.");
+//         session.setAttribute("users", users);
+//     }else{
+//         redirectAttributes.addFlashAttribute("alert","수정에 실패하였습니다. 다시 시도해주세요.");
+//     }
+//        return "redirect:/mypage";
+//    }
+
+
+
 }

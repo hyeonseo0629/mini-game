@@ -38,7 +38,7 @@
         <form action="logout" method="post">
             <button type="submit">로그아웃</button>
         </form>
-        <p>현재 로그인한 유저 ID: ${users.user_id}</p>
+
         <form id="deleteUser"action="deleteUser" method="post">
             <input type="hidden" name="user_id" value="${users.user_id}">
             <button type="button"onclick="checkDelete()">회원 탈퇴</button>
@@ -59,6 +59,7 @@
     <br>
 
 <button onclick="openInvenModal()" type="button">인벤토리</button>
+<button onclick="openUpdateUser()"type="button">회원정보 수정</button>
 </c:if>
 </div>
 
@@ -90,6 +91,33 @@ onsubmit="return validateSignForm()">
         <div>인벤토리</div>
         <div>인벤토리 내용</div>
         <button onclick="closeInvenModal()">X</button>
+    </div>
+</div>
+
+<!--회원정보수정모달창-->
+<div id="updateModal" class="modal" style="display: none"onclick="backUpdateModal(event)">
+    <div>
+        <form action="/updateUser" method="post">
+            <div>회원 정보 수정</div>
+            <div>
+                <label for="user_id">아이디</label>
+                <input type="text" id="user_id" name="user_id" value="${user.user_id}">
+            </div>
+            <div>
+                <label for="user_pw">비밀번호</label>
+                <input type="text" name="user_pw" placeholder="변경할 비밀번호를 입력하세요">
+            </div>
+            <div>
+                <label for="user_name">이름</label>
+                <input type="text" id="user_name"name="user_name" value="${user.user_name}">
+            </div>
+            <div>
+                <label for="user_nickname">닉네임</label>
+                <input type="text" id="user_nickname"name="user_nickname" value="${user.user_nickname}">
+            </div>
+            <button class="">정보수정</button>
+            <button onclick="closeUpdateUser()" type="button">X</button>
+        </form>
     </div>
 </div>
 
@@ -140,6 +168,7 @@ onsubmit="return validateSignForm()">
         }
     }
 </script>
+
 <script>
     <!--인벤토리모달창기능-->
     function openInvenModal() {
@@ -151,6 +180,21 @@ onsubmit="return validateSignForm()">
     function backInvenModal(event) {
         if (event.target.id == "invenModal") {
             closeInvenModal();
+        }
+    }
+</script>
+
+<script>
+    <!--정보수정모달창기능-->
+    function openUpdateUser() {
+        document.getElementById("updateModal").style.display = "flex";
+    }
+    function closeUpdateUser() {
+        document.getElementById("updateModal").style.display = "none";
+    }
+    function backUpdateModal(event) {
+        if (event.target.id == "updateModal") {
+            closeUpdateUser();
         }
     }
 </script>
@@ -183,10 +227,36 @@ function validateSignForm(){
 </script>
 
 <script>
+    <!--회원가입필수입력기능-->
+    function validateSignForm(){
+        const id = document.querySelector('input[name="user_id"]').value.trim();
+        const pw = document.querySelector('input[name="user_pw"]').value.trim();
+        const name = document.querySelector('input[name="user_name"]').value.trim();
+        const nickname = document.querySelector('input[name="user_nickname"]').value.trim();
+        if (!id) {
+            alert("아이디를 입력해주세요.");
+            return false;
+        }
+        if (!pw) {
+            alert("비밀번호를 입력해주세요.");
+            return false;
+        }
+        if (!name) {
+            alert("이름을 입력해주세요.");
+            return false;
+        }
+        if (!nickname) {
+            alert("닉네임을 입력해주세요.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<script>
     <!--삭제확인알람기능-->
     function checkDelete(){
         const checkUser = confirm("정말로 회원 탈퇴를 하시겠습니까?");
-
         if(checkUser){
             document.getElementById("deleteUser").submit();
         }else{
