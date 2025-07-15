@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class ShopC {
     @Autowired
     private ShopService shopService;
 
-    @GetMapping("/ShopC")
+    @GetMapping("/shopC")
     public String shopC(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
         setPagingData(model, page);
         setUserMoneyToModel(session, model);
@@ -31,8 +32,8 @@ public class ShopC {
         return "main_page";
     }
 
-    @PostMapping("/BuyItem")
-    public String buyItemC(@RequestParam("itemId") String itemId,
+    @PostMapping("buyitem")
+    public String buyItemC(@RequestParam("itemId") int itemId,
                            HttpSession session,
                            @RequestParam(defaultValue = "1") int page,
                            Model model) {
@@ -70,18 +71,61 @@ public class ShopC {
         if (updatcheck > 0) {
             System.out.println("구매 완료");
 
-            // 세션 반영
+            // 세션 반영(잔액 실시간 반영처리)
             int afterMoney = shopService.getUserMoney(user.getUser_id());
             user.setUser_money(afterMoney);
             session.setAttribute("users", user);
             model.addAttribute("userMoney", afterMoney);
+
         } else {
             System.out.println("구매 오류");
         }
 
+        // 구매버튼을 누르면 buying_record 테이블 insert(인벤토리를 위하여)
+        int user_no = user.getUser_no();
+        int buying_Record_Insert_check = shopService.insertBuyingRecord(user_no,itemId);
+        if (buying_Record_Insert_check > 0) {
+            System.out.println("구매 기록 저장 성공!");
+
+
+            // 인벤토리 관련 실시간 반영처리
+            List<ShopItemsVO> updatedInventory = shopService.getInventory(user.getUser_no());
+            session.setAttribute("inventoryItems", updatedInventory);
+
+            System.out.println("업데이트된 인벤토리 사이즈 : " + updatedInventory.size());
+
+
+        } else {
+            System.out.println("구매 기록 저장 실패!");
+        }
+
+
+
+
         model.addAttribute("content", "shop/shop_main.jsp");
-        return "main_page";
+        return "redirect:/main_page";
     }
+
+    @PostMapping("/shop/applyAvatar")
+    public String applyAvatarC(@RequestParam("avatarImg") String avatarImg, HttpSession session){
+        UsersVO user = (UsersVO) session.getAttribute("users");
+        System.out.println("user : " + user);
+
+        //1.DB업데이트
+        int avatarcheck = shopService.updateUserAvatar(user.getUser_id(),avatarImg);
+        if (avatarcheck > 0) {
+            System.out.println("아바타 업데이트 완료");
+        }
+
+        user.setUser_avatar_img(avatarImg);
+
+        session.setAttribute("user", user);
+
+        return "redirect:/main_page";
+    }
+
+
+
 
     // 1 공통 처리 메서드(페이징)
     private void setPagingData(Model model, int page) {
