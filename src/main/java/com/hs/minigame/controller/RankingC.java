@@ -25,11 +25,11 @@ public class RankingC {
     public String postRankingScore(Model model, @RequestParam String rankingType,
                                    @RequestParam(defaultValue = "1") int page) {
         switch (rankingType) {
-            case "winningStack" :
+            case "winningStack":
                 return rankingService.handleStackRank(model, page);
-            case "money" :
+            case "money":
                 return rankingService.handleMoneyRank(model, page);
-            default :
+            default:
                 return rankingService.handleScoreRank(model, page);
         }
     }

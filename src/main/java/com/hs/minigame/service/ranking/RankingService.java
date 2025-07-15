@@ -19,17 +19,10 @@ public class RankingService {
     private static final int LIMIT = 10;
 
     // all select (사용 X)
-    public List<UserScoreVO> selectScoreRanking(){
-        return rankingMapper.selectScoreRanking();
-    }
+    public List<UserScoreVO> selectScoreRanking() { return rankingMapper.selectScoreRanking(); }
+    public List<UserStackVO> selectStackRanking() { return rankingMapper.selectStackRanking(); }
 
-    public List<UserStackVO> selectStackRanking() {
-        return rankingMapper.selectStackRanking();
-    }
-
-    public List<UsersVO> selectMoneyRanking() {
-        return rankingMapper.selectMoneyRanking();
-    }
+    public List<UsersVO> selectMoneyRanking() { return rankingMapper.selectMoneyRanking(); }
 
     // (1) 페이지별 데이터 가져오기
     public List<UserScoreVO> selectScoreRankingByPage(int offset, int limit) {

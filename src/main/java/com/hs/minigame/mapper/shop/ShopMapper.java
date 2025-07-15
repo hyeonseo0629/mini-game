@@ -17,32 +17,32 @@ public interface ShopMapper {
     public List<ShopItemsVO> inventory(int user_no);
 
 
-    @Select("select * from SHOPITEMS")
+    @Select("SELECT * FROM SHOPITEMS")
     public List<ShopItemsVO> selectAll();
 
     @Update("UPDATE SHOPITEMS SET ITEM_AVATAR_IMG=#{item_avatar_img} WHERE ITEM_ID=#{item_id}")
     public void updateImage(ShopItemsVO vo);
 
-    @Select("select * from SHOPITEMS"+" order by ITEM_ID desc"+
+    @Select("SELECT * FROM SHOPITEMS"+" order by ITEM_ID desc"+
             " offset #{offset} rows fetch next #{limit} rows only")
     public List<ShopItemsVO> SelectShopItemsByPaging(@Param("offset") int offset,@Param("limit") int limit);
 
-    @Select("SELECT count(*) FROM shopitems")
+    @Select("SELECT COUNT(*) FROM SHOPITEMS")
     public int getShopItemCount();
 
-    @Select("select * from SHOPITEMS where ITEM_ID = #{itemId}")
+    @Select("SELECT * FROM SHOPITEMS WHERE ITEM_ID = #{itemId}")
     public ShopItemsVO selectInfoById(@Param("itemId") int itemId);
 
-    @Update("update USERS set USER_MONEY = USER_MONEY - #{itemPrice} where USER_ID = #{userId} ")
+    @Update("UPDATE USERS SET USER_MONEY = USER_MONEY - #{itemPrice} WHERE USER_ID = #{userId} ")
     public int updateUserInfo(@Param("userId") String userId, @Param("itemPrice")  int price);
 
     //구매 후 보유 돈 조회하기
-    @Select("select USER_MONEY from USERS where USER_ID = #{userId}")
+    @Select("SELECT USER_MONEY FROM USERS WHERE USER_ID = #{userId}")
     public int getAfterMoney(@Param("userId") String userId);
 
-    @Insert("insert into BUYING_RECORD(BUYING_USER_NO,BUYING_ITEM_ID,BUYING_DATE) values (#{user_no},#{item_Id},SYSDATE)")
+    @Insert("INSERT INTO BUYING_RECORD(BUYING_USER_NO,BUYING_ITEM_ID,BUYING_DATE) VALUES (#{user_no},#{item_Id},SYSDATE)")
     public int insertRecord(@Param("user_no") int user_no, @Param("item_Id") int item_Id);
 
-    @Update("update USERS set USER_AVATAR_IMG = #{avatarImg} where USER_ID = #{userId}")
+    @Update("UPDATE USERS SET USER_AVATAR_IMG = #{avatarImg} WHERE USER_ID = #{userId}")
     public int updateAvatar(String userId, String avatarImg);
 }

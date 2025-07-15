@@ -14,7 +14,7 @@ public class ShopService {
     @Autowired
     private ShopMapper shopMapper;
 
-    public  List<ShopItemsVO> getInventory(int user_no) {
+    public List<ShopItemsVO> getInventory(int user_no) {
         List<ShopItemsVO> inventoryList = shopMapper.inventory(user_no);
         return inventoryList;
     }
@@ -31,7 +31,7 @@ public class ShopService {
 
     public List<ShopItemsVO> getShopItems(int page, int limit) {
         int offset = (page - 1) * limit;
-        return shopMapper.SelectShopItemsByPaging(offset,limit);
+        return shopMapper.SelectShopItemsByPaging(offset, limit);
     }
 
     public int getShopItemCount() {
@@ -52,6 +52,6 @@ public class ShopService {
     }
 
     public int updateUserAvatar(String userId, String avatarImg) {
-        return shopMapper.updateAvatar(userId,avatarImg);
+        return shopMapper.updateAvatar(userId, avatarImg);
     }
 }

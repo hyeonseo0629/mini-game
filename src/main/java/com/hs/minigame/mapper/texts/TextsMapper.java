@@ -8,9 +8,9 @@ import java.util.List;
 @Mapper
 public interface TextsMapper {
 
-    @Select("select * from texts"+" where text_type = #{type} order by text_write_date desc "+
+    @Select("select * from texts" + " where text_type = #{type} order by text_write_date desc " +
             "offset #{offset} rows fetch next 5 rows only")
-    public List<TextsVO> selectTexts(@Param("offset") int offset,String type);
+    public List<TextsVO> selectTexts(@Param("offset") int offset, String type);
 
     @Select("select count(*) from texts where text_type = #{type}")
     public int textsCount(String type);

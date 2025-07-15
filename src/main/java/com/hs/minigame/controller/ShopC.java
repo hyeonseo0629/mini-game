@@ -83,7 +83,7 @@ public class ShopC {
 
         // 구매버튼을 누르면 buying_record 테이블 insert(인벤토리를 위하여)
         int user_no = user.getUser_no();
-        int buying_Record_Insert_check = shopService.insertBuyingRecord(user_no,itemId);
+        int buying_Record_Insert_check = shopService.insertBuyingRecord(user_no, itemId);
         if (buying_Record_Insert_check > 0) {
             System.out.println("구매 기록 저장 성공!");
 
@@ -100,19 +100,17 @@ public class ShopC {
         }
 
 
-
-
         model.addAttribute("content", "shop/shop_main.jsp");
         return "redirect:/main_page";
     }
 
     @PostMapping("/shop/applyAvatar")
-    public String applyAvatarC(@RequestParam("avatarImg") String avatarImg, HttpSession session){
+    public String applyAvatarC(@RequestParam("avatarImg") String avatarImg, HttpSession session) {
         UsersVO user = (UsersVO) session.getAttribute("users");
         System.out.println("user : " + user);
 
         //1.DB업데이트
-        int avatarcheck = shopService.updateUserAvatar(user.getUser_id(),avatarImg);
+        int avatarcheck = shopService.updateUserAvatar(user.getUser_id(), avatarImg);
         if (avatarcheck > 0) {
             System.out.println("아바타 업데이트 완료");
         }
