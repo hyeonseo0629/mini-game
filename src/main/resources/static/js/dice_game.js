@@ -161,7 +161,7 @@ function gameInit() {
     // 버튼 설정
     btn.textContent = "Start Game";
     btn.style.position = "absolute";
-    btn.style.top = "6%";
+    btn.style.top = "8%";
     btn.style.left = "5%";
     btn.style.padding = "10px 20px";
     btn.style.fontSize = "16px";
@@ -422,7 +422,7 @@ function updateTotalScore() {
             playerTotal += parseInt(cell.textContent);
         }
     });
-    document.getElementById("score-total").textContent = total;
+    document.getElementById("score-total").textContent = playerTotal;
 }
 
 // CPU 턴 로직
@@ -492,8 +492,25 @@ function updateCPUTotalScore() {
             } else if (playerTotal < computerTotal) {
                 result = "lose";
             }
-            location.href = "GameEndC?result=" + result;
+
+            postGameResult(result);
         }
     });
-    document.querySelector(`#board-2 #score-total`).textContent = total;
+    document.querySelector(`#board-2 #score-total`).textContent = computerTotal;
+}
+
+// GameEndC로 Post로 보내기 위한 처리
+function postGameResult(result) {
+    const form = document.createElement("form");
+    form.action = "GameEndC";
+    form.method = "post";
+
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "result";
+    input.value = result;
+
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
 }
