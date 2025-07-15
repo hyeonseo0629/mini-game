@@ -9,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-
+@RequestMapping("rank")
 @Controller
 public class RankingC {
 
@@ -21,12 +22,12 @@ public class RankingC {
 
     private static final int LIMIT = 10;
 
-    @GetMapping("/RankingC")
+    @GetMapping
     public String getRankingScore(Model model, @RequestParam(defaultValue = "1") int page) {
         return handleScoreRank(model, page);
     }
 
-    @PostMapping("/RankingC")
+    @PostMapping
     public String postRankingScore(Model model, @RequestParam String rankingType,
                                    @RequestParam(defaultValue = "1") int page) {
         switch (rankingType) {

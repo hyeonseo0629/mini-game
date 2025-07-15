@@ -14,14 +14,14 @@
 <%--        </div>--%>
         <div class="ranking-type" style="display: flex;">
             <%-- GET 방식 --%>
-            <form action="RankingC" method="get">
+            <form action="rank" method="get">
                 <button type="submit">레이팅왕</button>
             </form>
             <%-- POST 방식 --%>
-            <form action="RankingC" method="post">
+            <form action="rank" method="post">
                 <button type="submit" name="rankingType" value="winningStack">연승왕</button>
             </form>
-            <form action="RankingC" method="post">
+            <form action="rank" method="post">
                 <button type="submit" name="rankingType" value="money">코인왕</button>
             </form>
         </div>

@@ -12,7 +12,6 @@ function shopbuy(btn){
     console.log(loginCheck);
     if (loginCheck === "false") {
         alert("로그인을 먼저 진행하셔야 합니다.");
-        location.href = "/ShopC";
         return;
     }
 

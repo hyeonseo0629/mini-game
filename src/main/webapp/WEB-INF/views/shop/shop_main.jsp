@@ -46,10 +46,10 @@
 <hr>
 <div class="container">
     <c:forEach var="i" items="${pagedItems}">
-        <form action="/BuyItem" method="post">
+        <form action="buyitem" method="post">
             <div class="shop-item-container">
                 <div class="item-img">
-                    <img src="resources/images/${i.item_avatar_img}" alt="img">
+                    <img src="/resources/images/${i.item_avatar_img}" alt="img">
                 </div>
                 <div class="item-name">${i.item_name}</div>
                 <div class="underside">
@@ -69,7 +69,7 @@
                 <span>[${p}]</span>
             </c:when>
             <c:otherwise>
-                <a href="/ShopC?page=${p}">[${p}]</a>
+                <a href="/shopC?page=${p}">[${p}]</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
