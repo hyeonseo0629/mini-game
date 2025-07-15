@@ -38,8 +38,9 @@
         <form action="logout" method="post">
             <button type="submit">로그아웃</button>
         </form>
+
         <form id="deleteUser"action="deleteUser" method="post">
-            <input type="hidden" name="user_id" value="${sessionScope.loginUser.user_id}">
+            <input type="hidden" name="user_id" value="${users.user_id}">
             <button type="button"onclick="checkDelete()">회원 탈퇴</button>
         </form>
     </div>
@@ -50,7 +51,6 @@
     <c:if test="${not empty users}">
     <div>
         <div>ID : ${users.user_id}</div>
-        <div>PW : ${users.user_pw}</div>
         <div>이름 : ${users.user_name}</div>
         <div>닉네임 : ${users.user_nickname}</div>
         <div>머니 : ${users.user_money}</div>
@@ -58,6 +58,7 @@
     <br>
 
 <button onclick="openInvenModal()" type="button">인벤토리</button>
+<button onclick="openUpdateUser()"type="button">회원정보 수정</button>
 </c:if>
 </div>
 
@@ -115,6 +116,32 @@ onsubmit="return validateSignForm()">
     </div>
 </div>
 
+<!--회원정보수정모달창-->
+<div id="updateModal" class="modal" style="display: none"onclick="backUpdateModal(event)">
+    <div>
+        <form action="/updateUser" method="post">
+            <input type="hidden" name="originalId" value="${user.user_id}">
+            <div>회원 정보 수정</div>
+            <div>
+                <label for="user_id">아이디</label>
+                <input type="text" id="user_id" name="user_id" value="${user.user_id}">
+            </div>
+            <div>
+                <label for="user_pw">비밀번호</label>
+                <input type="text" name="user_pw"required placeholder="변경할 비밀번호를 입력하세요">
+            </div>
+            <div>
+                <label for="user_name">이름</label>
+                <input type="text" id="user_name"name="user_name" value="${user.user_name}">
+            </div>
+            <div>
+                <label for="user_nickname">닉네임</label>
+                <input type="text" id="user_nickname"name="user_nickname" value="${user.user_nickname}">
+            </div>
+            <button type="submit">정보수정</button>
+            <button onclick="closeUpdateUser()" type="button">X</button>
+        </form>
+    </div>
 <div class="avatar_zone">
     <c:if test="${not empty user.user_avatar_img}">
         <img src="/resources/images/${user.user_avatar_img}" alt="현재 아바타" width="100">
@@ -136,6 +163,16 @@ onsubmit="return validateSignForm()">
     <script>
         if (!window.shownAlert) {
             alert('${alert2}');
+            window.shownAlert = true;
+        }
+    </script>
+</c:if>
+
+<!-- 누락된 알림들도 처리하는 공통 alert 처리 -->
+<c:if test="${not empty alert}">
+    <script>
+        if (!window.shownAlert) {
+            alert('${alert}');
             window.shownAlert = true;
         }
     </script>
@@ -170,6 +207,7 @@ onsubmit="return validateSignForm()">
         }
     }
 </script>
+
 <script>
     <!--인벤토리모달창기능-->
     function openInvenModal() {
@@ -229,6 +267,23 @@ onsubmit="return validateSignForm()">
 </script>
 
 <script>
+    <!--정보수정모달창기능-->
+    function openUpdateUser() {
+        document.getElementById("updateModal").style.display = "flex";
+    }
+    function closeUpdateUser() {
+        document.getElementById("updateModal").style.display = "none";
+    }
+    function backUpdateModal(event) {
+        if (event.target.id == "updateModal") {
+            closeUpdateUser();
+        }
+    }
+</script>
+
+
+
+<script>
     <!--회원가입필수입력기능-->
 function validateSignForm(){
     const id = document.querySelector('input[name="user_id"]').value.trim();
@@ -256,10 +311,36 @@ function validateSignForm(){
 </script>
 
 <script>
+    <!--회원가입필수입력기능-->
+    function validateSignForm(){
+        const id = document.querySelector('input[name="user_id"]').value.trim();
+        const pw = document.querySelector('input[name="user_pw"]').value.trim();
+        const name = document.querySelector('input[name="user_name"]').value.trim();
+        const nickname = document.querySelector('input[name="user_nickname"]').value.trim();
+        if (!id) {
+            alert("아이디를 입력해주세요.");
+            return false;
+        }
+        if (!pw) {
+            alert("비밀번호를 입력해주세요.");
+            return false;
+        }
+        if (!name) {
+            alert("이름을 입력해주세요.");
+            return false;
+        }
+        if (!nickname) {
+            alert("닉네임을 입력해주세요.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<script>
     <!--삭제확인알람기능-->
     function checkDelete(){
         const checkUser = confirm("정말로 회원 탈퇴를 하시겠습니까?");
-
         if(checkUser){
             document.getElementById("deleteUser").submit();
         }else{
@@ -270,7 +351,7 @@ function validateSignForm(){
 <script>
     <!--alret양식통일용-->
 window.alert = function(message){
-    const box = document.createElement();
+    const box = document.createElement("<div>");
     box.className = "cssAlert";
     box.textContent = message;
     document.body.appendChild(box);
