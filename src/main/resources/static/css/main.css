@@ -93,6 +93,7 @@ body {
     min-height: 100vh;
     border-left: 1px solid #3a3a3a;
     border-right: 1px solid #3a3a3a;
+    position: relative;
 }
 
 button {
@@ -107,4 +108,84 @@ a {
 
 a:hover {
     color: #e0d8c3;
+}
+
+.game-container {
+    margin: 0;
+    padding: 0;
+    width: 800px;
+}
+
+/* 점수판 묶음 (두 개 나란히 배치) */
+.game-container > .score-boards {
+    position: absolute;
+    top: 9%;
+    right: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    z-index: 10;
+}
+
+/* 각 점수판 */
+.game-container .score-board {
+    background: rgba(255, 255, 255, 0.95);
+    width: 180px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.game-container .score-board.active {
+    border: 2px solid #cfae70;
+    transform: scale(1.03);
+}
+
+/* 테이블 기본 스타일 */
+.game-container .score-board > .score-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: white;
+}
+
+.game-container .score-board th,
+.game-container .score-board td {
+    border: 1px solid #999;
+    padding: 6px 8px;
+    text-align: center;
+}
+
+/* 카테고리 제목 셀 */
+.game-container .score-board th {
+    background-color: #444;
+    color: white;
+    font-weight: normal;
+}
+
+.game-container .score-board td {
+    color: black;
+}
+
+/* 점수판 editable 셀 스타일 */
+.game-container .score-board td.editable {
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: background 0.3s, color 0.3s;
+}
+
+.game-container .score-board td.editable:hover {
+    background-color: #d8d8d8;
+    color: #000;
+}
+
+/* 제목 */
+.game-container .score-board h3 {
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
 }
