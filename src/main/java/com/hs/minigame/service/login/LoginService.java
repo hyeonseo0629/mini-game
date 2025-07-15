@@ -25,12 +25,13 @@ public class LoginService {
     }
     @Transactional
     public void deleteUser(String userId){
-          loginMapper.deleteUserFromRecord(userId);
-          loginMapper.deleteUser(userId);
+        System.out.println("deleteUser is called with ID: " + userId);
+         loginMapper.deleteUser(userId);
         System.out.println("Deleting user with ID: " + userId);
     }
 
-    public void deleteUserFromRecord(String userId) {
+        public void deleteUserFromRecord(String userId) {
+            System.out.println("deleteUserFromRecord is called with ID: " + userId);
         loginMapper.deleteUserFromRecord(userId);
     }
 }

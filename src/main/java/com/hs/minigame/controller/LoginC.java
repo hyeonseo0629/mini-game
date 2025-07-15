@@ -104,14 +104,22 @@ public class LoginC {
     }
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam("user_id") String userId, HttpSession session, RedirectAttributes redirectAttributes ) {
-      try {
-          System.out.println("Controller: Attempting to delete user with ID: " + userId);
-          loginService.deleteUserFromRecord(userId);
+        System.out.println("Controller: Attempting to delete user with ID: " + userId);
+        try {
+
+          try {
+              loginService.deleteUserFromRecord(userId);
+          } catch (Exception e) {
+              System.out.println("[경고] record 테이블 없음 또는 삭제 실패 → 무시하고 진행: " + e.getMessage());
+          }
+
+          System.out.println("Calling deleteUser");
           loginService.deleteUser(userId);
           session.invalidate();
           redirectAttributes.addFlashAttribute("alert", "회원 탈퇴가 완료되었습니다.");
           return "redirect:/main_page";
       } catch (Exception e) {
+          e.printStackTrace();
           redirectAttributes.addFlashAttribute("alert", "회원 탈퇴에 실패했습니다.");
           return "redirect:/main_page";
       }
