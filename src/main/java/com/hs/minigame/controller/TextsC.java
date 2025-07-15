@@ -81,18 +81,17 @@ public class TextsC {
         model.addAttribute("text", text);
         model.addAttribute("texts_type", KRType);
         model.addAttribute("content", "texts/texts_detail.jsp");
-        return"main_page";
+        return "main_page";
     }
 
     // 게시판 글 작성 폼
     @GetMapping("/TextPostC")
     public String textPost(Model model, HttpSession session) {
-        if(loginService.loginCheck(session)){
-        model.addAttribute("content", "texts/texts_post.jsp");
-        }else{
+        if (loginService.loginCheck(session)) {
+            model.addAttribute("content", "texts/texts_post.jsp");
+        } else {
             return "redirect:/TextsC";
         }
-
         return "main_page";
     }
 
@@ -131,7 +130,7 @@ public class TextsC {
     public String textInsert(@RequestParam("b") int b, HttpSession session, TextsVO texts) {
         if (b != 1 && b != 2 && b != 3) return "redirect:/TextsC";  // 컨트롤러 로직이 포함된 곳
         UsersVO user = (UsersVO) session.getAttribute("users");
-       if(user == null) return "redirect:/";
+        if (user == null) return "redirect:/";
         int user_no = user.getUser_no();
 
         String text_title = texts.getText_title();
