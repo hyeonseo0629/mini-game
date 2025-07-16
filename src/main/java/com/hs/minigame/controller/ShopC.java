@@ -21,6 +21,8 @@ public class ShopC {
     //리미트 상수화
     private static final int PAGE_LIMIT = 4;
 
+
+
     @Autowired
     private ShopService shopService;
 
@@ -92,6 +94,18 @@ public class ShopC {
 
             // 인벤토리 관련 실시간 반영처리
             List<ShopItemsVO> updatedInventory = shopService.getInventory(user.getUser_no());
+            
+            //인벤토리에 기본아바타 항상 들어가 있게 하는 로직
+            //getInventory를 호출하면 DB에서 인벤토리 정보를 가져옴(내가 실제로 산 인벤토리만 불러옴-> 기본 아바타가 없는 상태)
+            //그래서 아래 코드를 추가해서 강제로 기본아바타를 항상 넣어주는 상태 추가
+            final int BASE_AVATAR_ID = 30;
+            boolean hasBaseAvatar = updatedInventory.stream()
+                    .anyMatch(item -> item.getItem_id().equals(String.valueOf(BASE_AVATAR_ID)));
+            if (!hasBaseAvatar) {
+                ShopItemsVO baseAvatar = shopService.getItemById(BASE_AVATAR_ID);
+                updatedInventory.add(0, baseAvatar);
+            }
+
             session.setAttribute("inventoryItems", updatedInventory);
 
             System.out.println("업데이트된 인벤토리 사이즈 : " + updatedInventory.size());
@@ -121,7 +135,7 @@ public class ShopC {
 
         user.setUser_avatar_img(avatarImg);
 
-        session.setAttribute("user", user);
+        session.setAttribute("users", user);
 
         return "redirect:/main_page";
     }
