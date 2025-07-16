@@ -269,7 +269,7 @@ document.getElementById(tab + 'Tab').classList.add('active');
 
 document.getElementById('idTab-btn').classList.remove('active');
 document.getElementById('pwTab-btn').classList.remove('active');
-document.getElementById(tab + 'Tab-btn').classList.add('acitve');
+document.getElementById(tab + 'Tab-btn').classList.add('active');
 }
 
 </script>
