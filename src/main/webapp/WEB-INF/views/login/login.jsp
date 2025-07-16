@@ -100,7 +100,7 @@ onsubmit="return validateSignForm()">
 
                <div id="idTab">
                    <div>아이디</div>
-                   <form action="/findId" method="post"id="findIdForm">
+                   <form id="findIdForm">
                        <div>이름 : </div>
                        <input type="text" id="user_name" name="user_name" required>
                        <div>이메일 : </div>
