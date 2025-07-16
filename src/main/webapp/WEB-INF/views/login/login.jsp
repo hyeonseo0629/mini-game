@@ -54,6 +54,8 @@
         <div>이름 : ${users.user_name}</div>
         <div>닉네임 : ${users.user_nickname}</div>
         <div>머니 : ${users.user_money}</div>
+        <div>이메일 : ${users.user_email}</div>
+
     </div>
     <br>
 
@@ -79,6 +81,9 @@ onsubmit="return validateSignForm()">
         <div>
             <input type="text" name="user_nickname" placeholder="닉네임">
         </div>
+        <div>
+            <input type ="text" name="user_email" placeholder="이메일">
+        </div>
         <button class="openModal-sign">회원가입</button>
         <button onclick="closeSignModal()" type="button">X</button>
     </form>
@@ -99,7 +104,7 @@ onsubmit="return validateSignForm()">
                        <div>이름 : </div>
                        <input type="text" id="user_name" name="user_name" required>
                        <div>이메일 : </div>
-                       <input type="text" id="" name="" required>
+                       <input type="text" id="user_email" name="user_email" required>
                        <button type="submit">아이디 찾기</button>
                    </form>
                    <button onclick="closeFindModal()" type="button">X</button>
@@ -113,7 +118,7 @@ onsubmit="return validateSignForm()">
                       <div>아이디 : </div>
                        <input type="text" id="user_id" name="user_id" required>
                        <div>이메일 : </div>
-                      <input type="text" id="" name=""required>
+                      <input type="text" id="user_email" name="user_email"required>
                     <button type="submit">비밀번호 변경</button>
                    </form>
                  <button onclick="closeFindModal()" type="button">X</button>
@@ -175,6 +180,10 @@ onsubmit="return validateSignForm()">
             <div>
                 <label for="user_nickname">닉네임</label>
                 <input type="text" id="user_nickname"name="user_nickname" value="${user.user_nickname}">
+            </div>
+            <div>
+                <label for="user_email">이메일</label>
+                <input type="text" id="user_email"name="user_email" value="${user.user_email}">
             </div>
             <button type="submit">정보수정</button>
             <button onclick="closeUpdateUser()" type="button">X</button>

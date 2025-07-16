@@ -184,7 +184,17 @@ public class LoginC {
      }
         return "redirect:/main_page";
     }
+    @PostMapping("/findId")
+    @ResponseBody
+    public String findId(@RequestParam String user_name,@RequestParam String user_email){
+      String userId = loginService.findUserId(user_name,user_email);
+      if(userId != null){
+          return "당신의 ID는 : " + userId;
+      }else{
+          return "일치하는 정보가 없습니다.";
+      }
 
+    }
 
 
 }

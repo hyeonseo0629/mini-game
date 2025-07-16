@@ -40,6 +40,9 @@ public class LoginService {
          return loginMapper.updateUser(originalId, users);
         }
 
+    public String findUserId(String name, String email) {
+        return loginMapper.findUserId(name, email);
+    }
 
 
 }
