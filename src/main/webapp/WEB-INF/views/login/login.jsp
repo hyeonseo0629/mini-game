@@ -100,13 +100,14 @@ onsubmit="return validateSignForm()">
 
                <div id="idTab">
                    <div>아이디</div>
-                   <form action="/findId" method="post">
+                   <form action="/findId" method="post"id="findIdForm">
                        <div>이름 : </div>
                        <input type="text" id="user_name" name="user_name" required>
                        <div>이메일 : </div>
                        <input type="text" id="user_email" name="user_email" required>
                        <button type="submit">아이디 찾기</button>
                    </form>
+                   <div id="idResult" style="margin-top:10px; color:blue;"></div>
                    <button onclick="closeFindModal()" type="button">X</button>
                </div>
 
@@ -280,8 +281,24 @@ document.getElementById('idTab-btn').classList.remove('active');
 document.getElementById('pwTab-btn').classList.remove('active');
 document.getElementById(tab + 'Tab-btn').classList.add('active');
 }
-
 </script>
+    <script>
+        <!--아이디 찾기 표시 기능-->
+        document.getElementById("findIdForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            const response = await fetch("/findId", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.text();
+            document.getElementById("idResult").innerText = result;
+        });
+    </script>
 
 
 <script>

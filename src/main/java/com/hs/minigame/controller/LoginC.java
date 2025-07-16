@@ -186,14 +186,14 @@ public class LoginC {
     }
     @PostMapping("/findId")
     @ResponseBody
-    public String findId(@RequestParam String user_name,@RequestParam String user_email){
+        public String findId(@RequestParam String user_name,@RequestParam String user_email,Model model){
       String userId = loginService.findUserId(user_name,user_email);
       if(userId != null){
-          return "당신의 ID는 : " + userId;
+          model.addAttribute("result","당신의 ID :" + userId);
       }else{
-          return "일치하는 정보가 없습니다.";
+          model.addAttribute("result","일치하는 정보가 없습니다.");
       }
-
+       return "findIdResult";
     }
 
 

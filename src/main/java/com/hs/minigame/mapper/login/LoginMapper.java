@@ -26,7 +26,7 @@ public interface LoginMapper {
     boolean updateUser(@Param("originalId") String originalId, @Param("users") UsersVO users);
 
     @Select("SELECT user_id FROM users WHERE user_name = #{user_name} AND user_email = #{user_email}")
-    String findUserId(@Param("name") String name, @Param("email") String email);
+    String findUserId(@Param("user_name") String name, @Param("user_email") String email);
 
 
 }
