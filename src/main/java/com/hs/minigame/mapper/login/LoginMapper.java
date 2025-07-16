@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper()
 public interface LoginMapper {
 
-    @Select("select user_no, user_id, user_pw, user_name, user_nickname, user_money from users where user_id =#{id}")
+    @Select("select user_no, user_id, user_pw, user_name, user_nickname, user_money, user_avatar_img from users where user_id =#{id}")
     UsersVO selectUser(String id);
 
 
@@ -22,7 +22,7 @@ public interface LoginMapper {
     @Delete("delete from users where user_id = #{userId}")
     void deleteUser(@Param("userId") String userId);
 
-    @Update("update users set user_id=#{users.user_id},user_pw=#{users.user_pw},user_name=#{users.user_name},user_nickname=#{users.user_nickname}  WHERE user_id = #{originalId}")
+    @Update("update users set user_id=#{users.user_id},user_pw=#{users.user_pw},user_name=#{users.user_name},user_nickname=#{users.user_nickname},user_role=#{users.user_role},user_avatar_img=#{users.user_avatar_img}  WHERE user_id = #{originalId}")
     boolean updateUser(@Param("originalId") String originalId, @Param("users") UsersVO users);
 }
 

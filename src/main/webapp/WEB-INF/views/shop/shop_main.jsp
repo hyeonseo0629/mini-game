@@ -55,7 +55,22 @@
                 <div class="underside">
                     <div class="item-price">${i.item_price}원</div>
                     <input type="hidden" name="itemId" value="${i.item_id}">
-                    <button type="button" class="buy-btn" data-price="${i.item_price}" onclick="shopbuy(this)">구매</button>
+
+                    <c:set var="alreadyOwned" value="false" />
+                    <c:forEach var="inv" items="${sessionScope.inventoryItems}">
+                        <c:if test="${inv.item_id == i.item_id}">
+                            <c:set var="alreadyOwned" value="true" />
+                        </c:if>
+                    </c:forEach>
+
+                    <c:choose>
+                        <c:when test="${alreadyOwned}">
+                            <button type="button" disabled>보유중</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button type="button" class="buy-btn" data-price="${i.item_price}" onclick="shopbuy(this)">구매</button>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </form>
