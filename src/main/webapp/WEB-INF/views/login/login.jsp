@@ -143,7 +143,6 @@ onsubmit="return validateSignForm()">
         </form>
     </div>
 </div>
-
 <div class="avatar_zone">
     <c:if test="${not empty users.user_avatar_img}">
         <img src="/resources/images/${users.user_avatar_img}" alt="현재 아바타" width="100">
