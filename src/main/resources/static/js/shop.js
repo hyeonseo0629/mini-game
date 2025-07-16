@@ -35,7 +35,7 @@ function shopbuy(btn){
     //구매할지말지 마지막 확인
     if(confirm("정말 구매하시겠습니까?")){
         alert("구매 완료되었습니다")
-        document.querySelector("form").submit();
+        btn.closest("form").submit();
     }else {
         alert("구매가 취소되었습니다")
     }

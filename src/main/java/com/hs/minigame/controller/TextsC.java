@@ -1,5 +1,6 @@
 package com.hs.minigame.controller;
 
+import com.hs.minigame.service.login.LoginService;
 import com.hs.minigame.service.texts.TextsService;
 import com.hs.minigame.vo.TextsVO;
 import com.hs.minigame.vo.UsersVO;
@@ -20,10 +21,14 @@ public class TextsC {
     @Autowired
     private TextsService textsService;
 
+    @Autowired
+    private LoginService loginService;
+
     // 게시판 홈 (페이징 있음)
     @GetMapping("/TextsC")
-    public String textsMain(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "1", value = "b") int text_type, Model model) {
-        int limit = 5;
+    public String textsMain(@RequestParam(defaultValue = "1") int page,
+                            @RequestParam(defaultValue = "1", value = "b") int text_type,
+                            Model model) {
         String type = "";
         String KRType = "";
 
@@ -42,9 +47,9 @@ public class TextsC {
                 break;
         }
 
-        List<TextsVO> Texts = textsService.selectTexts(page, limit, type);
+        List<TextsVO> Texts = textsService.selectTexts(page, type);
         int totalCount = textsService.textsCount(type);
-        int totalPage = (int) Math.ceil((double) totalCount / limit);
+        int totalPage = (int) Math.ceil((double) totalCount / 5);
 
         //paging 관련 로직
         model.addAttribute("totalPage", totalPage);
@@ -76,14 +81,17 @@ public class TextsC {
         model.addAttribute("text", text);
         model.addAttribute("texts_type", KRType);
         model.addAttribute("content", "texts/texts_detail.jsp");
-        return"main_page";
+        return "main_page";
     }
 
     // 게시판 글 작성 폼
     @GetMapping("/TextPostC")
-    public String textPost(@RequestParam("b") int text_type, Model model) {
-        model.addAttribute("b", text_type);
-        model.addAttribute("content", "texts/texts_post.jsp");
+    public String textPost(Model model, HttpSession session) {
+        if (loginService.loginCheck(session)) {
+            model.addAttribute("content", "texts/texts_post.jsp");
+        } else {
+            return "redirect:/TextsC";
+        }
         return "main_page";
     }
 
@@ -122,6 +130,7 @@ public class TextsC {
     public String textInsert(@RequestParam("b") int b, HttpSession session, TextsVO texts) {
         if (b != 1 && b != 2 && b != 3) return "redirect:/TextsC";  // 컨트롤러 로직이 포함된 곳
         UsersVO user = (UsersVO) session.getAttribute("users");
+        if (user == null) return "redirect:/";
         int user_no = user.getUser_no();
 
         String text_title = texts.getText_title();

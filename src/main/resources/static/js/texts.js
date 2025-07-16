@@ -4,7 +4,5 @@ function deleteTexts (text_id) {
 }
 
 function postTexts(text_type) {
-    if (confirm("로그인 후 작성해주시길 바랍니다.")) {
         location.href = "/TextPostC?b=" + text_type;
-    }
 }
