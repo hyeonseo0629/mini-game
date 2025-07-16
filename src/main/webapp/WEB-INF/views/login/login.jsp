@@ -113,15 +113,18 @@ onsubmit="return validateSignForm()">
 
                <div id="pwTab">
                    <div>비밀번호</div>
-                    <form action="/findPw" method="post">
+                    <form id="findPwForm">
                       <div>이름 : </div>
                        <input type="text" id="user_name" name="user_name" required>
                       <div>아이디 : </div>
                        <input type="text" id="user_id" name="user_id" required>
                        <div>이메일 : </div>
                       <input type="text" id="user_email" name="user_email"required>
+                        <div>새로운 비밀번호 : </div>
+                        <input type="password" id="" name="" required>
                     <button type="submit">비밀번호 변경</button>
                    </form>
+                   <div id="pwResult" style="margin-top:10px; color:blue;"></div>
                  <button onclick="closeFindModal()" type="button">X</button>
               </div>
 
