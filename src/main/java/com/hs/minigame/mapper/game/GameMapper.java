@@ -31,7 +31,7 @@ public interface GameMapper {
             "WHERE score_user_no = #{userNo}")
     void updateWinScore(int userNo);
 
-    @Insert("INSERT INTO(score_user_no, score_game_id, score_point) " +
+    @Insert("INSERT INTO score(score_user_no, score_game_id, score_point) " +
             "VALUES(#{userNo}, 1, 500)")
     void insertWinScore(int userNo);
 
@@ -46,7 +46,7 @@ public interface GameMapper {
             "WHERE stack_user_no = #{userNo}")
     int selectStackPoint(int userNo);
 
-    @Insert("INSERT INTO(stack_user_no, stack_game_id, stack_point) " +
+    @Insert("INSERT INTO winning_stack(stack_user_no, stack_game_id, stack_point) " +
             "VALUES(#{userNo}, 1, 1)")
     void insertWinStack(int userNo);
 
