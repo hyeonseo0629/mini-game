@@ -26,7 +26,7 @@
                 <button type="submit">로그인</button>
                 <div class="sub-actions">
                     <button onclick="openSignModal()" type="button">회원가입</button>
-                    <button onclick="opendSignFind()" type="button" >아이디/비밀번호 찾기</button>
+                    <button onclick="openFindModal()" type="button" >아이디/비밀번호 찾기</button>
                 </div>
             </form>
         </c:when>
@@ -85,21 +85,41 @@ onsubmit="return validateSignForm()">
 </div>
 
 <!--아이디/비번찾기모달창-->
-<div>
-    <form>
-        <div>아이디 / 비밀번호 찾기</div>
-        <div>
-        <div>아이디</div>
-            <form>
-                
+<div id="findModal" class="modal" style="display: none" onclick="backFindModal(event)">
+    <div class="findModal-container">
 
-
-            </form>
-
-        <div>비밀번호</div>
-
+        <div class="tab-button">
+            <button onclick="showTab('id')" id="idTab-btn"class="active">아이디 찾기</button>
+            <button onclick="showTab('pw')" id="pwTab-btn">비밀번호 찾기</button>
         </div>
-    </form>
+
+               <div id="idTab">
+                   <div>아이디</div>
+                   <form action="/findId" method="post">
+                       <div>이름 : </div>
+                       <input type="text" id="user_name" name="user_name" required>
+                       <div>이메일 : </div>
+                       <input type="text" id="" name="" required>
+                       <button type="submit">아이디 찾기</button>
+                   </form>
+                   <button onclick="closeFindModal()" type="button">X</button>
+               </div>
+
+               <div id="pwTab">
+                   <div>비밀번호</div>
+                    <form action="/findPw" method="post">
+                      <div>이름 : </div>
+                       <input type="text" id="user_name" name="user_name" required>
+                      <div>아이디 : </div>
+                       <input type="text" id="user_id" name="user_id" required>
+                       <div>이메일 : </div>
+                      <input type="text" id="" name=""required>
+                    <button type="submit">비밀번호 변경</button>
+                   </form>
+                 <button onclick="closeFindModal()" type="button">X</button>
+              </div>
+
+    </div>
 </div>
 
 <!--인벤토리모달창-->
@@ -225,6 +245,35 @@ onsubmit="return validateSignForm()">
         }
     }
 </script>
+<script>
+        <!--아이디/비번찾기모달창기능-->
+        function openFindModal() {
+            document.getElementById("findModal").style.display = "flex";
+        }
+        function closeFindModal() {
+            document.getElementById("findModal").style.display = "none";
+        }
+        function backFindModal(event) {
+            if (event.target.id == "findModal") {
+                closeFindModal();
+            }
+        }
+</script>
+
+<script>
+    <!--아이디/비번찾기모달창 탭 기능-->
+function showTab(tab){
+document.getElementById('idTab').classList.remove('active');
+document.getElementById('pwTab').classList.remove('active');
+document.getElementById(tab + 'Tab').classList.add('active');
+
+document.getElementById('idTab-btn').classList.remove('active');
+document.getElementById('pwTab-btn').classList.remove('active');
+document.getElementById(tab + 'Tab-btn').classList.add('acitve');
+}
+
+</script>
+
 
 <script>
     <!--인벤토리모달창기능-->
