@@ -38,10 +38,6 @@ public class LoginService {
     public boolean updateUser(String originalId,UsersVO users){
         System.out.println("updateUser is called with original ID: " + originalId + ", new ID: " + users.getUser_id());
          return loginMapper.updateUser(originalId, users);
-
-
-//       int result = loginMapper.updateUser(users);
-//        return result == 1;
         }
 
 

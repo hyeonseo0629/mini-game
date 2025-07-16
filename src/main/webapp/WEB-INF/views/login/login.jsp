@@ -26,7 +26,7 @@
                 <button type="submit">로그인</button>
                 <div class="sub-actions">
                     <button onclick="openSignModal()" type="button">회원가입</button>
-                    <button type="button" onclick="location.href='findAccount'">아이디/비밀번호 찾기</button>
+                    <button onclick="opendSignFind()" type="button" >아이디/비밀번호 찾기</button>
                 </div>
             </form>
         </c:when>
@@ -81,6 +81,24 @@ onsubmit="return validateSignForm()">
         </div>
         <button class="openModal-sign">회원가입</button>
         <button onclick="closeSignModal()" type="button">X</button>
+    </form>
+</div>
+
+<!--아이디/비번찾기모달창-->
+<div>
+    <form>
+        <div>아이디 / 비밀번호 찾기</div>
+        <div>
+        <div>아이디</div>
+            <form>
+                
+
+
+            </form>
+
+        <div>비밀번호</div>
+
+        </div>
     </form>
 </div>
 
@@ -351,7 +369,7 @@ function validateSignForm(){
 <script>
     <!--alret양식통일용-->
 window.alert = function(message){
-    const box = document.createElement("<div>");
+    const box = document.createElement("div");
     box.className = "cssAlert";
     box.textContent = message;
     document.body.appendChild(box);
