@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
+@RequestMapping("/text")
 @Controller
 public class TextsC {
 
@@ -25,142 +27,121 @@ public class TextsC {
     private LoginService loginService;
 
     // 게시판 홈 (페이징 있음)
-    @GetMapping("/TextsC")
-    public String textsMain(@RequestParam(defaultValue = "1") int page,
-                            @RequestParam(defaultValue = "1", value = "b") int text_type,
-                            Model model) {
-        String type = "";
-        String KRType = "";
+//    @GetMapping("/{type}")
+//    public String textsMain(@RequestParam(defaultValue = "1") int page,
+//                            @PathVariable String type,
+//                            Model model) {
+//        type = type.toUpperCase();
+//        List<TextsVO> texts = textsService.selectTexts(page, type);
+//        int totalCount = textsService.textsCount(type);
+//        int totalPage = (int) Math.ceil((double) totalCount / 5);
+//
+//        //paging 관련 로직
+//        model.addAttribute("totalPage", totalPage);
+//        model.addAttribute("currentPage", page);
+//        model.addAttribute("texts", texts);
+//        model.addAttribute("type", type);
+//        model.addAttribute("content", "texts/texts_main.jsp");
+//        return "main_page";
+//    }
 
-        switch (text_type) {
-            case 1:
-                type = "COMMUNITY";
-                KRType = "게시판";
-                break;
-            case 2:
-                type = "NOTICE";
-                KRType = "공지사항";
-                break;
-            case 3:
-                type = "QUESTION";
-                KRType = "문의사항";
-                break;
-        }
-
-        List<TextsVO> Texts = textsService.selectTexts(page, type);
+    @ResponseBody
+    @GetMapping("/list/{type}/{page}")
+    public Map<String, Object> getTextList(@PathVariable String type, @PathVariable int page) {
+        type = type.toUpperCase();
+        List<TextsVO> texts = textsService.selectTexts(page, type);
         int totalCount = textsService.textsCount(type);
         int totalPage = (int) Math.ceil((double) totalCount / 5);
 
-        //paging 관련 로직
-        model.addAttribute("totalPage", totalPage);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("Texts", Texts);
-        model.addAttribute("texts_type", KRType);
-        model.addAttribute("content", "texts/texts_main.jsp");
-        return "main_page";
+        Map<String, Object> result = new HashMap<>();
+        result.put("texts", texts);
+        result.put("totalPage", totalPage);
+        result.put("currentPage", page);
+        return result;
     }
 
+
     // 게시판 글 상세내용
-    @GetMapping("/TextDetailC")
-    public String textDetail(@RequestParam("text_id") int text_id, @RequestParam("b") int text_type, Model model) {
-        TextsVO text = textsService.getTextById(text_id);
-        String KRType = "";
-
-        switch (text_type) {
-            case 1:
-                KRType = "게시판";
-                break;
-            case 2:
-                KRType = "공지사항";
-                break;
-            case 3:
-                KRType = "문의사항";
-                break;
-        }
-
-        model.addAttribute("text", text);
-        model.addAttribute("texts_type", KRType);
+    @GetMapping("/detail/{id}")
+    public String textDetail(@PathVariable int id, Model model) {
+        TextsVO textVO = textsService.getTextById(id);
+        model.addAttribute("textVO", textVO);
         model.addAttribute("content", "texts/texts_detail.jsp");
         return "main_page";
     }
 
-    // 게시판 글 작성 폼
-    @GetMapping("/TextPostC")
-    public String textPost(Model model, HttpSession session) {
-        if (loginService.loginCheck(session)) {
-            model.addAttribute("content", "texts/texts_post.jsp");
-        } else {
-            return "redirect:/TextsC";
-        }
-        return "main_page";
-    }
-
     // 게시판 글 수정 페이지
-    @PostMapping("/TextUpdatePageC")
-    public String textUpdatePage(@RequestParam("text") int text_id, Model model) {
-        TextsVO textsVO = textsService.getTextById(text_id);
-        model.addAttribute("text", textsVO);
+    @GetMapping("/update/{id}")
+    public String textUpdatePage(@PathVariable int id, Model model) {
+        TextsVO textVO = textsService.getTextById(id);
+        model.addAttribute("textVO", textVO);
         model.addAttribute("content", "texts/texts_update.jsp");
         return "main_page";
     }
 
     // 게시판 수정
-    @PostMapping("/TextUpdateC")
-    public String textUpdate(@RequestParam("text_title") String text_title, @RequestParam("text_content") String text_content, @RequestParam("text_id") int text_id, HttpSession httpSession, Model model) {
-        UsersVO user = (UsersVO) httpSession.getAttribute("users");
+    @ResponseBody
+    @PostMapping("/update")
+    public int textUpdate(@RequestBody TextsVO textsVO) {
+        System.out.println(">>> textUpdate called with: " + textsVO);
+        if (textsVO.getText_id() == 0) {
+            System.err.println(">>> ERROR: text_id is 0 or missing!");
+        }
+        textsService.updateText(textsVO);
 
-        textsService.updateText(text_title, text_content, String.valueOf(text_id));
-        model.addAttribute("text", textsService.getTextById(text_id));
-        model.addAttribute("content", "texts/texts_detail.jsp");
-        return "main_page";
+        return 1;
+//        return Integer.parseInt("redirect:/text/" + textsVO.getText_type());
     }
 
     // 게시판 글 삭제
-    @GetMapping("TextDeleteC")
-    public String textDelete(@RequestParam("text_id") int text_id, Model model) {
-        textsService.deleteText(text_id);
+//    @GetMapping("/delete/{id}/{type}")
+//    public String textDelete(@PathVariable int id, @PathVariable String type, Model model) {
+//        textsService.deleteText(id);
+//        type = type.toLowerCase();
+//        model.addAttribute("content", "texts/texts_main.jsp");
+//        return "redirect:/text/" + type;
+//    }
 
-        model.addAttribute("content", "texts/texts_main.jsp");
-        return "redirect:/TextsC?b=1";
+//    @GetMapping("/delete/{id}/{type}")
+//    public String textDelete(@PathVariable int id, @PathVariable String type, Model model) {
+//        textsService.deleteText(id);
+//        type = type.toLowerCase();
+//        model.addAttribute("content", "texts/texts_main.jsp");
+//        return "redirect:/text/" + type;
+//    }
+
+    // 게시판 글 삭제 (Modified to return JSON and use POST)
+    @ResponseBody // Indicate that the return value should be bound to the web response body
+    @PostMapping("/delete/{id}/{type}") // Changed to POST method
+    public int textDelete(@PathVariable int id, @PathVariable String type) {
+        System.out.println("Deleting text with id: " + id + " and type: " + type);
+        int result = textsService.deleteText(id);
+        return result; // Return 1 for success, 0 for failure
+    }
+
+    // 게시판 글 작성 폼
+    @GetMapping("/add")
+    public String textPost(Model model, HttpSession session) {
+        if (loginService.loginCheck(session)) {
+            model.addAttribute("content", "texts/texts_post.jsp");
+        } else {
+            return "redirect:/text/" + model.getAttribute("type");
+        }
+        return "main_page";
     }
 
     // 게시판 게시물 작성
-    @Transactional
-    @PostMapping("/TextInsertC")
-    public String textInsert(@RequestParam("b") int b, HttpSession session, TextsVO texts) {
-        if (b != 1 && b != 2 && b != 3) return "redirect:/TextsC";  // 컨트롤러 로직이 포함된 곳
+    @ResponseBody
+    @PostMapping("/add/{type}")
+    public int textInsert(HttpSession session, @RequestBody TextsVO textsVO, Model model, @PathVariable String type) {
+        System.out.println("---------");
+        System.out.println(textsVO);
+        System.out.println("---------");
         UsersVO user = (UsersVO) session.getAttribute("users");
-        if (user == null) return "redirect:/";
-        int user_no = user.getUser_no();
+        if (user == null) return 0;
+        textsVO.setText_user_no(user.getUser_no());
+        return textsService.insertText(textsVO);
 
-        String text_title = texts.getText_title();
-        String text_content = texts.getText_content();
-
-        String type = "";
-
-        switch (b) {
-            case 1:
-                type = "COMMUNITY";
-                break;
-            case 2:
-                type = "NOTICE";
-                break;
-            case 3:
-                type = "QUESTION";
-                break;
-        }
-
-        textsService.insertText(text_title, text_content, user_no, type);
-
-        return "redirect:/TextsC?b=" + b;
     }
 
-//    @GetMapping("/commu-edit-texts")
-//    public String showEditForm(@RequestParam("text_id") int text_id, Model model) {
-//        TextsVO text = textsService.getTextById(text_id);
-//        System.out.println("text : " + text);
-//        model.addAttribute("text", text);
-//        model.addAttribute("content", "texts/texts_detail.jsp");
-//        return "main_page"; // texts_update.jsp로 이동
-//    }
 }

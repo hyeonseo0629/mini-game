@@ -13,16 +13,16 @@
     <!--로그인창-->
     <c:choose>
         <c:when test="${empty users}">
-            <form action="login" method="post" class="login-form">
+            <form action="/login" method="post" class="login-form">
                 <h2>로그인</h2>
-                <input type="text" name="id" value="1">
-<%--                       value="${alert == 'id 불일치' ? '' : param.id}"--%>
-<%--                       placeholder="${alert == 'id 불일치' ? '아이디 미존재' : '아이디'}" required>--%>
-                       <!--alert가 "id 불일치"이면 비우고/ 아니면 param.id(아이디)-->
-                       <!--alert가 "id 불일치"이면 '아이디 미존재'/아니면 '아이디'-->
-                <input type="password" name="pw" value="1">
-<%--                       value="${alert == 'pw 불일치' ? '' : param.pw}"--%>
-<%--                       placeholder="${alert == 'pw 불일치' ? '비밀번호 불일치' : '비밀번호'}" required>--%>
+                <input type="text" name="id" autocomplete="off"
+                       value="${alert == 'id 불일치' ? '' : param.id}"
+                       placeholder="${alert == 'id 불일치' ? '아이디 미존재' : '아이디'}" required>
+<%--                       <!--alert가 "id 불일치"이면 비우고/ 아니면 param.id(아이디)-->--%>
+<%--                       <!--alert가 "id 불일치"이면 '아이디 미존재'/아니면 '아이디'-->--%>
+                <input type="password" name="pw" autocomplete="off"
+                       value="${alert == 'pw 불일치' ? '' : param.pw}"
+                       placeholder="${alert == 'pw 불일치' ? '비밀번호 불일치' : '비밀번호'}" required>
                 <button type="submit">로그인</button>
                 <div class="sub-actions">
                     <button onclick="openSignModal()" type="button">회원가입</button>
@@ -142,6 +142,7 @@ onsubmit="return validateSignForm()">
             <button onclick="closeUpdateUser()" type="button">X</button>
         </form>
     </div>
+</div>
 <div class="avatar_zone">
     <c:if test="${not empty user.user_avatar_img}">
         <img src="/resources/images/${user.user_avatar_img}" alt="현재 아바타" width="100">

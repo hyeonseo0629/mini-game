@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class TextsService {
+
     @Autowired
     private TextsMapper textsMapper;
 
@@ -25,15 +26,16 @@ public class TextsService {
         return textsMapper.getTextByID(textId);
     }
 
-    public void updateText(String textTitle, String textContent, String s) {
-        textsMapper.updateText(textTitle, textContent, s);
+    public void updateText(TextsVO textsVO) {
+        textsMapper.updateText(textsVO);
     }
 
-    public void deleteText(int textId) {
+    public int deleteText(int textId) {
         textsMapper.deleteText(textId);
+        return textId;
     }
 
-    public void insertText(String textTitle, String textContent, int userNo, String textType) {
-        textsMapper.insertText(textTitle, textContent, userNo, textType);
+    public int insertText(TextsVO textsVO) {
+        return textsMapper.insertText(textsVO);
     }
 }
