@@ -7,8 +7,10 @@ import com.hs.minigame.vo.ShopItemsVO;
 import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,8 @@ public class LoginC {
     @Autowired
     private ShopService shopService;
     private LoginMapper loginMapper;
+    @Autowired
+    private HttpServletResponse httpServletResponse;
 
     @PostMapping("/login")
     public String login(@RequestParam String id, @RequestParam String pw, HttpSession session, RedirectAttributes redirectAttributes, HttpServletRequest request) {
@@ -224,12 +228,20 @@ public class LoginC {
     @PostMapping("/findPw")
     @ResponseBody
     public String findPw(@RequestParam String user_id,@RequestParam String user_name,@RequestParam String user_email,@RequestParam("new_pw") String newPw) {
-
      String result = loginService.findUserPw(user_id,user_name,user_email,newPw);
-
      return result;
-
    }
-
-
+   //세션 완료 알람 (보류)
+//    @GetMapping("/checksession")
+//    @ResponseBody
+//    public ResponseEntity<Map<String,String>>checksession(HttpSession session){
+//       Map<String,String> response = new HashMap<>();
+//
+//       if(session.getAttribute("users")==null){
+//           response.put("status","expired");
+//       }else{
+//           response.put("status","active");
+//       }
+//       return ResponseEntity.ok(response);
+//    }
 }
