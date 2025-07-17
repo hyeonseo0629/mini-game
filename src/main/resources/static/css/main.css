@@ -113,7 +113,7 @@ a:hover {
 .game-container {
     margin: 0;
     padding: 0;
-    width: 800px;
+    width: 80%;
 }
 
 /* 게임 내 버튼 */
@@ -132,7 +132,7 @@ a:hover {
 /* 점수판 묶음 (두 개 나란히 배치) */
 .game-container > .score-boards {
     position: absolute;
-    top: 10%;
+    top: 7%;
     right: 5%;
     display: flex;
     flex-direction: row;
@@ -201,6 +201,80 @@ a:hover {
     margin-bottom: 5px;
     font-size: 16px;
     color: #333;
+}
+
+/* 게임 선택 버튼 */
+.game-selection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin: 15px 0 0;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+}
+
+.game-selection > .select-button {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #3a3a3a, #2a2a2a);
+    border: 1px solid #4a4a4a;
+    border-radius: 10px;
+    color: #e0d8c3;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.game-selection > .select-button:hover {
+    /*background: linear-gradient(45deg, #5a4033, #3a3a3a);*/
+    transform: scale(1.05);
+    color: #fff4d2;
+    border-color: #cfae70;
+}
+
+.game-selection > .select-button.game-1:hover {
+    background-image: url("../images/suri.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.game-selection > .select-button.game-2:hover {
+    background-image: url("../images/wizard.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.game-selection > .select-button.game-3:hover {
+    background-image: url("../images/polar_bear.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.game-selection > .select-button.game-4:hover {
+    background-image: url("../images/dinosaur.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.game-selection > .select-button.game-5:hover {
+    background-image: url("../images/hatsune_miku.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.game-selection > .select-button.game-6:hover {
+    background-image: url("../images/base_avatar.webp");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 /* 전체 화면 어둡게 (모달 배경) */

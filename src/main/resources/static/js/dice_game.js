@@ -16,7 +16,7 @@ let computerTotal = 0;
 const canvas = document.querySelector("#canvas");
 const btn = document.querySelector(".game-button");
 const width = 800;
-const height = 800;
+const height = 680;
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -117,22 +117,26 @@ function gameInit() {
     });
 
     const loader = new THREE.TextureLoader();
+
+    console.log("contextPath : " + contextPath);
+
+    let meterialPath = contextPath.endsWith("/") ? contextPath + "resources/images/" : contextPath + "/resources/images/";
     const materials = [
-        new THREE.MeshBasicMaterial({ map: loader.load("resources/images/1_dot.png") }),
+        new THREE.MeshBasicMaterial({ map: loader.load(meterialPath + "1_dot.png") }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/2_dots.png"),
+            map: loader.load(meterialPath + "2_dots.png"),
         }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/3_dots.png"),
+            map: loader.load(meterialPath + "3_dots.png"),
         }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/4_dots.png"),
+            map: loader.load(meterialPath + "4_dots.png"),
         }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/5_dots.png"),
+            map: loader.load(meterialPath + "5_dots.png"),
         }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/6_dots.png"),
+            map: loader.load(meterialPath + "6_dots.png"),
         }),
     ];
 
@@ -160,7 +164,7 @@ function gameInit() {
         // => diceMeshes[0]부터 diceMeshed[4]까지는 각각 주사위 하나씩의 시각적 표현(mesh)임
     }
 
-    
+
 
     // 버튼 이벤트 설정
     btn.addEventListener("click", () => {
@@ -492,20 +496,4 @@ function updateCPUTotalScore() {
         }
     });
     document.querySelector(`#board-2 #score-total`).textContent = computerTotal;
-}
-
-// GameEndC로 Post로 보내기 위한 처리
-function postGameResult(result) {
-    const form = document.createElement("form");
-    form.action = "GameEndC";
-    form.method = "post";
-
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "result";
-    input.value = result;
-
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
 }
