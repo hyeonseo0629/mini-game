@@ -113,14 +113,14 @@ a:hover {
 .game-container {
     margin: 0;
     padding: 0;
-    width: 80%;
+    width: 100%;
 }
 
 /* 게임 내 버튼 */
 .game-container > .game-button {
     position: absolute;
     top: 8%;
-    right: 7%;
+    left: 7%;
     padding: 10px 20px;
     font-size: 16px;
     z-index: 10;
@@ -131,18 +131,21 @@ a:hover {
 
 #canvas {
     position: absolute;
-    top: 5%;
-    right: 5%;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* 점수판 묶음 (두 개 나란히 배치) */
 .game-container > .score-boards {
+    width: 100%;
     position: absolute;
-    top: 7%;
-    left: 5%;
+    top: 6%;
+    left: 0;
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    justify-content: space-around;
+    gap: 50%;
     z-index: 10;
 }
 
