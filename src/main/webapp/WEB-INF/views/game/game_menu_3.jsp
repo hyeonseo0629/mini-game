@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="game-container">
     <div>게임 3</div>
+    <div class="game-area" style="width: 800px; height: 680px; padding: 0"></div>
 </div>
 <div class="game-selection">
     <button class="select-button game-1" onclick="moveToController(1)">야추다이스</button>
