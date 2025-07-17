@@ -1,5 +1,6 @@
 package com.hs.minigame.controller;
 
+import com.hs.minigame.mapper.login.LoginMapper;
 import com.hs.minigame.service.login.LoginService;
 import com.hs.minigame.service.shop.ShopService;
 import com.hs.minigame.vo.ShopItemsVO;
@@ -30,6 +31,7 @@ public class LoginC {
 
     @Autowired
     private ShopService shopService;
+    private LoginMapper loginMapper;
 
     @PostMapping("/login")
     public String login(@RequestParam String id, @RequestParam String pw, HttpSession session, RedirectAttributes redirectAttributes, HttpServletRequest request) {
@@ -219,6 +221,15 @@ public class LoginC {
       }
     }
 
+    @PostMapping("/findPw")
+    @ResponseBody
+    public String findPw(@RequestParam String user_id,@RequestParam String user_name,@RequestParam String user_email,@RequestParam("new_pw") String newPw) {
+
+     String result = loginService.findUserPw(user_id,user_name,user_email,newPw);
+
+     return result;
+
+   }
 
 
 }

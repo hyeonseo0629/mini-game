@@ -113,15 +113,15 @@ onsubmit="return validateSignForm()">
 
                <div id="pwTab">
                    <div>비밀번호</div>
-                    <form id="findPwForm">
+                    <form id="findPwForm"action="/findPw" method="post">
                       <div>이름 : </div>
-                       <input type="text" id="user_name" name="user_name" required>
+                       <input type="text" id="user_name_pw" name="user_name" required>
                       <div>아이디 : </div>
-                       <input type="text" id="user_id" name="user_id" required>
+                       <input type="text" id="user_id_pw" name="user_id" required>
                        <div>이메일 : </div>
-                      <input type="text" id="user_email" name="user_email"required>
+                      <input type="text" id="user_email_pw" name="user_email"required>
                         <div>새로운 비밀번호 : </div>
-                        <input type="password" id="" name="" required>
+                        <input type="password" id="new_pw" name="new_pw" required>
                     <button type="submit">비밀번호 변경</button>
                    </form>
                    <div id="pwResult" style="margin-top:10px; color:blue;"></div>
@@ -303,6 +303,24 @@ document.getElementById(tab + 'Tab-btn').classList.add('active');
             document.getElementById("idResult").innerText = result;
         });
     </script>
+
+<script>
+    <!--비밀번호 찾기 표시 기능-->
+    document.getElementById("findPwForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const response = await fetch("/findPw", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.text();
+        document.getElementById("pwResult").innerText = result;
+    });
+</script>
 
 
 <script>
