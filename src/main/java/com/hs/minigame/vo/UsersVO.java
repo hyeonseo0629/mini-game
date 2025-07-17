@@ -21,4 +21,5 @@ public class UsersVO {
     private int user_money;
     private Date user_created_at;
     private String user_avatar_img;
+    private String user_email;
 }

@@ -16,6 +16,8 @@ import java.util.List;
 @Controller
 public class LoginC {
 
+    private static final int BASE_AVATAR_ID = 30;
+
     @Autowired
     private LoginService loginService; //새로운 service마다 의존성 필요
 
@@ -28,6 +30,10 @@ public class LoginC {
         UsersVO users = loginService.getUser(id);
         String referer = request.getHeader("Referer");
         //"Referer" : 사용자가 이 요청을 보내기 전 머물렀던 페이지URL
+
+
+        System.out.println("DEBUG - 아바타 이미지: " + users.getUser_avatar_img());
+
         if (users == null) {
             System.out.println("id 불일치");
             redirectAttributes.addFlashAttribute("alert", "id 불일치");
@@ -41,6 +47,12 @@ public class LoginC {
             //새로운 세션 객체를 강제로 생성(true = 세션이 없으면 강제로 만들어라 라는 뜻)
             session = request.getSession(true);
 
+
+            //.trim은 문자열 양 끝의 공백 제거,(null이거나 공백만 있는 문자열이면 user의 아바타에 기본아바타를 설정해줘)
+            if (users.getUser_avatar_img() == null || users.getUser_avatar_img().trim().isEmpty()) {
+                users.setUser_avatar_img("base_avatar.webp");
+            }
+
             //새로 생성한 세션에 로그인 한 사용자 정보를 다시 담음
             //로그인할 때 DB에서 다시 가져오기 때문에 가장 최신 인벤토리 상태가 반영된다
             session.setAttribute("users", users);
@@ -48,6 +60,17 @@ public class LoginC {
             //인벤토리
             List<ShopItemsVO> inventoryItems = shopService.getInventory(users.getUser_no());
             session.setAttribute("inventoryItems", inventoryItems);
+
+            //기본 아바타 설정 작업(구매하지 않더라도 인벤토리에 기본아바타가 있게끔)
+            //DB에 기록하는게 아니라 단순히 세션에 넣는 작업 뿐
+            boolean hasAvatar = inventoryItems.stream()
+                    .anyMatch(item -> item.getItem_id().equals(String.valueOf(BASE_AVATAR_ID)));
+
+            if (!hasAvatar) {
+                ShopItemsVO baseAvatar = shopService.getItemById(BASE_AVATAR_ID);
+                inventoryItems.add(0, baseAvatar);
+            }
+
 
             System.out.println("로그인 성공");
             redirectAttributes.addFlashAttribute("alert", "로그인 성공");
@@ -96,8 +119,22 @@ public class LoginC {
 //        return "main_page";
     }
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login/login";
+    }
+
     @PostMapping("/sign")
     public String sign(@ModelAttribute UsersVO users, RedirectAttributes redirectAttributes) {
+
+        if (!isValidId(users.getUser_id())) {
+            redirectAttributes.addFlashAttribute("alert", "아이디는 6~12자, 소문자+숫자만 가능합니다.");
+            return "redirect:/main_page";
+        }
+        if (!isValidPassword(users.getUser_pw())) {
+            redirectAttributes.addFlashAttribute("alert", "비밀번호는 8자 이상, 대문자/숫자/특수문자를 포함해야 합니다.");
+            return "redirect:/main_page";
+        }
 
         users.setUser_money(5000);
         users.setUser_role("USER");
@@ -110,9 +147,22 @@ public class LoginC {
         } else {
             redirectAttributes.addFlashAttribute("alert", "회원 가입 실패");
         }
-        redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
+//        redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
         return "redirect:/main_page";
     }
+
+    public boolean isValidId(String id) {
+        // 소문자+숫자, 6~12자
+        String pattern = "^[a-z0-9]{6,12}$";
+        return id != null && id.matches(pattern);
+    }
+
+    public boolean isValidPassword(String pw) {
+        // 8자 이상, 대문자, 숫자, 특수문자
+        String pattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$";
+        return pw != null && pw.matches(pattern);
+    }
+
 
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam("user_id") String userId, HttpSession session, RedirectAttributes redirectAttributes) {
@@ -153,5 +203,17 @@ public class LoginC {
         }
         return "redirect:/main_page";
     }
+
+    @PostMapping("/findId")
+    @ResponseBody
+    public String findId(@RequestParam String user_name, @RequestParam String user_email) {
+        String userId = loginService.findUserId(user_name, user_email);
+        if (userId != null) {
+            return "당신의 ID :" + userId;
+        } else {
+            return "일치하는 정보가 없습니다.";
+        }
+    }
+
 
 }

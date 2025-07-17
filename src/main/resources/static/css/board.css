@@ -9,7 +9,7 @@ table {
     border-collapse: collapse;
     table-layout: fixed;
     margin-top: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 /*table thead tr {*/
@@ -48,8 +48,8 @@ table {
 /*    background-color: #f9f9f9;*/
 /*}*/
 
-.text_id{
-    text-align:  center;
+.text_id {
+    text-align: center;
 }
 
 .text_title {
@@ -57,16 +57,16 @@ table {
     text-align: center;
 }
 
-.text_user_no{
+.text_user_no {
     width: 500px;
-    text-align:  center;
+    text-align: center;
 }
 
-.text_date{
-    text-align:  center;
+.text_date {
+    text-align: center;
 }
 
-.paging{
+.paging {
     text-align: center;
 }
 

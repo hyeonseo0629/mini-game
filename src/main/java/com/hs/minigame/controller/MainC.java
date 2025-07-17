@@ -47,7 +47,9 @@ public class MainC {
     @GetMapping("/GameC")
     public String gameC(Model model, HttpSession session) {
         UsersVO user = (UsersVO) session.getAttribute("users");
-        user.setUser_money(gameService.getUserMoney(user.getUser_no()));
+        if (user != null) {
+            user.setUser_money(gameService.getUserMoney(user.getUser_no()));
+        }
 
         model.addAttribute("content", "game/game_menu.jsp");
         return "main_page";

@@ -1,220 +1,238 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
 .modal {
-  display: none;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 /*인벤 모달 슬라이드 기능*/
 .inventory-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px 0;
-  /*gap: 5px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    /*gap: 5px;*/
 }
 
 .inventory-contents {
-  flex: 1;
-  min-width: 300px;
-  overflow: hidden;
-  position: relative;
+    flex: 1;
+    min-width: 300px;
+    overflow: hidden;
+    position: relative;
 }
 
 .inventory-track {
-  display: flex;
-  transition: transform 0.3s ease;
-  min-width: 100%;
-  will-change: transform;
+    display: flex;
+    transition: transform 0.3s ease;
+    min-width: 100%;
+    will-change: transform;
 }
 
 .inventory-item {
-  flex: 0 0 130px;
-  margin-right: 20px; /*js에서 계산한 마진이랑 일치*/
-  text-align: center;
-  padding: 10px;
-  flex-shrink: 0;
-  box-sizing: border-box;
+    flex: 0 0 130px;
+    margin-right: 20px; /*js에서 계산한 마진이랑 일치*/
+    text-align: center;
+    padding: 10px;
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .slide-btn {
-  background-color: transparent;
-  border: none;
-  color: #e0d8c3;
-  font-size: 1.5rem;
-  cursor: pointer;
-  user-select: none;
+    background-color: transparent;
+    border: none;
+    color: #e0d8c3;
+    font-size: 1.5rem;
+    cursor: pointer;
+    user-select: none;
 }
 
 .slide-btn:hover {
-  color: #cfae70;
+    color: #cfae70;
 }
 
 /*슬라이드 기능은 여기까지*/
 
 
 .inven-modal-body {
-  position: relative;
-  display: inline-block;
-  background-color: #252525;
-  color: #e0d8c3;
-  padding: 30px;
-  border-radius: 8px;
-  text-align: center;
-  width: 400px;
-  height: 400px;
+    position: relative;
+    display: inline-block;
+    background-color: #252525;
+    color: #e0d8c3;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    width: 400px;
+    height: 400px;
 }
 
 #closeInvenModal {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 20px;
-  position: absolute;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    position: absolute;
 }
 
 #closeInvenModal:hover {
-  background-color: #b30000;
+    background-color: #b30000;
 }
+
 body {
-  background-color: #1c1c1c; /* 기존 배경과 통일 */
-  color: #e0d8c3;
-  font-family: "Noto Sans KR", sans-serif;
-  margin: 0;
+    background-color: #1c1c1c; /* 기존 배경과 통일 */
+    color: #e0d8c3;
+    font-family: "Noto Sans KR", sans-serif;
+    margin: 0;
 }
 
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 0vh;
-  position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 0vh;
+    position: static;
 
 }
 
 .login-form {
-  background-color: #2a2a2a;
-  padding: 20px; /* 컴팩트 padding */
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  width: 180px; /* 폭 축소 */
+    background-color: #2a2a2a;
+    padding: 20px; /* 컴팩트 padding */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    width: 180px; /* 폭 축소 */
 }
 
 .login-form h2 {
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 1rem;
-  color: #cfae70;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #cfae70;
 }
 
 .login-form input {
-  margin-bottom: 8px;
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-  background-color: #3a3a3a;
-  color: #e0d8c3;
-  font-size: 0.85rem;
+    margin-bottom: 8px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3a3a3a;
+    color: #e0d8c3;
+    font-size: 0.85rem;
 }
 
 .login-form input::placeholder {
-  color: #b8b8b8;
+    color: #b8b8b8;
 }
 
 .login-form button {
-  padding: 8px;
-  margin-top: 5px;
-  border: none;
-  border-radius: 5px;
-  background-color: #cfae70;
-  color: #1c1c1c;
-  font-weight: bold;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background 0.3s;
+    padding: 8px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
 .login-form button:hover {
-  background-color: #e0d8c3;
+    background-color: #e0d8c3;
 }
 
 .sub-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
 }
 
 .sub-actions button {
-  background: none;
-  border: none;
-  color: #cfae70;
-  cursor: pointer;
-  font-size: 0.8rem;
+    background: none;
+    border: none;
+    color: #cfae70;
+    cursor: pointer;
+    font-size: 0.8rem;
 }
 
 .sub-actions button:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .welcome-box {
-  background-color: #2a2a2a;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 180px; /* 로그인 박스와 동일 폭 */
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 180px; /* 로그인 박스와 동일 폭 */
 }
 
 .welcome-box span {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
 .welcome-box button {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #cfae70;
-  color: #1c1c1c;
-  font-weight: bold;
-  font-size: 0.9rem;
-  cursor: pointer;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
 }
 
 .welcome-box button:hover {
-  background-color: #e0d8c3;
+    background-color: #e0d8c3;
 }
+
 .cssAlert {
-  position: fixed;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #2a2a2a;
-  color: #e0d8c3;
-  padding: 14px 24px;
-  border-radius: 8px;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 0.9rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  z-index: 9999;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  pointer-events: none; /* 다른 UI 방해 안 하도록 */
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2a2a2a;
+    color: #e0d8c3;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* 다른 UI 방해 안 하도록 */
 }
 
 .cssAlert.fade-out {
-  opacity: 0;
+    opacity: 0;
+}
+
+/* 탭 내용 기본적으로 숨김 */
+#idTab, #pwTab {
+    display: none;
+}
+
+/* active 클래스가 있을 때만 보이기 */
+#idTab.active, #pwTab.active {
+    display: block;
+}
+
+/* 버튼 스타일 */
+.tab-button button.active {
+    background-color: #007bff;
+    color: white;
 }
