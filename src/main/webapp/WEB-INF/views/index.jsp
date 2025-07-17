@@ -4,7 +4,7 @@
   <head>
     <title>mini game</title>
     <script>
-      location.href = "GameC";
+      location.href = "GameC/1";
     </script>
   </head>
   <body></body>

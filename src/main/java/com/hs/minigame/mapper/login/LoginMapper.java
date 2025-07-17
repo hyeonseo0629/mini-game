@@ -25,6 +25,14 @@ public interface LoginMapper {
     @Select("SELECT user_id FROM users WHERE user_name = #{user_name} AND user_email = #{user_email}")
     String findUserId(@Param("user_name") String name, @Param("user_email") String email);
 
+    //유저 조회
+    @Select("SELECT * FROM users WHERE user_id = #{user_id} AND user_name = #{user_name} AND user_email = #{user_email}")
+    UsersVO resetUserPw (@Param("user_id") String userId,
+                         @Param("user_name") String userName,
+                         @Param("user_email") String userEmail);
+    // 비밀번호 업데이트
+    @Update("UPDATE users SET user_pw = #{newPw} WHERE user_id = #{user_id}")
+    void changeUserPw (@Param("user_id") String userId, @Param("newPw") String newPw);
 
 }
 

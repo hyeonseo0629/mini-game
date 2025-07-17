@@ -72,6 +72,7 @@ public class LoginC {
             }
 
 
+
             System.out.println("로그인 성공");
             redirectAttributes.addFlashAttribute("alert", "로그인 성공");
             redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
@@ -142,13 +143,13 @@ public class LoginC {
 
         boolean success = loginService.registerUser(users);
 
-        if (success) {
-            redirectAttributes.addFlashAttribute("alert", "회원 가입 성공");
-        } else {
-            redirectAttributes.addFlashAttribute("alert", "회원 가입 실패");
-        }
-//        redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
-        return "redirect:/main_page";
+       if(success) {
+           redirectAttributes.addFlashAttribute("alert","회원 가입 성공");
+       } else {
+           redirectAttributes.addFlashAttribute("alert","회원 가입 실패");
+       }
+       //redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
+       return  "redirect:/main_page";
     }
 
     public boolean isValidId(String id) {
@@ -156,7 +157,6 @@ public class LoginC {
         String pattern = "^[a-z0-9]{6,12}$";
         return id != null && id.matches(pattern);
     }
-
     public boolean isValidPassword(String pw) {
         // 8자 이상, 대문자, 숫자, 특수문자
         String pattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$";
@@ -165,28 +165,28 @@ public class LoginC {
 
 
     @PostMapping("/deleteUser")
-    public String deleteUser(@RequestParam("user_id") String userId, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String deleteUser(@RequestParam("user_id") String userId, HttpSession session, RedirectAttributes redirectAttributes ) {
         System.out.println("Controller: Attempting to delete user with ID: " + userId);
         try {
-            try {
-                loginService.deleteUserFromRecord(userId);
-            } catch (Exception e) {
-                System.out.println("record 임시 테이블 없음 /삭제 실패 → 무시하고 진행: " + e.getMessage());
-            }
-            System.out.println("Calling deleteUser");
-            loginService.deleteUser(userId);
-            session.invalidate();
-            redirectAttributes.addFlashAttribute("alert", "회원 탈퇴가 완료되었습니다.");
-            return "redirect:/main_page";
-        } catch (Exception e) {
-            e.printStackTrace();
-            redirectAttributes.addFlashAttribute("alert", "회원 탈퇴에 실패했습니다.");
-            return "redirect:/main_page";
-        }
+          try {
+              loginService.deleteUserFromRecord(userId);
+          } catch (Exception e) {
+              System.out.println("record 임시 테이블 없음 /삭제 실패 → 무시하고 진행: " + e.getMessage());
+          }
+          System.out.println("Calling deleteUser");
+          loginService.deleteUser(userId);
+          session.invalidate();
+          redirectAttributes.addFlashAttribute("alert", "회원 탈퇴가 완료되었습니다.");
+          return "redirect:/main_page";
+      } catch (Exception e) {
+          e.printStackTrace();
+          redirectAttributes.addFlashAttribute("alert", "회원 탈퇴에 실패했습니다.");
+          return "redirect:/main_page";
+      }
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(@ModelAttribute UsersVO users, @RequestParam("originalId") String originalId, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String updateUser(@ModelAttribute UsersVO users,@RequestParam("originalId") String originalId,RedirectAttributes redirectAttributes,HttpSession session) {
 
         if (users.getUser_pw() == null || users.getUser_pw().trim().isEmpty()) {
             UsersVO originalUser = loginService.getUser(originalId);
@@ -215,5 +215,23 @@ public class LoginC {
         }
     }
 
-
+    @PostMapping("/findPw")
+    @ResponseBody
+    public String findPw(@RequestParam String user_id,@RequestParam String user_name,@RequestParam String user_email,@RequestParam("new_pw") String newPw) {
+     String result = loginService.findUserPw(user_id,user_name,user_email,newPw);
+     return result;
+   }
+   //세션 완료 알람 (보류)
+//    @GetMapping("/checksession")
+//    @ResponseBody
+//    public ResponseEntity<Map<String,String>>checksession(HttpSession session){
+//       Map<String,String> response = new HashMap<>();
+//
+//       if(session.getAttribute("users")==null){
+//           response.put("status","expired");
+//       }else{
+//           response.put("status","active");
+//       }
+//       return ResponseEntity.ok(response);
+//    }
 }

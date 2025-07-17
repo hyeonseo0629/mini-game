@@ -29,22 +29,22 @@ function init() {
 function clicked(no) {
     switch (no) {
         case 1:
-            location.href = "GameC";
+            location.href = "/GameC/1";
             break;
         case 2:
-            location.href = "shopC";
+            location.href = "/shopC";
             break;
         case 3:
-            location.href = "rank";
+            location.href = "/rank";
             break;
         case 4:
-            location.href = "TextsC?b=1";
+            location.href = "/TextsC?b=1";
             break;
         case 5:
-            location.href = "TextsC?b=2";
+            location.href = "/TextsC?b=2";
             break;
         case 6:
-            location.href = "TextsC?b=3";
+            location.href = "/TextsC?b=3";
             break;
         default:
             break;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -44,14 +45,36 @@ public class MainC {
     @Autowired
     private GameService gameService;
 
-    @GetMapping("/GameC")
-    public String gameC(Model model, HttpSession session) {
+    @GetMapping("/GameC/{gameNum}")
+    public String gameC(Model model, HttpSession session, @PathVariable int gameNum) {
         UsersVO user = (UsersVO) session.getAttribute("users");
         if (user != null) {
             user.setUser_money(gameService.getUserMoney(user.getUser_no()));
         }
 
-        model.addAttribute("content", "game/game_menu.jsp");
+        switch (gameNum) {
+            case 1:
+                model.addAttribute("content", "game/game_menu.jsp");
+                break;
+            case 2:
+                model.addAttribute("content", "game/game_menu_2.jsp");
+                break;
+            case 3:
+                model.addAttribute("content", "game/game_menu_3.jsp");
+                break;
+            case 4:
+                model.addAttribute("content", "game/game_menu_4.jsp");
+                break;
+            case 5:
+                model.addAttribute("content", "game/game_menu_5.jsp");
+                break;
+            case 6:
+                model.addAttribute("content", "game/game_menu_6.jsp");
+                break;
+            default:
+                model.addAttribute("content", "game/game_menu.jsp");
+                break;
+        }
         return "main_page";
     }
 

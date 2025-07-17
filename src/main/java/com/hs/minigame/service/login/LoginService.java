@@ -46,13 +46,28 @@ public class LoginService {
         return loginMapper.findUserId(name, email);
     }
 
-
-
     public boolean loginCheck(HttpSession session) {
         UsersVO user = (UsersVO) session.getAttribute("users");
         if (user == null) return false;
         return true;
     }
+
+    public String findUserPw(String userId, String userName, String userEmail, String newPw){
+
+      UsersVO user = loginMapper.resetUserPw(userId,userName, userEmail); //유저 정보 조회
+
+      if(user!=null) {
+          loginMapper.changeUserPw(userId, newPw);//비번 변경 처리
+          return "비밀번호를 성공적으로 변경했습니다.";
+      }else{
+          return  "일치하는 정보가 없습니다.";
+      }
+    }
+
+
+
+
+
 
 }
 

@@ -113,15 +113,15 @@ onsubmit="return validateSignForm()">
 
                <div id="pwTab">
                    <div>비밀번호</div>
-                    <form id="findPwForm">
+                    <form id="findPwForm"action="/findPw" method="post">
                       <div>이름 : </div>
-                       <input type="text" id="user_name" name="user_name" required>
+                       <input type="text" id="user_name_pw" name="user_name" required>
                       <div>아이디 : </div>
-                       <input type="text" id="user_id" name="user_id" required>
+                       <input type="text" id="user_id_pw" name="user_id" required>
                        <div>이메일 : </div>
-                      <input type="text" id="user_email" name="user_email"required>
+                      <input type="text" id="user_email_pw" name="user_email"required>
                         <div>새로운 비밀번호 : </div>
-                        <input type="password" id="" name="" required>
+                        <input type="password" id="new_pw" name="new_pw" required>
                     <button type="submit">비밀번호 변경</button>
                    </form>
                    <div id="pwResult" style="margin-top:10px; color:blue;"></div>
@@ -231,7 +231,6 @@ onsubmit="return validateSignForm()">
 </c:if>
 
 <script>
-
     let currentSlide = 0;
     <!--비밀번호토글기능-->
     function toggle() {
@@ -259,6 +258,7 @@ onsubmit="return validateSignForm()">
         }
     }
 </script>
+
 <script>
         <!--아이디/비번찾기모달창기능-->
         function openFindModal() {
@@ -286,24 +286,46 @@ document.getElementById('pwTab-btn').classList.remove('active');
 document.getElementById(tab + 'Tab-btn').classList.add('active');
 }
 </script>
-    <script>
-        <!--아이디 찾기 표시 기능-->
+
+<script>
+    <!--아이디 찾기 표시 기능-->
         document.getElementById("findIdForm").addEventListener("submit", async function(e) {
             e.preventDefault();
-
             const form = e.target;
             const formData = new FormData(form);
-
             const response = await fetch("/findId", {
                 method: "POST",
                 body: formData
             });
-
             const result = await response.text();
             document.getElementById("idResult").innerText = result;
         });
-    </script>
+</script>
 
+<script>
+    <!--비밀번호 찾기 표시 기능-->
+    document.getElementById("findPwForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const newPw = formData.get("newPw"); // 비밀번호 가져오기
+        const pwPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+
+        if (!pwPattern.test(newPw)) {
+            document.getElementById("pwResult").style.color = "red";
+            document.getElementById("pwResult").innerText = "비밀번호는 8자 이상이며 대문자, 숫자, 특수문자를 포함해야 합니다.";
+            return;
+        }
+
+        const response = await fetch("/findPw", {
+            method: "POST",
+            body: formData
+        });
+        const result = await response.text();
+        document.getElementById("pwResult").innerText = result;
+    });
+</script>
 
 <script>
     <!--인벤토리모달창기능-->
@@ -378,8 +400,6 @@ document.getElementById(tab + 'Tab-btn').classList.add('active');
     }
 </script>
 
-
-
 <script>
     <!--회원가입필수입력기능-->
 function validateSignForm(){
@@ -445,6 +465,7 @@ function validateSignForm(){
         }
     }
 </script>
+
 <script>
     <!--alret양식통일용-->
 window.alert = function(message){
@@ -459,6 +480,20 @@ window.alert = function(message){
     },2500);
 };
 </script>
+
+<%--<script> 세션 완료 알람(보류)--%>
+<%-- window.onload = function(){--%>
+<%--     fetch('/checksession')--%>
+<%--         . then(response=>response.json())--%>
+<%--         .then(data=>{--%>
+<%--            if(data.status ==='expired'){--%>
+<%--                alert("세션 만료, 다시 로그인해주세요.");--%>
+<%--                window.location.href='/login';--%>
+<%--              }--%>
+<%--            })--%>
+<%--          .catch(error=>console.log(error));--%>
+<%-- };--%>
+<%--</script>--%>
 
 </body>
 </html>
