@@ -13,7 +13,7 @@
     <!--로그인창-->
     <c:choose>
         <c:when test="${empty users}">
-            <form action="login" method="post" class="login-form">
+            <form action="/login" method="post" class="login-form">
                 <h2>로그인</h2>
                 <input type="text" name="id"
                        value="${alert == 'id 불일치' ? '' : param.id}"
@@ -35,11 +35,11 @@
         <!--로그인완료창-->
     <div class="welcome-box">
         <span>${users.user_id}님 환영합니다</span>
-        <form action="logout" method="post">
+        <form action="/logout" method="post">
             <button type="submit">로그아웃</button>
         </form>
 
-        <form id="deleteUser"action="deleteUser" method="post">
+        <form id="deleteUser"action="/deleteUser" method="post">
             <input type="hidden" name="user_id" value="${users.user_id}">
             <button type="button"onclick="checkDelete()">회원 탈퇴</button>
         </form>
