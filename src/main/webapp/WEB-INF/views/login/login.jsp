@@ -231,7 +231,6 @@ onsubmit="return validateSignForm()">
 </c:if>
 
 <script>
-
     let currentSlide = 0;
     <!--비밀번호토글기능-->
     function toggle() {
@@ -259,6 +258,7 @@ onsubmit="return validateSignForm()">
         }
     }
 </script>
+
 <script>
         <!--아이디/비번찾기모달창기능-->
         function openFindModal() {
@@ -286,42 +286,48 @@ document.getElementById('pwTab-btn').classList.remove('active');
 document.getElementById(tab + 'Tab-btn').classList.add('active');
 }
 </script>
-    <script>
-        <!--아이디 찾기 표시 기능-->
+
+<script>
+    <!--아이디 찾기 표시 기능-->
         document.getElementById("findIdForm").addEventListener("submit", async function(e) {
             e.preventDefault();
-
             const form = e.target;
             const formData = new FormData(form);
-
             const response = await fetch("/findId", {
                 method: "POST",
                 body: formData
             });
-
             const result = await response.text();
             document.getElementById("idResult").innerText = result;
         });
-    </script>
+</script>
 
 <script>
     <!--비밀번호 찾기 표시 기능-->
     document.getElementById("findPwForm").addEventListener("submit", async function(e) {
         e.preventDefault();
-
         const form = e.target;
         const formData = new FormData(form);
+
+        const newPw = formData.get("newPw"); // 비밀번호 가져오기
+        const pwPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+
+        if (!pwPattern.test(newPw)) {
+            document.getElementById("pwResult").style.color = "red";
+            document.getElementById("pwResult").innerText = "비밀번호는 8자 이상이며 대문자, 숫자, 특수문자를 포함해야 합니다.";
+            return;
+        }
+
+
 
         const response = await fetch("/findPw", {
             method: "POST",
             body: formData
         });
-
         const result = await response.text();
         document.getElementById("pwResult").innerText = result;
     });
 </script>
-
 
 <script>
     <!--인벤토리모달창기능-->
@@ -396,8 +402,6 @@ document.getElementById(tab + 'Tab-btn').classList.add('active');
     }
 </script>
 
-
-
 <script>
     <!--회원가입필수입력기능-->
 function validateSignForm(){
@@ -463,6 +467,7 @@ function validateSignForm(){
         }
     }
 </script>
+
 <script>
     <!--alret양식통일용-->
 window.alert = function(message){
