@@ -8,64 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="game-container">
-    <div id="canvas" style="width: 800px; padding: 0"></div>
-<%--    <div class="score-boards">--%>
-<%--        <div class="score-board" id="board-1">--%>
-<%--            <h3>Player</h3>--%>
-<%--            <table id="score-table">--%>
-<%--                <thead>--%>
-<%--                <tr>--%>
-<%--                    <th>카테고리</th>--%>
-<%--                    <th>점수</th>--%>
-<%--                </tr>--%>
-<%--                </thead>--%>
-<%--                <tbody>--%>
-<%--                <tr><td>Ones</td><td id="score-ones">-</td></tr>--%>
-<%--                <tr><td>Twos</td><td id="score-twos">-</td></tr>--%>
-<%--                <tr><td>Threes</td><td id="score-threes">-</td></tr>--%>
-<%--                <tr><td>Fours</td><td id="score-fours">-</td></tr>--%>
-<%--                <tr><td>Fives</td><td id="score-fives">-</td></tr>--%>
-<%--                <tr><td>Sixes</td><td id="score-sixes">-</td></tr>--%>
-<%--                <tr><td>Three of a kind</td><td id="score-three">-</td></tr>--%>
-<%--                <tr><td>Four of a kind</td><td id="score-four">-</td></tr>--%>
-<%--                <tr><td>Full House</td><td id="score-full">-</td></tr>--%>
-<%--                <tr><td>Small Straight</td><td id="score-small">-</td></tr>--%>
-<%--                <tr><td>Large Straight</td><td id="score-large">-</td></tr>--%>
-<%--                <tr><td>Yahtzee</td><td id="score-yahtzee">-</td></tr>--%>
-<%--                <tr><td>Chance</td><td id="score-chance">-</td></tr>--%>
-<%--                <tr><td>Total</td><td id="score-total"></td></tr>--%>
-<%--                </tbody>--%>
-<%--            </table>--%>
-<%--        </div>--%>
-<%--        <div class="score-board" id="board-2">--%>
-<%--            <h3>CPU</h3>--%>
-<%--            <table id="score-table">--%>
-<%--                <thead>--%>
-<%--                <tr>--%>
-<%--                    <th>카테고리</th>--%>
-<%--                    <th>점수</th>--%>
-<%--                </tr>--%>
-<%--                </thead>--%>
-<%--                <tbody>--%>
-<%--                <tr><td>Ones</td><td id="score-ones">-</td></tr>--%>
-<%--                <tr><td>Twos</td><td id="score-twos">-</td></tr>--%>
-<%--                <tr><td>Threes</td><td id="score-threes">-</td></tr>--%>
-<%--                <tr><td>Fours</td><td id="score-fours">-</td></tr>--%>
-<%--                <tr><td>Fives</td><td id="score-fives">-</td></tr>--%>
-<%--                <tr><td>Sixes</td><td id="score-sixes">-</td></tr>--%>
-<%--                <tr><td>Three of a kind</td><td id="score-three">-</td></tr>--%>
-<%--                <tr><td>Four of a kind</td><td id="score-four">-</td></tr>--%>
-<%--                <tr><td>Full House</td><td id="score-full">-</td></tr>--%>
-<%--                <tr><td>Small Straight</td><td id="score-small">-</td></tr>--%>
-<%--                <tr><td>Large Straight</td><td id="score-large">-</td></tr>--%>
-<%--                <tr><td>Yahtzee</td><td id="score-yahtzee">-</td></tr>--%>
-<%--                <tr><td>Chance</td><td id="score-chance">-</td></tr>--%>
-<%--                <tr><td>Total</td><td id="score-total"></td></tr>--%>
-<%--                </tbody>--%>
-<%--            </table>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-    <!-- 디버깅용 -->
     <div class="score-boards">
         <div class="score-board" id="board-1">
             <h3>Player</h3>
@@ -77,18 +19,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr><td>Ones</td><td id="score-ones">1</td></tr>
-                <tr><td>Twos</td><td id="score-twos">2</td></tr>
-                <tr><td>Threes</td><td id="score-threes">3</td></tr>
-                <tr><td>Fours</td><td id="score-fours">4</td></tr>
-                <tr><td>Fives</td><td id="score-fives">5</td></tr>
-                <tr><td>Sixes</td><td id="score-sixes">6</td></tr>
-                <tr><td>Three of a kind</td><td id="score-three">0</td></tr>
-                <tr><td>Four of a kind</td><td id="score-four">0</td></tr>
-                <tr><td>Full House</td><td id="score-full">0</td></tr>
-                <tr><td>Small Straight</td><td id="score-small">0</td></tr>
-                <tr><td>Large Straight</td><td id="score-large">0</td></tr>
-                <tr><td>Yahtzee</td><td id="score-yahtzee">0</td></tr>
+                <tr><td>Ones</td><td id="score-ones">-</td></tr>
+                <tr><td>Twos</td><td id="score-twos">-</td></tr>
+                <tr><td>Threes</td><td id="score-threes">-</td></tr>
+                <tr><td>Fours</td><td id="score-fours">-</td></tr>
+                <tr><td>Fives</td><td id="score-fives">-</td></tr>
+                <tr><td>Sixes</td><td id="score-sixes">-</td></tr>
+                <tr><td>Three of a kind</td><td id="score-three">-</td></tr>
+                <tr><td>Four of a kind</td><td id="score-four">-</td></tr>
+                <tr><td>Full House</td><td id="score-full">-</td></tr>
+                <tr><td>Small Straight</td><td id="score-small">-</td></tr>
+                <tr><td>Large Straight</td><td id="score-large">-</td></tr>
+                <tr><td>Yahtzee</td><td id="score-yahtzee">-</td></tr>
                 <tr><td>Chance</td><td id="score-chance">-</td></tr>
                 <tr><td>Total</td><td id="score-total"></td></tr>
                 </tbody>
@@ -104,26 +46,98 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr><td>Ones</td><td id="score-ones">1</td></tr>
-                <tr><td>Twos</td><td id="score-twos">2</td></tr>
-                <tr><td>Threes</td><td id="score-threes">3</td></tr>
-                <tr><td>Fours</td><td id="score-fours">4</td></tr>
-                <tr><td>Fives</td><td id="score-fives">5</td></tr>
-                <tr><td>Sixes</td><td id="score-sixes">6</td></tr>
-                <tr><td>Three of a kind</td><td id="score-three">0</td></tr>
-                <tr><td>Four of a kind</td><td id="score-four">0</td></tr>
-                <tr><td>Full House</td><td id="score-full">0</td></tr>
-                <tr><td>Small Straight</td><td id="score-small">0</td></tr>
-                <tr><td>Large Straight</td><td id="score-large">0</td></tr>
-                <tr><td>Yahtzee</td><td id="score-yahtzee">0</td></tr>
-                <tr><td>Chance</td><td id="score-chance">14</td></tr>
+                <tr><td>Ones</td><td id="score-ones">-</td></tr>
+                <tr><td>Twos</td><td id="score-twos">-</td></tr>
+                <tr><td>Threes</td><td id="score-threes">-</td></tr>
+                <tr><td>Fours</td><td id="score-fours">-</td></tr>
+                <tr><td>Fives</td><td id="score-fives">-</td></tr>
+                <tr><td>Sixes</td><td id="score-sixes">-</td></tr>
+                <tr><td>Three of a kind</td><td id="score-three">-</td></tr>
+                <tr><td>Four of a kind</td><td id="score-four">-</td></tr>
+                <tr><td>Full House</td><td id="score-full">-</td></tr>
+                <tr><td>Small Straight</td><td id="score-small">-</td></tr>
+                <tr><td>Large Straight</td><td id="score-large">-</td></tr>
+                <tr><td>Yahtzee</td><td id="score-yahtzee">-</td></tr>
+                <tr><td>Chance</td><td id="score-chance">-</td></tr>
                 <tr><td>Total</td><td id="score-total"></td></tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <div id="canvas" style="width: 800px; height: 680px; padding: 0"></div>
+    <button class="game-button" name="user" value="${sessionScope.users}">Start Game</button>
+    <div class="game-area" style="width: 800px; height: 680px; padding: 0"></div>
+
     <!-- 디버깅용 -->
+<%--    <div class="score-boards">--%>
+<%--        <div class="score-board" id="board-1">--%>
+<%--            <h3>Player</h3>--%>
+<%--            <table id="score-table">--%>
+<%--                <thead>--%>
+<%--                <tr>--%>
+<%--                    <th>카테고리</th>--%>
+<%--                    <th>점수</th>--%>
+<%--                </tr>--%>
+<%--                </thead>--%>
+<%--                <tbody>--%>
+<%--                <tr><td>Ones</td><td id="score-ones">1</td></tr>--%>
+<%--                <tr><td>Twos</td><td id="score-twos">2</td></tr>--%>
+<%--                <tr><td>Threes</td><td id="score-threes">3</td></tr>--%>
+<%--                <tr><td>Fours</td><td id="score-fours">4</td></tr>--%>
+<%--                <tr><td>Fives</td><td id="score-fives">5</td></tr>--%>
+<%--                <tr><td>Sixes</td><td id="score-sixes">6</td></tr>--%>
+<%--                <tr><td>Three of a kind</td><td id="score-three">0</td></tr>--%>
+<%--                <tr><td>Four of a kind</td><td id="score-four">0</td></tr>--%>
+<%--                <tr><td>Full House</td><td id="score-full">0</td></tr>--%>
+<%--                <tr><td>Small Straight</td><td id="score-small">0</td></tr>--%>
+<%--                <tr><td>Large Straight</td><td id="score-large">0</td></tr>--%>
+<%--                <tr><td>Yahtzee</td><td id="score-yahtzee">0</td></tr>--%>
+<%--                <tr><td>Chance</td><td id="score-chance">-</td></tr>--%>
+<%--                <tr><td>Total</td><td id="score-total"></td></tr>--%>
+<%--                </tbody>--%>
+<%--            </table>--%>
+<%--        </div>--%>
+<%--        <div class="score-board" id="board-2">--%>
+<%--            <h3>CPU</h3>--%>
+<%--            <table id="score-table">--%>
+<%--                <thead>--%>
+<%--                <tr>--%>
+<%--                    <th>카테고리</th>--%>
+<%--                    <th>점수</th>--%>
+<%--                </tr>--%>
+<%--                </thead>--%>
+<%--                <tbody>--%>
+<%--                <tr><td>Ones</td><td id="score-ones">1</td></tr>--%>
+<%--                <tr><td>Twos</td><td id="score-twos">2</td></tr>--%>
+<%--                <tr><td>Threes</td><td id="score-threes">3</td></tr>--%>
+<%--                <tr><td>Fours</td><td id="score-fours">4</td></tr>--%>
+<%--                <tr><td>Fives</td><td id="score-fives">5</td></tr>--%>
+<%--                <tr><td>Sixes</td><td id="score-sixes">6</td></tr>--%>
+<%--                <tr><td>Three of a kind</td><td id="score-three">0</td></tr>--%>
+<%--                <tr><td>Four of a kind</td><td id="score-four">0</td></tr>--%>
+<%--                <tr><td>Full House</td><td id="score-full">0</td></tr>--%>
+<%--                <tr><td>Small Straight</td><td id="score-small">0</td></tr>--%>
+<%--                <tr><td>Large Straight</td><td id="score-large">0</td></tr>--%>
+<%--                <tr><td>Yahtzee</td><td id="score-yahtzee">0</td></tr>--%>
+<%--                <tr><td>Chance</td><td id="score-chance">14</td></tr>--%>
+<%--                <tr><td>Total</td><td id="score-total"></td></tr>--%>
+<%--                </tbody>--%>
+<%--            </table>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+    <!-- 디버깅용 -->
+
 </div>
+
+<div class="game-selection">
+    <button class="select-button game-1" onclick="moveToController(1)">야추다이스</button>
+    <button class="select-button game-2" onclick="moveToController(2)">게임 2</button>
+    <button class="select-button game-3" onclick="moveToController(3)">게임 3</button>
+    <button class="select-button game-4" onclick="moveToController(4)">게임 4</button>
+    <button class="select-button game-5" onclick="moveToController(5)">게임 5</button>
+    <button class="select-button game-6" onclick="moveToController(6)">게임 6</button>
+</div>
+
 <c:choose>
     <c:when test="${not empty result}">
         <div class="game-result-container">
@@ -155,7 +169,12 @@
                 </c:when>
             </c:choose>
         </div>
-        <button class="game-return-button" onclick="location.href='GameC'">게임으로</button>
+        <button class="game-return-button" onclick="location.href='/GameC/1'">게임으로</button>
     </div>
 </div>
-<script type="module" src="resources/js/dice_game.js"></script>
+<script>
+    const contextPath = "${pageContext.request.contextPath}";
+    console.log("jsp 내 contextPath : " + contextPath);
+</script>
+<script type="module" src="${pageContext.request.contextPath}/resources/js/dice_game.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/game.js"></script>

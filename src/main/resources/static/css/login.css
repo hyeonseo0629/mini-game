@@ -218,3 +218,18 @@ body {
 .cssAlert.fade-out {
   opacity: 0;
 }
+   /* 탭 내용 기본적으로 숨김 */
+ #idTab, #pwTab {
+   display: none;
+ }
+
+/* active 클래스가 있을 때만 보이기 */
+#idTab.active, #pwTab.active {
+  display: block;
+}
+
+/* 버튼 스타일 */
+.tab-button button.active {
+  background-color: #007bff;
+  color: white;
+}

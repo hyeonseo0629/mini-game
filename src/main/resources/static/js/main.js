@@ -29,13 +29,13 @@ function init() {
 function clicked(no) {
     switch (no) {
         case 1:
-            location.href = "GameC";
+            location.href = "/GameC/1";
             break;
         case 2:
-            location.href = "shopC";
+            location.href = "/shopC";
             break;
         case 3:
-            location.href = "rank";
+            location.href = "/rank";
             break;
         case 4:
             location.href = "/text/community";

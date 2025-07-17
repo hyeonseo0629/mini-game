@@ -8,15 +8,15 @@ let diceBodies = [];
 let diceMeshes = [];
 let heldDice = new Set();
 let gameStarted = false;
-let turn = 1;
+// let turn = 1;
 let rollCount = 0;
 let playerTotal = 0;
 let computerTotal = 0;
 
 const canvas = document.querySelector("#canvas");
-const btn = document.createElement("button");
+const btn = document.querySelector(".game-button");
 const width = 800;
-const height = 800;
+const height = 680;
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -117,22 +117,26 @@ function gameInit() {
     });
 
     const loader = new THREE.TextureLoader();
+
+    console.log("contextPath : " + contextPath);
+
+    let meterialPath = contextPath.endsWith("/") ? contextPath + "resources/images/" : contextPath + "/resources/images/";
     const materials = [
-        new THREE.MeshBasicMaterial({ map: loader.load("resources/images/1_dot.png") }),
+        new THREE.MeshBasicMaterial({ map: loader.load(meterialPath + "1_dot.png") }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/2_dots.png"),
+            map: loader.load(meterialPath + "2_dots.png"),
         }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/3_dots.png"),
+            map: loader.load(meterialPath + "3_dots.png"),
         }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/4_dots.png"),
+            map: loader.load(meterialPath + "4_dots.png"),
         }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/5_dots.png"),
+            map: loader.load(meterialPath + "5_dots.png"),
         }),
         new THREE.MeshBasicMaterial({
-            map: loader.load("resources/images/6_dots.png"),
+            map: loader.load(meterialPath + "6_dots.png"),
         }),
     ];
 
@@ -152,33 +156,27 @@ function gameInit() {
         world.addBody(body);
         diceBodies.push(body);
 
-        const mesh = new THREE.Mesh(geometry, materials);
-        mesh.userData.index = i;
-        scene.add(mesh);
-        diceMeshes.push(mesh);
+        // diceMeshes는 THREE.js에서 주사위의 시각적인 3D 표현체들(mesh)를 담고 있는 배열
+        const mesh = new THREE.Mesh(geometry, materials);  // 박스형 주사위 하나 생성
+        mesh.userData.index = i; // 클릭 판별용 인덱스 저장
+        scene.add(mesh); // scene에 추가하여 렌더링
+        diceMeshes.push(mesh); // mesh를 diceMeshes 배열에 저장
+        // => diceMeshes[0]부터 diceMeshed[4]까지는 각각 주사위 하나씩의 시각적 표현(mesh)임
     }
 
-    // 버튼 설정
-    btn.textContent = "Start Game";
-    btn.style.position = "absolute";
-    btn.style.top = "8%";
-    btn.style.left = "5%";
-    btn.style.padding = "10px 20px";
-    btn.style.fontSize = "16px";
-    btn.style.zIndex = "10";
-    btn.style.backgroundColor = "#cfae70";
-    btn.style.borderRadius = "10px";
-    btn.style.border = "none";
-    document.querySelector('.game-container').appendChild(btn);
 
+
+    // 버튼 이벤트 설정
     btn.addEventListener("click", () => {
+
         if (!gameStarted) {
             gameStarted = true;
-            turn = 1;
+            // turn = 1; // 활용되지 않는 변수 (*** 일단 주석처리)
             rollCount = 0;
             heldDice.clear();
             btn.textContent = "Roll Again";
         }
+
         // if (rollCount < 3) {
         rollDice();
         // }
@@ -190,6 +188,7 @@ function gameInit() {
         mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
         mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
+        // Raycaster로 주사위와의 충돌 체크 -> 클릭된 주사위(mesh)를 식별
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(diceMeshes);
 
@@ -497,20 +496,4 @@ function updateCPUTotalScore() {
         }
     });
     document.querySelector(`#board-2 #score-total`).textContent = computerTotal;
-}
-
-// GameEndC로 Post로 보내기 위한 처리
-function postGameResult(result) {
-    const form = document.createElement("form");
-    form.action = "GameEndC";
-    form.method = "post";
-
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "result";
-    input.value = result;
-
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
 }
