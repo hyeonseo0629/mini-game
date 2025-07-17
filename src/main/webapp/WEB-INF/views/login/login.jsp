@@ -26,7 +26,7 @@
                 <button type="submit">로그인</button>
                 <div class="sub-actions">
                     <button onclick="openSignModal()" type="button">회원가입</button>
-                    <button type="button" onclick="location.href='findAccount'">아이디/비밀번호 찾기</button>
+                    <button onclick="openFindModal()" type="button" >아이디/비밀번호 찾기</button>
                 </div>
             </form>
         </c:when>
@@ -54,6 +54,8 @@
         <div>이름 : ${users.user_name}</div>
         <div>닉네임 : ${users.user_nickname}</div>
         <div>머니 : ${users.user_money}</div>
+        <div>이메일 : ${users.user_email}</div>
+
     </div>
     <br>
 
@@ -79,9 +81,54 @@ onsubmit="return validateSignForm()">
         <div>
             <input type="text" name="user_nickname" placeholder="닉네임">
         </div>
+        <div>
+            <input type ="text" name="user_email" placeholder="이메일">
+        </div>
         <button class="openModal-sign">회원가입</button>
         <button onclick="closeSignModal()" type="button">X</button>
     </form>
+</div>
+
+<!--아이디/비번찾기모달창-->
+<div id="findModal" class="modal" style="display: none" onclick="backFindModal(event)">
+    <div class="findModal-container">
+
+        <div class="tab-button">
+            <button onclick="showTab('id')" id="idTab-btn"class="active">아이디 찾기</button>
+            <button onclick="showTab('pw')" id="pwTab-btn">비밀번호 찾기</button>
+        </div>
+
+               <div id="idTab">
+                   <div>아이디</div>
+                   <form id="findIdForm">
+                       <div>이름 : </div>
+                       <input type="text" id="user_name" name="user_name" required>
+                       <div>이메일 : </div>
+                       <input type="text" id="user_email" name="user_email" required>
+                       <button type="submit">아이디 찾기</button>
+                   </form>
+                   <div id="idResult" style="margin-top:10px; color:blue;"></div>
+                   <button onclick="closeFindModal()" type="button">X</button>
+               </div>
+
+               <div id="pwTab">
+                   <div>비밀번호</div>
+                    <form id="findPwForm"action="/findPw" method="post">
+                      <div>이름 : </div>
+                       <input type="text" id="user_name_pw" name="user_name" required>
+                      <div>아이디 : </div>
+                       <input type="text" id="user_id_pw" name="user_id" required>
+                       <div>이메일 : </div>
+                      <input type="text" id="user_email_pw" name="user_email"required>
+                        <div>새로운 비밀번호 : </div>
+                        <input type="password" id="new_pw" name="new_pw" required>
+                    <button type="submit">비밀번호 변경</button>
+                   </form>
+                   <div id="pwResult" style="margin-top:10px; color:blue;"></div>
+                 <button onclick="closeFindModal()" type="button">X</button>
+              </div>
+
+    </div>
 </div>
 
 <!--인벤토리모달창-->
@@ -138,6 +185,10 @@ onsubmit="return validateSignForm()">
                 <label for="user_nickname">닉네임</label>
                 <input type="text" id="user_nickname"name="user_nickname" value="${user.user_nickname}">
             </div>
+            <div>
+                <label for="user_email">이메일</label>
+                <input type="text" id="user_email"name="user_email" value="${user.user_email}">
+            </div>
             <button type="submit">정보수정</button>
             <button onclick="closeUpdateUser()" type="button">X</button>
         </form>
@@ -180,7 +231,6 @@ onsubmit="return validateSignForm()">
 </c:if>
 
 <script>
-
     let currentSlide = 0;
     <!--비밀번호토글기능-->
     function toggle() {
@@ -207,6 +257,74 @@ onsubmit="return validateSignForm()">
             closeSignModal();
         }
     }
+</script>
+
+<script>
+        <!--아이디/비번찾기모달창기능-->
+        function openFindModal() {
+            document.getElementById("findModal").style.display = "flex";
+        }
+        function closeFindModal() {
+            document.getElementById("findModal").style.display = "none";
+        }
+        function backFindModal(event) {
+            if (event.target.id == "findModal") {
+                closeFindModal();
+            }
+        }
+</script>
+
+<script>
+    <!--아이디/비번찾기모달창 탭 기능-->
+function showTab(tab){
+document.getElementById('idTab').classList.remove('active');
+document.getElementById('pwTab').classList.remove('active');
+document.getElementById(tab + 'Tab').classList.add('active');
+
+document.getElementById('idTab-btn').classList.remove('active');
+document.getElementById('pwTab-btn').classList.remove('active');
+document.getElementById(tab + 'Tab-btn').classList.add('active');
+}
+</script>
+
+<script>
+    <!--아이디 찾기 표시 기능-->
+        document.getElementById("findIdForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const response = await fetch("/findId", {
+                method: "POST",
+                body: formData
+            });
+            const result = await response.text();
+            document.getElementById("idResult").innerText = result;
+        });
+</script>
+
+<script>
+    <!--비밀번호 찾기 표시 기능-->
+    document.getElementById("findPwForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const newPw = formData.get("newPw"); // 비밀번호 가져오기
+        const pwPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+
+        if (!pwPattern.test(newPw)) {
+            document.getElementById("pwResult").style.color = "red";
+            document.getElementById("pwResult").innerText = "비밀번호는 8자 이상이며 대문자, 숫자, 특수문자를 포함해야 합니다.";
+            return;
+        }
+
+        const response = await fetch("/findPw", {
+            method: "POST",
+            body: formData
+        });
+        const result = await response.text();
+        document.getElementById("pwResult").innerText = result;
+    });
 </script>
 
 <script>
@@ -282,8 +400,6 @@ onsubmit="return validateSignForm()">
     }
 </script>
 
-
-
 <script>
     <!--회원가입필수입력기능-->
 function validateSignForm(){
@@ -349,6 +465,7 @@ function validateSignForm(){
         }
     }
 </script>
+
 <script>
     <!--alret양식통일용-->
 window.alert = function(message){
@@ -363,6 +480,20 @@ window.alert = function(message){
     },2500);
 };
 </script>
+
+<%--<script> 세션 완료 알람(보류)--%>
+<%-- window.onload = function(){--%>
+<%--     fetch('/checksession')--%>
+<%--         . then(response=>response.json())--%>
+<%--         .then(data=>{--%>
+<%--            if(data.status ==='expired'){--%>
+<%--                alert("세션 만료, 다시 로그인해주세요.");--%>
+<%--                window.location.href='/login';--%>
+<%--              }--%>
+<%--            })--%>
+<%--          .catch(error=>console.log(error));--%>
+<%-- };--%>
+<%--</script>--%>
 
 </body>
 </html>

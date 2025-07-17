@@ -40,10 +40,10 @@ public class LoginService {
     public boolean updateUser(String originalId, UsersVO users) {
         System.out.println("updateUser is called with original ID: " + originalId + ", new ID: " + users.getUser_id());
         return loginMapper.updateUser(originalId, users);
+    }
 
-
-//       int result = loginMapper.updateUser(users);
-//        return result == 1;
+    public String findUserId(String name, String email) {
+        return loginMapper.findUserId(name, email);
     }
 
     public boolean loginCheck(HttpSession session) {
@@ -52,4 +52,22 @@ public class LoginService {
         return true;
     }
 
+    public String findUserPw(String userId, String userName, String userEmail, String newPw){
+
+      UsersVO user = loginMapper.resetUserPw(userId,userName, userEmail); //유저 정보 조회
+
+      if(user!=null) {
+          loginMapper.changeUserPw(userId, newPw);//비번 변경 처리
+          return "비밀번호를 성공적으로 변경했습니다.";
+      }else{
+          return  "일치하는 정보가 없습니다.";
+      }
+    }
+
+
+
+
+
+
 }
+

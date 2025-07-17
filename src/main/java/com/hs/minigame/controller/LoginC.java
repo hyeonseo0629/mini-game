@@ -1,13 +1,16 @@
 package com.hs.minigame.controller;
 
+import com.hs.minigame.mapper.login.LoginMapper;
 import com.hs.minigame.service.login.LoginService;
 import com.hs.minigame.service.shop.ShopService;
 import com.hs.minigame.vo.ShopItemsVO;
 import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +33,9 @@ public class LoginC {
 
     @Autowired
     private ShopService shopService;
+    private LoginMapper loginMapper;
+    @Autowired
+    private HttpServletResponse httpServletResponse;
 
     @PostMapping("/login")
     public String login(@RequestParam String id, @RequestParam String pw, HttpSession session, RedirectAttributes redirectAttributes, HttpServletRequest request) {
@@ -126,23 +132,49 @@ public class LoginC {
 //        model.addAttribute("content", "game/game_menu.jsp");
 //        return "main_page";
     }
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login/login";
+    }
     @PostMapping("/sign")
     public String sign(@ModelAttribute UsersVO users,RedirectAttributes redirectAttributes) {
+
+        if(!isValidId(users.getUser_id())){
+        redirectAttributes.addFlashAttribute("alert","아이디는 6~12자, 소문자+숫자만 가능합니다.");
+        return "redirect:/main_page";
+        }
+        if(!isValidPassword(users.getUser_pw())){
+        redirectAttributes.addFlashAttribute("alert","비밀번호는 8자 이상, 대문자/숫자/특수문자를 포함해야 합니다.");
+        return "redirect:/main_page";
+        }
 
         users.setUser_money(5000);
         users.setUser_role("USER");
         users.setUser_avatar_img("base_avatar.webp");
 
-      boolean success = loginService.registerUser(users);
+        boolean success = loginService.registerUser(users);
 
        if(success) {
            redirectAttributes.addFlashAttribute("alert","회원 가입 성공");
        } else {
            redirectAttributes.addFlashAttribute("alert","회원 가입 실패");
        }
-       redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
+       //redirectAttributes.addFlashAttribute("content", "game/game_menu.jsp");
        return  "redirect:/main_page";
     }
+
+    public boolean isValidId(String id) {
+        // 소문자+숫자, 6~12자
+        String pattern = "^[a-z0-9]{6,12}$";
+        return id != null && id.matches(pattern);
+    }
+    public boolean isValidPassword(String pw) {
+        // 8자 이상, 대문자, 숫자, 특수문자
+        String pattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$";
+        return pw != null && pw.matches(pattern);
+    }
+
+
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam("user_id") String userId, HttpSession session, RedirectAttributes redirectAttributes ) {
         System.out.println("Controller: Attempting to delete user with ID: " + userId);
@@ -182,5 +214,34 @@ public class LoginC {
      }
         return "redirect:/main_page";
     }
+    @PostMapping("/findId")
+    @ResponseBody
+        public String findId(@RequestParam String user_name,@RequestParam String user_email){
+      String userId = loginService.findUserId(user_name,user_email);
+      if(userId != null){
+          return "당신의 ID :" + userId;
+      }else{
+          return"일치하는 정보가 없습니다.";
+      }
+    }
 
+    @PostMapping("/findPw")
+    @ResponseBody
+    public String findPw(@RequestParam String user_id,@RequestParam String user_name,@RequestParam String user_email,@RequestParam("new_pw") String newPw) {
+     String result = loginService.findUserPw(user_id,user_name,user_email,newPw);
+     return result;
+   }
+   //세션 완료 알람 (보류)
+//    @GetMapping("/checksession")
+//    @ResponseBody
+//    public ResponseEntity<Map<String,String>>checksession(HttpSession session){
+//       Map<String,String> response = new HashMap<>();
+//
+//       if(session.getAttribute("users")==null){
+//           response.put("status","expired");
+//       }else{
+//           response.put("status","active");
+//       }
+//       return ResponseEntity.ok(response);
+//    }
 }
