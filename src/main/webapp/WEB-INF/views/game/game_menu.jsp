@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="game-container">
     <div id="canvas" style="width: 800px; padding: 0"></div>
+    <button class="game-button" name="user" value="${sessionScope.users}">Start Game</button>
     <div class="score-boards">
         <div class="score-board" id="board-1">
             <h3>Player</h3>
@@ -65,6 +66,7 @@
             </table>
         </div>
     </div>
+
     <!-- 디버깅용 -->
 <%--    <div class="score-boards">--%>
 <%--        <div class="score-board" id="board-1">--%>
@@ -123,6 +125,7 @@
 <%--        </div>--%>
 <%--    </div>--%>
     <!-- 디버깅용 -->
+
 </div>
 <c:choose>
     <c:when test="${not empty result}">

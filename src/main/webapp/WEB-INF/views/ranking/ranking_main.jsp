@@ -36,9 +36,9 @@
                                 <div class="username">${r.user_nickname}</div>
                                 <div class="score">
                                     <c:choose>
-                                        <c:when test="${rankingType=='레이팅 점수'}">${r.score_point}</c:when>
-                                        <c:when test="${rankingType=='연승 횟수'}">${r.stack_point}</c:when>
-                                        <c:otherwise>${r.user_money}</c:otherwise>
+                                        <c:when test="${rankingType=='레이팅 점수'}">${r.score_point}점</c:when>
+                                        <c:when test="${rankingType=='연승 횟수'}">${r.stack_point}연승</c:when>
+                                        <c:otherwise>${r.user_money}원</c:otherwise>
                                     </c:choose>
                                 </div>
                                 <div class="badge">${i.index + 1}</div>
@@ -49,7 +49,7 @@
 
                 <!-- 4~10등 (Top3 이후 7개) -->
                 <div class="ranking-header ranking-row">
-                    <div>No</div>
+                    <div>등수</div>
                     <div>아이디</div>
                     <div>닉네임</div>
                     <div>
@@ -68,9 +68,9 @@
                             <div>${r.user_nickname}</div>
                             <div>
                                 <c:choose>
-                                    <c:when test="${rankingType=='레이팅 점수'}">${r.score_point}</c:when>
-                                    <c:when test="${rankingType=='연승 횟수'}">${r.stack_point}</c:when>
-                                    <c:otherwise>${r.user_money}</c:otherwise>
+                                    <c:when test="${rankingType=='레이팅 점수'}">${r.score_point}점</c:when>
+                                    <c:when test="${rankingType=='연승 횟수'}">${r.stack_point}연승</c:when>
+                                    <c:otherwise>${r.user_money}원</c:otherwise>
                                 </c:choose>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
             <c:set var="startIndex" value="${10 + (page-2) * 10}" /> <!-- (page-1) * 10으로 대체 가능한지 차후 확인 -->
             <c:set var="endIndex" value="${startIndex + 10}" />
             <div class="ranking-header ranking-row">
-                <div>No</div>
+                <div>등수</div>
                 <div>아이디</div>
                 <div>닉네임</div>
                 <div>
@@ -102,9 +102,9 @@
                         <div>${r.user_nickname}</div>
                         <div>
                             <c:choose>
-                                <c:when test="${rankingType=='레이팅 점수'}">${r.score_point}</c:when>
-                                <c:when test="${rankingType=='연승 횟수'}">${r.stack_point}</c:when>
-                                <c:otherwise>${r.user_money}</c:otherwise>
+                                <c:when test="${rankingType=='레이팅 점수'}">${r.score_point}점</c:when>
+                                <c:when test="${rankingType=='연승 횟수'}">${r.stack_point}연승</c:when>
+                                <c:otherwise>${r.user_money}원</c:otherwise>
                             </c:choose>
                         </div>
                     </div>

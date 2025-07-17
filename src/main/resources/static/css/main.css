@@ -116,6 +116,19 @@ a:hover {
     width: 800px;
 }
 
+/* 게임 내 버튼 */
+.game-container > .game-button {
+    position: absolute;
+    top: 8%;
+    left: 5%;
+    padding: 10px 20px;
+    font-size: 16px;
+    z-index: 10;
+    background-color: #cfae70;
+    border-radius: 10px;
+    border: none;
+}
+
 /* 점수판 묶음 (두 개 나란히 배치) */
 .game-container > .score-boards {
     position: absolute;
