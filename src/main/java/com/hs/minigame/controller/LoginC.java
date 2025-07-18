@@ -44,8 +44,7 @@ public class LoginC {
         String referer = request.getHeader("Referer");
         //"Referer" : 사용자가 이 요청을 보내기 전 머물렀던 페이지URL
 
-
-        System.out.println("DEBUG - 아바타 이미지: " + users.getUser_avatar_img());
+//        System.out.println("DEBUG - 아바타 이미지: " + users.getUser_avatar_img());
 
         if (users == null) {
             System.out.println("id 불일치");

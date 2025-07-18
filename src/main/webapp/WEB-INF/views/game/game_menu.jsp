@@ -9,8 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="game-container">
     <div class="score-boards">
-        <div class="score-board" id="board-1">
-            <h3>Player</h3>
+        <div class="score-board" id="board-2">
+            <h3>CPU</h3>
             <table id="score-table">
                 <thead>
                 <tr>
@@ -36,8 +36,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="score-board" id="board-2">
-            <h3>CPU</h3>
+        <div class="score-board" id="board-1">
+            <h3>Player</h3>
             <table id="score-table">
                 <thead>
                 <tr>
