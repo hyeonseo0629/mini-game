@@ -42,7 +42,7 @@ function gameInit() {
     btn.style.disabled = false;
 
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(95, width / height, 0.1, 1000);
     camera.position.set(0, 20, 3);
     camera.lookAt(0, -10, 0);
 
@@ -69,8 +69,16 @@ function gameInit() {
         containerSize * 2,
         containerSize * 2
     );
+
+    const loader = new THREE.TextureLoader();
+    let meterialPath = contextPath.endsWith("/") ? contextPath + "resources/images/" : contextPath + "/resources/images/";
+    const texture = loader.load(meterialPath + "game_board_tile.jpg");
+
     const floorMat = new THREE.MeshBasicMaterial({
-        color: 0x3a2c1e,
+        // color: 0x4b3621,
+        // color: 0x5e503f,
+        // color: 0x3e3a36,
+        map: texture,
         side: THREE.DoubleSide,
     });
     const floorMesh = new THREE.Mesh(floorGeo, floorMat);
@@ -82,8 +90,7 @@ function gameInit() {
     );
     const wallGeo = new THREE.BoxGeometry(containerSize, 10, wallThickness);
     const wallMat = new THREE.MeshBasicMaterial({
-        color: 0xcfae70,
-        wireframe: true,
+        visible: false,
     });
 
     [
@@ -118,9 +125,6 @@ function gameInit() {
         scene.add(mesh);
     });
 
-    const loader = new THREE.TextureLoader();
-
-    let meterialPath = contextPath.endsWith("/") ? contextPath + "resources/images/" : contextPath + "/resources/images/";
     const materials = [
         new THREE.MeshBasicMaterial({ map: loader.load(meterialPath + "1_dot.png") }),
         new THREE.MeshBasicMaterial({
@@ -164,7 +168,14 @@ function gameInit() {
         // => diceMeshes[0]부터 diceMeshed[4]까지는 각각 주사위 하나씩의 시각적 표현(mesh)임
     }
 
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(10, 20, 10); // 너무 멀거나 각도가 애매할 수 있음
+    light.target.position.set(0, 0, 0); // 꼭 추가하세요!
+    scene.add(light);
+    scene.add(light.target); // 놓치기 쉬운 부분
 
+    const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+    scene.add(ambient);
 
     // 버튼 이벤트 설정
     btn.addEventListener("click", () => {
