@@ -39,9 +39,12 @@
 }
 
 .shop-item-container {
+    background-image: url("/resources/images/gameconsole.webp");
+    background-repeat: no-repeat;
+    /*background-size: 256px;*/
+
     width: 200px; /* 한 줄에 4개씩 배치하려면 200px * 4 + gap 고려 */
     box-sizing: border-box; /* padding, border 포함 계산 */
-    border: 2px solid #333;
     padding: 10px;
     text-align: center;
     font-family: sans-serif;
@@ -52,9 +55,8 @@
 }
 
 .item-img {
-    width: 100%;
+    width: 150px;
     height: 150px;
-    border: 2px solid #333;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,32 +64,80 @@
 }
 
 .item-img > img {
-    max-width: 100%;
+    margin-left: 30px;
+    margin-bottom: 18px;
+    max-width: 70%;
     height: 100%;
+
+
+    /*max-width: 100%;*/
+    /*max-height: 100%;*/
+    /*object-fit: contain;*/
+    /*aspect-ratio: 1 / 1;*/
+    /*image-rendering: pixelated;*/
 }
 
+.base_avatar {
+    transform: scale(0.80);
+    margin-left: 5px;
+}
+
+.dinosaur {
+    transform: scale(0.8);
+    margin-left: 5px;
+}
+
+.wizard {
+    transform: scale(0.75);
+    margin-left: 5px;
+}
+
+.polar_bear {
+    transform: scale(1.1);
+}
+
+.name-price-zone{
+
+    height: 32%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}
+
+
 .item-name {
-    border-top: 2px solid #333;
     padding: 5px 0;
     font-weight: bold;
+    padding-bottom: 44px;
+
 }
 
 .underside {
     display: flex;
     justify-content: space-around;
     margin-top: 5px;
+    align-items: center;
+    margin-bottom: 24px;
 }
 
 .item-price {
-    border: 2px solid #333;
+    margin-left: 15px;
+    margin-right: 5px;
     padding: 5px 10px;
+    white-space: nowrap;
+
 }
 
 .buy-btn {
-    border: 2px solid #333;
-    background-color: white;
+    border: none;
+    background-color: transparent;
+    color:#e0d8c3 ;
     padding: 5px 10px;
     cursor: pointer;
+    white-space: nowrap;
+    font-family: sans-serif;
+
 }
 
 .pagination{
