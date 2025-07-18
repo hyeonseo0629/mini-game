@@ -27,39 +27,57 @@ public class TextsC {
     private LoginService loginService;
 
     // 게시판 홈 (페이징 있음)
-//    @GetMapping("/{type}")
-//    public String textsMain(@RequestParam(defaultValue = "1") int page,
-//                            @PathVariable String type,
-//                            Model model) {
-//        type = type.toUpperCase();
-//        List<TextsVO> texts = textsService.selectTexts(page, type);
-//        int totalCount = textsService.textsCount(type);
-//        int totalPage = (int) Math.ceil((double) totalCount / 5);
-//
-//        //paging 관련 로직
-//        model.addAttribute("totalPage", totalPage);
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("texts", texts);
-//        model.addAttribute("type", type);
-//        model.addAttribute("content", "texts/texts_main.jsp");
-//        return "main_page";
-//    }
-
-    @ResponseBody
-    @GetMapping("/list/{type}/{page}")
-    public Map<String, Object> getTextList(@PathVariable String type, @PathVariable int page) {
+    @GetMapping("/{type}")
+    public String textsMain(@RequestParam(defaultValue = "1") int page,
+                            @PathVariable String type,
+                            Model model) {
         type = type.toUpperCase();
         List<TextsVO> texts = textsService.selectTexts(page, type);
         int totalCount = textsService.textsCount(type);
         int totalPage = (int) Math.ceil((double) totalCount / 5);
 
+        //paging 관련 로직
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("texts", texts);
+        model.addAttribute("type", type);
+        model.addAttribute("content", "texts/texts_main.jsp");
+        return "main_page";
+    }
+
+//    @ResponseBody
+//    @GetMapping("/list/{type}/{page}")
+//    public Map<String, Object> getTextList(@PathVariable String type, @PathVariable int page) {
+//        type = type.toUpperCase();
+//        List<TextsVO> texts = textsService.selectTexts(page, type);
+//        int totalCount = textsService.textsCount(type);
+//        int totalPage = (int) Math.ceil((double) totalCount / 5);
+//
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("texts", texts);
+//        result.put("totalPage", totalPage);
+//        result.put("currentPage", page);
+//        return result;
+//    }
+
+    @GetMapping("/list/{type}/{page}")
+    @ResponseBody
+    public Map<String, Object> listPage(@PathVariable("type") String type,
+                                        @PathVariable("page") int page) {
+
+        int perPage = 5;
+        int start = (page - 1) * perPage;
+
+        List<TextsVO> texts = textsService.getTextsByPage(type, start, perPage);
+        int totalCount = textsService.getTotalCount(type);
+        int totalPage = (int) Math.ceil((double) totalCount / perPage);
+
         Map<String, Object> result = new HashMap<>();
         result.put("texts", texts);
         result.put("totalPage", totalPage);
-        result.put("currentPage", page);
+
         return result;
     }
-
 
     // 게시판 글 상세내용
     @GetMapping("/detail/{id}")

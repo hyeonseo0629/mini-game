@@ -34,4 +34,10 @@ public interface TextsMapper {
 
     @Insert("insert into texts( text_title, text_content, text_user_no, text_type) values (#{text_title}, #{text_content}, #{text_user_no}, #{text_type})")
     public int insertText(TextsVO textsVO);
+
+    @Select("SELECT * FROM texts WHERE text_type = #{type} ORDER BY text_id DESC LIMIT #{perPage} OFFSET #{start}")
+    List<TextsVO> getTextsByPage(@Param("type") String type, @Param("start") int start, @Param("perPage") int perPage);
+
+    @Select("SELECT COUNT() FROM texts WHERE text_type = #{type}")
+    int getTotalCount(@Param("type") String type);
 }

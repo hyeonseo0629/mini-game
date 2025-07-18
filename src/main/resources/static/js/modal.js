@@ -165,10 +165,19 @@ deleteBtn.addEventListener('click', e => {
 
             // Remove the deleted row from the DOM
             const deletedRow = document.querySelector(`.text-row[data-id="${id}"]`);
-            if (deletedRow) {
-                deletedRow.remove();
-            }
-            alert("게시물이 삭제되었습니다.");
+            // if (deletedRow) {
+            //     deletedRow.remove();
+            // }
+            // alert("게시물이 삭제되었습니다.");
+            const currentPageEl = document.querySelector(".page-link.active") || document.querySelector(".page-link");
+            const currentPage = currentPageEl ? currentPageEl.dataset.page : 1;
+            fetch(`/text/list/${type}/${currentPage}`)
+                .then(res => res.json())
+                .then(data => {
+                    updateList(data.texts, type);
+                    updatePaging(data.totalPage, currentPage, type);
+                    alert("게시물이 삭제되었습니다.");
+                });
 
             // You might want to re-fetch the list if pagination/total count needs update,
             // or if the redirect from Spring actually takes effect.
@@ -247,3 +256,73 @@ function formatDate(dateStr) {
     return `${m}월 ${d}일`;
 }
 
+function updateList(texts, type) {
+    const tbody = document.querySelector('tbody');
+    tbody.innerHTML = '';
+
+    texts.forEach(t => {
+        const row = document.createElement('tr');
+        row.classList.add('text-row');
+        row.dataset.id = t.text_id;
+        row.dataset.title = t.text_title;
+        row.dataset.content = t.text_content;
+        row.dataset.nickname = t.user_nickname;
+        row.dataset.date = t.text_write_date;
+        row.dataset.type = type;
+
+        row.innerHTML = `
+            <td class="text_id">${t.text_id}</td>
+            <td class="text_title">${t.text_title}</td>
+            <td class="text_user_no">${t.user_nickname}</td>
+            <td class="text_date">${formatDate(t.text_write_date)}</td>
+        `;
+        tbody.appendChild(row);
+
+        row.addEventListener('click', e => {
+            if (e.target.tagName === 'BUTTON') return;
+
+            openDetailBtn.click();
+            titleEl.value = row.dataset.title;
+            contentEl.value = row.dataset.content;
+            nickNameEl.value = row.dataset.nickname;
+            dateEl.innerText = row.dataset.date;
+
+            editBtn.dataset.id = row.dataset.id;
+            editBtn.dataset.type = row.dataset.type;
+            deleteBtn.dataset.id = row.dataset.id;
+            deleteBtn.dataset.type = row.dataset.type;
+
+            titleEl.disabled = true;
+            contentEl.disabled = true;
+            saveEditBtn.style.display = 'none';
+        });
+    });
+}
+
+function updatePaging(totalPage, currentPage, type) {
+    const pagingDiv = document.querySelector(".paging");
+    pagingDiv.innerHTML = '';
+
+    for (let p = 1; p <= totalPage; p++) {
+        const a = document.createElement("a");
+        a.href = "javascript:void(0);";
+        a.classList.add("page-link");
+        if (p == currentPage) a.classList.add("active");
+        a.dataset.page = p;
+        a.dataset.type = type;
+        a.innerText = `[${p}]`;
+        pagingDiv.appendChild(a);
+
+        // 이벤트 리바인딩
+        a.addEventListener('click', async function () {
+            try {
+                const res = await fetch(`/text/list/${type}/${p}`);
+                const data = await res.json();
+                updateList(data.texts, type);
+                updatePaging(data.totalPage, p, type);
+            } catch (err) {
+                console.error("페이지 불러오기 실패:", err);
+            }
+        });
+    }
+}

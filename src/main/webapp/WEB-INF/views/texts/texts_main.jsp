@@ -16,10 +16,10 @@
     <table>
         <thead>
         <tr>
-            <th>No.</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
+            <th class="col-no">No.</th>
+            <th class="col-title">제목</th>
+            <th class="col-writer">작성자</th>
+            <th class="col-date">작성일</th>
         </tr>
         </thead>
         <tbody>
@@ -39,9 +39,9 @@
     <div class="paging">
         <c:forEach begin="1" end="${totalPage}" var="p">
             <a href="javascript:void(0);"
-               class="page-link"
+               class="page-link ${p == currentPage ? 'active' : ''}"
                data-page="${p}"
-               data-type="${type}">[${p}]</a>
+               data-type="${type}">${p}</a>
         </c:forEach>
     </div>
 

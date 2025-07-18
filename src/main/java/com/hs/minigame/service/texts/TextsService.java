@@ -38,4 +38,13 @@ public class TextsService {
     public int insertText(TextsVO textsVO) {
         return textsMapper.insertText(textsVO);
     }
+
+    public List<TextsVO> getTextsByPage(String type, int start, int perPage) {
+        return textsMapper.getTextsByPage(type, start, perPage);
+    }
+
+    public int getTotalCount(String type) {
+        return textsMapper.getTotalCount(type);
+    }
+
 }
