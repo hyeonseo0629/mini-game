@@ -1,7 +1,7 @@
 .board-text {
     width: 100%;
     max-width: 800px;
-    margin: 40px auto;
+    margin:auto;
     padding: 20px;
     box-sizing: border-box;
     color: #e0d8c3;
@@ -10,15 +10,14 @@
 
 .board-text h1 {
     text-align: center;
-    margin-bottom: 60px;
     color: #cfae70;
-    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .board-text > .button-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    margin: 10px auto 40px auto;
+    text-align: right;
+    width: 100%;
 }
 
 .board-text > .button-container button {
@@ -27,7 +26,7 @@
     color: #1c1c1c;
     font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
     transition: background-color 0.3s ease;
@@ -130,8 +129,8 @@
     flex-shrink: 0; /* 줄어들지 않도록 */
     min-width: 45px;
     padding: 8px 14px;
-    background-color: #cfae70;
-    color: #1c1c1c;
+    background-color: #444;
+    color: #fff;
     font-weight: bold;
     border-radius: 6px;
     text-decoration: none;
@@ -142,14 +141,14 @@
 }
 
 .board-text > .paging .page-link:hover {
-    background-color: #e0d8c3;
+    background-color: #666;
     transform: translateY(-2px);
 }
 
 .board-text > .paging .page-link.active {
-    background-color: #8f7b45;
-    color: #fff;
-    cursor: default;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
 }
 
 /* modal */
@@ -216,7 +215,7 @@
     border: none;
     border-radius: 12px;
     padding: 20px;
-    width: 1000px;
+    width: 800px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     margin: auto;
 }
@@ -233,7 +232,7 @@
     padding: 8px;
     width: 100%;
     font-family: inherit;
-    font-size: 18px;
+    font-size: 30px;
     text-align: center;
 }
 
@@ -246,12 +245,23 @@
     padding: 8px;
     width: 100%;
     font-family: inherit;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
 #detailModal textarea {
-    resize: vertical;
-    height: 120px;
+    resize: none;
+    height: 300px;
+    overflow: auto;
+}
+
+#detailContent {
+    white-space: pre-wrap; /* ✅ 줄바꿈, 띄어쓰기 유지 */
+    background-color: transparent;
+    border: none;
+    resize: none;
+    overflow: hidden;
+    font-family: inherit;
 }
 
 #detailModal p {
@@ -261,7 +271,6 @@
 /* detailDate (단순 텍스트용) */
 #detailModal #detailDate {
     color: #ccc;
-    font-size: 14px;
     margin-top: 8px;
     text-align: left;
 }
@@ -269,7 +278,7 @@
 /* 버튼 묶음 */
 #detailModal .btns {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 20px;
