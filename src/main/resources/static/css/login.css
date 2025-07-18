@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
+
+.right-bar-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* 필요에 따라 수평 가운데 정렬 */
+  gap: 20px;             /* 요소들 간 간격 */
+}
+
 .modal {
   display: none;
   position: fixed;
@@ -19,20 +27,21 @@
   align-items: center;
   justify-content: center;
   margin: 10px 0;
+  height: 80%;
   /*gap: 5px;*/
 }
 
 .inventory-contents {
-  flex: 1;
-  min-width: 300px;
+  width: 400px;
   overflow: hidden;
   position: relative;
+
 }
 
 .inventory-track {
   display: flex;
   transition: transform 0.3s ease;
-  min-width: 100%;
+  min-width: max-content;
   will-change: transform;
 }
 
@@ -96,6 +105,7 @@ body {
 
 .login-container {
   display: flex;
+  flex-direction:column ;
   justify-content: center;
   align-items: center;
   min-height: 0vh;
@@ -226,6 +236,18 @@ body {
 /* active 클래스가 있을 때만 보이기 */
 #idTab.active, #pwTab.active {
   display: block;
+}
+
+img {
+  /*width: auto;*/
+  /*object-fit: contain; !* 또는 'cover' 테스트해봐 *!*/
+  /*image-rendering: pixelated; !* 픽셀 캐릭터일 경우 *!*/
+  /*display: block;*/
+  /*margin: 0 auto;*/
+
+  width: 200px;
+  height: 200px;
+  object-fit: contain;  /* or cover / fill / none / scale-down */
 }
 
 /* 버튼 스타일 */
