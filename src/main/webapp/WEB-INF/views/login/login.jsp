@@ -145,7 +145,7 @@ onsubmit="return validateSignForm()">
     <!--인벤토리모달창-->
 <div id="invenModal" class="modal" style="display: none" onclick="backInvenModal(event)">
     <div class="inven-modal-body">
-        <div>인벤토리</div>
+        <span>인벤토리</span>
             <div class="inventory-wrapper">
                 <button class="slide-btn left" onclick="slide(-1)">&#8592;</button>
 

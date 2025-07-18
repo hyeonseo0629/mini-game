@@ -3,7 +3,7 @@
 .modal {
   display: none;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 1);
   top: 0;
   left: 0;
   width: 100%;
@@ -11,6 +11,7 @@
   justify-content: center;
   align-items: center;
   z-index: 20;
+  opacity: 1;
 }
 
 /*인벤 모달 슬라이드 기능*/
@@ -64,18 +65,21 @@
 .inven-modal-body {
   position: relative;
   display: inline-block;
-  background-color: #252525;
-  color: #e0d8c3;
-  padding: 30px;
-  border-radius: 8px;
+  background-color: #2a2a2a;        /* 변경됨: 더 진한 배경으로 통일 */
+  color: #e0d8c3;                   /* 유지됨 */
+  padding: 30px;                    /* 유지됨 */
+  border-radius: 15px;              /* 변경됨: radius를 더 둥글게 */
   text-align: center;
-  width: 400px;
-  height: 400px;
+  width: 420px;                     /* 변경됨: 공통 너비와 일치 */
+  height: auto;                     /* 변경됨: 고정 높이 제거 */
+  box-shadow: 0 0 15px rgba(255, 215, 0, 1);
 }
-
+.inven-modal-body span{
+  font-size: 1.5rem;
+}
 #closeInvenModal {
-  background-color: red;
-  color: white;
+  /*background-color: transparent; */   /* 변경됨: 배경 제거 */
+  color: #facc15;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
@@ -85,7 +89,7 @@
 }
 
 #closeInvenModal:hover {
-  background-color: #b30000;
+  color: #e0d8c3;  /* 변경됨: hover 시 밝은 텍스트로 */
 }
 body {
   background-color: #1c1c1c; /* 기존 배경과 통일 */
@@ -242,7 +246,7 @@ body {
   border-radius: 8px;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.9rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
   z-index: 9999;
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -372,7 +376,7 @@ body {
   width: 420px;
   max-width: 90vw;
   text-align: center;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 1);
   position: relative;
 }
 
@@ -413,7 +417,7 @@ body {
   width: 420px;
   max-width: 90vw;
   text-align: center;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 1);
   position: relative;
   margin: 0 auto;
 }
@@ -478,7 +482,7 @@ body {
   width: 420px;
   max-width: 90vw;
   text-align: center;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 1);
   position: relative;
 }
 
