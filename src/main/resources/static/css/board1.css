@@ -14,13 +14,13 @@
     font-weight: bold;
 }
 
-.button-container {
+.board-text > .button-container {
     margin: 10px auto 40px auto;
     text-align: right;
     width: 100%;
 }
 
-.button-container button {
+.board-text > .button-container button {
     padding: 8px 16px;
     background-color: #cfae70;
     color: #1c1c1c;
@@ -30,33 +30,33 @@
     cursor: pointer;
     font-size: 0.9rem;
     transition: background-color 0.3s ease;
-
 }
 
-.button-container button:hover {
+.board-text > .button-container button:hover {
     background-color: #e0d8c3;
 }
 
-.col-no {
+.board-text > table .col-no {
     width: 10%;
 }
 
-.col-title {
+.board-text > table .col-title {
     width: 50%;
     text-align: center;
     padding-left: 20px;
 }
 
-.col-writer {
+.board-text > table .col-writer {
     width: 20%;
 }
 
-.col-date {
+.board-text > table .col-date {
     width: 20%;
 }
+
 
 /* 게시판 테이블 스타일 */
-table {
+.board-text > table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
@@ -66,12 +66,13 @@ table {
     overflow: hidden;
 }
 
-thead {
+.board-text > table thead {
     background-color: #3a3a3a;
     color: #cfae70;
 }
 
-th, td {
+.board-text > table th,
+.board-text > table td {
     padding: 12px;
     text-align: center;
     border-bottom: 1px solid #444;
@@ -83,26 +84,26 @@ th, td {
     text-overflow: ellipsis;
 }
 
-tr:last-child td {
+.board-text > table tr:last-child td {
     border-bottom: none;
 }
 
-tr:nth-child(even) {
+.board-text > table tr:nth-child(even) {
     background-color: #252525;
 }
 
-tr:hover {
+.board-text > table tr:hover {
     background-color: #333;
 }
 
-.text_id,
-.text_user_no,
-.text_date {
+.board-text > table .text_id,
+.board-text > table .text_user_no,
+.board-text > table .text_date {
     width: 100px;
     color: #e0d8c3;
 }
 
-.text_title {
+.board-text > table .text_title {
     width: auto;
     text-align: center;
     padding-left: 20px;
@@ -114,7 +115,7 @@ tr:hover {
     text-overflow: ellipsis;
 }
 
-.paging {
+.board-text > .paging {
     display: flex;
     justify-content: center;
     flex-wrap: nowrap; /* 버튼 줄바꿈 방지 */
@@ -124,7 +125,7 @@ tr:hover {
     padding: 10px 0;
 }
 
-.page-link {
+.board-text > .paging .page-link {
     flex-shrink: 0; /* 줄어들지 않도록 */
     min-width: 45px;
     padding: 8px 14px;
@@ -139,21 +140,20 @@ tr:hover {
     text-align: center;
 }
 
-.page-link:hover {
+.board-text > .paging .page-link:hover {
     background-color: #666;
     transform: translateY(-2px);
 }
 
-.page-link.active {
+.board-text > .paging .page-link.active {
     background-color: #cfae70;
     color: #1c1c1c;
     font-weight: bold;
-    cursor: default;
 }
 
-
-
 /* modal */
+
+
  #insertModal {
      text-align: center;
      background-color: #1e1e1e;

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/resources/css/login.css"/>
 </head>
 <body>
-<br>
+<div class="right-zone">
+
 <div class="login-container">
     <!--로그인창-->
     <c:choose>
@@ -33,42 +34,49 @@
 
     <c:otherwise>
         <!--로그인완료창-->
-    <div class="welcome-box">
-        <span>${users.user_id}님 환영합니다</span>
-        <form action="/logout" method="post">
-            <button type="submit">로그아웃</button>
-        </form>
+        <div class="welcome-box">
+            <span>${users.user_id}님 환영합니다</span>
+             <form action="/logout" method="post">
+                <button type="submit">로그아웃</button>
+             </form>
 
-        <form id="deleteUser"action="/deleteUser" method="post">
-            <input type="hidden" name="user_id" value="${users.user_id}">
-            <button type="button"onclick="checkDelete()">회원 탈퇴</button>
-        </form>
-    </div>
+               <form id="deleteUser"action="/deleteUser" method="post">
+                  <input type="hidden" name="user_id" value="${users.user_id}">
+                  <button type="button"onclick="checkDelete()">회원 탈퇴</button>
+                </form>
+         </div>
     </c:otherwise>
     </c:choose>
+</div>
+
     <br>
+
     <!--마이페이지+인벤토리-->
     <c:if test="${not empty users}">
-    <div>
+        <div class="mypage-box">
+            <span>마이페이지</span>
+    <div class="mypage-info">
         <div>ID : ${users.user_id}</div>
         <div>이름 : ${users.user_name}</div>
         <div>닉네임 : ${users.user_nickname}</div>
         <div>머니 : ${users.user_money}</div>
         <div>이메일 : ${users.user_email}</div>
-
     </div>
-    <br>
 
-<button onclick="openInvenModal()" type="button">인벤토리</button>
-<button onclick="openUpdateUser()"type="button">회원정보 수정</button>
-</c:if>
-</div>
+        <div class="another-box">
+            <button onclick="openInvenModal()" type="button">인벤토리</button>
+            <button onclick="openUpdateUser()"type="button">회원정보 수정</button>
+        </div>
+        </div>
+     </c:if>
 
 <!--회원가입모달창-->
 <div id="signModal" class="modal" style="display:none" onclick="backSignModal(event)"
 onsubmit="return validateSignForm()">
+    <div class="signModal-box">
     <form action="/sign" method="post">
         <div>회원 가입</div>
+        <div class="group-form">
         <div>
             <input type="text" name="user_id" placeholder="id">
         </div>
@@ -84,14 +92,17 @@ onsubmit="return validateSignForm()">
         <div>
             <input type ="text" name="user_email" placeholder="이메일">
         </div>
+        </div>
         <button class="openModal-sign">회원가입</button>
-        <button onclick="closeSignModal()" type="button">X</button>
+        <button onclick="closeSignModal()" type="button"class="close-btn">X</button>
     </form>
 </div>
+</div>
+
 
 <!--아이디/비번찾기모달창-->
 <div id="findModal" class="modal" style="display: none" onclick="backFindModal(event)">
-    <div class="findModal-container">
+    <div class="findModal-box">
 
         <div class="tab-button">
             <button onclick="showTab('id')" id="idTab-btn"class="active">아이디 찾기</button>
@@ -108,7 +119,7 @@ onsubmit="return validateSignForm()">
                        <button type="submit">아이디 찾기</button>
                    </form>
                    <div id="idResult" style="margin-top:10px; color:blue;"></div>
-                   <button onclick="closeFindModal()" type="button">X</button>
+                   <button onclick="closeFindModal()" type="button"class="close-btn">X</button>
                </div>
 
                <div id="pwTab">
@@ -125,16 +136,16 @@ onsubmit="return validateSignForm()">
                     <button type="submit">비밀번호 변경</button>
                    </form>
                    <div id="pwResult" style="margin-top:10px; color:blue;"></div>
-                 <button onclick="closeFindModal()" type="button">X</button>
+                 <button onclick="closeFindModal()" type="button"class="close-btn">X</button>
               </div>
+          </div>
+      </div>
 
-    </div>
-</div>
 
-<!--인벤토리모달창-->
+    <!--인벤토리모달창-->
 <div id="invenModal" class="modal" style="display: none" onclick="backInvenModal(event)">
     <div class="inven-modal-body">
-        <div>인벤토리</div>
+        <span>인벤토리</span>
             <div class="inventory-wrapper">
                 <button class="slide-btn left" onclick="slide(-1)">&#8592;</button>
 
@@ -159,13 +170,13 @@ onsubmit="return validateSignForm()">
 
                 <button class="slide-btn right" onclick="slide(1)">&#8594;</button>
             </div>
-        <button onclick="closeInvenModal()">X</button>
+        <button onclick="closeInvenModal()"class="close-btn">X</button>
     </div>
 </div>
 
 <!--회원정보수정모달창-->
 <div id="updateModal" class="modal" style="display: none"onclick="backUpdateModal(event)">
-    <div>
+    <div class="updateModal-box">
         <form action="/updateUser" method="post">
             <input type="hidden" name="originalId" value="${user.user_id}">
             <div>회원 정보 수정</div>
@@ -190,7 +201,7 @@ onsubmit="return validateSignForm()">
                 <input type="text" id="user_email"name="user_email" value="${user.user_email}">
             </div>
             <button type="submit">정보수정</button>
-            <button onclick="closeUpdateUser()" type="button">X</button>
+            <button onclick="closeUpdateUser()" type="button"class="close-btn">X</button>
         </form>
     </div>
 </div>
@@ -198,6 +209,8 @@ onsubmit="return validateSignForm()">
     <c:if test="${not empty users.user_avatar_img}">
         <img src="/resources/images/${users.user_avatar_img}" alt="현재 아바타" width="100">
     </c:if>
+</div>
+
 </div>
 
 <!--로그인알람-->
