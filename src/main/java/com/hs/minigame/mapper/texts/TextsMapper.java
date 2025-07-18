@@ -8,9 +8,16 @@ import java.util.List;
 @Mapper
 public interface TextsMapper {
 
-    @Select("select t.*, u.user_nickname from texts t, users u where t.text_user_no = u.user_no and text_type = #{type} order by text_write_date desc "+
-            "offset #{offset} rows fetch next 5 rows only")
-    public List<TextsVO> selectTexts(int offset,String type);
+    @Select("""
+    SELECT t.*, u.user_nickname
+    FROM texts t, users u
+    WHERE t.text_user_no = u.user_no
+      AND text_type = #{type}
+    ORDER BY text_write_date DESC
+    OFFSET #{offset} ROWS FETCH NEXT 10 ROWS ONLY
+""")
+    List<TextsVO> selectTexts(@Param("type") String type, @Param("offset") int offset);
+
 
     @Select("select count(*) from texts where text_type = #{type}")
     public int textsCount(String type);

@@ -5,10 +5,10 @@
 <div class="board-text">
     <h1>${type}</h1><br>
     <c:if test="${not empty sessionScope.users}">
-        <input type="hidden" id="loginCheck" value="true" />
+        <input type="hidden" id="loginCheck" value="true"/>
     </c:if>
     <c:if test="${empty sessionScope.users}">
-        <input type="hidden" id="loginCheck" value="false" />
+        <input type="hidden" id="loginCheck" value="false"/>
     </c:if>
     <div class="button-container">
         <button type="button" onclick="postTexts()">작성</button>
@@ -24,12 +24,13 @@
         </thead>
         <tbody>
         <c:forEach var="t" items="${texts}">
-            <tr class="text-row" data-id="${t.text_id}" data-title="${t.text_title}" data-content="${t.text_content}" data-nickname="${t.user_nickname}" data-date="${t.text_write_date}">
+            <tr class="text-row" data-type="${t.text_type}" data-id="${t.text_id}" data-title="${t.text_title}" data-content="${t.text_content}"
+                data-nickname="${t.user_nickname}" data-date="${t.text_write_date}">
                 <td class="text_id">${t.text_id}</td>
                 <td class="text_title">${t.text_title}</td>
                 <td class="text_user_no">${t.user_nickname}</td>
                 <td class="text_date">
-                    <fmt:formatDate value="${t.text_write_date}" pattern="MM월 dd일" />
+                    <fmt:formatDate value="${t.text_write_date}" pattern="MM월 dd일"/>
                 </td>
             </tr>
         </c:forEach>
@@ -47,8 +48,8 @@
 
 
     <!-- 게시물 작성 모달 -->
-<button id="openInsertBtn" style="display: none">입력 모달 열기</button>
-<dialog id="insertModal">
+    <button id="openInsertBtn" style="display: none">입력 모달 열기</button>
+    <dialog id="insertModal">
         <h2>${type}</h2>
         <div>
             <div>title</div>
@@ -60,20 +61,21 @@
         </div>
         <button id="addBtn" data-type="${type}">업로드</button>
         <button id="closeBtn">닫기</button>
-</dialog>
+    </dialog>
 </div>
 
 <!-- detail 모달 -->
 <button id="openDetailBtn" style="display: none">상세 페이지 모달 열기</button>
 <dialog id="detailModal">
-    <h2><input id="detailTitle"  disabled></h2>
-    <p ><textarea id="detailContent"  disabled></textarea></p>
-    <p ><input id="detailNickname"  disabled ></p>
+    <h2><input id="detailTitle" disabled></h2>
+    <p><textarea id="detailContent" disabled></textarea></p>
+    <p><input id="detailNickname" disabled></p>
     <p id="detailDate">내용</p>
 
     <div class="btns">
         <button id="editBtn">수정</button>
-        <button id="saveEditBtn" style="display: none;">저장</button> <%-- 이 부분이 추가되었는지 확인! --%>
+        <button id="saveEditBtn" style="display: none;">저장</button>
+        <%-- 이 부분이 추가되었는지 확인! --%>
         <button id="deleteBtn">삭제</button>
         <button id="closeDetailBtn">닫기</button>
     </div>

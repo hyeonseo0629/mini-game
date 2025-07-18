@@ -14,9 +14,11 @@ public class TextsService {
     private TextsMapper textsMapper;
 
     public List<TextsVO> selectTexts(int page, String type) {
-        int offset = (page - 1) * 5;
-        return textsMapper.selectTexts(offset, type);
+        int pageSize = 10;
+        int offset = (page - 1) * pageSize; // ✅ 올바른 offset 계산
+        return textsMapper.selectTexts(type, offset);
     }
+
 
     public int textsCount(String type) {
         return textsMapper.textsCount(type);
