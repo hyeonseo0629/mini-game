@@ -1,6 +1,6 @@
-function shopbuy(btn){
+function shopbuy(btn) {
 
-    const userMoney =  parseInt(document.getElementById("userMoney").value);
+    const userMoney = parseInt(document.getElementById("userMoney").value);
     const itemPrice = parseInt(btn.getAttribute("data-price"));
 
     console.log(userMoney);
@@ -33,10 +33,10 @@ function shopbuy(btn){
     }
 
     //구매할지말지 마지막 확인
-    if(confirm("정말 구매하시겠습니까?")){
+    if (confirm("정말 구매하시겠습니까?")) {
         alert("구매 완료되었습니다")
         btn.closest("form").submit();
-    }else {
+    } else {
         alert("구매가 취소되었습니다")
     }
 }

@@ -4,7 +4,6 @@
     margin: 40px auto;
     padding: 20px;
     box-sizing: border-box;
-    font-family: "Noto Sans KR", sans-serif;
     color: #e0d8c3;
     position: relative;
 }
@@ -38,6 +37,25 @@
     background-color: #e0d8c3;
 }
 
+.col-no {
+    width: 10%;
+}
+
+.col-title {
+    width: 50%;
+    text-align: center;
+    padding-left: 20px;
+}
+
+.col-writer {
+    width: 20%;
+}
+
+.col-date {
+    width: 20%;
+}
+
+
 /* 게시판 테이블 스타일 */
 table {
     width: 100%;
@@ -58,8 +76,12 @@ th, td {
     padding: 12px;
     text-align: center;
     border-bottom: 1px solid #444;
-    word-wrap: break-word;
     font-size: 0.9rem;
+
+    /* 🔽 글자가 줄바꿈 되지 않도록 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 tr:last-child td {
@@ -83,24 +105,187 @@ tr:hover {
 
 .text_title {
     width: auto;
-    text-align: left;
+    text-align: center;
     padding-left: 20px;
     color: #e0d8c3;
+
+    /* 🔽 줄바꿈 방지 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .paging {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; /* 버튼 줄바꿈 방지 */
+    overflow-x: auto;  /* 창이 너무 작을 때 가로 스크롤 허용 */
+    gap: 10px;
+    margin-top: 30px;
+    padding: 10px 0;
+}
+
+.page-link {
+    flex-shrink: 0; /* 줄어들지 않도록 */
+    min-width: 45px;
+    padding: 8px 14px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     text-align: center;
+}
+
+.page-link:hover {
+    background-color: #e0d8c3;
+    transform: translateY(-2px);
+}
+
+.page-link.active {
+    background-color: #8f7b45;
+    color: #fff;
+    cursor: default;
+}
+
+/* modal */
+
+
+ #insertModal {
+     text-align: center;
+     background-color: #1e1e1e;
+     color: #f0f0f0;
+     border: none;
+     border-radius: 12px;
+     padding: 20px;
+     width: 400px;
+     box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+     margin: auto;
+ }
+
+#insertModal ::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#insertModal > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    gap: 10px;
+}
+
+#insertModal input[type="text"],
+#insertModal textarea {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #f0f0f0;
+    border-radius: 6px;
+    padding: 8px;
+    width: 100%;
+    font-family: inherit;
+}
+
+#insertModal textarea {
+    resize: vertical;
+}
+
+#insertModal button#closeBtn {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#insertModal button#closeBtn:hover {
+    background-color: #666;
+}
+
+#detailModal {
+    text-align: center;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 12px;
+    padding: 20px;
+    width: 1000px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    margin: auto;
+}
+
+#detailModal::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#detailModal h2 input {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #f0f0f0;
+    border-radius: 6px;
+    padding: 8px;
+    width: 100%;
+    font-family: inherit;
+    font-size: 18px;
+    text-align: center;
+}
+
+#detailModal textarea,
+#detailModal input {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: #f0f0f0;
+    border-radius: 6px;
+    padding: 8px;
+    width: 100%;
+    font-family: inherit;
+    margin-bottom: 10px;
+}
+
+#detailModal textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+#detailModal p {
+    margin: 10px 0;
+}
+
+/* detailDate (단순 텍스트용) */
+#detailModal #detailDate {
+    color: #ccc;
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: left;
+}
+
+/* 버튼 묶음 */
+#detailModal .btns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-top: 20px;
 }
 
-.paging a {
-    margin: 0 5px;
-    color: #cfae70;
-    text-decoration: none;
-    font-weight: bold;
+/* 버튼 스타일 */
+#detailModal button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-size: 14px;
 }
 
-.paging a:hover {
-    text-decoration: underline;
-    color: #e0d8c3;
+#detailModal button:hover {
+    background-color: #666;
 }
