@@ -60,7 +60,7 @@ document.querySelectorAll(".text-row").forEach((el) => {
 
         // Populate the detail modal with data from the clicked row
         titleEl.value = el.dataset.title;
-        contentEl.innerText = el.dataset.content; // Use innerText for textarea
+        contentEl.value = el.dataset.content; // Use innerText for textarea
         nickNameEl.value = el.dataset.nickname;
         dateEl.innerText = el.dataset.date;
 
@@ -161,31 +161,7 @@ deleteBtn.addEventListener('click', e => {
         })
         .then(responseText => {
             console.log("Delete response:", responseText); // Log the response
-            detailDialog.close(); // Close the modal
-
-            // Remove the deleted row from the DOM
-            const deletedRow = document.querySelector(`.text-row[data-id="${id}"]`);
-            // if (deletedRow) {
-            //     deletedRow.remove();
-            // }
-            // alert("게시물이 삭제되었습니다.");
-            const currentPageEl = document.querySelector(".page-link.active") || document.querySelector(".page-link");
-            const currentPage = currentPageEl ? currentPageEl.dataset.page : 1;
-            fetch(`/text/list/${type}/${currentPage}`)
-                .then(res => res.json())
-                .then(data => {
-                    updateList(data.texts, type);
-                    updatePaging(data.totalPage, currentPage, type);
-                    alert("게시물이 삭제되었습니다.");
-                });
-
-            // You might want to re-fetch the list if pagination/total count needs update,
-            // or if the redirect from Spring actually takes effect.
-            // For now, simple DOM removal is good for immediate feedback.
-            // If the server-side delete operation redirects to the main page,
-            // the full page refresh will occur anyway.
-            // If `location.href` is still desired after client-side removal:
-            // location.href = `/text/${type.toLowerCase()}`; // This will cause a full reload
+           location.href = "/text/" + type.toLowerCase();
         })
         .catch(err => {
             console.error(err);
@@ -197,6 +173,11 @@ document.querySelectorAll('.page-link').forEach(link => {
     link.addEventListener('click', async function () {
         const page = this.dataset.page;
         const type = this.dataset.type;
+        document.querySelectorAll(".page-link").forEach((a) => {
+                            a.classList.remove("active");
+        })
+        document.querySelectorAll(".page-link")[page-1].classList.add("active");
+
 
         try {
             const res = await fetch(`/text/list/${type}/${page}`);
@@ -299,30 +280,32 @@ function updateList(texts, type) {
     });
 }
 
-function updatePaging(totalPage, currentPage, type) {
-    const pagingDiv = document.querySelector(".paging");
-    pagingDiv.innerHTML = '';
-
-    for (let p = 1; p <= totalPage; p++) {
-        const a = document.createElement("a");
-        a.href = "javascript:void(0);";
-        a.classList.add("page-link");
-        if (p == currentPage) a.classList.add("active");
-        a.dataset.page = p;
-        a.dataset.type = type;
-        a.innerText = `[${p}]`;
-        pagingDiv.appendChild(a);
-
-        // 이벤트 리바인딩
-        a.addEventListener('click', async function () {
-            try {
-                const res = await fetch(`/text/list/${type}/${p}`);
-                const data = await res.json();
-                updateList(data.texts, type);
-                updatePaging(data.totalPage, p, type);
-            } catch (err) {
-                console.error("페이지 불러오기 실패:", err);
-            }
-        });
-    }
-}
+// function updatePaging(totalPage, currentPage, type) {
+//     const pagingDiv = document.querySelector(".paging");
+//     pagingDiv.innerHTML = '';
+//         console.log(currentPage)
+//
+//     for (let p = 1; p <= totalPage; p++) {
+//         const a = document.createElement("a");
+//         a.href = "javascript:void(0);";
+//         a.classList.add("page-link");
+//         if (p == currentPage) a.classList.add("active");
+//         a.dataset.page = p;
+//         a.dataset.type = type;
+//         a.innerText = `[${p}]`;
+//         pagingDiv.appendChild(a);
+//
+//         // 이벤트 리바인딩
+//         a.addEventListener('click', async function () {
+//             try {
+//                 console.log("clicjed?")
+//                 const res = await fetch(`/text/list/${type}/${p}`);
+//                 const data = await res.json();
+//                 updateList(data.texts, type);
+//                 updatePaging(data.totalPage, p, type);
+//             } catch (err) {
+//                 console.error("페이지 불러오기 실패:", err);
+//             }
+//         });
+//     }
+// }
