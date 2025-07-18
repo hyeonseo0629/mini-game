@@ -54,6 +54,7 @@
     <!--마이페이지+인벤토리-->
     <c:if test="${not empty users}">
         <div class="mypage-box">
+            <span>마이페이지</span>
     <div class="mypage-info">
         <div>ID : ${users.user_id}</div>
         <div>이름 : ${users.user_name}</div>
@@ -62,7 +63,6 @@
         <div>이메일 : ${users.user_email}</div>
     </div>
 
-    <br>
         <div class="another-box">
             <button onclick="openInvenModal()" type="button">인벤토리</button>
             <button onclick="openUpdateUser()"type="button">회원정보 수정</button>
