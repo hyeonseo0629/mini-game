@@ -34,7 +34,7 @@ public class TextsC {
         type = type.toUpperCase();
         List<TextsVO> texts = textsService.selectTexts(page, type);
         int totalCount = textsService.textsCount(type);
-        int totalPage = (int) Math.ceil((double) totalCount / 5);
+        int totalPage = (int) Math.ceil((double) totalCount / 10);
 
         //paging 관련 로직
         model.addAttribute("totalPage", totalPage);
@@ -45,39 +45,39 @@ public class TextsC {
         return "main_page";
     }
 
-//    @ResponseBody
-//    @GetMapping("/list/{type}/{page}")
-//    public Map<String, Object> getTextList(@PathVariable String type, @PathVariable int page) {
-//        type = type.toUpperCase();
-//        List<TextsVO> texts = textsService.selectTexts(page, type);
-//        int totalCount = textsService.textsCount(type);
-//        int totalPage = (int) Math.ceil((double) totalCount / 5);
-//
-//        Map<String, Object> result = new HashMap<>();
-//        result.put("texts", texts);
-//        result.put("totalPage", totalPage);
-//        result.put("currentPage", page);
-//        return result;
-//    }
-
-    @GetMapping("/list/{type}/{page}")
     @ResponseBody
-    public Map<String, Object> listPage(@PathVariable("type") String type,
-                                        @PathVariable("page") int page) {
-
-        int perPage = 5;
-        int start = (page - 1) * perPage;
-
-        List<TextsVO> texts = textsService.getTextsByPage(type, start, perPage);
-        int totalCount = textsService.getTotalCount(type);
-        int totalPage = (int) Math.ceil((double) totalCount / perPage);
+    @GetMapping("/list/{type}/{page}")
+    public Map<String, Object> getTextList(@PathVariable String type, @PathVariable int page) {
+        type = type.toUpperCase();
+        List<TextsVO> texts = textsService.selectTexts(page, type);
+        int totalCount = textsService.textsCount(type);
+        int totalPage = (int) Math.ceil((double) totalCount / 10);
 
         Map<String, Object> result = new HashMap<>();
         result.put("texts", texts);
         result.put("totalPage", totalPage);
-
+        result.put("currentPage", page);
         return result;
     }
+
+//    @GetMapping("/list/{type}/{page}")
+//    @ResponseBody
+//    public Map<String, Object> listPage(@PathVariable("type") String type,
+//                                        @PathVariable("page") int page) {
+//
+//        int perPage = 5;
+//        int start = (page - 1) * perPage;
+//
+//        List<TextsVO> texts = textsService.getTextsByPage(type, start, perPage);
+//        int totalCount = textsService.getTotalCount(type);
+//        int totalPage = (int) Math.ceil((double) totalCount / perPage);
+//
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("texts", texts);
+//        result.put("totalPage", totalPage);
+//
+//        return result;
+//    }
 
     // 게시판 글 상세내용
     @GetMapping("/detail/{id}")
@@ -153,7 +153,7 @@ public class TextsC {
     @PostMapping("/add/{type}")
     public int textInsert(HttpSession session, @RequestBody TextsVO textsVO, Model model, @PathVariable String type) {
         System.out.println("---------");
-        System.out.println(textsVO);
+        System.out.println(textsVO.getText_content());
         System.out.println("---------");
         UsersVO user = (UsersVO) session.getAttribute("users");
         if (user == null) return 0;

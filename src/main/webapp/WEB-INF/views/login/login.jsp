@@ -206,11 +206,6 @@
         </div>
     </div>
 </div>
-<div class="avatar_zone">
-    <c:if test="${not empty users.user_avatar_img}">
-        <img src="/resources/images/${users.user_avatar_img}" alt="현재 아바타" width="100">
-    </c:if>
-</div>
 
 <!--로그인알람-->
 <c:if test="${alert == '로그인 성공'}">
@@ -370,7 +365,7 @@
         const container = document.querySelector('.inventory-contents');
         const totalItems = items.length;
 
-        if (items.length === 0) {
+        if (totalItems === 0) {
             console.log("보유한 아이템이 없습니다. 슬라이드할 필요가 없습니다.");
             return;
         }
@@ -378,15 +373,18 @@
         const itemStyle = window.getComputedStyle(items[0]);
         const itemMarginRight = parseFloat(itemStyle.marginRight); // "20px" -> 20 (숫자로 변환)
         const itemTotalWidth = items[0].offsetWidth + itemMarginRight; // 예: 130px + 20px = 150px
+        console.log(itemTotalWidth);
 
         // 한 번에 보이는 아이템 개수를 계산합니다.
         // 컨테이너의 너비(예: 300px)를 아이템 하나의 총 너비(예: 150px)로 나누어 몇 개가 보이는지 확인합니다.
         const visibleCount = Math.floor(container.offsetWidth / itemTotalWidth);
+        // console.log(visibleCount);
 
         // 최대 슬라이드 가능한 인덱스(위치)를 계산합니다.
         // 총 아이템 개수에서 한 번에 보이는 아이템 개수를 뺀 값입니다.
         // Math.max(0, ...)를 사용하여 음수가 되는 것을 방지합니다 (총 아이템이 보이는 아이템보다 적을 경우).
         const maxSlide = Math.max(0, items.length - visibleCount);
+        // console.log(maxSlide);
 
         // currentSlide 값을 업데이트하고 범위를 제한합니다.
         currentSlide += direction; // 슬라이드 방향(1 또는 -1)에 따라 currentSlide를 변경
@@ -399,8 +397,8 @@
         }
 
         // track 요소의 CSS transform 속성을 업데이트하여 슬라이드를 실제로 움직입니다.
-        const moveX = currentSlide * itemTotalWidth;
-        track.style.transform = `translateX(-\${moveX}px)`;
+        const moveX =  - currentSlide * itemTotalWidth + 40;
+        track.style.transform = `translateX(\${moveX}px)`;
 
     }
 

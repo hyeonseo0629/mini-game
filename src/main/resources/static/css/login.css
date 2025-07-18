@@ -1,546 +1,565 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
 
+.right-bar-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 필요에 따라 수평 가운데 정렬 */
+    gap: 20px; /* 요소들 간 간격 */
+}
+
 .modal {
-  display: none;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 1);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  z-index: 20;
-  opacity: 1;
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 1);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    opacity: 1;
 }
 
 /*인벤 모달 슬라이드 기능*/
 .inventory-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px 0;
-  /*gap: 5px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    height: 80%;
+    /*gap: 5px;*/
 }
 
 .inventory-contents {
-  flex: 1;
-  min-width: 300px;
-  overflow: hidden;
-  position: relative;
+    width: 400px;
+    overflow: hidden;
+    position: relative;
 }
 
 .inventory-track {
-  display: flex;
-  transition: transform 0.3s ease;
-  min-width: 100%;
-  will-change: transform;
+    display: flex;
+    transition: transform 0.3s ease;
+    min-width: max-content;
+    will-change: transform;
 }
 
 .inventory-item {
-  flex: 0 0 130px;
-  margin-right: 20px; /*js에서 계산한 마진이랑 일치*/
-  text-align: center;
-  padding: 10px;
-  flex-shrink: 0;
-  box-sizing: border-box;
+    flex: 0 0 130px;
+    margin-right: 20px; /*js에서 계산한 마진이랑 일치*/
+    text-align: center;
+    padding: 10px;
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .slide-btn {
-  background-color: transparent;
-  border: none;
-  color: #e0d8c3;
-  font-size: 1.5rem;
-  cursor: pointer;
-  user-select: none;
+    background-color: transparent;
+    border: none;
+    color: #e0d8c3;
+    font-size: 1.5rem;
+    cursor: pointer;
+    user-select: none;
 }
 
 .slide-btn:hover {
-  color: #cfae70;
+    color: #cfae70;
 }
 
 /*슬라이드 기능은 여기까지*/
 
-
 .inven-modal-body {
-  position: relative;
-  display: inline-block;
-  background-color: #2a2a2a;        /* 변경됨: 더 진한 배경으로 통일 */
-  color: #e0d8c3;                   /* 유지됨 */
-  padding: 30px;                    /* 유지됨 */
-  border-radius: 15px;              /* 변경됨: radius를 더 둥글게 */
-  text-align: center;
-  width: 420px;                     /* 변경됨: 공통 너비와 일치 */
-  height: auto;                     /* 변경됨: 고정 높이 제거 */
-  box-shadow: 0 0 15px rgba(255, 215, 0, 1);
+    position: relative;
+    display: inline-block;
+    background-color: #2a2a2a; /* 변경됨: 더 진한 배경으로 통일 */
+    color: #e0d8c3; /* 유지됨 */
+    padding: 30px; /* 유지됨 */
+    border-radius: 15px; /* 변경됨: radius를 더 둥글게 */
+    text-align: center;
+    width: 420px; /* 변경됨: 공통 너비와 일치 */
+    height: auto; /* 변경됨: 고정 높이 제거 */
+    box-shadow: 0 0 15px rgba(255, 215, 0, 1);
 }
-.inven-modal-body span{
-  font-size: 1.5rem;
+.inven-modal-body span {
+    font-size: 1.5rem;
 }
 #closeInvenModal {
-  /*background-color: transparent; */   /* 변경됨: 배경 제거 */
-  color: #facc15;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 20px;
-  position: absolute;
+    /*background-color: transparent; */ /* 변경됨: 배경 제거 */
+    color: #facc15;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    position: absolute;
 }
 
 #closeInvenModal:hover {
-  color: #e0d8c3;  /* 변경됨: hover 시 밝은 텍스트로 */
+    color: #e0d8c3; /* 변경됨: hover 시 밝은 텍스트로 */
 }
 body {
-  background-color: #1c1c1c; /* 기존 배경과 통일 */
-  color: #e0d8c3;
-  font-family: "Noto Sans KR", sans-serif;
-  margin: 0;
+    background-color: #1c1c1c; /* 기존 배경과 통일 */
+    color: #e0d8c3;
+    font-family: "Noto Sans KR", sans-serif;
+    margin: 0;
 }
 
 .login-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 0vh;
-  position: static;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 0vh;
+    position: static;
 }
 
 .login-form {
-  background-color: #2a2a2a;
-  padding: 20px; /* 컴팩트 padding */
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  width: 180px; /* 폭 축소 */
+    background-color: #2a2a2a;
+    padding: 20px; /* 컴팩트 padding */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    width: 180px; /* 폭 축소 */
 }
 
 .login-form h2 {
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 1rem;
-  color: #cfae70;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #cfae70;
 }
 
 .login-form input {
-  margin-bottom: 8px;
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-  background-color: #3a3a3a;
-  color: #e0d8c3;
-  font-size: 0.85rem;
+    margin-bottom: 8px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3a3a3a;
+    color: #e0d8c3;
+    font-size: 0.85rem;
 }
 
 .login-form input::placeholder {
-  color: #b8b8b8;
+    color: #b8b8b8;
 }
 
 .login-form button {
-  padding: 8px;
-  margin-top: 5px;
-  border: none;
-  border-radius: 5px;
-  background-color: #cfae70;
-  color: #1c1c1c;
-  font-weight: bold;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background 0.3s;
+    padding: 8px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
 .login-form button:hover {
-  background-color: #e0d8c3;
+    background-color: #e0d8c3;
 }
 
 .sub-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
 }
 
 .sub-actions button {
-  background: none;
-  border: none;
-  color: #cfae70;
-  cursor: pointer;
-  font-size: 0.8rem;
+    background: none;
+    border: none;
+    color: #cfae70;
+    cursor: pointer;
+    font-size: 0.8rem;
 }
 
 .sub-actions button:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .welcome-box {
-  background-color: #2a2a2a;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 180px; /* 로그인 박스와 동일 폭 */
-  border: 3px solid #ffd700;
-  border-radius: 15px;
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 180px; /* 로그인 박스와 동일 폭 */
+    border: 3px solid #ffd700;
+    border-radius: 15px;
 }
 
 .welcome-box span {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
 .welcome-box button {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #cfae70;
-  color: #1c1c1c;
-  font-weight: bold;
-  font-size: 0.9rem;
-  cursor: pointer;
-  margin-bottom: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .welcome-box button:hover {
-  background-color: #e0d8c3;
+    background-color: #e0d8c3;
 }
 
 .another-box {
-  background-color: #2a2a2a;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 180px; /* 로그인 박스와 동일 폭 */
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 180px; /* 로그인 박스와 동일 폭 */
 }
 
 .another-box span {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
 .another-box button {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #cfae70;
-  color: #1c1c1c;
-  font-weight: bold;
-  font-size: 0.9rem;
-  cursor: pointer;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
 }
 
 .another-box button:hover {
-  background-color: #e0d8c3;
+    background-color: #e0d8c3;
 }
 
 .cssAlert {
-  position: fixed;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #2a2a2a;
-  color: #e0d8c3;
-  padding: 14px 24px;
-  border-radius: 8px;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 0.9rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
-  z-index: 9999;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  pointer-events: none; /* 다른 UI 방해 안 하도록 */
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2a2a2a;
+    color: #e0d8c3;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 1);
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* 다른 UI 방해 안 하도록 */
 }
 
 .cssAlert.fade-out {
-  opacity: 0;
+    opacity: 0;
 }
-   /* 탭 내용 기본적으로 숨김 */
- #idTab, #pwTab {
-   display: none;
- }
+/* 탭 내용 기본적으로 숨김 */
+#idTab,
+#pwTab {
+    display: none;
+}
 
 /* active 클래스가 있을 때만 보이기 */
-#idTab.active, #pwTab.active {
-  display: block;
+#idTab.active,
+#pwTab.active {
+    display: block;
+}
+
+img {
+    /*width: auto;*/
+    /*object-fit: contain; !* 또는 'cover' 테스트해봐 *!*/
+    /*image-rendering: pixelated; !* 픽셀 캐릭터일 경우 *!*/
+    /*display: block;*/
+    /*margin: 0 auto;*/
+
+    width: 200px;
+    height: 200px;
+    object-fit: contain; /* or cover / fill / none / scale-down */
 }
 
 /* 버튼 스타일 */
 .tab-button button.active {
-  background-color: #007bff;
-  color: white;
+    background-color: #007bff;
+    color: white;
 }
 .right-zone {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
 }
 
 .mypage-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  border: 3px solid #ffd700;
-  border-radius: 15px;
-  margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    border: 3px solid #ffd700;
+    border-radius: 15px;
+    margin-bottom: 30px;
 }
-.mypage-box span{
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 3px;
-  font-size: 1.2rem;
+.mypage-box span {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 3px;
+    font-size: 1.2rem;
 }
 .mypage-info {
-  font-size: 1.1rem;
-  color: #ffd700;
-  text-align: center;
-  background-color: #2a2a2a;
-  padding: 15px 20px;
-  border-radius: 10px;
-  width: 180px;
+    font-size: 1.1rem;
+    color: #ffd700;
+    text-align: center;
+    background-color: #2a2a2a;
+    padding: 15px 20px;
+    border-radius: 10px;
+    width: 180px;
 }
 
 .another-box {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .action-btn {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #cfae70;
-  color: #1c1c1c;
-  font-weight: bold;
-  font-size: 0.9rem;
-  cursor: pointer;
-  width: 180px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 180px;
 }
 
 .action-btn:hover {
-  background-color: #e0d8c3;
+    background-color: #e0d8c3;
 }
-.avatar_zone{
-
-  border: 3px solid #ffd700;
-  border-radius: 15px;
+.avatar_zone {
+    border: 3px solid #ffd700;
+    border-radius: 15px;
 }
 
 /* ✅ 탭 버튼 영역 */
 .tab-button {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .tab-button button {
-  padding: 10px 20px;
-  background-color: #3a3a3a;
-  color: #e0d8c3;
-  border: 1px solid #cfae70;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
+    padding: 10px 20px;
+    background-color: #3a3a3a;
+    color: #e0d8c3;
+    border: 1px solid #cfae70;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .tab-button button.active {
-  background-color: #cfae70;
-  color: #1c1c1c;
+    background-color: #cfae70;
+    color: #1c1c1c;
 }
 
 .tab-button button:hover {
-  background-color: #e0d8c3;
-  color: #1c1c1c;
+    background-color: #e0d8c3;
+    color: #1c1c1c;
 }
 
 /* ✅ 탭 내용 보이기/숨기기 */
-#idTab, #pwTab {
-  display: none;
+#idTab,
+#pwTab {
+    display: none;
 }
 
-#idTab.active, #pwTab.active {
-  display: block;
+#idTab.active,
+#pwTab.active {
+    display: block;
 }
 
 /* ✅ 아이디/비번 찾기 모달 전체 박스 */
 .findModal-box {
-  background-color: #2a2a2a;
-  color: #e0d8c3;
-  padding: 30px;
-  border-radius: 15px;
-  width: 420px;
-  max-width: 90vw;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 1);
-  position: relative;
+    background-color: #2a2a2a;
+    color: #e0d8c3;
+    padding: 30px;
+    border-radius: 15px;
+    width: 420px;
+    max-width: 90vw;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 1);
+    position: relative;
 }
 
 /* ✅ 입력창 스타일 */
 .findModal-box input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  border: none;
-  background-color: #3a3a3a;
-  color: #e0d8c3;
-  font-size: 0.9rem;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3a3a3a;
+    color: #e0d8c3;
+    font-size: 0.9rem;
 }
 
 /* ✅ 제출 버튼 스타일 */
 .findModal-box button[type="submit"] {
-  padding: 10px 20px;
-  background-color: #cfae70;
-  color: #1c1c1c;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+    padding: 10px 20px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .findModal-box button[type="submit"]:hover {
-  background-color: #e0d8c3;
+    background-color: #e0d8c3;
 }
 
 /* ✅ 회원가입 모달 박스 스타일 */
 .signModal-box {
-  background-color: #2a2a2a;
-  color: #e0d8c3;
-  padding: 30px;
-  border-radius: 15px;
-  width: 420px;
-  max-width: 90vw;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 1);
-  position: relative;
-  margin: 0 auto;
+    background-color: #2a2a2a;
+    color: #e0d8c3;
+    padding: 30px;
+    border-radius: 15px;
+    width: 420px;
+    max-width: 90vw;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 1);
+    position: relative;
+    margin: 0 auto;
 }
 
 /* ✅ 입력 폼 정렬 */
 .group-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
 }
 
 /* ✅ 인풋 스타일 */
 .group-form input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: #3a3a3a;
-  color: #e0d8c3;
-  font-size: 0.9rem;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3a3a3a;
+    color: #e0d8c3;
+    font-size: 0.9rem;
 }
 
 /* ✅ 회원가입 제출 버튼 */
 .openModal-sign {
-  padding: 10px 20px;
-  background-color: #cfae70;
-  color: #1c1c1c;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 .openModal-sign:hover {
-  background-color: #e0d8c3;
+    background-color: #e0d8c3;
 }
 
 /* ✅ 닫기 버튼 (X) */
 .close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
-  border: none;
-  color: #e0d8c3;
-  font-size: 1.2rem;
-  cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #e0d8c3;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .close-btn:hover {
-  color: #cfae70;
+    color: #cfae70;
 }
 
 /* UpdateModal 전용 스타일 */
 .updateModal-box {
-  background-color: #2a2a2a;
-  color: #e0d8c3;
-  padding: 30px;
-  border-radius: 15px;
-  width: 420px;
-  max-width: 90vw;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 1);
-  position: relative;
+    background-color: #2a2a2a;
+    color: #e0d8c3;
+    padding: 30px;
+    border-radius: 15px;
+    width: 420px;
+    max-width: 90vw;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 1);
+    position: relative;
 }
 
 .updateModal-box input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  border: none;
-  background-color: #3a3a3a;
-  color: #e0d8c3;
-  font-size: 0.9rem;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3a3a3a;
+    color: #e0d8c3;
+    font-size: 0.9rem;
 }
 
 .updateModal-box label {
-  display: block;
-  margin-bottom: 5px;
-  color: #facc15;
-  font-size: 0.95em;
+    display: block;
+    margin-bottom: 5px;
+    color: #facc15;
+    font-size: 0.95em;
 }
 
 .updateModal-box button {
-  padding: 10px 20px;
-  background-color: #cfae70;
-  color: #1c1c1c;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #cfae70;
+    color: #1c1c1c;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 .updateModal-box button:hover {
-  background-color: #e0d8c3;
+    background-color: #e0d8c3;
 }
 
 .updateModal-box > div:first-child {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #facc15;
-  margin-bottom: 10px;
-  text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #facc15;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 /* 닫기 버튼 (X) */
 .updateModal-box .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  color: #facc15;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    color: #facc15;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
 }
 
 .updateModal-box .close-btn:hover {
-  color: #e0d8c3;
+    color: #e0d8c3;
 }
-
