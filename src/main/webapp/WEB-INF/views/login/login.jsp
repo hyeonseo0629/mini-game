@@ -494,19 +494,5 @@ window.alert = function(message){
 };
 </script>
 
-<%--<script> 세션 완료 알람(보류)--%>
-<%-- window.onload = function(){--%>
-<%--     fetch('/checksession')--%>
-<%--         . then(response=>response.json())--%>
-<%--         .then(data=>{--%>
-<%--            if(data.status ==='expired'){--%>
-<%--                alert("세션 만료, 다시 로그인해주세요.");--%>
-<%--                window.location.href='/login';--%>
-<%--              }--%>
-<%--            })--%>
-<%--          .catch(error=>console.log(error));--%>
-<%-- };--%>
-<%--</script>--%>
-
 </body>
 </html>
