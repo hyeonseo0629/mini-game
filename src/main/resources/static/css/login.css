@@ -3,7 +3,7 @@
 .modal {
   display: none;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
   top: 0;
   left: 0;
   width: 100%;
@@ -326,5 +326,217 @@ body {
   border-radius: 15px;
 }
 
+/* ✅ 탭 버튼 영역 */
+.tab-button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
+.tab-button button {
+  padding: 10px 20px;
+  background-color: #3a3a3a;
+  color: #e0d8c3;
+  border: 1px solid #cfae70;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tab-button button.active {
+  background-color: #cfae70;
+  color: #1c1c1c;
+}
+
+.tab-button button:hover {
+  background-color: #e0d8c3;
+  color: #1c1c1c;
+}
+
+/* ✅ 탭 내용 보이기/숨기기 */
+#idTab, #pwTab {
+  display: none;
+}
+
+#idTab.active, #pwTab.active {
+  display: block;
+}
+
+/* ✅ 아이디/비번 찾기 모달 전체 박스 */
+.findModal-box {
+  background-color: #2a2a2a;
+  color: #e0d8c3;
+  padding: 30px;
+  border-radius: 15px;
+  width: 420px;
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+  position: relative;
+}
+
+/* ✅ 입력창 스타일 */
+.findModal-box input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #3a3a3a;
+  color: #e0d8c3;
+  font-size: 0.9rem;
+}
+
+/* ✅ 제출 버튼 스타일 */
+.findModal-box button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #cfae70;
+  color: #1c1c1c;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.findModal-box button[type="submit"]:hover {
+  background-color: #e0d8c3;
+}
+
+/* ✅ 회원가입 모달 박스 스타일 */
+.signModal-box {
+  background-color: #2a2a2a;
+  color: #e0d8c3;
+  padding: 30px;
+  border-radius: 15px;
+  width: 420px;
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+  position: relative;
+  margin: 0 auto;
+}
+
+/* ✅ 입력 폼 정렬 */
+.group-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* ✅ 인풋 스타일 */
+.group-form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #3a3a3a;
+  color: #e0d8c3;
+  font-size: 0.9rem;
+}
+
+/* ✅ 회원가입 제출 버튼 */
+.openModal-sign {
+  padding: 10px 20px;
+  background-color: #cfae70;
+  color: #1c1c1c;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.openModal-sign:hover {
+  background-color: #e0d8c3;
+}
+
+/* ✅ 닫기 버튼 (X) */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #e0d8c3;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #cfae70;
+}
+
+/* UpdateModal 전용 스타일 */
+.updateModal-box {
+  background-color: #2a2a2a;
+  color: #e0d8c3;
+  padding: 30px;
+  border-radius: 15px;
+  width: 420px;
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+  position: relative;
+}
+
+.updateModal-box input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #3a3a3a;
+  color: #e0d8c3;
+  font-size: 0.9rem;
+}
+
+.updateModal-box label {
+  display: block;
+  margin-bottom: 5px;
+  color: #facc15;
+  font-size: 0.95em;
+}
+
+.updateModal-box button {
+  padding: 10px 20px;
+  background-color: #cfae70;
+  color: #1c1c1c;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.updateModal-box button:hover {
+  background-color: #e0d8c3;
+}
+
+.updateModal-box > div:first-child {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #facc15;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* 닫기 버튼 (X) */
+.updateModal-box .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  color: #facc15;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.updateModal-box .close-btn:hover {
+  color: #e0d8c3;
+}
 
