@@ -8,42 +8,26 @@
     <link rel="stylesheet" href="/resources/css/login.css"/>
 </head>
 <body>
-<br>
-<div class="right-bar-zone">
-    <div class="login-container">
-        <!--로그인창-->
-        <c:choose>
-            <c:when test="${empty users}">
-                <form action="/login" method="post" class="login-form">
-                    <h2>로그인</h2>
-                    <input type="text" name="id"
-                           value="${alert == 'id 불일치' ? '' : param.id}"
-                           placeholder="${alert == 'id 불일치' ? '아이디 미존재' : '아이디'}" required>
-                    <!--alert가 "id 불일치"이면 비우고/ 아니면 param.id(아이디)-->
-                    <!--alert가 "id 불일치"이면 '아이디 미존재'/아니면 '아이디'-->
-                    <input type="password" name="pw"
-                           value="${alert == 'pw 불일치' ? '' : param.pw}"
-                           placeholder="${alert == 'pw 불일치' ? '비밀번호 불일치' : '비밀번호'}" required>
-                    <button type="submit">로그인</button>
-                    <div class="sub-actions">
-                        <button onclick="openSignModal()" type="button">회원가입</button>
-                        <button onclick="openFindModal()" type="button">아이디/비밀번호 찾기</button>
-                    </div>
-                </form>
-            </c:when>
+<div class="right-zone">
 
-            <c:otherwise>
-                <!--로그인완료창-->
-                <div class="welcome-box">
-                    <span>${users.user_id}님 환영합니다</span>
-                    <form action="/logout" method="post">
-                        <button type="submit">로그아웃</button>
-                    </form>
-
-                    <form id="deleteUser" action="/deleteUser" method="post">
-                        <input type="hidden" name="user_id" value="${users.user_id}">
-                        <button type="button" onclick="checkDelete()">회원 탈퇴</button>
-                    </form>
+<div class="login-container">
+    <!--로그인창-->
+    <c:choose>
+        <c:when test="${empty users}">
+            <form action="/login" method="post" class="login-form">
+                <h2>로그인</h2>
+                <input type="text" name="id"
+                       value="${alert == 'id 불일치' ? '' : param.id}"
+                       placeholder="${alert == 'id 불일치' ? '아이디 미존재' : '아이디'}" required>
+                       <!--alert가 "id 불일치"이면 비우고/ 아니면 param.id(아이디)-->
+                       <!--alert가 "id 불일치"이면 '아이디 미존재'/아니면 '아이디'-->
+                <input type="password" name="pw"
+                       value="${alert == 'pw 불일치' ? '' : param.pw}"
+                       placeholder="${alert == 'pw 불일치' ? '비밀번호 불일치' : '비밀번호'}" required>
+                <button type="submit">로그인</button>
+                <div class="sub-actions">
+                    <button onclick="openSignModal()" type="button">회원가입</button>
+                    <button onclick="openFindModal()" type="button" >아이디/비밀번호 찾기</button>
                 </div>
             </c:otherwise>
         </c:choose>
@@ -57,85 +41,120 @@
                 <div>머니 : ${users.user_money}</div>
                 <div>이메일 : ${users.user_email}</div>
 
-            </div>
-            <br>
+    <c:otherwise>
+        <!--로그인완료창-->
+        <div class="welcome-box">
+            <span>${users.user_id}님 환영합니다</span>
+             <form action="/logout" method="post">
+                <button type="submit">로그아웃</button>
+             </form>
 
+               <form id="deleteUser"action="/deleteUser" method="post">
+                  <input type="hidden" name="user_id" value="${users.user_id}">
+                  <button type="button"onclick="checkDelete()">회원 탈퇴</button>
+                </form>
+         </div>
+    </c:otherwise>
+    </c:choose>
+</div>
+
+    <br>
+
+    <!--마이페이지+인벤토리-->
+    <c:if test="${not empty users}">
+        <div class="mypage-box">
+            <span>마이페이지</span>
+    <div class="mypage-info">
+        <div>ID : ${users.user_id}</div>
+        <div>이름 : ${users.user_name}</div>
+        <div>닉네임 : ${users.user_nickname}</div>
+        <div>머니 : ${users.user_money}</div>
+        <div>이메일 : ${users.user_email}</div>
+    </div>
+
+        <div class="another-box">
             <button onclick="openInvenModal()" type="button">인벤토리</button>
-            <button onclick="openUpdateUser()" type="button">회원정보 수정</button>
-        </c:if>
-    </div>
-
-    <!--회원가입모달창-->
-    <div id="signModal" class="modal" style="display:none" onclick="backSignModal(event)"
-         onsubmit="return validateSignForm()">
-        <form action="/sign" method="post">
-            <div>회원 가입</div>
-            <div>
-                <input type="text" name="user_id" placeholder="id">
-            </div>
-            <div>
-                <input type="text" name="user_pw" placeholder="pw">
-            </div>
-            <div>
-                <input type="text" name="user_name" placeholder="이름">
-            </div>
-            <div>
-                <input type="text" name="user_nickname" placeholder="닉네임">
-            </div>
-            <div>
-                <input type="text" name="user_email" placeholder="이메일">
-            </div>
-            <button class="openModal-sign">회원가입</button>
-            <button onclick="closeSignModal()" type="button">X</button>
-        </form>
-    </div>
-
-    <!--아이디/비번찾기모달창-->
-    <div id="findModal" class="modal" style="display: none" onclick="backFindModal(event)">
-        <div class="findModal-container">
-
-            <div class="tab-button">
-                <button onclick="showTab('id')" id="idTab-btn" class="active">아이디 찾기</button>
-                <button onclick="showTab('pw')" id="pwTab-btn">비밀번호 찾기</button>
-            </div>
-
-            <div id="idTab">
-                <div>아이디</div>
-                <form id="findIdForm">
-                    <div>이름 :</div>
-                    <input type="text" id="user_name" name="user_name" required>
-                    <div>이메일 :</div>
-                    <input type="text" id="user_email" name="user_email" required>
-                    <button type="submit">아이디 찾기</button>
-                </form>
-                <div id="idResult" style="margin-top:10px; color:blue;"></div>
-                <button onclick="closeFindModal()" type="button">X</button>
-            </div>
-
-            <div id="pwTab">
-                <div>비밀번호</div>
-                <form id="findPwForm" action="/findPw" method="post">
-                    <div>이름 :</div>
-                    <input type="text" id="user_name_pw" name="user_name" required>
-                    <div>아이디 :</div>
-                    <input type="text" id="user_id_pw" name="user_id" required>
-                    <div>이메일 :</div>
-                    <input type="text" id="user_email_pw" name="user_email" required>
-                    <div>새로운 비밀번호 :</div>
-                    <input type="password" id="new_pw" name="new_pw" required>
-                    <button type="submit">비밀번호 변경</button>
-                </form>
-                <div id="pwResult" style="margin-top:10px; color:blue;"></div>
-                <button onclick="closeFindModal()" type="button">X</button>
-            </div>
-
+            <button onclick="openUpdateUser()"type="button">회원정보 수정</button>
         </div>
-    </div>
+        </div>
+     </c:if>
+
+<!--회원가입모달창-->
+<div id="signModal" class="modal" style="display:none" onclick="backSignModal(event)"
+onsubmit="return validateSignForm()">
+    <div class="signModal-box">
+    <form action="/sign" method="post">
+        <div>회원 가입</div>
+        <div class="group-form">
+        <div>
+            <input type="text" name="user_id" placeholder="id">
+        </div>
+        <div>
+            <input type="text" name="user_pw" placeholder="pw">
+        </div>
+        <div>
+            <input type="text" name="user_name" placeholder="이름">
+        </div>
+        <div>
+            <input type="text" name="user_nickname" placeholder="닉네임">
+        </div>
+        <div>
+            <input type ="text" name="user_email" placeholder="이메일">
+        </div>
+        </div>
+        <button class="openModal-sign">회원가입</button>
+        <button onclick="closeSignModal()" type="button"class="close-btn">X</button>
+    </form>
+</div>
+</div>
+
+
+<!--아이디/비번찾기모달창-->
+<div id="findModal" class="modal" style="display: none" onclick="backFindModal(event)">
+    <div class="findModal-box">
+
+        <div class="tab-button">
+            <button onclick="showTab('id')" id="idTab-btn"class="active">아이디 찾기</button>
+            <button onclick="showTab('pw')" id="pwTab-btn">비밀번호 찾기</button>
+        </div>
+
+               <div id="idTab">
+                   <div>아이디</div>
+                   <form id="findIdForm">
+                       <div>이름 : </div>
+                       <input type="text" id="user_name" name="user_name" required>
+                       <div>이메일 : </div>
+                       <input type="text" id="user_email" name="user_email" required>
+                       <button type="submit">아이디 찾기</button>
+                   </form>
+                   <div id="idResult" style="margin-top:10px; color:blue;"></div>
+                   <button onclick="closeFindModal()" type="button"class="close-btn">X</button>
+               </div>
+
+               <div id="pwTab">
+                   <div>비밀번호</div>
+                    <form id="findPwForm"action="/findPw" method="post">
+                      <div>이름 : </div>
+                       <input type="text" id="user_name_pw" name="user_name" required>
+                      <div>아이디 : </div>
+                       <input type="text" id="user_id_pw" name="user_id" required>
+                       <div>이메일 : </div>
+                      <input type="text" id="user_email_pw" name="user_email"required>
+                        <div>새로운 비밀번호 : </div>
+                        <input type="password" id="new_pw" name="new_pw" required>
+                    <button type="submit">비밀번호 변경</button>
+                   </form>
+                   <div id="pwResult" style="margin-top:10px; color:blue;"></div>
+                 <button onclick="closeFindModal()" type="button"class="close-btn">X</button>
+              </div>
+          </div>
+      </div>
+
 
     <!--인벤토리모달창-->
-    <div id="invenModal" class="modal" style="display: none" onclick="backInvenModal(event)">
-        <div class="inven-modal-body">
-            <div>인벤토리</div>
+<div id="invenModal" class="modal" style="display: none" onclick="backInvenModal(event)">
+    <div class="inven-modal-body">
+        <span>인벤토리</span>
             <div class="inventory-wrapper">
                 <button class="slide-btn left" onclick="slide(-1)">&#8592;</button>
 
@@ -160,46 +179,41 @@
 
                 <button class="slide-btn right" onclick="slide(1)">&#8594;</button>
             </div>
-            <button onclick="closeInvenModal()">X</button>
-        </div>
+        <button onclick="closeInvenModal()"class="close-btn">X</button>
     </div>
 
-    <!--회원정보수정모달창-->
-    <div id="updateModal" class="modal" style="display: none" onclick="backUpdateModal(event)">
-        <div>
-            <form action="/updateUser" method="post">
-                <input type="hidden" name="originalId" value="${user.user_id}">
-                <div>회원 정보 수정</div>
-                <div>
-                    <label for="user_id">아이디</label>
-                    <input type="text" id="user_id" name="user_id" value="${user.user_id}">
-                </div>
-                <div>
-                    <label for="user_pw">비밀번호</label>
-                    <input type="text" name="user_pw" required placeholder="변경할 비밀번호를 입력하세요">
-                </div>
-                <div>
-                    <label for="user_name">이름</label>
-                    <input type="text" id="user_name" name="user_name" value="${user.user_name}">
-                </div>
-                <div>
-                    <label for="user_nickname">닉네임</label>
-                    <input type="text" id="user_nickname" name="user_nickname" value="${user.user_nickname}">
-                </div>
-                <div>
-                    <label for="user_email">이메일</label>
-                    <input type="text" id="user_email" name="user_email" value="${user.user_email}">
-                </div>
-                <button type="submit">정보수정</button>
-                <button onclick="closeUpdateUser()" type="button">X</button>
-            </form>
-        </div>
+<!--회원정보수정모달창-->
+<div id="updateModal" class="modal" style="display: none"onclick="backUpdateModal(event)">
+    <div class="updateModal-box">
+        <form action="/updateUser" method="post">
+            <input type="hidden" name="originalId" value="${user.user_id}">
+            <div>회원 정보 수정</div>
+            <div>
+                <label for="user_id">아이디</label>
+                <input type="text" id="user_id" name="user_id" value="${user.user_id}">
+            </div>
+            <div>
+                <label for="user_pw">비밀번호</label>
+                <input type="text" name="user_pw"required placeholder="변경할 비밀번호를 입력하세요">
+            </div>
+            <div>
+                <label for="user_name">이름</label>
+                <input type="text" id="user_name"name="user_name" value="${user.user_name}">
+            </div>
+            <div>
+                <label for="user_nickname">닉네임</label>
+                <input type="text" id="user_nickname"name="user_nickname" value="${user.user_nickname}">
+            </div>
+            <div>
+                <label for="user_email">이메일</label>
+                <input type="text" id="user_email"name="user_email" value="${user.user_email}">
+            </div>
+            <button type="submit">정보수정</button>
+            <button onclick="closeUpdateUser()" type="button"class="close-btn">X</button>
+        </form>
     </div>
-    <div class="avatar_zone">
-        <c:if test="${not empty users.user_avatar_img}">
-            <img src="/resources/images/${users.user_avatar_img}" alt="현재 아바타" width="100">
-        </c:if>
-    </div>
+</div>
+
 </div>
 
 <!--로그인알람-->
@@ -496,20 +510,6 @@
         }, 2500);
     };
 </script>
-
-<%--<script> 세션 완료 알람(보류)--%>
-<%-- window.onload = function(){--%>
-<%--     fetch('/checksession')--%>
-<%--         . then(response=>response.json())--%>
-<%--         .then(data=>{--%>
-<%--            if(data.status ==='expired'){--%>
-<%--                alert("세션 만료, 다시 로그인해주세요.");--%>
-<%--                window.location.href='/login';--%>
-<%--              }--%>
-<%--            })--%>
-<%--          .catch(error=>console.log(error));--%>
-<%-- };--%>
-<%--</script>--%>
 
 </body>
 </html>

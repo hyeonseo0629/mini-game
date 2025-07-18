@@ -8,22 +8,43 @@ import java.util.List;
 @Mapper
 public interface TextsMapper {
 
-    @Select("select * from texts"+" where text_type = #{type} order by text_write_date desc "+
-            "offset #{offset} rows fetch next 5 rows only")
-    public List<TextsVO> selectTexts(@Param("offset") int offset,String type);
+    @Select("""
+    SELECT t.*, u.user_nickname
+    FROM texts t, users u
+    WHERE t.text_user_no = u.user_no
+      AND text_type = #{type}
+    ORDER BY text_write_date DESC
+    OFFSET #{offset} ROWS FETCH NEXT 10 ROWS ONLY
+""")
+    List<TextsVO> selectTexts(@Param("type") String type, @Param("offset") int offset);
+
 
     @Select("select count(*) from texts where text_type = #{type}")
     public int textsCount(String type);
 
-    @Select("select * from texts where text_id = #{text_id}")
+    @Select("SELECT\n" +
+            "    t.*,\n" +
+            "    CASE t.text_type\n" +
+            "        WHEN 'COMMUNITY' THEN '게시판'\n" +
+            "        WHEN 'NOTICE' THEN '공지사항'\n" +
+            "        WHEN 'QUESTION' THEN '문의사항'\n" +
+            "        ELSE '기타'\n" +
+            "        END AS text_kr\n" +
+            "FROM TEXTS t where text_id = #{text_id}")
     public TextsVO getTextByID(int text_id);
 
     @Update("update texts set text_title = #{text_title}, text_content = #{text_content} where text_id = #{text_id}")
-    public void updateText(String text_title, String text_content, String text_id);
+    public void updateText(TextsVO textsVO);
 
     @Delete("delete from texts where text_id = #{text_id}")
     public void deleteText(int textId);
 
-    @Insert("insert into texts( text_title, text_content, text_user_no, text_type) values (#{text_title}, #{text_content}, #{user_no}, #{text_type})")
-    public void insertText(@Param("text_title") String text_title, @Param("text_content") String text_content, int user_no, String text_type);
+    @Insert("insert into texts( text_title, text_content, text_user_no, text_type) values (#{text_title}, #{text_content}, #{text_user_no}, #{text_type})")
+    public int insertText(TextsVO textsVO);
+
+    @Select("SELECT * FROM texts WHERE text_type = #{type} ORDER BY text_id DESC LIMIT #{perPage} OFFSET #{start}")
+    List<TextsVO> getTextsByPage(@Param("type") String type, @Param("start") int start, @Param("perPage") int perPage);
+
+    @Select("SELECT COUNT() FROM texts WHERE text_type = #{type}")
+    int getTotalCount(@Param("type") String type);
 }

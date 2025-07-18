@@ -15,6 +15,8 @@ let computerTotal = 0;
 
 const canvas = document.querySelector("#canvas");
 const btn = document.querySelector(".game-button");
+const playerBoard = document.querySelector("#board-1");
+const cpuBoard = document.querySelector("#board-2");
 const width = 800;
 const height = 680;
 
@@ -68,7 +70,7 @@ function gameInit() {
         containerSize * 2
     );
     const floorMat = new THREE.MeshBasicMaterial({
-        color: 0x006600,
+        color: 0x3a2c1e,
         side: THREE.DoubleSide,
     });
     const floorMesh = new THREE.Mesh(floorGeo, floorMat);
@@ -80,7 +82,7 @@ function gameInit() {
     );
     const wallGeo = new THREE.BoxGeometry(containerSize, 10, wallThickness);
     const wallMat = new THREE.MeshBasicMaterial({
-        color: 0x8888ff,
+        color: 0xcfae70,
         wireframe: true,
     });
 
@@ -117,8 +119,6 @@ function gameInit() {
     });
 
     const loader = new THREE.TextureLoader();
-
-    console.log("contextPath : " + contextPath);
 
     let meterialPath = contextPath.endsWith("/") ? contextPath + "resources/images/" : contextPath + "/resources/images/";
     const materials = [
@@ -168,13 +168,13 @@ function gameInit() {
 
     // 버튼 이벤트 설정
     btn.addEventListener("click", () => {
-
         if (!gameStarted) {
             gameStarted = true;
             // turn = 1; // 활용되지 않는 변수 (*** 일단 주석처리)
             rollCount = 0;
             heldDice.clear();
             btn.textContent = "Roll Again";
+            playerBoard.style.border = "3px solid #f05656";
         }
 
         // if (rollCount < 3) {
@@ -206,7 +206,6 @@ function gameInit() {
                 smoothMove(mesh, from, to, 0.3);
 
                 const topFace = getTopFaceIndex(mesh.quaternion);
-                console.log("Held Dice Face:", topFace);
                 const newQuat = getQuaternionForFace(topFace);
                 mesh.quaternion.copy(newQuat);
             } else {
@@ -351,7 +350,7 @@ function smoothMove(mesh, fromPos, toPos, duration = 0.5) {
 // 점수판 카테고리 클릭 이벤트
 function enableCategoryClicks() {
     categories.forEach(cat => {
-        const cell = document.querySelector(`#board-1 #score-${cat}`);
+        const cell = document.querySelector(`#board-1 .score-${cat}`);
         if (cell && cell.textContent === "-") {
             cell.classList.add("clickable");
             cell.onclick = () => {
@@ -361,9 +360,10 @@ function enableCategoryClicks() {
                 cell.classList.remove("clickable");
                 cell.onclick = null;
 
+                updateTotalScore();
+
                 rollCount = 0;
                 heldDice.clear();
-                updateTotalScore();
                 rollDice(); // 자동으로 새 라운드 시작
 
                 setTimeout(cpuTurn, 1000);
@@ -416,18 +416,20 @@ function hasLargeStraight(arr) {
 function updateTotalScore() {
     playerTotal = 0;
     categories.forEach(cat => {
-        const cell = document.querySelector(`#board-1 #score-${cat}`);
+        const cell = document.querySelector(`#board-1 .score-${cat}`);
         if (cell && !isNaN(parseInt(cell.textContent))) {
             playerTotal += parseInt(cell.textContent);
         }
     });
-    document.getElementById("score-total").textContent = playerTotal;
+    document.querySelector("#board-1 .score-total").textContent = playerTotal;
 }
 
 // CPU 턴 로직
 function cpuTurn() {
     btn.textContent = "CPU Turn";
     btn.style.disabled = true;
+    playerBoard.style.border = "1px solid #444";
+    cpuBoard.style.border = "3px solid #016af3";
     rollCount = 0;
     heldDice.clear();
 
@@ -448,7 +450,7 @@ function cpuTurn() {
                 let bestCat = null;
                 let maxScore = -1;
                 categories.forEach(cat => {
-                    const cell = document.querySelector(`#board-2 #score-${cat}`);
+                    const cell = document.querySelector(`#board-2 .score-${cat}`);
                     if (cell && cell.textContent === "-" && scoreMap[cat] > maxScore) {
                         maxScore = scoreMap[cat];
                         bestCat = cat;
@@ -456,7 +458,7 @@ function cpuTurn() {
                 });
 
                 if (bestCat) {
-                    const cell = document.querySelector(`#board-2 #score-${bestCat}`);
+                    const cell = document.querySelector(`#board-2 .score-${bestCat}`);
                     cell.textContent = scoreMap[bestCat];
                 }
 
@@ -477,7 +479,7 @@ function updateCPUTotalScore() {
     computerTotal = 0;
     let scoreCount = 0;
     categories.forEach(cat => {
-        const cell = document.querySelector(`#board-2 #score-${cat}`);
+        const cell = document.querySelector(`#board-2 .score-${cat}`);
         if (cell && !isNaN(parseInt(cell.textContent))) {
             computerTotal += parseInt(cell.textContent);
             scoreCount++;
@@ -485,6 +487,8 @@ function updateCPUTotalScore() {
 
         if (scoreCount === 13) {
             btn.style.disabled = true;
+            playerBoard.style.border = "1px solid #444";
+            cpuBoard.style.border = "1px solid #444";
             let result = "draw";
             if (playerTotal > computerTotal) {
                 result = "win";
@@ -495,5 +499,7 @@ function updateCPUTotalScore() {
             postGameResult(result);
         }
     });
-    document.querySelector(`#board-2 #score-total`).textContent = computerTotal;
+    document.querySelector(`#board-2 .score-total`).textContent = computerTotal;
+    playerBoard.style.border = "3px solid #f05656";
+    cpuBoard.style.border = "1px solid #444";
 }
