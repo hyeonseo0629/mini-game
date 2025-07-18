@@ -269,42 +269,42 @@ a:hover {
 }
 
 .game-selection > .select-button.game-1:hover {
-    background-image: url("../images/suri.webp");
+    background-image: url("../images/demon_image_main.png");
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
 }
 
 .game-selection > .select-button.game-2:hover {
-    background-image: url("../images/demon_image2.webp");
+    background-image: url("../images/demon_image.png");
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
 }
 
 .game-selection > .select-button.game-3:hover {
-    background-image: url("../images/polar_bear.webp");
+    background-image: url("../images/demon_image2.webp");
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
 }
 
 .game-selection > .select-button.game-4:hover {
-    background-image: url("../images/dinosaur.webp");
+    background-image: url("../images/demon_image3.webp");
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
 }
 
 .game-selection > .select-button.game-5:hover {
-    background-image: url("../images/hatsune_miku.webp");
+    background-image: url("../images/demon_image4.webp");
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
 }
 
 .game-selection > .select-button.game-6:hover {
-    background-image: url("../images/base_avatar.webp");
+    background-image: url("../images/demon_image5.png");
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
