@@ -5,13 +5,14 @@
 }
 
 .ranking-type {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
 }
 
 .ranking-type form button {
+    width: 110px;
     padding: 10px 16px;
     background: linear-gradient(45deg, #3a3a3a, #2a2a2a);
     border: 1px solid #4a4a4a;
