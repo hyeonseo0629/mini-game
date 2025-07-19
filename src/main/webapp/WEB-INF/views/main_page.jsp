@@ -6,6 +6,8 @@ contentType="text/html;charset=UTF-8" language="java" %>
         <title>home page</title>
         <link rel="stylesheet" href="/resources/css/main.css" />
         <link rel="stylesheet" href="/resources/css/board1.css">
+        <link rel="stylesheet" href="/resources/css/game.css">
+        <link rel="stylesheet" href="/resources/css/ranking.css">
         <script src="/resources/js/main.js"></script>
         <script src="/resources/js/texts.js"></script>
         <link rel="icon" href="/resources/images/favicon.ico?v=2" sizes="32x32" type="image/x-icon">
