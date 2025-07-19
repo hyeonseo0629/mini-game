@@ -80,9 +80,11 @@
     height: auto; /* 변경됨: 고정 높이 제거 */
     box-shadow: 0 0 15px rgba(255, 215, 0, 1);
 }
+
 .inven-modal-body span {
     font-size: 1.5rem;
 }
+
 #closeInvenModal {
     /*background-color: transparent; */ /* 변경됨: 배경 제거 */
     color: #facc15;
@@ -97,6 +99,7 @@
 #closeInvenModal:hover {
     color: #e0d8c3; /* 변경됨: hover 시 밝은 텍스트로 */
 }
+
 body {
     background-color: #1c1c1c; /* 기존 배경과 통일 */
     color: #e0d8c3;
@@ -261,6 +264,7 @@ body {
 .cssAlert.fade-out {
     opacity: 0;
 }
+
 /* 탭 내용 기본적으로 숨김 */
 #idTab,
 #pwTab {
@@ -290,6 +294,7 @@ img {
     background-color: #007bff;
     color: white;
 }
+
 .right-zone {
     display: flex;
     flex-direction: column;
@@ -306,12 +311,14 @@ img {
     border-radius: 15px;
     margin-bottom: 30px;
 }
+
 .mypage-box span {
     display: block;
     margin-top: 15px;
     margin-bottom: 3px;
     font-size: 1.2rem;
 }
+
 .mypage-info {
     font-size: 1.1rem;
     color: #ffd700;
@@ -343,6 +350,7 @@ img {
 .action-btn:hover {
     background-color: #e0d8c3;
 }
+
 .avatar_zone {
     border: 3px solid #ffd700;
     border-radius: 15px;
