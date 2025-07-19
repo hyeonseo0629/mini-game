@@ -1,15 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page
-        contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
     <title>home page</title>
     <link rel="stylesheet" href="/resources/css/main.css"/>
+    <link rel="stylesheet" href="/resources/css/login.css"/>
+    <link rel="stylesheet" href="/resources/css/shop.css">
     <link rel="stylesheet" href="/resources/css/board.css">
     <script src="/resources/js/main.js"></script>
+    <script src="/resources/js/login.js"></script>
+    <script src="/resources/js/shop.js"></script>
     <script src="/resources/js/texts.js"></script>
     <link rel="icon" href="/resources/images/favicon.ico?v=2" sizes="32x32" type="image/x-icon">
+    <%--    <meta http-equiv="X-UA-Compatible" content="IE=edge">--%>
 </head>
 <body>
 <div class="main-container">

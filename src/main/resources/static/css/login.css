@@ -7,7 +7,7 @@
     gap: 20px; /* 요소들 간 간격 */
 }
 
-.modal {
+.userInfoModal {
     display: none;
     position: fixed;
     background-color: rgba(0, 0, 0, 1);
@@ -98,13 +98,6 @@
 
 #closeInvenModal:hover {
     color: #e0d8c3; /* 변경됨: hover 시 밝은 텍스트로 */
-}
-
-body {
-    background-color: #1c1c1c; /* 기존 배경과 통일 */
-    color: #e0d8c3;
-    font-family: "Noto Sans KR", sans-serif;
-    margin: 0;
 }
 
 .login-container {
@@ -277,7 +270,7 @@ body {
     display: block;
 }
 
-img {
+.avatar_zone img {
     /*width: auto;*/
     /*object-fit: contain; !* 또는 'cover' 테스트해봐 *!*/
     /*image-rendering: pixelated; !* 픽셀 캐릭터일 경우 *!*/
