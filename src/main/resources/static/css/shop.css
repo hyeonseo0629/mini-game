@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     flex-wrap: wrap; /* 넘칠 경우 줄바꿈 */
     justify-content: center; /* 전체를 가운데 정렬 */
@@ -7,12 +7,12 @@
     margin-top: 10%;
 }
 
-.Shop-Top-Line{
+.Shop-Top-Line {
     display: flex;
     justify-content: space-between;
 }
 
-.Coin-Zone{
+.Coin-Zone {
     display: flex;
     flex-wrap: nowrap;
     white-space: nowrap;
@@ -24,7 +24,7 @@
 
 }
 
-.Shop-Top-Line-img{
+.Shop-Top-Line-img {
     background-image: url("/resources/images/coin.webp");
     background-size: contain;
     background-repeat: no-repeat;
@@ -32,7 +32,7 @@
     height: 30px;
 }
 
-.Shop-Top-Line-Money{
+.Shop-Top-Line-Money {
     font-size: 20px;
     align-content: flex-end;
     font-family: sans-serif;
@@ -140,7 +140,7 @@
 
 }
 
-.pagination{
+.pagination {
 
     text-align: center;
     font-size: 25px;

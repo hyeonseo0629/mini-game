@@ -7,13 +7,11 @@ import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 @RequestMapping("/text")
@@ -60,25 +58,6 @@ public class TextsC {
         return result;
     }
 
-//    @GetMapping("/list/{type}/{page}")
-//    @ResponseBody
-//    public Map<String, Object> listPage(@PathVariable("type") String type,
-//                                        @PathVariable("page") int page) {
-//
-//        int perPage = 5;
-//        int start = (page - 1) * perPage;
-//
-//        List<TextsVO> texts = textsService.getTextsByPage(type, start, perPage);
-//        int totalCount = textsService.getTotalCount(type);
-//        int totalPage = (int) Math.ceil((double) totalCount / perPage);
-//
-//        Map<String, Object> result = new HashMap<>();
-//        result.put("texts", texts);
-//        result.put("totalPage", totalPage);
-//
-//        return result;
-//    }
-
     // 게시판 글 상세내용
     @GetMapping("/detail/{id}")
     public String textDetail(@PathVariable int id, Model model) {
@@ -108,25 +87,7 @@ public class TextsC {
         textsService.updateText(textsVO);
 
         return 1;
-//        return Integer.parseInt("redirect:/text/" + textsVO.getText_type());
     }
-
-    // 게시판 글 삭제
-//    @GetMapping("/delete/{id}/{type}")
-//    public String textDelete(@PathVariable int id, @PathVariable String type, Model model) {
-//        textsService.deleteText(id);
-//        type = type.toLowerCase();
-//        model.addAttribute("content", "texts/texts_main.jsp");
-//        return "redirect:/text/" + type;
-//    }
-
-//    @GetMapping("/delete/{id}/{type}")
-//    public String textDelete(@PathVariable int id, @PathVariable String type, Model model) {
-//        textsService.deleteText(id);
-//        type = type.toLowerCase();
-//        model.addAttribute("content", "texts/texts_main.jsp");
-//        return "redirect:/text/" + type;
-//    }
 
     // 게시판 글 삭제 (Modified to return JSON and use POST)
     @ResponseBody // Indicate that the return value should be bound to the web response body
@@ -161,5 +122,4 @@ public class TextsC {
         return textsService.insertText(textsVO);
 
     }
-
 }
