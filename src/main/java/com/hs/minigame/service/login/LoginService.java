@@ -1,6 +1,5 @@
 package com.hs.minigame.service.login;
 
-
 import com.hs.minigame.mapper.login.LoginMapper;
 import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpSession;
@@ -52,22 +51,16 @@ public class LoginService {
         return true;
     }
 
-    public String findUserPw(String userId, String userName, String userEmail, String newPw){
+    public String findUserPw(String userId, String userName, String userEmail, String newPw) {
 
-      UsersVO user = loginMapper.resetUserPw(userId,userName, userEmail); //유저 정보 조회
+        UsersVO user = loginMapper.resetUserPw(userId, userName, userEmail); //유저 정보 조회
 
-      if(user!=null) {
-          loginMapper.changeUserPw(userId, newPw);//비번 변경 처리
-          return "비밀번호를 성공적으로 변경했습니다.";
-      }else{
-          return  "일치하는 정보가 없습니다.";
-      }
+        if (user != null) {
+            loginMapper.changeUserPw(userId, newPw);//비번 변경 처리
+            return "비밀번호를 성공적으로 변경했습니다.";
+        } else {
+            return "일치하는 정보가 없습니다.";
+        }
     }
-
-
-
-
-
-
 }
 

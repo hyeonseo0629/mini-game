@@ -53,15 +53,15 @@ public interface RankingMapper {
     // (2) 전체 데이터 개수 가져오기
     @Select("SELECT COUNT(*) " +
             "FROM users, score " +
-            "WHERE user_no = score_user_no AND score_game_id = 1" )
+            "WHERE user_no = score_user_no AND score_game_id = 1")
     public int getScoreRankingCount();
 
     @Select("SELECT COUNT(*) " +
             "FROM users, winning_stack " +
-            "WHERE user_no = stack_user_no AND stack_game_id = 1" )
+            "WHERE user_no = stack_user_no AND stack_game_id = 1")
     public int getStackRankingCount();
 
     @Select("SELECT COUNT(*) " +
-            "FROM users" )
+            "FROM users")
     public int getMoneyRankingCount();
 }
