@@ -29,7 +29,8 @@ public interface TextsMapper {
             "        WHEN 'QUESTION' THEN '문의사항'\n" +
             "        ELSE '기타'\n" +
             "        END AS text_kr\n" +
-            "FROM TEXTS t where text_id = #{text_id}")
+            "FROM TEXTS t JOIN USERS u ON t.text_user_no = u.user_no\n" +
+            "WHERE t.text_id = #{text_id}")
     public TextsVO getTextByID(int text_id);
 
     @Update("update texts set text_title = #{text_title}, text_content = #{text_content} where text_id = #{text_id}")
