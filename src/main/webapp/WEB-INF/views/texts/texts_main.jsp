@@ -6,13 +6,28 @@
     <h1>${type}</h1><br>
     <c:if test="${not empty sessionScope.users}">
         <input type="hidden" id="loginCheck" value="true"/>
+        <input type="hidden" id="userRole" value="${sessionScope.users.user_role}" />
     </c:if>
     <c:if test="${empty sessionScope.users}">
         <input type="hidden" id="loginCheck" value="false"/>
     </c:if>
-    <div class="button-container">
-        <button type="button" onclick="postTexts()">작성</button>
-    </div>
+
+    <!-- ✅ 공지사항 + 관리자(admin)인 경우만 버튼 출력 -->
+    <c:if test="${type == 'notice' and sessionScope.users.user_role == 'admin'}">
+        <div class="button-container">
+            <button type="button" id="openInsertBtn">작성</button>
+        </div>
+    </c:if>
+
+    <!-- ✅ 공지사항 외 게시판은 로그인만 되어 있으면 누구나 작성 가능 -->
+    <c:if test="${type != 'notice' and not empty sessionScope.users}">
+        <div class="button-container">
+            <button type="button" id="openInsertBtn">작성</button>
+        </div>
+    </c:if>
+<%--    <div class="button-container">--%>
+<%--        <button type="button" onclick="postTexts()">작성</button>--%>
+<%--    </div>--%>
     <table>
         <thead>
         <tr>
@@ -50,7 +65,10 @@
     <!-- 게시물 작성 모달 -->
     <button id="openInsertBtn" style="display: none">입력 모달 열기</button>
     <dialog id="insertModal">
-        <h2>${type}</h2>
+        <div class="modal-header">
+            <h2>${type}</h2>
+            <button id="closeBtn">X</button>
+        </div>
         <div>
             <div>title</div>
             <div><input type="text" name="text_title"></div>
@@ -60,24 +78,25 @@
             <div><textarea name="text_content" id="" cols="30" rows="10"></textarea></div>
         </div>
         <button id="addBtn" data-type="${type}">업로드</button>
-        <button id="closeBtn">닫기</button>
     </dialog>
 </div>
 
 <!-- detail 모달 -->
 <button id="openDetailBtn" style="display: none">상세 페이지 모달 열기</button>
 <dialog id="detailModal">
-    <h2><input id="detailTitle" disabled></h2>
-    <p><textarea id="detailContent" disabled></textarea></p>
-    <p><input id="detailNickname" disabled></p>
-    <p id="detailDate">내용</p>
+    <div class="detail-header">
+        <button id="closeDetailBtn">X</button>
+    </div>
+        <h2><input id="detailTitle" disabled></h2>
+        <p><textarea id="detailContent" disabled></textarea></p>
+        <p><input id="detailNickname" disabled></p>
+        <p id="detailDate">내용</p>
 
     <div class="btns">
         <button id="editBtn">수정</button>
         <button id="saveEditBtn" style="display: none;">저장</button>
         <%-- 이 부분이 추가되었는지 확인! --%>
         <button id="deleteBtn">삭제</button>
-        <button id="closeDetailBtn">닫기</button>
     </div>
 </dialog>
 

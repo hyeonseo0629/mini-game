@@ -13,7 +13,21 @@ const contentEl = document.querySelector("#detailContent")
 const nickNameEl = document.querySelector("#detailNickname")
 const dateEl = document.querySelector("#detailDate")
 
-openAddBtn.addEventListener('click', () => insertDialog.showModal());
+openAddBtn.addEventListener('click', () => {
+    // 게시판 타입 추출
+    const type = document.querySelector("h1")?.innerText?.trim(); // ex) "공지사항"
+    const userRole = document.getElementById("userRole")?.value; // ex) "admin" or "user"
+
+    // 공지사항 + 일반 사용자일 경우 차단
+    if (type === 'notice' && userRole !== 'admin') {
+        alert("권한이 없습니다.");
+        return;
+    }
+
+    insertDialog.showModal();
+});
+
+
 closeBtn.addEventListener('click', () => insertDialog.close());
 
 // openDetailBtn이 클릭될 때 detailDialog를 열도록 명시적으로 추가
@@ -74,6 +88,19 @@ document.querySelectorAll(".text-row").forEach((el) => {
         titleEl.disabled = true;
         contentEl.disabled = true;
         saveEditBtn.style.display = 'none'; // Hide save button initially
+
+        const type = el.dataset.type?.toLowerCase();
+
+        if (type === 'notice') {
+            editBtn.style.display = 'none';
+            saveEditBtn.style.display = 'none';
+            deleteBtn.style.display = 'none';
+        } else {
+            editBtn.style.display = 'inline-block';
+            saveEditBtn.style.display = 'none'; // 수정 중 아닐 경우 숨김 유지
+            deleteBtn.style.display = 'inline-block';
+        }
+
     });
 });
 
