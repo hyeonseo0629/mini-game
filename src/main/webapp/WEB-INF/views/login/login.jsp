@@ -25,15 +25,8 @@
             <c:otherwise>
                 <!--로그인 완료창-->
                 <div class="welcome-box">
-                    <span>${users.user_nickname}님 환영합니다</span>
-                    <form action="/logout" method="post">
-                        <button type="submit">로그아웃</button>
-                    </form>
-
-                    <form id="deleteUser" action="/deleteUser" method="post">
-                        <input type="hidden" name="user_id" value="${users.user_id}">
-                        <button type="button" onclick="checkDelete()">회원 탈퇴</button>
-                    </form>
+                    <button onclick="openInvenModal()" type="button">Inventory</button>
+                    <button onclick="openMyPageModal()" type="button">Profile</button>
                 </div>
             </c:otherwise>
         </c:choose>
@@ -42,22 +35,28 @@
     <br>
 
     <!--마이페이지+인벤토리-->
-    <c:if test="${not empty users}">
-    <div class="mypage-box">
-        <span>마이페이지</span>
-        <div class="mypage-info">
-            <div>ID : ${users.user_id}</div>
-            <div>이름 : ${users.user_name}</div>
-            <div>닉네임 : ${users.user_nickname}</div>
-            <div>머니 : ${users.user_money}</div>
-        </div>
+    <div id="invenModal" class="userInfoModal" style="display: none" onclick="backInvenModal(event)">
+        <div class="mypage-box">
+            <span>마이페이지</span>
+            <div class="mypage-info">
+                <div>ID : ${users.user_id}</div>
+                <div>이름 : ${users.user_name}</div>
+                <div>닉네임 : ${users.user_nickname}</div>
+                <div>머니 : ${users.user_money}</div>
+            </div>
 
-        <div class="another-box">
-            <button onclick="openInvenModal()" type="button">인벤토리</button>
-            <button onclick="openUpdateUser()" type="button">회원정보 수정</button>
+            <div class="another-box">
+                <form action="/logout" method="post">
+                    <button type="submit">로그아웃</button>
+                </form>
+                <button onclick="openUpdateUser()" type="button">회원정보 수정</button>
+                <form id="deleteUser" action="/deleteUser" method="post">
+                    <input type="hidden" name="user_id" value="${users.user_id}">
+                    <button type="button" onclick="checkDelete()">회원 탈퇴</button>
+                </form>
+            </div>
         </div>
     </div>
-    </c:if>
 
     <!--회원가입모달창-->
     <div id="signModal" class="userInfoModal" style="display:none" onclick="backSignModal(event)"
