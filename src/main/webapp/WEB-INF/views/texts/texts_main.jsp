@@ -4,8 +4,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div class="board-text">
     <h1>${type}</h1><br>
+
+
     <c:if test="${not empty sessionScope.users}">
         <input type="hidden" id="loginCheck" value="true"/>
+        <input type="hidden" id="userNo" value="${sessionScope.users.user_no}" />
+        <input type="hidden" id="userId" value="${sessionScope.users.user_id}" />
         <input type="hidden" id="userRole" value="${sessionScope.users.user_role}" />
     </c:if>
     <c:if test="${empty sessionScope.users}">
@@ -13,14 +17,14 @@
     </c:if>
 
     <!-- ✅ 공지사항 + 관리자(admin)인 경우만 버튼 출력 -->
-    <c:if test="${type == 'notice' and sessionScope.users.user_role == 'admin'}">
+    <c:if test="${type == 'NOTICE' and sessionScope.users.user_role.equals('ADMIN')}">
         <div class="button-container">
             <button type="button" id="openInsertBtn">작성</button>
         </div>
     </c:if>
 
     <!-- ✅ 공지사항 외 게시판은 로그인만 되어 있으면 누구나 작성 가능 -->
-    <c:if test="${type != 'notice' and not empty sessionScope.users}">
+    <c:if test="${type != 'NOTICE' and not empty sessionScope.users.equals('USER')}">
         <div class="button-container">
             <button type="button" id="openInsertBtn">작성</button>
         </div>
@@ -40,7 +44,7 @@
         <tbody>
         <c:forEach var="t" items="${texts}">
             <tr class="text-row" data-type="${t.text_type}" data-id="${t.text_id}" data-title="${t.text_title}" data-content="${t.text_content}"
-                data-nickname="${t.user_nickname}" data-date="${t.text_write_date}">
+                data-nickname="${t.user_nickname}" data-date="${t.text_write_date}" data-user="${t.text_user_no}">
                 <td class="text_id">${t.text_id}</td>
                 <td class="text_title">${t.text_title}</td>
                 <td class="text_user_no">${t.user_nickname}</td>
@@ -60,7 +64,6 @@
                data-type="${type}">${p}</a>
         </c:forEach>
     </div>
-
 
     <!-- 게시물 작성 모달 -->
     <button id="openInsertBtn" style="display: none">입력 모달 열기</button>
