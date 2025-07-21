@@ -7,7 +7,21 @@
     gap: 20px; /* 요소들 간 간격 */
 }
 
-.modal {
+.userInfoModal {
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 1);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    opacity: 1;
+}
+
+.MyPageModal {
     display: none;
     position: fixed;
     background-color: rgba(0, 0, 0, 1);
@@ -80,9 +94,11 @@
     height: auto; /* 변경됨: 고정 높이 제거 */
     box-shadow: 0 0 15px rgba(255, 215, 0, 1);
 }
+
 .inven-modal-body span {
     font-size: 1.5rem;
 }
+
 #closeInvenModal {
     /*background-color: transparent; */ /* 변경됨: 배경 제거 */
     color: #facc15;
@@ -96,12 +112,6 @@
 
 #closeInvenModal:hover {
     color: #e0d8c3; /* 변경됨: hover 시 밝은 텍스트로 */
-}
-body {
-    background-color: #1c1c1c; /* 기존 배경과 통일 */
-    color: #e0d8c3;
-    font-family: "Noto Sans KR", sans-serif;
-    margin: 0;
 }
 
 .login-container {
@@ -261,6 +271,7 @@ body {
 .cssAlert.fade-out {
     opacity: 0;
 }
+
 /* 탭 내용 기본적으로 숨김 */
 #idTab,
 #pwTab {
@@ -273,7 +284,7 @@ body {
     display: block;
 }
 
-img {
+.avatar_zone img {
     /*width: auto;*/
     /*object-fit: contain; !* 또는 'cover' 테스트해봐 *!*/
     /*image-rendering: pixelated; !* 픽셀 캐릭터일 경우 *!*/
@@ -290,6 +301,7 @@ img {
     background-color: #007bff;
     color: white;
 }
+
 .right-zone {
     display: flex;
     flex-direction: column;
@@ -306,12 +318,14 @@ img {
     border-radius: 15px;
     margin-bottom: 30px;
 }
+
 .mypage-box span {
     display: block;
     margin-top: 15px;
     margin-bottom: 3px;
     font-size: 1.2rem;
 }
+
 .mypage-info {
     font-size: 1.1rem;
     color: #ffd700;
@@ -343,6 +357,7 @@ img {
 .action-btn:hover {
     background-color: #e0d8c3;
 }
+
 .avatar_zone {
     border: 3px solid #ffd700;
     border-radius: 15px;

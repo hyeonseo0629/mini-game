@@ -19,7 +19,7 @@ public class RankingService {
     private static final int LIMIT = 10;
 
     // all select (사용 X)
-    public List<UserScoreVO> selectScoreRanking(){
+    public List<UserScoreVO> selectScoreRanking() {
         return rankingMapper.selectScoreRanking();
     }
 

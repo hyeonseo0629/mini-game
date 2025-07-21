@@ -5,13 +5,14 @@
 }
 
 .ranking-type {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
 }
 
 .ranking-type form button {
+    width: 110px;
     padding: 10px 16px;
     background: linear-gradient(45deg, #3a3a3a, #2a2a2a);
     border: 1px solid #4a4a4a;
@@ -57,7 +58,7 @@
     width: 170px;
     text-align: center;
     position: relative;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .top3-card img.avatar {
@@ -96,7 +97,7 @@
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .ranking-row {

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -17,11 +16,8 @@ import java.util.List;
 @Controller
 public class ShopC {
 
-
     //리미트 상수화
     private static final int PAGE_LIMIT = 4;
-
-
 
     @Autowired
     private ShopService shopService;
@@ -40,7 +36,6 @@ public class ShopC {
                            HttpSession session,
                            @RequestParam(defaultValue = "1") int page,
                            Model model) {
-
         setPagingData(model, page);
         UsersVO user = setUserMoneyToModel(session, model);
 
@@ -87,14 +82,13 @@ public class ShopC {
 
         // 구매버튼을 누르면 buying_record 테이블 insert(인벤토리를 위하여)
         int user_no = user.getUser_no();
-        int buying_Record_Insert_check = shopService.insertBuyingRecord(user_no,itemId);
+        int buying_Record_Insert_check = shopService.insertBuyingRecord(user_no, itemId);
         if (buying_Record_Insert_check > 0) {
             System.out.println("구매 기록 저장 성공!");
 
-
             // 인벤토리 관련 실시간 반영처리
             List<ShopItemsVO> updatedInventory = shopService.getInventory(user.getUser_no());
-            
+
             //인벤토리에 기본아바타 항상 들어가 있게 하는 로직
             //getInventory를 호출하면 DB에서 인벤토리 정보를 가져옴(내가 실제로 산 인벤토리만 불러옴-> 기본 아바타가 없는 상태)
             //그래서 아래 코드를 추가해서 강제로 기본아바타를 항상 넣어주는 상태 추가
@@ -110,25 +104,21 @@ public class ShopC {
 
             System.out.println("업데이트된 인벤토리 사이즈 : " + updatedInventory.size());
 
-
         } else {
             System.out.println("구매 기록 저장 실패!");
         }
-
-
-
 
         model.addAttribute("content", "shop/shop_main.jsp");
         return "redirect:/main_page";
     }
 
     @PostMapping("/shop/applyAvatar")
-    public String applyAvatarC(@RequestParam("avatarImg") String avatarImg, HttpSession session){
+    public String applyAvatarC(@RequestParam("avatarImg") String avatarImg, HttpSession session) {
         UsersVO user = (UsersVO) session.getAttribute("users");
         System.out.println("user : " + user);
 
         //1.DB업데이트
-        int avatarcheck = shopService.updateUserAvatar(user.getUser_id(),avatarImg);
+        int avatarcheck = shopService.updateUserAvatar(user.getUser_id(), avatarImg);
         if (avatarcheck > 0) {
             System.out.println("아바타 업데이트 완료");
         }
@@ -139,9 +129,6 @@ public class ShopC {
 
         return "redirect:/main_page";
     }
-
-
-
 
     // 1 공통 처리 메서드(페이징)
     private void setPagingData(Model model, int page) {
