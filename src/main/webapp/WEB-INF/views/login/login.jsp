@@ -25,15 +25,8 @@
             <c:otherwise>
                 <!--로그인 완료창-->
                 <div class="welcome-box">
-                    <span>${users.user_nickname}님 환영합니다</span>
-                    <form action="/logout" method="post">
-                        <button type="submit">로그아웃</button>
-                    </form>
-
-                    <form id="deleteUser" action="/deleteUser" method="post">
-                        <input type="hidden" name="user_id" value="${users.user_id}">
-                        <button type="button" onclick="checkDelete()">회원 탈퇴</button>
-                    </form>
+                    <button onclick="openInvenModal()" type="button">Inventory</button>
+                    <button onclick="openMyPageModal()" type="button">Profile</button>
                 </div>
             </c:otherwise>
         </c:choose>
@@ -42,28 +35,34 @@
     <br>
 
     <!--마이페이지+인벤토리-->
-    <c:if test="${not empty users}">
-    <div class="mypage-box">
-        <span>마이페이지</span>
-        <div class="mypage-info">
-            <div>ID : ${users.user_id}</div>
-            <div>이름 : ${users.user_name}</div>
-            <div>닉네임 : ${users.user_nickname}</div>
-            <div>머니 : ${users.user_money}</div>
-        </div>
+    <div id="myPageModal" class="myPageModal" style="display: none" onclick="backMyPageModal(event)">
+        <div class="mypage-box">
+            <span>마이페이지</span>
+            <div class="mypage-info">
+                <div>ID : ${users.user_id}</div>
+                <div>이름 : ${users.user_name}</div>
+                <div>닉네임 : ${users.user_nickname}</div>
+                <div>머니 : ${users.user_money}</div>
+            </div>
 
-        <div class="another-box">
-            <button onclick="openInvenModal()" type="button">인벤토리</button>
-            <button onclick="openUpdateUser()" type="button">회원정보 수정</button>
+            <div class="another-box">
+                <form action="/logout" method="post">
+                    <button type="submit">로그아웃</button>
+                </form>
+                <button onclick="openUpdateUser()" type="button">회원정보 수정</button>
+                <form id="deleteUser" action="/deleteUser" method="post">
+                    <input type="hidden" name="user_id" value="${users.user_id}">
+                    <button type="button" onclick="checkDelete()">회원 탈퇴</button>
+                </form>
+            </div>
+            <button onclick="closeMyPageModal()" type="button" class="close-btn">X</button>
         </div>
     </div>
-    </c:if>
 
     <!--회원가입모달창-->
-    <div id="signModal" class="userInfoModal" style="display:none" onclick="backSignModal(event)"
-         onsubmit="return validateSignForm()">
+    <div id="signModal" class="userInfoModal" style="display:none" onclick="backSignModal(event)">
         <div class="signModal-box">
-            <form action="/sign" method="post">
+            <form action="/sign" method="post" >
                 <div>회원 가입</div>
                 <div class="group-form">
                     <div>
@@ -82,12 +81,11 @@
                         <input type="text" name="user_email" placeholder="이메일">
                     </div>
                 </div>
-                <button class="openModal-sign">회원가입</button>
+                <button class="openModal-sign" type="">회원가입</button>
                 <button onclick="closeSignModal()" type="button" class="close-btn">X</button>
             </form>
         </div>
     </div>
-
 
     <!--아이디/비번찾기모달창-->
     <div id="findModal" class="userInfoModal" style="display: none" onclick="backFindModal(event)">
@@ -130,7 +128,6 @@
         </div>
     </div>
 
-
     <!--인벤토리모달창-->
     <div id="invenModal" class="userInfoModal" style="display: none" onclick="backInvenModal(event)">
         <div class="inven-modal-body">
@@ -146,10 +143,10 @@
 
                         <c:forEach var="item" items="${sessionScope.inventoryItems}">
                             <div class="inventory-item">
-                                <img src="/resources/images/${item.item_avatar_img}" alt="아바타" width="80">
+                                <img src="/resources/images/${empty item.item_avatar_img ? 'base_avatar.webp' : item.item_avatar_img}" alt="아바타" width="80">
                                 <div>${item.item_name}</div>
                                 <form action="/shop/applyAvatar" method="post">
-                                    <input type="hidden" name="avatarImg" value="${item.item_avatar_img}">
+                                    <input type="hidden" name="avatarImg" value="${empty item.item_avatar_img ? 'base_avatar.webp' : item.item_avatar_img}">
                                     <button type="submit">적용</button>
                                 </form>
                             </div>
@@ -161,37 +158,37 @@
             </div>
             <button onclick="closeInvenModal()" class="close-btn">X</button>
         </div>
+    </div>
 
-        <!--회원정보수정모달창-->
-        <div id="updateModal" class="userInfoModal" style="display: none" onclick="backUpdateModal(event)">
-            <div class="updateModal-box">
-                <form action="/updateUser" method="post">
-                    <input type="hidden" name="originalId" value="${user.user_id}">
-                    <div>회원 정보 수정</div>
-                    <div>
-                        <label for="user_id">아이디</label>
-                        <input type="text" id="user_id" name="user_id" value="${user.user_id}">
-                    </div>
-                    <div>
-                        <label for="user_pw">비밀번호</label>
-                        <input type="text" name="user_pw" required placeholder="변경할 비밀번호를 입력하세요">
-                    </div>
-                    <div>
-                        <label for="user_name">이름</label>
-                        <input type="text" id="user_name" name="user_name" value="${user.user_name}">
-                    </div>
-                    <div>
-                        <label for="user_nickname">닉네임</label>
-                        <input type="text" id="user_nickname" name="user_nickname" value="${user.user_nickname}">
-                    </div>
-                    <div>
-                        <label for="user_email">이메일</label>
-                        <input type="text" id="user_email" name="user_email" value="${user.user_email}">
-                    </div>
-                    <button type="submit">정보수정</button>
-                    <button onclick="closeUpdateUser()" type="button" class="close-btn">X</button>
-                </form>
-            </div>
+    <!--회원정보수정모달창-->
+    <div id="updateModal" class="userInfoModal" style="display: none" onclick="backUpdateModal(event)">
+        <div class="updateModal-box">
+            <form action="/updateUser" method="post">
+                <input type="hidden" name="originalId" value="${user.user_id}">
+                <div>회원 정보 수정</div>
+                <div>
+                    <label for="user_id">아이디</label>
+                    <input type="text" id="user_id" name="user_id" value="${user.user_id}">
+                </div>
+                <div>
+                    <label for="user_pw">비밀번호</label>
+                    <input type="text" name="user_pw" required placeholder="변경할 비밀번호를 입력하세요">
+                </div>
+                <div>
+                    <label for="user_name">이름</label>
+                    <input type="text" id="user_name" name="user_name" value="${user.user_name}">
+                </div>
+                <div>
+                    <label for="user_nickname">닉네임</label>
+                    <input type="text" id="user_nickname" name="user_nickname" value="${user.user_nickname}">
+                </div>
+                <div>
+                    <label for="user_email">이메일</label>
+                    <input type="text" id="user_email" name="user_email" value="${user.user_email}">
+                </div>
+                <button type="submit">정보수정</button>
+                <button onclick="closeUpdateUser()" type="button" class="close-btn">X</button>
+            </form>
         </div>
     </div>
     <div class="avatar_zone">
@@ -201,32 +198,32 @@
     </div>
 </div>
 
-    <!--로그인알람-->
-    <c:if test="${alert == '로그인 성공'}">
+<!--로그인알람-->
+<c:if test="${alert == '로그인 성공'}">
     <script>
         if (!window.shownAlert) {
             alert('${alert}');
             window.shownAlert = true;
         }
     </script>
-    </c:if>
+</c:if>
 
-    <!--로그아웃알람-->
-    <c:if test="${not empty alert2}">
+<!--로그아웃알람-->
+<c:if test="${not empty alert2}">
     <script>
         if (!window.shownAlert) {
             alert('${alert2}');
             window.shownAlert = true;
         }
     </script>
-    </c:if>
+</c:if>
 
-    <!-- 누락된 알림들도 처리하는 공통 alert 처리 -->
-    <c:if test="${not empty alert}">
+<!-- 누락된 알림들도 처리하는 공통 alert 처리 -->
+<c:if test="${not empty alert}">
     <script>
         if (!window.shownAlert) {
             alert('${alert}');
             window.shownAlert = true;
         }
     </script>
-    </c:if>
+</c:if>

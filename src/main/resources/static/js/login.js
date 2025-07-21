@@ -71,7 +71,7 @@ document.getElementById("findPwForm").addEventListener("submit", async function 
     const form = e.target;
     const formData = new FormData(form);
 
-    const newPw = formData.get("newPw"); // 비밀번호 가져오기
+    const newPw = formData.get("new_pw"); // 비밀번호 가져오기
     const pwPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
 
     if (!pwPattern.test(newPw)) {
@@ -88,7 +88,22 @@ document.getElementById("findPwForm").addEventListener("submit", async function 
     document.getElementById("pwResult").innerText = result;
 });
 
-<!--인벤토리모달창기능-->
+// 마이페이지 모달 창 기능
+function openMyPageModal() {
+    document.getElementById("myPageModal").style.display = "flex";
+}
+
+function closeMyPageModal() {
+    document.getElementById("myPageModal").style.display = "none";
+}
+
+function backMyPageModal(event) {
+    if (event.target.id == "myPageModal") {
+        closeSignModal();
+    }
+}
+
+// 인벤토리 모달 창 기능
 function openInvenModal() {
     document.getElementById("invenModal").style.display = "flex";
     currentSlide = 0;
@@ -146,11 +161,10 @@ function slide(direction) {
 
     // track 요소의 CSS transform 속성을 업데이트하여 슬라이드를 실제로 움직입니다.
     const moveX = -currentSlide * itemTotalWidth + 40;
-    track.style.transform = `translateX(\${moveX}px)`;
-
+    track.style.transform = "translateX(" + moveX + "px)";
 }
 
-<!--정보수정모달창기능-->
+// 정보수정 모달 창 기능
 function openUpdateUser() {
     document.getElementById("updateModal").style.display = "flex";
 }
@@ -165,7 +179,7 @@ function backUpdateModal(event) {
     }
 }
 
-<!--회원가입필수입력기능-->
+// 회원가입 필수 입력 기능
 function validateSignForm() {
     const id = document.querySelector('input[name="user_id"]').value.trim();
     const pw = document.querySelector('input[name="user_pw"]').value.trim();
@@ -190,32 +204,7 @@ function validateSignForm() {
     return true;
 }
 
-<!--회원가입필수입력기능-->
-function validateSignForm() {
-    const id = document.querySelector('input[name="user_id"]').value.trim();
-    const pw = document.querySelector('input[name="user_pw"]').value.trim();
-    const name = document.querySelector('input[name="user_name"]').value.trim();
-    const nickname = document.querySelector('input[name="user_nickname"]').value.trim();
-    if (!id) {
-        alert("아이디를 입력해주세요.");
-        return false;
-    }
-    if (!pw) {
-        alert("비밀번호를 입력해주세요.");
-        return false;
-    }
-    if (!name) {
-        alert("이름을 입력해주세요.");
-        return false;
-    }
-    if (!nickname) {
-        alert("닉네임을 입력해주세요.");
-        return false;
-    }
-    return true;
-}
-
-<!--삭제확인알람기능-->
+// 삭제 확인 알람 기능
 function checkDelete() {
     const checkUser = confirm("정말로 회원 탈퇴를 하시겠습니까?");
     if (checkUser) {
@@ -225,7 +214,7 @@ function checkDelete() {
     }
 }
 
-<!--alret양식통일용-->
+// alret 양식 통일용
 window.alert = function (message) {
     const box = document.createElement("div");
     box.className = "cssAlert";
