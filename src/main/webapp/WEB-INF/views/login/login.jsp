@@ -144,10 +144,10 @@
 
                         <c:forEach var="item" items="${sessionScope.inventoryItems}">
                             <div class="inventory-item">
-                                <img src="/resources/images/${item.item_avatar_img}" alt="아바타" width="80">
+                                <img src="/resources/images/${empty item.item_avatar_img ? 'base_avatar.webp' : item.item_avatar_img}" alt="아바타" width="80">
                                 <div>${item.item_name}</div>
                                 <form action="/shop/applyAvatar" method="post">
-                                    <input type="hidden" name="avatarImg" value="${item.item_avatar_img}">
+                                    <input type="hidden" name="avatarImg" value="${empty item.item_avatar_img ? 'base_avatar.webp' : item.item_avatar_img}">
                                     <button type="submit">적용</button>
                                 </form>
                             </div>
@@ -159,37 +159,37 @@
             </div>
             <button onclick="closeInvenModal()" class="close-btn">X</button>
         </div>
+    </div>
 
-        <!--회원정보수정모달창-->
-        <div id="updateModal" class="userInfoModal" style="display: none" onclick="backUpdateModal(event)">
-            <div class="updateModal-box">
-                <form action="/updateUser" method="post">
-                    <input type="hidden" name="originalId" value="${user.user_id}">
-                    <div>회원 정보 수정</div>
-                    <div>
-                        <label for="user_id">아이디</label>
-                        <input type="text" id="user_id" name="user_id" value="${user.user_id}">
-                    </div>
-                    <div>
-                        <label for="user_pw">비밀번호</label>
-                        <input type="text" name="user_pw" required placeholder="변경할 비밀번호를 입력하세요">
-                    </div>
-                    <div>
-                        <label for="user_name">이름</label>
-                        <input type="text" id="user_name" name="user_name" value="${user.user_name}">
-                    </div>
-                    <div>
-                        <label for="user_nickname">닉네임</label>
-                        <input type="text" id="user_nickname" name="user_nickname" value="${user.user_nickname}">
-                    </div>
-                    <div>
-                        <label for="user_email">이메일</label>
-                        <input type="text" id="user_email" name="user_email" value="${user.user_email}">
-                    </div>
-                    <button type="submit">정보수정</button>
-                    <button onclick="closeUpdateUser()" type="button" class="close-btn">X</button>
-                </form>
-            </div>
+    <!--회원정보수정모달창-->
+    <div id="updateModal" class="userInfoModal" style="display: none" onclick="backUpdateModal(event)">
+        <div class="updateModal-box">
+            <form action="/updateUser" method="post">
+                <input type="hidden" name="originalId" value="${user.user_id}">
+                <div>회원 정보 수정</div>
+                <div>
+                    <label for="user_id">아이디</label>
+                    <input type="text" id="user_id" name="user_id" value="${user.user_id}">
+                </div>
+                <div>
+                    <label for="user_pw">비밀번호</label>
+                    <input type="text" name="user_pw" required placeholder="변경할 비밀번호를 입력하세요">
+                </div>
+                <div>
+                    <label for="user_name">이름</label>
+                    <input type="text" id="user_name" name="user_name" value="${user.user_name}">
+                </div>
+                <div>
+                    <label for="user_nickname">닉네임</label>
+                    <input type="text" id="user_nickname" name="user_nickname" value="${user.user_nickname}">
+                </div>
+                <div>
+                    <label for="user_email">이메일</label>
+                    <input type="text" id="user_email" name="user_email" value="${user.user_email}">
+                </div>
+                <button type="submit">정보수정</button>
+                <button onclick="closeUpdateUser()" type="button" class="close-btn">X</button>
+            </form>
         </div>
     </div>
     <div class="avatar_zone">
