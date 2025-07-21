@@ -71,7 +71,7 @@ document.getElementById("findPwForm").addEventListener("submit", async function 
     const form = e.target;
     const formData = new FormData(form);
 
-    const newPw = formData.get("newPw"); // 비밀번호 가져오기
+    const newPw = formData.get("new_pw"); // 비밀번호 가져오기
     const pwPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
 
     if (!pwPattern.test(newPw)) {

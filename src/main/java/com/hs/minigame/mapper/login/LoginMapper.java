@@ -19,7 +19,7 @@ public interface LoginMapper {
     @Delete("delete from users where user_id = #{userId}")
     public void deleteUser(@Param("userId") String userId);
 
-    @Update("update users set user_id=#{users.user_id},user_pw=#{users.user_pw},user_name=#{users.user_name},user_nickname=#{users.user_nickname},user_email=#{users.user_email},user_role=#{users.user_role},user_avatar_img=#{users.user_avatar_img}  WHERE user_id = #{originalId}")
+    @Update("update users set user_id=#{users.user_id},user_pw=#{users.user_pw},user_name=#{users.user_name},user_nickname=#{users.user_nickname},user_email=#{users.user_email},user_role=#{users.user_role,jdbcType=VARCHAR},user_avatar_img=#{users.user_avatar_img,jdbcType=VARCHAR}  WHERE user_id = #{originalId}")
     public boolean updateUser(@Param("originalId") String originalId, @Param("users") UsersVO users);
 
     @Select("SELECT user_id FROM users WHERE user_name = #{user_name} AND user_email = #{user_email}")

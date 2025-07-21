@@ -211,6 +211,13 @@ public class LoginC {
             UsersVO originalUser = loginService.getUser(originalId);
             users.setUser_pw(originalUser.getUser_pw());
         }
+        //role,img가 null일 경우 대비용
+        if (users.getUser_role() == null || users.getUser_role().trim().isEmpty()) {
+            users.setUser_role("USER");
+        }
+        if (users.getUser_avatar_img() == null || users.getUser_avatar_img().trim().isEmpty()) {
+            users.setUser_avatar_img("base_avatar.webp");  
+        }
 
         boolean updateSuccess = loginService.updateUser(originalId, users);
 

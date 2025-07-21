@@ -60,10 +60,9 @@
     </div>
 
     <!--회원가입모달창-->
-    <div id="signModal" class="userInfoModal" style="display:none" onclick="backSignModal(event)"
-         onsubmit="return validateSignForm()">
+    <div id="signModal" class="userInfoModal" style="display:none" onclick="backSignModal(event)">
         <div class="signModal-box">
-            <form action="/sign" method="post">
+            <form action="/sign" method="post" >
                 <div>회원 가입</div>
                 <div class="group-form">
                     <div>
@@ -82,7 +81,7 @@
                         <input type="text" name="user_email" placeholder="이메일">
                     </div>
                 </div>
-                <button class="openModal-sign">회원가입</button>
+                <button class="openModal-sign" type="">회원가입</button>
                 <button onclick="closeSignModal()" type="button" class="close-btn">X</button>
             </form>
         </div>
