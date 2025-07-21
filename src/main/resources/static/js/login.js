@@ -93,11 +93,11 @@ function openMyPageModal() {
     document.getElementById("myPageModal").style.display = "flex";
 }
 
-function closeSignModal() {
+function closeMyPageModal() {
     document.getElementById("myPageModal").style.display = "none";
 }
 
-function backSignModal(event) {
+function backMyPageModal(event) {
     if (event.target.id == "myPageModal") {
         closeSignModal();
     }

@@ -35,7 +35,7 @@
     <br>
 
     <!--마이페이지+인벤토리-->
-    <div id="invenModal" class="userInfoModal" style="display: none" onclick="backInvenModal(event)">
+    <div id="myPageModal" class="myPageModal" style="display: none" onclick="backMyPageModal(event)">
         <div class="mypage-box">
             <span>마이페이지</span>
             <div class="mypage-info">
@@ -55,6 +55,7 @@
                     <button type="button" onclick="checkDelete()">회원 탈퇴</button>
                 </form>
             </div>
+            <button onclick="closeMyPageModal()" type="button" class="close-btn">X</button>
         </div>
     </div>
 
@@ -86,7 +87,6 @@
             </form>
         </div>
     </div>
-
 
     <!--아이디/비번찾기모달창-->
     <div id="findModal" class="userInfoModal" style="display: none" onclick="backFindModal(event)">
@@ -128,7 +128,6 @@
             </div>
         </div>
     </div>
-
 
     <!--인벤토리모달창-->
     <div id="invenModal" class="userInfoModal" style="display: none" onclick="backInvenModal(event)">
@@ -200,32 +199,32 @@
     </div>
 </div>
 
-    <!--로그인알람-->
-    <c:if test="${alert == '로그인 성공'}">
+<!--로그인알람-->
+<c:if test="${alert == '로그인 성공'}">
     <script>
         if (!window.shownAlert) {
             alert('${alert}');
             window.shownAlert = true;
         }
     </script>
-    </c:if>
+</c:if>
 
-    <!--로그아웃알람-->
-    <c:if test="${not empty alert2}">
+<!--로그아웃알람-->
+<c:if test="${not empty alert2}">
     <script>
         if (!window.shownAlert) {
             alert('${alert2}');
             window.shownAlert = true;
         }
     </script>
-    </c:if>
+</c:if>
 
-    <!-- 누락된 알림들도 처리하는 공통 alert 처리 -->
-    <c:if test="${not empty alert}">
+<!-- 누락된 알림들도 처리하는 공통 alert 처리 -->
+<c:if test="${not empty alert}">
     <script>
         if (!window.shownAlert) {
             alert('${alert}');
             window.shownAlert = true;
         }
     </script>
-    </c:if>
+</c:if>
