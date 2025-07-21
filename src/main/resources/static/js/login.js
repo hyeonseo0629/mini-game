@@ -71,7 +71,7 @@ document.getElementById("findPwForm").addEventListener("submit", async function 
     const form = e.target;
     const formData = new FormData(form);
 
-    const newPw = formData.get("newPw"); // 비밀번호 가져오기
+    const newPw = formData.get("new_pw"); // 비밀번호 가져오기
     const pwPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
 
     if (!pwPattern.test(newPw)) {
@@ -161,8 +161,7 @@ function slide(direction) {
 
     // track 요소의 CSS transform 속성을 업데이트하여 슬라이드를 실제로 움직입니다.
     const moveX = -currentSlide * itemTotalWidth + 40;
-    track.style.transform = `translateX(${moveX}px)`;
-
+    track.style.transform = "translateX(" + moveX + "px)";
 }
 
 // 정보수정 모달 창 기능
@@ -178,31 +177,6 @@ function backUpdateModal(event) {
     if (event.target.id == "updateModal") {
         closeUpdateUser();
     }
-}
-
-// 회원가입 필수 입력 기능
-function validateSignForm() {
-    const id = document.querySelector('input[name="user_id"]').value.trim();
-    const pw = document.querySelector('input[name="user_pw"]').value.trim();
-    const name = document.querySelector('input[name="user_name"]').value.trim();
-    const nickname = document.querySelector('input[name="user_nickname"]').value.trim();
-    if (!id) {
-        alert("아이디를 입력해주세요.");
-        return false;
-    }
-    if (!pw) {
-        alert("비밀번호를 입력해주세요.");
-        return false;
-    }
-    if (!name) {
-        alert("이름을 입력해주세요.");
-        return false;
-    }
-    if (!nickname) {
-        alert("닉네임을 입력해주세요.");
-        return false;
-    }
-    return true;
 }
 
 // 회원가입 필수 입력 기능
