@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper()
 public interface LoginMapper {
 
-    @Select("select user_no, user_id, user_pw, user_name, user_nickname, user_money, user_email, user_avatar_img from users where user_id =#{id}")
+    @Select("select * from users where user_id =#{id}")
     public UsersVO selectUser(String id);
 
     @Insert("insert into users(user_id, user_pw,user_name,user_nickname,user_money,user_role,user_avatar_img,user_email)" +

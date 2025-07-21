@@ -89,13 +89,32 @@ public class TextsC {
         return 1;
     }
 
-    // 게시판 글 삭제 (Modified to return JSON and use POST)
-    @ResponseBody // Indicate that the return value should be bound to the web response body
-    @PostMapping("/delete/{id}/{type}") // Changed to POST method
-    public int textDelete(@PathVariable int id, @PathVariable String type) {
-        System.out.println("Deleting text with id: " + id + " and type: " + type);
-        int result = textsService.deleteText(id);
-        return result; // Return 1 for success, 0 for failure
+//    // 게시판 글 삭제 (Modified to return JSON and use POST)
+//    @ResponseBody // Indicate that the return value should be bound to the web response body
+//    @PostMapping("/delete/{id}/{type}") // Changed to POST method
+//    public int textDelete(@PathVariable int id, @PathVariable String type) {
+//        System.out.println("Deleting text with id: " + id + " and type: " + type);
+//        int result = textsService.deleteText(id);
+//        return result; // Return 1 for success, 0 for failure
+//    }
+
+    @PostMapping("/delete/{id}/{type}")
+    @ResponseBody
+    public int textDelete(@PathVariable int id, HttpSession session) {
+        UsersVO user = (UsersVO) session.getAttribute("users");
+        if (user == null) return 0; // 비로그인 사용자 차단
+
+        TextsVO post = textsService.getTextById(id); // 게시글 정보 가져오기
+        if (post == null) return 0; // 게시글이 없을 경우
+
+       boolean isOwner = post.getText_user_no() == user.getUser_no();
+       boolean isAdmin = user.getUser_role().equals("admin");
+
+       if (isOwner || isAdmin) {
+           return textsService.deleteText(id); // ✅ 권한 있으면 삭제
+        } else {
+           return 0; // 권한 없으면 실패
+       }
     }
 
     // 게시판 글 작성 폼
