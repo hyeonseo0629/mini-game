@@ -161,7 +161,7 @@ function slide(direction) {
 
     // track 요소의 CSS transform 속성을 업데이트하여 슬라이드를 실제로 움직입니다.
     const moveX = -currentSlide * itemTotalWidth + 40;
-    track.style.transform = `translateX(\${moveX}px)`;
+    track.style.transform = `translateX(${moveX}px)`;
 
 }
 

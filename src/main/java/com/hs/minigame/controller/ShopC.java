@@ -109,7 +109,7 @@ public class ShopC {
         }
 
         model.addAttribute("content", "shop/shop_main.jsp");
-        return "redirect:/main_page";
+        return "redirect:/shopC";
     }
 
     @PostMapping("/shop/applyAvatar")
