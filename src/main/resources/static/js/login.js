@@ -204,31 +204,6 @@ function validateSignForm() {
     return true;
 }
 
-// 회원가입 필수 입력 기능
-function validateSignForm() {
-    const id = document.querySelector('input[name="user_id"]').value.trim();
-    const pw = document.querySelector('input[name="user_pw"]').value.trim();
-    const name = document.querySelector('input[name="user_name"]').value.trim();
-    const nickname = document.querySelector('input[name="user_nickname"]').value.trim();
-    if (!id) {
-        alert("아이디를 입력해주세요.");
-        return false;
-    }
-    if (!pw) {
-        alert("비밀번호를 입력해주세요.");
-        return false;
-    }
-    if (!name) {
-        alert("이름을 입력해주세요.");
-        return false;
-    }
-    if (!nickname) {
-        alert("닉네임을 입력해주세요.");
-        return false;
-    }
-    return true;
-}
-
 // 삭제 확인 알람 기능
 function checkDelete() {
     const checkUser = confirm("정말로 회원 탈퇴를 하시겠습니까?");
