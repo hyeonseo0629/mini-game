@@ -19,4 +19,8 @@ public class TextsVO {
         private Date text_write_date;
         private String text_type;
         private String text_kr;
+        private int user_no;
 }
+
+
+

@@ -13,7 +13,21 @@ const contentEl = document.querySelector("#detailContent")
 const nickNameEl = document.querySelector("#detailNickname")
 const dateEl = document.querySelector("#detailDate")
 
-openAddBtn.addEventListener('click', () => insertDialog.showModal());
+openAddBtn.addEventListener('click', () => {
+    // 게시판 타입 추출
+    const type = document.querySelector("h1")?.innerText?.trim(); // ex) "공지사항"
+    const userRole = document.getElementById("userRole")?.value; // ex) "admin" or "user"
+
+    // 공지사항 + 일반 사용자일 경우 차단
+    if (type === 'notice' && userRole !== 'ADMIN') {
+        alert("권한이 없습니다.");
+        return;
+    }
+
+    insertDialog.showModal();
+});
+
+
 closeBtn.addEventListener('click', () => insertDialog.close());
 
 // openDetailBtn이 클릭될 때 detailDialog를 열도록 명시적으로 추가
@@ -53,48 +67,60 @@ document.querySelector("#addBtn").addEventListener("click", (e) => {
 // Event listener for clicking on each text row to open the detail modal
 document.querySelectorAll(".text-row").forEach((el) => {
     el.addEventListener("click", e => {
-        // Prevent opening the modal if a child element that should not trigger it was clicked
         if (e.target.tagName === 'BUTTON') return;
+        openDetailBtn.click();
 
-        openDetailBtn.click(); // Programmatically click the hidden button to open the modal
-
-        // Populate the detail modal with data from the clicked row
+        // 모달 정보 채우기
         titleEl.value = el.dataset.title;
-        contentEl.value = el.dataset.content; // Use innerText for textarea
+        contentEl.value = el.dataset.content;
         nickNameEl.value = el.dataset.nickname;
         dateEl.innerText = el.dataset.date;
 
-        // Store the ID and type on the edit and delete buttons for later use
+        // 버튼용 정보 저장
         editBtn.dataset.id = el.dataset.id;
         editBtn.dataset.type = el.dataset.type;
         deleteBtn.dataset.id = el.dataset.id;
         deleteBtn.dataset.type = el.dataset.type;
 
-        // Disable title and content fields initially
+        // 기본 숨김 상태
+        editBtn.style.display = 'none';
+        deleteBtn.style.display = 'none';
+        saveEditBtn.style.display = 'none';
+
         titleEl.disabled = true;
         contentEl.disabled = true;
-        saveEditBtn.style.display = 'none'; // Hide save button initially
+
+        // ✅ 권한 체크 로직
+        const isLoggedIn = document.getElementById('loginCheck')?.value == 'true';
+        const loginUserNo = document.getElementById('userNo')?.value;
+        const loginUserRole = document.getElementById('userRole')?.value;
+        const postWriterNo = el.dataset.user;
+
+        if (isLoggedIn && (String(loginUserNo) === String(postWriterNo) || loginUserRole === 'ADMIN')){
+            editBtn.style.display = 'inline-block';
+            deleteBtn.style.display = 'inline-block';
+        }
     });
 });
 
-
 editBtn.addEventListener('click', e => {
-    titleEl.disabled = !titleEl.disabled;
-    contentEl.disabled = !contentEl.disabled;
+    // 텍스트 필드 활성화
+    titleEl.disabled = false;
+    contentEl.disabled = false;
 
-    if (!titleEl.disabled) { // If fields are now enabled for editing
-        saveEditBtn.style.display = 'inline-block'; // Show save button
-    } else {
-        saveEditBtn.style.display = 'none'; // Hide save button
-    }
+    // 버튼 표시 상태 조절
+    editBtn.style.display = 'none'; // 수정 버튼 숨기기
+    saveEditBtn.style.display = 'inline-block'; // 저장 버튼 보이기
+    deleteBtn.style.display = 'inline-block'; // 삭제 버튼 계속 보이기 (원하면 숨겨도 됨)
 });
+
 
 // New event listener for saving edits
 saveEditBtn.addEventListener('click', async () => {
     const id = editBtn.dataset.id;
     const type = editBtn.dataset.type;
     const newTitle = titleEl.value;
-    const newContent = contentEl.value; // Use .value for textarea when getting updated content
+    const newContent = contentEl.value;
 
     const obj = {
         text_id: id,
@@ -105,7 +131,7 @@ saveEditBtn.addEventListener('click', async () => {
 
     try {
         const res = await fetch("/text/update", {
-            method: "POST", // Use POST for updates
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -117,17 +143,23 @@ saveEditBtn.addEventListener('click', async () => {
         }
 
         const data = await res.json();
-        if (data === 1) { // Assuming 1 for success
-            alert("게시물이 성공적으로 수정되었습니다.");
+        if (data === 1) {
+            alert("게시물이 수정되었습니다.");
             detailDialog.close();
 
-            // Update the corresponding row in the main table immediately
+            // ✅ UI 상태 복원 추가
+            editBtn.style.display = 'inline-block';
+            saveEditBtn.style.display = 'none';
+            deleteBtn.style.display = 'inline-block';
+            titleEl.disabled = true;
+            contentEl.disabled = true;
+
+            // ✅ 리스트 데이터 업데이트
             const rowToUpdate = document.querySelector(`.text-row[data-id="${id}"]`);
             if (rowToUpdate) {
                 rowToUpdate.dataset.title = newTitle;
-                rowToUpdate.dataset.content = newContent; // Update the dataset for content
-                rowToUpdate.querySelector(".text_title").innerText = newTitle; // Update displayed title
-                // No need to update nickname or date if they don't change with this edit
+                rowToUpdate.dataset.content = newContent;
+                rowToUpdate.querySelector(".text_title").innerText = newTitle;
             }
         } else {
             alert("게시물 수정에 실패했습니다.");
@@ -135,14 +167,8 @@ saveEditBtn.addEventListener('click', async () => {
     } catch (err) {
         console.error("Error updating post:", err);
         alert("게시물 수정 중 오류가 발생했습니다.");
-    } finally {
-        // Re-disable fields and hide save button after attempt
-        titleEl.disabled = true;
-        contentEl.disabled = true;
-        saveEditBtn.style.display = 'none';
     }
 });
-
 
 // Corrected delete button event listener (removed nesting)
 deleteBtn.addEventListener('click', e => {
@@ -236,76 +262,3 @@ function formatDate(dateStr) {
     const d = date.getDate();
     return `${m}월 ${d}일`;
 }
-
-function updateList(texts, type) {
-    const tbody = document.querySelector('tbody');
-    tbody.innerHTML = '';
-
-    texts.forEach(t => {
-        const row = document.createElement('tr');
-        row.classList.add('text-row');
-        row.dataset.id = t.text_id;
-        row.dataset.title = t.text_title;
-        row.dataset.content = t.text_content;
-        row.dataset.nickname = t.user_nickname;
-        row.dataset.date = t.text_write_date;
-        row.dataset.type = type;
-
-        row.innerHTML = `
-            <td class="text_id">${t.text_id}</td>
-            <td class="text_title">${t.text_title}</td>
-            <td class="text_user_no">${t.user_nickname}</td>
-            <td class="text_date">${formatDate(t.text_write_date)}</td>
-        `;
-        tbody.appendChild(row);
-
-        row.addEventListener('click', e => {
-            if (e.target.tagName === 'BUTTON') return;
-
-            openDetailBtn.click();
-            titleEl.value = row.dataset.title;
-            contentEl.value = row.dataset.content;
-            nickNameEl.value = row.dataset.nickname;
-            dateEl.innerText = row.dataset.date;
-
-            editBtn.dataset.id = row.dataset.id;
-            editBtn.dataset.type = row.dataset.type;
-            deleteBtn.dataset.id = row.dataset.id;
-            deleteBtn.dataset.type = row.dataset.type;
-
-            titleEl.disabled = true;
-            contentEl.disabled = true;
-            saveEditBtn.style.display = 'none';
-        });
-    });
-}
-
-// function updatePaging(totalPage, currentPage, type) {
-//     const pagingDiv = document.querySelector(".paging");
-//     pagingDiv.innerHTML = '';
-//         console.log(currentPage)
-//
-//     for (let p = 1; p <= totalPage; p++) {
-//         const a = document.createElement("a");
-//         a.href = "javascript:void(0);";
-//         a.classList.add("page-link");
-//         if (p == currentPage) a.classList.add("active");
-//         a.dataset.page = p;
-//         a.dataset.type = type;
-//         a.innerText = `[${p}]`;
-//         pagingDiv.appendChild(a);
-//
-//         // 이벤트 리바인딩
-//         a.addEventListener('click', async function () {
-//             try {
-//                 console.log("clicjed?")
-//                 const res = await fetch(`/text/list/${type}/${p}`);
-//                 const data = await res.json();
-//                 updateList(data.texts, type);
-//                 updatePaging(data.totalPage, p, type);
-//             } catch (err) {
-//                 console.error("페이지 불러오기 실패:", err);
-//             }
-//         });
-//     }
-// }

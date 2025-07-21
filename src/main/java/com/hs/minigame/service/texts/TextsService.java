@@ -19,7 +19,6 @@ public class TextsService {
         return textsMapper.selectTexts(type, offset);
     }
 
-
     public int textsCount(String type) {
         return textsMapper.textsCount(type);
     }
@@ -45,8 +44,7 @@ public class TextsService {
         return textsMapper.getTextsByPage(type, start, perPage);
     }
 
-    public int getTotalCount(String type) {
-        return textsMapper.getTotalCount(type);
-    }
-
+//    public int getTotalCount(String type) {
+//        return textsMapper.getTotalCount(type);
+//    }
 }

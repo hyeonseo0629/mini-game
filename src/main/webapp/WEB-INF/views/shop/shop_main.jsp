@@ -1,15 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-
-    <link rel="stylesheet" href="/resources/css/shop.css">
-    <script src="/resources/js/shop.js"></script>
-    <title>shop main</title>
-</head>
-<body>
-
 
 <c:choose>
     <c:when test="${not empty sessionScope.users}">
@@ -20,14 +10,12 @@
     </c:otherwise>
 </c:choose>
 
-
 <c:if test="${not empty errorMsg}">
     <input type="hidden" id="errorMsg" value="${errorMsg}">
 </c:if>
 
 <input type="hidden" id="userMoney" value="${userMoney}">
 <input type="hidden" id="userMoney" value="${user.user_money}">
-
 
 <div class="Shop-Top-Line">
     <h1>상점</h1>
@@ -92,7 +80,3 @@
         </c:choose>
     </c:forEach>
 </div>
-
-
-</body>
-</html>

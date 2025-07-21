@@ -7,13 +7,11 @@ import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 @RequestMapping("/text")
@@ -60,25 +58,6 @@ public class TextsC {
         return result;
     }
 
-//    @GetMapping("/list/{type}/{page}")
-//    @ResponseBody
-//    public Map<String, Object> listPage(@PathVariable("type") String type,
-//                                        @PathVariable("page") int page) {
-//
-//        int perPage = 5;
-//        int start = (page - 1) * perPage;
-//
-//        List<TextsVO> texts = textsService.getTextsByPage(type, start, perPage);
-//        int totalCount = textsService.getTotalCount(type);
-//        int totalPage = (int) Math.ceil((double) totalCount / perPage);
-//
-//        Map<String, Object> result = new HashMap<>();
-//        result.put("texts", texts);
-//        result.put("totalPage", totalPage);
-//
-//        return result;
-//    }
-
     // 게시판 글 상세내용
     @GetMapping("/detail/{id}")
     public String textDetail(@PathVariable int id, Model model) {
@@ -108,33 +87,34 @@ public class TextsC {
         textsService.updateText(textsVO);
 
         return 1;
-//        return Integer.parseInt("redirect:/text/" + textsVO.getText_type());
     }
 
-    // 게시판 글 삭제
-//    @GetMapping("/delete/{id}/{type}")
-//    public String textDelete(@PathVariable int id, @PathVariable String type, Model model) {
-//        textsService.deleteText(id);
-//        type = type.toLowerCase();
-//        model.addAttribute("content", "texts/texts_main.jsp");
-//        return "redirect:/text/" + type;
+//    // 게시판 글 삭제 (Modified to return JSON and use POST)
+//    @ResponseBody // Indicate that the return value should be bound to the web response body
+//    @PostMapping("/delete/{id}/{type}") // Changed to POST method
+//    public int textDelete(@PathVariable int id, @PathVariable String type) {
+//        System.out.println("Deleting text with id: " + id + " and type: " + type);
+//        int result = textsService.deleteText(id);
+//        return result; // Return 1 for success, 0 for failure
 //    }
 
-//    @GetMapping("/delete/{id}/{type}")
-//    public String textDelete(@PathVariable int id, @PathVariable String type, Model model) {
-//        textsService.deleteText(id);
-//        type = type.toLowerCase();
-//        model.addAttribute("content", "texts/texts_main.jsp");
-//        return "redirect:/text/" + type;
-//    }
+    @PostMapping("/delete/{id}/{type}")
+    @ResponseBody
+    public int textDelete(@PathVariable int id, HttpSession session) {
+        UsersVO user = (UsersVO) session.getAttribute("users");
+        if (user == null) return 0; // 비로그인 사용자 차단
 
-    // 게시판 글 삭제 (Modified to return JSON and use POST)
-    @ResponseBody // Indicate that the return value should be bound to the web response body
-    @PostMapping("/delete/{id}/{type}") // Changed to POST method
-    public int textDelete(@PathVariable int id, @PathVariable String type) {
-        System.out.println("Deleting text with id: " + id + " and type: " + type);
-        int result = textsService.deleteText(id);
-        return result; // Return 1 for success, 0 for failure
+        TextsVO post = textsService.getTextById(id); // 게시글 정보 가져오기
+        if (post == null) return 0; // 게시글이 없을 경우
+
+       boolean isOwner = post.getText_user_no() == user.getUser_no();
+       boolean isAdmin = user.getUser_role().equals("admin");
+
+       if (isOwner || isAdmin) {
+           return textsService.deleteText(id); // ✅ 권한 있으면 삭제
+        } else {
+           return 0; // 권한 없으면 실패
+       }
     }
 
     // 게시판 글 작성 폼
@@ -161,5 +141,4 @@ public class TextsC {
         return textsService.insertText(textsVO);
 
     }
-
 }

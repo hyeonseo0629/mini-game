@@ -1,10 +1,8 @@
 package com.hs.minigame.controller;
 
-import com.hs.minigame.mapper.login.LoginMapper;
 import com.hs.minigame.service.game.GameService;
 import com.hs.minigame.vo.UsersVO;
 import jakarta.servlet.http.HttpSession;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
