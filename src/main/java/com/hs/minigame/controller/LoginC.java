@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class LoginC {
 
-    private static final int BASE_AVATAR_ID = 30;
+    private static final int BASE_AVATAR_ID = 1;
 
     @Autowired
     private LoginService loginService; //새로운 service마다 의존성 필요
