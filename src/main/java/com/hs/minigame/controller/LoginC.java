@@ -58,17 +58,38 @@ public class LoginC {
 
             //인벤토리
             List<ShopItemsVO> inventoryItems = shopService.getInventory(users.getUser_no());
-            session.setAttribute("inventoryItems", inventoryItems);
+
 
             //기본 아바타 설정 작업(구매하지 않더라도 인벤토리에 기본아바타가 있게끔)
             //DB에 기록하는게 아니라 단순히 세션에 넣는 작업 뿐
             boolean hasAvatar = inventoryItems.stream()
                     .anyMatch(item -> item.getItem_id().equals(String.valueOf(BASE_AVATAR_ID)));
 
+//            if (!hasAvatar) {
+//                ShopItemsVO baseAvatar = shopService.getItemById(BASE_AVATAR_ID);
+//                inventoryItems.add(0, baseAvatar);
+//            }
+
             if (!hasAvatar) {
                 ShopItemsVO baseAvatar = shopService.getItemById(BASE_AVATAR_ID);
-                inventoryItems.add(0, baseAvatar);
+                if (baseAvatar == null) {
+                    System.out.println("기본 아바타 불러오기 실패: null");
+                } else {
+                    System.out.println("기본 아바타 ID: " + baseAvatar.getItem_id());
+                    System.out.println("기본 아바타 이름: " + baseAvatar.getItem_name());
+                    System.out.println("기본 아바타 이미지: " + baseAvatar.getItem_avatar_img());
+
+                    // 예외 처리: 이미지가 없으면 강제로 설정
+                    if (baseAvatar.getItem_avatar_img() == null || baseAvatar.getItem_avatar_img().isEmpty()) {
+                        baseAvatar.setItem_avatar_img("base_avatar.webp");
+                        System.out.println("기본 아바타 이미지 강제 설정");
+                    }
+
+                    inventoryItems.add(0, baseAvatar);
+                }
             }
+            session.setAttribute("inventoryItems", inventoryItems);
+
 
             System.out.println("로그인 성공");
             redirectAttributes.addFlashAttribute("alert", "로그인 성공");

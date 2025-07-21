@@ -144,10 +144,10 @@
 
                         <c:forEach var="item" items="${sessionScope.inventoryItems}">
                             <div class="inventory-item">
-                                <img src="/resources/images/${item.item_avatar_img}" alt="아바타" width="80">
+                                <img src="/resources/images/${empty item.item_avatar_img ? 'base_avatar.webp' : item.item_avatar_img}" alt="아바타" width="80">
                                 <div>${item.item_name}</div>
                                 <form action="/shop/applyAvatar" method="post">
-                                    <input type="hidden" name="avatarImg" value="${item.item_avatar_img}">
+                                    <input type="hidden" name="avatarImg" value="${empty item.item_avatar_img ? 'base_avatar.webp' : item.item_avatar_img}">
                                     <button type="submit">적용</button>
                                 </form>
                             </div>

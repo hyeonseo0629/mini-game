@@ -67,6 +67,15 @@
     box-sizing: border-box;
 }
 
+.inventory-item img {
+    height: 130px;
+    width: auto;
+    object-fit: contain;
+    image-rendering: pixelated;
+    display: block;
+    margin: 0 auto;
+}
+
 .slide-btn {
     background-color: transparent;
     border: none;
@@ -285,13 +294,13 @@
 }
 
 .avatar_zone img {
-    /*width: auto;*/
-    /*object-fit: contain; !* 또는 'cover' 테스트해봐 *!*/
-    /*image-rendering: pixelated; !* 픽셀 캐릭터일 경우 *!*/
-    /*display: block;*/
-    /*margin: 0 auto;*/
+    width: auto;
+    object-fit: contain; /* 또는 'cover' 테스트해봐 */
+    image-rendering: pixelated; /* 픽셀 캐릭터일 경우 */
+    display: block;
+    margin: 0 auto;
 
-    width: 200px;
+    /*width: 200px;*/
     height: 200px;
     object-fit: contain; /* or cover / fill / none / scale-down */
 }
