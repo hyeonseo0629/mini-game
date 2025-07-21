@@ -88,7 +88,22 @@ document.getElementById("findPwForm").addEventListener("submit", async function 
     document.getElementById("pwResult").innerText = result;
 });
 
-<!--인벤토리모달창기능-->
+// 마이페이지 모달 창 기능
+function openMyPageModal() {
+    document.getElementById("myPageModal").style.display = "flex";
+}
+
+function closeMyPageModal() {
+    document.getElementById("myPageModal").style.display = "none";
+}
+
+function backMyPageModal(event) {
+    if (event.target.id == "myPageModal") {
+        closeSignModal();
+    }
+}
+
+// 인벤토리 모달 창 기능
 function openInvenModal() {
     document.getElementById("invenModal").style.display = "flex";
     currentSlide = 0;
@@ -150,7 +165,7 @@ function slide(direction) {
 
 }
 
-<!--정보수정모달창기능-->
+// 정보수정 모달 창 기능
 function openUpdateUser() {
     document.getElementById("updateModal").style.display = "flex";
 }
@@ -165,7 +180,7 @@ function backUpdateModal(event) {
     }
 }
 
-<!--회원가입필수입력기능-->
+// 회원가입 필수 입력 기능
 function validateSignForm() {
     const id = document.querySelector('input[name="user_id"]').value.trim();
     const pw = document.querySelector('input[name="user_pw"]').value.trim();
@@ -190,7 +205,7 @@ function validateSignForm() {
     return true;
 }
 
-<!--회원가입필수입력기능-->
+// 회원가입 필수 입력 기능
 function validateSignForm() {
     const id = document.querySelector('input[name="user_id"]').value.trim();
     const pw = document.querySelector('input[name="user_pw"]').value.trim();
@@ -215,7 +230,7 @@ function validateSignForm() {
     return true;
 }
 
-<!--삭제확인알람기능-->
+// 삭제 확인 알람 기능
 function checkDelete() {
     const checkUser = confirm("정말로 회원 탈퇴를 하시겠습니까?");
     if (checkUser) {
@@ -225,7 +240,7 @@ function checkDelete() {
     }
 }
 
-<!--alret양식통일용-->
+// alret 양식 통일용
 window.alert = function (message) {
     const box = document.createElement("div");
     box.className = "cssAlert";

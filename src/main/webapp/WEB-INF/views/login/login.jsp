@@ -25,15 +25,8 @@
             <c:otherwise>
                 <!--로그인 완료창-->
                 <div class="welcome-box">
-                    <span>${users.user_nickname}님 환영합니다</span>
-                    <form action="/logout" method="post">
-                        <button type="submit">로그아웃</button>
-                    </form>
-
-                    <form id="deleteUser" action="/deleteUser" method="post">
-                        <input type="hidden" name="user_id" value="${users.user_id}">
-                        <button type="button" onclick="checkDelete()">회원 탈퇴</button>
-                    </form>
+                    <button onclick="openInvenModal()" type="button">Inventory</button>
+                    <button onclick="openMyPageModal()" type="button">Profile</button>
                 </div>
             </c:otherwise>
         </c:choose>
@@ -42,22 +35,29 @@
     <br>
 
     <!--마이페이지+인벤토리-->
-    <c:if test="${not empty users}">
-    <div class="mypage-box">
-        <span>마이페이지</span>
-        <div class="mypage-info">
-            <div>ID : ${users.user_id}</div>
-            <div>이름 : ${users.user_name}</div>
-            <div>닉네임 : ${users.user_nickname}</div>
-            <div>머니 : ${users.user_money}</div>
-        </div>
+    <div id="myPageModal" class="myPageModal" style="display: none" onclick="backMyPageModal(event)">
+        <div class="mypage-box">
+            <span>마이페이지</span>
+            <div class="mypage-info">
+                <div>ID : ${users.user_id}</div>
+                <div>이름 : ${users.user_name}</div>
+                <div>닉네임 : ${users.user_nickname}</div>
+                <div>머니 : ${users.user_money}</div>
+            </div>
 
-        <div class="another-box">
-            <button onclick="openInvenModal()" type="button">인벤토리</button>
-            <button onclick="openUpdateUser()" type="button">회원정보 수정</button>
+            <div class="another-box">
+                <form action="/logout" method="post">
+                    <button type="submit">로그아웃</button>
+                </form>
+                <button onclick="openUpdateUser()" type="button">회원정보 수정</button>
+                <form id="deleteUser" action="/deleteUser" method="post">
+                    <input type="hidden" name="user_id" value="${users.user_id}">
+                    <button type="button" onclick="checkDelete()">회원 탈퇴</button>
+                </form>
+            </div>
+            <button onclick="closeMyPageModal()" type="button" class="close-btn">X</button>
         </div>
     </div>
-    </c:if>
 
     <!--회원가입모달창-->
     <div id="signModal" class="userInfoModal" style="display:none" onclick="backSignModal(event)"
@@ -87,7 +87,6 @@
             </form>
         </div>
     </div>
-
 
     <!--아이디/비번찾기모달창-->
     <div id="findModal" class="userInfoModal" style="display: none" onclick="backFindModal(event)">
@@ -129,7 +128,6 @@
             </div>
         </div>
     </div>
-
 
     <!--인벤토리모달창-->
     <div id="invenModal" class="userInfoModal" style="display: none" onclick="backInvenModal(event)">
@@ -201,32 +199,32 @@
     </div>
 </div>
 
-    <!--로그인알람-->
-    <c:if test="${alert == '로그인 성공'}">
+<!--로그인알람-->
+<c:if test="${alert == '로그인 성공'}">
     <script>
         if (!window.shownAlert) {
             alert('${alert}');
             window.shownAlert = true;
         }
     </script>
-    </c:if>
+</c:if>
 
-    <!--로그아웃알람-->
-    <c:if test="${not empty alert2}">
+<!--로그아웃알람-->
+<c:if test="${not empty alert2}">
     <script>
         if (!window.shownAlert) {
             alert('${alert2}');
             window.shownAlert = true;
         }
     </script>
-    </c:if>
+</c:if>
 
-    <!-- 누락된 알림들도 처리하는 공통 alert 처리 -->
-    <c:if test="${not empty alert}">
+<!-- 누락된 알림들도 처리하는 공통 alert 처리 -->
+<c:if test="${not empty alert}">
     <script>
         if (!window.shownAlert) {
             alert('${alert}');
             window.shownAlert = true;
         }
     </script>
-    </c:if>
+</c:if>
