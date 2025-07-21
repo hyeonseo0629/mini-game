@@ -10,10 +10,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
     <link rel="stylesheet" href="/resources/css/board.css" />
     <link rel="stylesheet" href="/resources/css/game.css" />
     <link rel="stylesheet" href="/resources/css/ranking.css" />
-    <script src="/resources/js/main.js"></script>
-    <script src="/resources/js/login.js"></script>
-    <script src="/resources/js/shop.js"></script>
-    <script src="/resources/js/texts.js"></script>
+
     <link
       rel="icon"
       href="/resources/images/favicon.ico?v=2"
@@ -56,4 +53,8 @@ contentType="text/html;charset=UTF-8" language="java" %>
       </nav>
     </div>
   </body>
+  <script src="/resources/js/main.js"></script>
+  <script src="/resources/js/login.js"></script>
+  <script src="/resources/js/shop.js"></script>
+  <script src="/resources/js/texts.js"></script>
 </html>
